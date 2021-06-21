@@ -1,0 +1,29 @@
+{
+  "name": "vnpt---mqtt",
+  "version": "1.0.0",
+  "description": "VNPT - NHÓM XÂY DỤNG CÔNG CỤ MQTT",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TanTheVinh/VNPT---MQTT.git"
+  },
+  "keywords": [
+    "VNPT",
+    "MQTT"
+  ],
+  "author": "Tan The Vinh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TanTheVinh/VNPT---MQTT/issues"
+  },
+  "homepage": "https://github.com/TanTheVinh/VNPT---MQTT#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
