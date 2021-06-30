@@ -19,16 +19,5 @@
   "bugs": {
     "url": "https://github.com/TanTheVinh/VNPT---MQTT/issues"
   },
-  "homepage": "https://github.com/TanTheVinh/VNPT---MQTT#readme",
-  "dependencies": {
-    "express": "^4.17.1",
-    "express-handlebars": "^5.3.2",
-    "mosca": "^2.8.3",
-    "mqtt": "^4.2.8",
-    "pg": "^8.6.0"
-  },
-  "devDependencies": {
-    "morgan": "^1.10.0",
-    "nodemon": "^2.0.7"
-  }
+  "homepage": "https://github.com/TanTheVinh/VNPT---MQTT#readme"
 }
