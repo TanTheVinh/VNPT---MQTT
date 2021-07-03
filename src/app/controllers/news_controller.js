@@ -2,7 +2,12 @@
 class new_controller {
 
     index(req, res) {
-        res.render('news');
+        db.query(`select * from users`, (err, res) => {
+            if(!err) {
+                console.log(res.rows);
+            }
+        });
+        // res.render('news');
     }
 
     // [GET] /news/::slug

@@ -2,7 +2,7 @@
 class site_controller {
 
     index(req, res) {
-        res.render('/');
+        res.render('home');
     }
 
     search(req, res) {
