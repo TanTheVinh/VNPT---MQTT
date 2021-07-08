@@ -2,10 +2,8 @@
   "name": "vnpt---mqtt",
   "version": "1.0.0",
   "description": "VNPT - NHÓM XÂY DỤNG CÔNG CỤ MQTT",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
-    "start": "nodemon --inspect src/index.js",
-    "watch": "node-sass --watch src/resources/scss/ --output src/public/css/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,14 +22,14 @@
   "homepage": "https://github.com/TanTheVinh/VNPT---MQTT#readme",
   "dependencies": {
     "aedes": "^0.46.0",
-    "express": "^4.17.1",
-    "express-handlebars": "^5.3.2",
+    "mosca": "^2.8.3",
     "mqtt": "^4.2.8",
-    "pg": "^8.6.0"
+    "pg": "^8.6.0",
+    "python": "0.0.4"
   },
   "devDependencies": {
+    "mode-sass": "^1.0.0",
     "morgan": "^1.10.0",
-    "node-sass": "^6.0.1",
     "nodemon": "^2.0.9"
   }
 }

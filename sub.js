@@ -1,9 +1,9 @@
 //MQTT sub
-var mqtt = require('mqtt');
-var client = mqtt.connect('mqtt://localhost:1234');
-var topic = 'TheVinhTest';
+const mqtt = require('mqtt');
+const client = mqtt.connect('mqtt://localhost:1234');
+const topic = 'quangThangTest';
 
-client.on('message', (message) => {
+client.on('message', (topic, message) => {
     message = message.toString();
     console.log(message);
 });
