@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MQTT - admin dashboard</title>
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="main d-flex h-100">
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse text-light">
+            <div class="position-fixed pt-3">
+                <h2>Bảng điều khiển</h2>
+                <ul>
+                    <li>
+                        <h3>Thiết bị</h3>
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link p-3" aria-current="page" href="#">
+                                    Danh sách thiết bị
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link p-3" href="#">
+                                    Thêm thiết bị
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link p-3" href="#">
+                                    Thống kê
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3>Loại thiết bị</h3>
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                              <a class="nav-link p-3" aria-current="page" href="#">
+                                Danh sach loại thiết bị
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link p-3" href="#">
+                                Thêm loại thiết bị
+                              </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <h6 class="sidebar-heading d-flex justify-content-around align-items-center px-5 text-muted">
+                    <a class="link-secondary" href="#" aria-label="Add a new report">
+                    </a>
+                </h6>
+                <ul class="nav flex-column mt-5 mb-2" style="position:absolute; bottom: -110%;">
+                    <li class="nav-item">
+                      <a class="nav-link p-3" href="#">
+                        Đổi mật khẩu
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link p-3" href="#">
+                        Đăng xuất
+                      </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div id="showView" class="col-md-9 col-lg-10 m-auto">
+            <div class="row bg-light">
+                <h1 id="infoTitle" class="mx-5 mt-3">Thong tin thiet bi: <span id="idDevice" class="text-info">MA 1</span></h1>
+            </div>
+            <div class="row m-md-5 p-md-3">
+                <div class="infoInDB col-md-5 bg-light mx-2 border rounded">
+                    <div class="row p-4">
+                        <div class="col-6">
+                            MA THIET BI
+                        </div>
+                        <div class="col-6">
+                            MA 1
+                        </div>
+                    </div>
+                    <div class="row p-4">
+                        <div class="col-6">
+                            TEN THIET BI
+                        </div>
+                        <div class="col-6">
+                            TEN 1
+                        </div>
+                    </div>
+                    <div class="row p-4">
+                        <div class="col-6">
+                            TEN LOAI THIET BI
+                        </div>
+                        <div class="col-6">
+                            MA 1
+                        </div>
+                    </div>
+                    <div class="row p-4">
+                        <div class="col-6">
+                            DIA CHI THIET BI
+                        </div>
+                        <div class="col-6">
+                            DIA CHI 1
+                        </div>
+                    </div>
+                    <div class="row p-4">
+                        <div class="col-6">
+                            TOA DO THIET BI
+                        </div>
+                        <div class="col-6">
+                            TOA DO 1
+                        </div>
+                    </div>
+                    <div class="row p-4">
+                        <div class="col-6">
+                            TAI KHOAN THIET BI
+                        </div>
+                        <div class="col-6">
+                            TAI KHOAN 1
+                        </div>
+                    </div>
+                    <div class="row p-4">
+                        <div class="col-6">
+                            MAT KHAU THIET BI
+                        </div>
+                        <div class="col-6">
+                            MAT KHAU 1
+                        </div>
+                    </div>
+                    <div class="row p-4">
+                        <div class="col-6">
+                            TRANG THAI THIET BI
+                        </div>
+                        <div class="col-6">
+                            TRANG THAI 1
+                        </div>
+                    </div>
+                    <div class="row mt-5 p-5 d-flex justify-content-around">
+                        <button class="btn btn-success">Ket noi</button>
+                        <button class="btn btn-danger">Ngat ket noi</button>
+                        <button class="btn btn-warning">Chinh sua thong tin</button>
+                    </div>
+                </div>
+                <div class="publish col-md-3 bg-light mx-2 border rounded" style="overflow-y:scroll; overflow-x:hidden; height:775px;">
+                    <div class="row logHistory-topic m-2 border rounded p-2">
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam dolorem, numquam et facilis eligendi ad soluta est magni quos! Reiciendis?
+                    </div>
+                    <div class="row logHistory-topic m-2 border rounded p-2">
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam dolorem, numquam et facilis eligendi ad soluta est magni quos! Reiciendis?
+                    </div>
+                    <div class="row logHistory-topic m-2 border rounded p-2">
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam dolorem, numquam et facilis eligendi ad soluta est magni quos! Reiciendis?
+                    </div>
+                    <div class="row logHistory-topic m-2 border rounded p-2">
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam dolorem, numquam et facilis eligendi ad soluta est magni quos! Reiciendis?
+                    </div>
+                    <div class="row logHistory-topic m-2 border rounded p-2">
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam dolorem, numquam et facilis eligendi ad soluta est magni quos! Reiciendis?
+                    </div>
+                    <div class="row logHistory-topic m-2 border rounded p-2">
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam dolorem, numquam et facilis eligendi ad soluta est magni quos! Reiciendis?
+                    </div>
+                    <div class="row logHistory-topic m-2 border rounded p-2">
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam dolorem, numquam et facilis eligendi ad soluta est magni quos! Reiciendis?
+                    </div>
+                    <div class="row logHistory-topic m-2 border rounded p-2">
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam dolorem, numquam et facilis eligendi ad soluta est magni quos! Reiciendis?
+                    </div>
+                    <div class="row logHistory-topic m-2 border rounded p-2">
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam dolorem, numquam et facilis eligendi ad soluta est magni quos! Reiciendis?
+                    </div>
+                    <div class="row logHistory-topic m-2 border rounded p-2">
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam dolorem, numquam et facilis eligendi ad soluta est magni quos! Reiciendis?
+                    </div>
+                </div>
+                <div class="logHistory col-md-3 bg-light mx-2 border rounded" style="overflow-y:scroll; overflow-x:hidden; height:775px;">
+                    <div class="row logHistory-topic m-2 border rounded p-2">
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam dolorem, numquam et facilis eligendi ad soluta est magni quos! Reiciendis?
+                    </div>
+                    <div class="row logHistory-topic m-2 border rounded p-2">
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam dolorem, numquam et facilis eligendi ad soluta est magni quos! Reiciendis?
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+</body>
+</html>

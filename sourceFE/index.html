@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MQTT - admin dashboard</title>
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="main d-flex">
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse text-light">
+            <div class="position-fixed pt-3">
+                <h2>Bảng điều khiển</h2>
+                <ul>
+                    <li>
+                        <h3>Thiết bị</h3>
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link p-3" aria-current="page" href="#">
+                                    Danh sách thiết bị
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link p-3" href="#">
+                                    Thêm thiết bị
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link p-3" href="#">
+                                    Thống kê
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3>Loại thiết bị</h3>
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                              <a class="nav-link p-3" aria-current="page" href="#">
+                                Danh sach loại thiết bị
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link p-3" href="#">
+                                Thêm loại thiết bị
+                              </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <h6 class="sidebar-heading d-flex justify-content-around align-items-center px-5 text-muted">
+                    <a class="link-secondary" href="#" aria-label="Add a new report">
+                    </a>
+                </h6>
+                <ul class="nav flex-column mt-5 mb-2" style="position:absolute; bottom: -110%;">
+                    <li class="nav-item">
+                      <a class="nav-link p-3" href="#">
+                        Đổi mật khẩu
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link p-3" href="#">
+                        Đăng xuất
+                      </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div id="showView" class="col-md-9 col-lg-10 m-auto">
+            <div class="row bg-light">
+                <h1 id="title" class="mx-5 mt-3">Bảng điều khiển</h1>
+            </div>
+            <div class="row bg-info mb-5" id="showStatistical">
+                <div id="topOfShow" class="mx-auto d-flex justify-content-around">
+                    <div id="showConnected" class="bg-success mt-3 text-white p-3">
+                        Đang kết nối: 30000
+                    </div>
+                    <div id="showDisconnected" class="bg-danger my-3 text-white p-3">
+                        Ngắt kết nối: 1000
+                    </div>
+                </div>
+                <div id="bottOfShow" class="p-4">
+                    <div id="showCircularGraphicDisplay" class="my-3" style="grid-row: 1/3">
+                        Graphic
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit veritatis eveniet provident adipisci dolorem ipsam vitae repellendus officiis facilis, cumque eius incidunt deleniti illo cum, ut modi qui delectus culpa nulla ad minus id voluptatibus. Neque harum, repudiandae incidunt natus dicta aperiam voluptatum repellendus beatae asperiores quo? Eaque ipsum, maxime, labore autem ea quibusdam dignissimos deserunt veniam, maiores minima ipsam obcaecati debitis enim! Voluptates dolore atque itaque repellendus velit quas sit consequuntur voluptate, quidem eius voluptas! Velit, totam a eos ut delectus iusto laudantium reiciendis vitae quas sequi dolorem neque facere reprehenderit natus impedit quidem, blanditiis adipisci, odio nulla id culpa cumque corrupti aut non! Iste magni, officiis maiores molestias, beatae voluptas ullam vero, aliquam magnam quia dolorem incidunt! Eveniet accusamus est, commodi, nemo sequi vero explicabo ipsum officia corporis cupiditate, quisquam nostrum assumenda consectetur id. Iusto possimus eligendi optio voluptatem, necessitatibus sunt quisquam ea voluptatum illum libero voluptates iste enim facilis repellat quod repudiandae eum repellendus quam vitae assumenda aliquam voluptatibus perferendis. Voluptate enim sequi aut voluptas dolores, tenetur impedit molestiae aliquid vel vero. Consectetur commodi exercitationem suscipit explicabo est? Illum cum saepe nulla non earum quod, assumenda ex? Perferendis maxime asperiores ipsam praesentium! Corporis laboriosam cupiditate ipsa dolorum voluptate magnam quae dicta cum, cumque a eum assumenda illo amet quo sequi quidem velit reiciendis maxime enim animi labore adipisci in sapiente quia! Adipisci similique sed magni labore in sint delectus nihil quia debitis quam corporis, iusto quis quas aut voluptates suscipit, ipsam at hic error commodi. Ducimus voluptatum in accusantium, saepe labore, necessitatibus facilis aliquam quos dicta esse excepturi quod, quasi expedita cupiditate delectus perferendis tempora incidunt voluptatibus nisi quae? Dolorum cupiditate corrupti necessitatibus dolore, obcaecati natus praesentium facere. Consequatur temporibus, similique incidunt laboriosam amet optio totam? Magnam blanditiis cum, vitae mollitia excepturi ipsam libero distinctio doloremque at numquam tempore deleniti repellat, voluptate officia assumenda neque? Vel quos sed animi architecto. Beatae corporis sunt repellat tempore quam perspiciatis sed nesciunt voluptas velit voluptatibus eius, aut amet laborum repudiandae veritatis obcaecati provident explicabo ducimus libero quia! Ab facilis eligendi sequi aperiam modi, sint quos dolore incidunt ducimus alias totam. Deleniti, aut cum ea assumenda soluta harum ullam accusamus odit dolor animi ad aspernatur fuga inventore qui consectetur quaerat praesentium enim velit sint? Sint qui earum eius, repellat, pariatur ullam doloremque quisquam repudiandae esse nam aspernatur aliquam consectetur magni. Ipsa voluptatibus, itaque nulla necessitatibus debitis nesciunt! Culpa eaque aperiam perferendis sapiente reprehenderit, sint assumenda quisquam, repudiandae temporibus ipsum rerum aut natus quo incidunt explicabo? Nulla cupiditate obcaecati placeat est, nostrum dignissimos labore, unde qui incidunt amet praesentium quaerat earum veniam eius commodi? Nulla architecto, repudiandae assumenda corrupti et amet veritatis, minus veniam esse quasi nisi iste in consectetur quo similique id. Rerum culpa natus earum eius praesentium similique voluptatibus nam odio maxime hic! At aliquid libero, quidem velit, hic inventore ratione eligendi magni sequi, minus praesentium dicta quam voluptas non maxime eaque molestias repudiandae consectetur quia ullam provident ab fuga ad. Vel consequuntur repellendus laborum dignissimos. Nihil dolore maiores exercitationem!
+                    </div>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-between m-auto mt-4" id="table-info">
+                <h2 class="">Danh sách thiết bị</h2>
+                <form action="">
+                    <button class="btn btn-success active">Đang kết nối</button>
+                    <button class="btn btn-danger">Ngắt kết nối</button>
+                </form>
+                <table class="table table-striped text-center">
+                    <thead>
+                        <tr>
+                            <th class="col-md-1">Mã thiết bị</th>
+                            <th class="col-md-2">Tên thiết bị</th>
+                            <th class="col-md-4">Địa chỉ</th>
+                            <th class="col-md-3">Tài khoản</th>
+                            <th class="col-md-1">Trạng thái</th>
+                            <th class="col-md-1" colspan="2">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>MA 1</td>
+                            <td>Ten 1</td>
+                            <td>Dia chi 1</td>
+                            <td>Tài khoản 1</td>
+                            <td>
+                                <button class="btn btn-success">
+                                    Đang kết nối
+                                </button>
+                            </td>
+                            <td>
+                                <form action="infoDevice.html">
+                                    <button class="btn btn-info" type="submit">Xem chi tiết</button>
+                                </form>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger">Xoá</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>MA 2</td>
+                            <td>Ten 2</td>
+                            <td>Dia chi 2</td>
+                            <td>Tài khoản 2</td>
+                            <td>
+                                <button class="btn btn-danger">Ngắt kết nối</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-info">Xem chi tiết</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger">Xoá</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+    </div> 
+</body>
+</html>
