@@ -89,13 +89,13 @@
                 <h4 class="ms-1 d-none d-sm-inline">Loai thiet bi</h4>
                 <ul style="list-style-type: none">
                   <li>
-                    <a href="listTypeDevice.html">
+                    <a href="#">
                       <i class="fa fa-book-open"></i>
                       Danh sach loai thiet bi
                     </a>
                   </li>
                   <li>
-                    <a href="addTypeDevice.html">
+                    <a href="#">
                       <i class="fa fa-plus-circle"></i>
                       Them loai thiet bi
                     </a>
@@ -107,40 +107,82 @@
             <div class="pb-4">
               <ul style="list-style-type: none">
                 <li>
-                  <a class="" href="#"
-                    ><i class="fa fa-user-edit"></i> Doi mat khau</a
-                  >
+                  <a class="" href="#">
+                    <i class="fa fa-user-edit"></i>
+                    Doi mat khau
+                  </a>
                 </li>
                 <li>
-                  <a class="" href="#"
-                    ><i class="fa fa-sign-out-alt"></i> Dang xuat</a
-                  >
+                  <a class="" href="#">
+                    <i class="fa fa-sign-out-alt"></i>
+                    Dang xuat
+                  </a>
                 </li>
               </ul>
             </div>
           </div>
         </div>
         <div class="col">
-          <div class="row bg-light">
-            <h1 id="title" class="p-3">Bảng điều khiển</h1>
-          </div>
-          <div class="row bg-info" id="showStatistical">
-            <div id="topOfShow" class="mx-auto d-flex justify-content-around">
-              <div id="showConnected" class="bg-success mt-3 text-white p-3">
-                Đang kết nối: 30000
-              </div>
-              <div id="showDisconnected" class="bg-danger my-3 text-white p-3">
-                Ngắt kết nối: 1000
-              </div>
+          <div class="row">
+            <div class="d-flex justify-content-between m-auto p-4 bg-light">
+              <h2 class="">Danh sách loai thiết bị</h2>
+              <form class="d-flex">
+                <div class="input-group mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Search"
+                    aria-label="Search"
+                    aria-describedby="basic-addon1"
+                  />
+                  <button
+                    class="input-group-text btn btn-outline-success"
+                    type="submit"
+                  >
+                    Search
+                  </button>
+                </div>
+              </form>
             </div>
-            <div id="bottOfShow" class="p-4">
-              <div
-                id="showCircularGraphicDisplay"
-                class="my-3"
-                style="grid-row: 1/3"
-              >
-                <canvas id="chart-line"></canvas>
-              </div>
+            <div class="row p-5">
+              <table class="table table-striped text-center">
+                <thead>
+                  <tr>
+                    <th scope="col">Ma loai thiet bi</th>
+                    <th scope="col">Ten loai thiet bi</th>
+                    <th scope="col">Mo ta</th>
+                    <th scope="col">Thao tac</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>
+                      <a href="infoTypeDevice.html" class="btn btn-info">
+                        <i class="fa fa-info-circle"></i> Xem chi tiet
+                      </a>
+                      <button class="btn btn-danger">
+                        <i class="fa fa-trash-alt"></i> Xoá
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>
+                      <a href="editInfoTypeDevice.html" class="btn btn-info">
+                        <i class="fa fa-info-circle"></i> Xem chi tiet
+                      </a>
+                      <a href="#" class="btn btn-danger">
+                        <i class="fa fa-trash-alt"></i> Xoá
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
