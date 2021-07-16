@@ -1,31 +1,39 @@
-const express = require('express');
-const handlebars = require('express-handlebars');
-const morgan = require('morgan');
 const path = require('path');
-const sass = require('node-sass');
-const port = 3000;
+const express = require('express');
+const morgan = require('morgan');
+const handlebars = require('express-handlebars');
 const app = express();
+const port = 3000;
 
-const route = require('./routes/index_route');
-const db = require('./config/db/database');
+const route = require('./routes/');
+// const db = require('./config/db/');
 
-// connect to DB
-db.connect();
+//Connect database
+// db.connect();
 
-// scss, css
+//static file
 app.use(express.static(path.join(__dirname, 'public')));
 
 //HTTP logger
 // app.use(morgan('combined'));
 
-// Template engine
-app.engine('hbs', handlebars({extname: 'hbs'}));
-app.set('view engine', 'hbs');
-app.set('views', path.join(__dirname, 'resources/views'));
+//Dùng để đọc các thông tin trong form post
+// app.use(express.urlencoded({
+//   extended: true
+// }));
+// app.use(express.json());
 
-// route init
+//template engine
+app.engine('hbs', handlebars({
+  extname: '.hbs'
+}));
+app.set('view engine', 'hbs');
+
+app.set('views', path.join(__dirname, 'resources', 'views'));
+
+//route init
 route(app);
 
 app.listen(port, () => {
-    console.log(`listen http://localhost:${port}`);
+  console.log(`App listening at http://localhost:${port}`)
 });

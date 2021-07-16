@@ -5,7 +5,6 @@
   "main": "src/index.js",
   "scripts": {
     "start": "nodemon --inspect src/index.js",
-    "watch": "node-sass --watch src/resources/scss/ --output src/public/css/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,8 +22,11 @@
   },
   "homepage": "https://github.com/TanTheVinh/VNPT---MQTT#readme",
   "dependencies": {
+<<<<<<< HEAD
     "aedes": "^0.46.0",
     "bootstrap": "^5.0.2",
+=======
+>>>>>>> 39ca3393e4004443ebb1f66b4d56070e73935ca3
     "express": "^4.17.1",
     "express-handlebars": "^5.3.2",
     "mosca": "^2.8.3",
@@ -34,6 +36,6 @@
   "devDependencies": {
     "morgan": "^1.10.0",
     "node-sass": "^6.0.1",
-    "nodemon": "^2.0.9"
+    "nodemon": "^2.0.12"
   }
 }

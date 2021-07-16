@@ -1,12 +1,19 @@
 
 class site_controller {
 
-    index(req, res) {
+    // [GET] /
+    index(req, res, next){
         res.render('home');
     }
 
-    search(req, res) {
+    // [GET] /search
+    search(req, res, next){
         res.render('search');
+    }
+
+    // [GET] /:slug
+    show(req, res, next){
+        res.send('DETAIL');
     }
 }
 
