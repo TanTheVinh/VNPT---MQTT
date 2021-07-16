@@ -6,14 +6,9 @@ class site_controller {
         res.render('home');
     }
 
-    // [GET] /search
-    search(req, res, next){
-        res.render('search');
-    }
-
-    // [GET] /:slug
-    show(req, res, next){
-        res.send('DETAIL');
+    // [GET] /login
+    login(req, res, next){
+        res.render('login');
     }
 }
 

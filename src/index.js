@@ -6,24 +6,16 @@ const app = express();
 const port = 3000;
 
 const route = require('./routes/');
-// const db = require('./config/db/');
+const db = require('./config/db/database');
 
 //Connect database
-// db.connect();
+db.connect(() => {
+  console.log('connect successfully');
+});
 
 //static file
 app.use(express.static(path.join(__dirname, 'public')));
 
-//HTTP logger
-// app.use(morgan('combined'));
-
-//Dùng để đọc các thông tin trong form post
-// app.use(express.urlencoded({
-//   extended: true
-// }));
-// app.use(express.json());
-
-//template engine
 app.engine('hbs', handlebars({
   extname: '.hbs'
 }));
