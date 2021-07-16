@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MQTT - admin dashboard</title>
+    <!-- FONT AWESOME -->
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+    <!-- BOOTSTRAP -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+
+  <body>
+    <div class="container-fluid">
+      <div class="row flex-nowrap">
+        {{!-- header --}}
+        <div class="col-auto col-md-9 col-xl-10">
+          <div class="row bg-light">
+            <h1 id="title" class="p-3">Thiet bi:</h1>
+          </div>
+          <div class="row mt-5 mx-2 justify-content-center">
+            <div class="col-md-5 border rounded p-4">
+              <h2>Thong tin thiet bi:</h2>
+              <hr />
+              <table class="table">
+                <tr>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th scope="row">Ma thiet bi:</th>
+                  <td><span id="maThietBi">Ma 1</span></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th scope="row">Ten thiet bi:</th>
+                  <td><span id="tenThietBi">Ten 1</span></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th scope="row">Dia chi thiet bi:</th>
+                  <td><span id="diaChi">Dia chi 1</span></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th scope="row">Toa do thiet bi:</th>
+                  <td><span id="toaDo">Toa do 1</span></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th scope="row">Tai khoan thiet bi:</th>
+                  <td><span id="taiKhoan">Tai khoan 1</span></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th scope="row">Mat khau thiet bi:</th>
+                  <td><span id="matKhau">Mat khau 1</span></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th scope="row">Trang thai thiet bi:</th>
+                  <td><span id="trangThai">Trang thai 1</span></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td><span class="my-5">&nbsp;</span></td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    <!-- Button trigger modal -->
+                    <button
+                      type="button"
+                      class="btn btn-danger"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                    >
+                    <i class="fa fa-inbox"></i>
+                      Gui lenh
+                    </button>
+                    <!-- Modal -->
+                    <div
+                      class="modal fade"
+                      id="exampleModal"
+                      tabindex="-1"
+                      aria-labelledby="exampleModalLabel"
+                      aria-hidden="true"
+                    >
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                              Modal title
+                            </h5>
+                            <button
+                              type="button"
+                              class="btn-close"
+                              data-bs-dismiss="modal"
+                              aria-label="Close"
+                            ></button>
+                          </div>
+                          <div class="modal-body">...</div>
+                          <div class="modal-footer">
+                            <button
+                              type="button"
+                              class="btn btn-secondary"
+                              data-bs-dismiss="modal"
+                            >
+                              Close
+                            </button>
+                            <button type="button" class="btn btn-primary">
+                              Save changes
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </th>
+                  <td>
+                    <a
+                      id="chinhSua"
+                      href="editInfoDevice.html"
+                      class="btn btn-info"
+                      ><i class="fa fa-edit"></i>Chinh sua thong tin</a
+                    >
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div class="col-md-3 border rounded p-4 mx-4">
+              <h2>Publish</h2>
+              <hr />
+              <div class="overflow-auto" style="height: 500px">
+                <ul class="p-0" style="list-style-type: none">
+                  <li class="border rounded p-2">test test test</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-3 border rounded p-4">
+              <h2>Lich su hoat dong</h2>
+              <hr />
+              <div class="overflow-auto" style="height: 500px">
+                <ul class="p-0" style="list-style-type: none">
+                  <li class="border rounded p-2">test test test</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
