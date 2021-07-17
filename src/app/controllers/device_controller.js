@@ -3,17 +3,22 @@ class device_controller {
 
     //[GET] /list-device/
     list(req, res, next){
-        res.render('list_device');
+        res.render('listDevice');
     }
 
     //[GET] /list-device/detail
     detail(req, res, next){
-        res.render('detail_device');
+        res.render('infoDevice');
     }
 
     //[GET] /list-device/edit
     edit(req, res, next){
-        res.render('edit_device');
+        res.render('editInfoDevice');
+    }
+
+    //[GET] /list-device/add
+    add(req, res, next){
+        res.render('addDevice');
     }
 }
 

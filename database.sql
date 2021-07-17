@@ -125,6 +125,7 @@ create table THIETBI (
    TOADO                VARCHAR(30)          not null,
    TAIKHOAN             VARCHAR(30)          not null,
    MATKHAU              VARCHAR(20)          not null,
+   TRANGTHAI            BOOLEAN              not null,
    constraint PK_THIETBI primary key (MATHIETBI)
 );
 
