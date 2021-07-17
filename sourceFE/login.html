@@ -13,56 +13,51 @@
       crossorigin="anonymous"
     />
   </head>
-
+  <style>
+    html,
+    body,
+    .container,
+    .row {
+      height: 100%;
+      margin: auto;
+    }
+    .row {
+      align-items: center;
+    }
+  </style>
   <body>
-      <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Launch demo modal
-  </button>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
-    <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Launch demo modal
-  </button>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 offset-md-4">
+          <div class="login-form bg-light p-4">
+            <form action="" method="" class="row g-3">
+              <h4>Xin chao!</h4>
+              <div class="col-12">
+                <label>Tai khoan</label>
+                <input
+                  type="text"
+                  name="taiKhoan"
+                  class="form-control"
+                  placeholder="Tai khoan"
+                />
+              </div>
+              <div class="col-12">
+                <label>Mat khau</label>
+                <input
+                  type="password"
+                  name="matKhau"
+                  class="form-control"
+                  placeholder="Mat khau"
+                />
+              </div>
+              <div class="col-6">
+                <button type="submit" class="btn btn-dark">Dang nhap</button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
-  </div>
     <script>
       var myModal = document.getElementById("myModal");
       var myInput = document.getElementById("myInput");
