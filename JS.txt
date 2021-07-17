@@ -1,6 +1,0 @@
-array.for/each vòng lặp mảng thuần để xử lý dữ liệu
-array.every check nếu có 1 trong phần tử không thỏa mãn thì return true
-array.some check nếu có 1 trong phần tử thỏa mãn thì return true
-array.find check nếu trùng với điều kiên thì return phần tử mảng (chỉ tìm dc 1 phần tử gần nhất)
-array.filter check nếu trùng với điều kiên thì return phần tử mảng (trả về tất cả phần tử trùng)
-array.reduce 
