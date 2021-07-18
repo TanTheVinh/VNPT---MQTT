@@ -50,7 +50,8 @@
               "
             >
               <h2 class="fs-4 d-none text-white d-sm-inline text-primary">
-                <i class="fa fa-home"></i> Bang dieu khien
+                <i class="fa fa-home"></i> Bảng điều khiển
+
               </h2>
             </a>
             <ul
@@ -63,41 +64,43 @@
               id="menu"
             >
               <li class="nav-item">
-                <h4 class="mx-1 d-none d-sm-inline text-primary">Thiet bi</h4>
+                <h4 class="mx-1 d-none d-sm-inline text-primary">Thiết bị
+                </h4>
                 <ul style="list-style-type: none">
                   <li  class="p-2">
                     <a  class="text-white text-decoration-none fs-5" href="listDevice.html">
                       <i class="fa fa-book-open"></i>
-                      Danh sach thiet bi
+                      Danh sách thiết bị
                     </a>
                   </li>
                   <li  class="p-2">
                     <a  class="text-white text-decoration-none fs-5" href="addDevice.html">
                       <i class="fa fa-plus-circle"></i>
-                      Them thiet bi
+                      Thêm thiết bị
                     </a>
                   </li>
                   <li  class="p-2">
                     <a  class="text-white text-decoration-none fs-5" href="index.html">
                       <i class="fa fa-chart-line"></i>
-                      Thong ke
+                      Thống kê
                     </a>
                   </li>
                 </ul>
               </li>
               <li class="nav-item">
-                <h4 class="ms-1 d-none d-sm-inline text-primary">Loai thiet bi</h4>
+                <h4 class="ms-1 d-none d-sm-inline text-primary">Loại thiết bị
+                </h4>
                 <ul style="list-style-type: none">
                   <li  class="p-2">
                     <a  class="text-white text-decoration-none fs-5" href="listTypeDevice.html">
                       <i class="fa fa-book-open"></i>
-                      Danh sach loai thiet bi
+                      Danh sách loại thiết bị
                     </a>
                   </li>
                   <li class="p-2">
                     <a class="text-white text-decoration-none fs-5" href="addTypeDevice.html">
                       <i class="fa fa-plus-circle"></i>
-                      Them loai thiet bi
+                      Thêm loại thiết bị
                     </a>
                   </li>
                 </ul>
@@ -108,12 +111,12 @@
               <ul class="" style="list-style-type: none">
                 <li class="px-4">
                   <a class="text-white text-decoration-none fs-5" href="changePassword.html"
-                    ><i class="fa fa-user-edit"></i> Doi mat khau</a
+                    ><i class="fa fa-user-edit"></i> Đổi mật khẩu</a
                   >
                 </li>
                 <li class="p-4">
                   <a class="text-white text-decoration-none fs-5" href="#"
-                    ><i class="fa fa-sign-out-alt"></i> Dang xuat</a
+                    ><i class="fa fa-sign-out-alt"></i> Đổi mật khẩu</a
                   >
                 </li>
               </ul>
@@ -143,122 +146,123 @@
               </div>
             </div>
           </div>
+          <script>
+            window.onload = function () {
+            
+            var chart = new CanvasJS.Chart("chartContainer", {
+              animationEnabled: true,
+              exportEnabled: true,
+              title:{
+                text: "Gold Medals Won in Olympics"             
+              }, 
+              axisY:{
+                title: "Number of Medals"
+              },
+              toolTip: {
+                shared: true
+              },
+              legend:{
+                cursor:"pointer",
+                itemclick: toggleDataSeries
+              },
+              data: [{        
+                type: "spline",  
+                name: "US",        
+                showInLegend: true,
+                dataPoints: [
+                  { label: "Atlanta 1996" , y: 44 },     
+                  { label:"Sydney 2000", y: 37 },     
+                  { label: "Athens 2004", y: 36 },     
+                  { label: "Beijing 2008", y: 36 },     
+                  { label: "London 2012", y: 46 },
+                  { label: "Rio 2016", y: 46 }
+                ]
+              }, 
+              {        
+                type: "spline",
+                name: "China",        
+                showInLegend: true,
+                dataPoints: [
+                  { label: "Atlanta 1996" , y: 16 },     
+                  { label:"Sydney 2000", y: 28 },     
+                  { label: "Athens 2004", y: 32 },     
+                  { label: "Beijing 2008", y: 48 },     
+                  { label: "London 2012", y: 38 },
+                  { label: "Rio 2016", y: 26 }
+                ]
+              },
+              {        
+                type: "spline",  
+                name: "Britain",        
+                showInLegend: true,
+                dataPoints: [
+                  { label: "Atlanta 1996" , y: 1 },     
+                  { label:"Sydney 2000", y: 11 },     
+                  { label: "Athens 2004", y: 9 },     
+                  { label: "Beijing 2008", y: 19 },     
+                  { label: "London 2012", y: 29 },
+                  { label: "Rio 2016", y: 27 }
+                ]
+              },
+              {        
+                type: "spline",  
+                name: "Russia",        
+                showInLegend: true,
+                dataPoints: [
+                  { label: "Atlanta 1996" , y: 26 },     
+                  { label:"Sydney 2000", y: 32 },     
+                  { label: "Athens 2004", y: 28 },     
+                  { label: "Beijing 2008", y: 22 },     
+                  { label: "London 2012", y: 20 },
+                  { label: "Rio 2016", y: 19 }
+                ]
+              },
+              {        
+                type: "spline",  
+                name: "S Korea",        
+                showInLegend: true,
+                dataPoints: [
+                  { label: "Atlanta 1996" , y: 7 },     
+                  { label:"Sydney 2000", y: 8 },     
+                  { label: "Athens 2004", y: 9 },     
+                  { label: "Beijing 2008", y: 13 },     
+                  { label: "London 2012", y: 13 },
+                  { label: "Rio 2016", y: 9 }
+                ]
+              },  
+              {        
+                type: "spline",  
+                name: "Germany",        
+                showInLegend: true,
+                dataPoints: [
+                  { label: "Atlanta 1996" , y: 20 },     
+                  { label:"Sydney 2000", y: 13 },     
+                  { label: "Athens 2004", y: 13 },     
+                  { label: "Beijing 2008", y: 16 },     
+                  { label: "London 2012", y: 11 },
+                  { label: "Rio 2016", y: 17 }
+                ]
+              }]
+            });
+            
+            chart.render();
+            
+            function toggleDataSeries(e) {
+              if(typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                e.dataSeries.visible = false;
+              }
+              else {
+                e.dataSeries.visible = true;            
+              }
+              chart.render();
+            }
+            
+            }
+            </script>
+            <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+       
         </div>
       </div>
     </div>
-    <script>
-      window.onload = function () {
-      
-      var chart = new CanvasJS.Chart("chartContainer", {
-        animationEnabled: true,
-        exportEnabled: true,
-        title:{
-          text: "Gold Medals Won in Olympics"             
-        }, 
-        axisY:{
-          title: "Number of Medals"
-        },
-        toolTip: {
-          shared: true
-        },
-        legend:{
-          cursor:"pointer",
-          itemclick: toggleDataSeries
-        },
-        data: [{        
-          type: "spline",  
-          name: "US",        
-          showInLegend: true,
-          dataPoints: [
-            { label: "Atlanta 1996" , y: 44 },     
-            { label:"Sydney 2000", y: 37 },     
-            { label: "Athens 2004", y: 36 },     
-            { label: "Beijing 2008", y: 36 },     
-            { label: "London 2012", y: 46 },
-            { label: "Rio 2016", y: 46 }
-          ]
-        }, 
-        {        
-          type: "spline",
-          name: "China",        
-          showInLegend: true,
-          dataPoints: [
-            { label: "Atlanta 1996" , y: 16 },     
-            { label:"Sydney 2000", y: 28 },     
-            { label: "Athens 2004", y: 32 },     
-            { label: "Beijing 2008", y: 48 },     
-            { label: "London 2012", y: 38 },
-            { label: "Rio 2016", y: 26 }
-          ]
-        },
-        {        
-          type: "spline",  
-          name: "Britain",        
-          showInLegend: true,
-          dataPoints: [
-            { label: "Atlanta 1996" , y: 1 },     
-            { label:"Sydney 2000", y: 11 },     
-            { label: "Athens 2004", y: 9 },     
-            { label: "Beijing 2008", y: 19 },     
-            { label: "London 2012", y: 29 },
-            { label: "Rio 2016", y: 27 }
-          ]
-        },
-        {        
-          type: "spline",  
-          name: "Russia",        
-          showInLegend: true,
-          dataPoints: [
-            { label: "Atlanta 1996" , y: 26 },     
-            { label:"Sydney 2000", y: 32 },     
-            { label: "Athens 2004", y: 28 },     
-            { label: "Beijing 2008", y: 22 },     
-            { label: "London 2012", y: 20 },
-            { label: "Rio 2016", y: 19 }
-          ]
-        },
-        {        
-          type: "spline",  
-          name: "S Korea",        
-          showInLegend: true,
-          dataPoints: [
-            { label: "Atlanta 1996" , y: 7 },     
-            { label:"Sydney 2000", y: 8 },     
-            { label: "Athens 2004", y: 9 },     
-            { label: "Beijing 2008", y: 13 },     
-            { label: "London 2012", y: 13 },
-            { label: "Rio 2016", y: 9 }
-          ]
-        },  
-        {        
-          type: "spline",  
-          name: "Germany",        
-          showInLegend: true,
-          dataPoints: [
-            { label: "Atlanta 1996" , y: 20 },     
-            { label:"Sydney 2000", y: 13 },     
-            { label: "Athens 2004", y: 13 },     
-            { label: "Beijing 2008", y: 16 },     
-            { label: "London 2012", y: 11 },
-            { label: "Rio 2016", y: 17 }
-          ]
-        }]
-      });
-      
-      chart.render();
-      
-      function toggleDataSeries(e) {
-        if(typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-          e.dataSeries.visible = false;
-        }
-        else {
-          e.dataSeries.visible = true;            
-        }
-        chart.render();
-      }
-      
-      }
-      </script>
-      <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-  </body>
+     </body>
 </html>
