@@ -10,6 +10,7 @@ class device_controller {
                 const thietbi = result.rows;
                 // res.json({ thietbi });
                 res.render('listDevice', { thietbi });
+                console.log({thietbi});
             })
             .catch(next)
     }
@@ -21,9 +22,10 @@ class device_controller {
             .then(result => {
                 const thietbi = result.rows[0];
                 res.json({ thietbi });
+                // res.render('infoDevice');
+
             })
             .catch(next);
-        // res.render('infoDevice');
     }
 
     //[GET] /list-device/edit
