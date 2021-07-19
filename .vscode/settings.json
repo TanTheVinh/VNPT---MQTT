@@ -1,0 +1,14 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "mqtt",
+            "database": "mqtt",
+            "username": "postgres",
+            "password": "7714119"
+        }
+    ]
+}

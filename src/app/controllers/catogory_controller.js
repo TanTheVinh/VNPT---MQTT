@@ -3,7 +3,14 @@ class catogory_controller {
 
     //[GET] /list-catogory/
     list(req, res, next){
-        res.render('listTypeDevice');
+        pool
+        .query('select * from loaithietbi')
+        .then(result => {
+            const loaithietbi = result.rows;
+            // res.json({ loaithietbi });
+            res.render('listTypeDevice', { loaithietbi });
+        })
+        .catch(next)
     }
 
     //[GET] /list-catogory/detail

@@ -1,4 +1,3 @@
-const { text } = require("express");
 const pool = require("../../config/db/database");
 
 class site_controller {
@@ -6,10 +5,11 @@ class site_controller {
     // [GET] /
     index(req, res, next){
         pool
-            .query('select * from users where id = 1')
+            .query('select * from thietbi')
             .then(result => {
-                const temp = result.rows[0];
-                res.render('index', { temp });
+                const user = result.rows[0];
+                res.json({ user });
+                // res.render('index', { temp });
             })
             .catch(next)
     }

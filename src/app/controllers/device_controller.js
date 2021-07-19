@@ -1,9 +1,17 @@
+const pool = require("../../config/db/database");
 
 class device_controller {
 
     //[GET] /list-device/
     list(req, res, next){
-        res.render('listDevice');
+        pool
+            .query('select * from thietbi')
+            .then(result => {
+                const thietbi = result.rows;
+                // res.json({ thietbi });
+                res.render('listDevice', { thietbi });
+            })
+            .catch(next)
     }
 
     //[GET] /list-device/detail
