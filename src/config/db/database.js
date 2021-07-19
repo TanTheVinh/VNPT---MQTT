@@ -2,9 +2,9 @@ const { Pool, Client } = require('pg');
 
 var client = new Client({
     host: 'localhost',
-    database: 'Demo',
+    database: 'MQTT',
     user: 'postgres',
-    password: 'thevinh',
+    password: 'sa',
     port: 3211
 });
 
