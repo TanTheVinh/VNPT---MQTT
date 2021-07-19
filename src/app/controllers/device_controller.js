@@ -16,7 +16,14 @@ class device_controller {
 
     //[GET] /list-device/detail
     detail(req, res, next){
-        res.render('infoDevice');
+        pool
+            .query('select * from thietbi where ', [req.params.id])
+            .then(result => {
+                const thietbi = result.rows[0];
+                res.json({ thietbi });
+            })
+            .catch(next);
+        // res.render('infoDevice');
     }
 
     //[GET] /list-device/edit
