@@ -1,19 +1,34 @@
+const pool = require("../../config/db/database");
 
 class catogory_controller {
 
     //[GET] /list-catogory/
     list(req, res, next){
-        res.render('list_catogory');
+        pool
+        .query('select * from loaithietbi')
+        .then(result => {
+            const loaithietbi = result.rows;
+            // res.json({ loaithietbi });
+            res.render('listTypeDevice', { loaithietbi });
+        })
+        .catch(next)
     }
 
     //[GET] /list-catogory/detail
     detail(req, res, next){
-        res.render('detail_catogory');
+        res.render('infoTypeDevice');
     }
 
     //[GET] /list-catogory/edit
     edit(req, res, next){
-        res.render('edit_catogory');
+        res.render('editInfoTypeDevice');
+    }
+
+    //[GET] /list-category/add
+    add(req, res, next){
+        // pool
+        // .then('select')
+        // res.render('addTypeDevice');
     }
 }
 

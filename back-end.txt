@@ -1,10 +1,10 @@
 GET
-trang chu ("/"): so luong ket noi hien tai, lich su so luong ket noi
-Danh sach thiet bi ("/list-device"): thong tin tat ca thiet bi
-Chi tiet thiet bi ("/list-device/detail"): thong tin 1 thiet bi, lich su hoat dong, lich su gui lenh
-sua thong tin ("/list-device/edit"): thong tin thiet bi chinh sua
-sua thiet bi ("/list-category/edit"): thong tin loai thiet bi sua
-danh sach loai thiet bi ("/list-category"): thong tin tat ca loai thiet bi
+trang chu ("/"): so luong ket noi hien tai, so luong lich su so luong ket noi @
+Danh sach thiet bi ("/list-device"): thong tin tat ca thiet bi /
+Chi tiet thiet bi ("/list-device/detail"): thong tin 1 thiet bi, lich su hoat dong, lich su gui lenh @
+sua thiet bi ("/list-device/edit"): thong tin thiet bi chinh sua /
+sua loai thiet bi ("/list-category/edit"): thong tin loai thiet bi sua /
+danh sach loai thiet bi ("/list-category"): thong tin tat ca loai thiet bi /
 
 POST
 dang nhap ("/login"): dang nhap nguoi dung

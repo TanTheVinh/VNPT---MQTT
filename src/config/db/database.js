@@ -1,11 +1,11 @@
-const { Pool, Client } = require('pg');
+const Pool = require('pg').Pool;
 
-var client = new Client({
+var pool = new Pool({
     host: 'localhost',
     database: 'MQTT',
     user: 'postgres',
     password: 'sa',
-    port: 3211
+    port: 5432
 });
 
-module.exports = client;
+module.exports = pool;

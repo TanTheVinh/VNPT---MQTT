@@ -11,9 +11,9 @@ pool.connect()
 app.get('/index', (req, res)=>{
     pool.query(`SELECT count(*) FROM thietbi`, (err, result)=>{
         if(!err){
-            const temp = result.rows;
+            const temp = result.rows[0];
             res.send(result.rows);
-            console.log(temp);
+            res.render('index',{temp});
         }
     });
     pool.end;

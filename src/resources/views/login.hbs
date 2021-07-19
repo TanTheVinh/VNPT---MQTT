@@ -1,1 +1,41 @@
-<h1>Login</h1>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 offset-md-4">
+          <div class="login-form bg-light p-4">
+            <form action="" method="" class="row g-3">
+              <h4>Xin chao!</h4>
+              <div class="col-12">
+                <label>Tai khoan</label>
+                <input
+                  type="text"
+                  name="taiKhoan"
+                  class="form-control"
+                  placeholder="Tai khoan"
+                />
+              </div>
+              <div class="col-12">
+                <label>Mat khau</label>
+                <input
+                  type="password"
+                  name="matKhau"
+                  class="form-control"
+                  placeholder="Mat khau"
+                />
+              </div>
+              <div class="col-6">
+                <button type="submit" class="btn btn-dark">Dang nhap</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      var myModal = document.getElementById("myModal");
+      var myInput = document.getElementById("myInput");
+
+      myModal.addEventListener("shown.bs.modal", function () {
+        myInput.focus();
+      });
+    </script>
