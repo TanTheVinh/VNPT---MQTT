@@ -31,9 +31,11 @@ class catogory_controller {
         res.render('editInfoTypeDevice');
     }
 
-    //[GET] /list-catogory/add
+    //[GET] /list-category/add
     add(req, res, next){
-        res.render('addTypeDevice');
+        // pool
+        // .then('select')
+        // res.render('addTypeDevice');
     }
 
     // [DELETE] /list-catogory/delete/:id

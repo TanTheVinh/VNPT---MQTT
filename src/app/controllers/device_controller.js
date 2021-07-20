@@ -1,3 +1,4 @@
+const e = require("express");
 const { query } = require("express");
 const { Query } = require("pg");
 const pool = require("../../config/db/database");
@@ -33,11 +34,23 @@ class device_controller {
     //[GET] /list-device/edit/:id
     edit(req, res, next){
         res.render('editInfoDevice');
+        
     }
 
     //[GET] /list-device/add
     add(req, res, next){
-        res.render('addDevice');
+        const device = req.body;
+        const query_device = (`insert into thietbi(idthietbi, idloai, tenthietbi, taikhoan, matkhau, trangthai) 
+        values( default, '${device.idloai}', '${device.tenthietbi}', '${device.taikhoan}', '${device.matkhau}', '${device.trangthai}' )`);
+        pool.query( query_device, (err, res ) => {
+            if(!err){
+                res.send('thêm thành công');
+            }
+            else{ console.log(err.message) }
+
+        })
+            .catch(next);
+       // res.render('addDevice');
     }
 
     // [DELETE] /list-device/delete/:id
