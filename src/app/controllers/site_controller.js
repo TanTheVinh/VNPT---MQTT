@@ -13,8 +13,9 @@ class site_controller {
                     .query('select count(*) as ngatketnoi from thietbi where trangthai = false')
                     .then(result => {
                         soluong.ngatketnoi = result.rows[0].ngatketnoi;
-                        res.json({ soluong });
-                        // res.render('index', { soluong });
+                        // res.json({ soluong });
+                        console.log({soluong});
+                        res.render('index', { soluong });
                     })
                     .catch(next);
             })
