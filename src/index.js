@@ -15,7 +15,7 @@ db.connect(() => {
 });
 
 //static file
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'resources/views/plugins')));
 
 app.use(methodOverride('_method'))
 
