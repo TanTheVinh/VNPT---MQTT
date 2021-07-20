@@ -21,6 +21,7 @@
                         type="text"
                         name="maLoaiThietBi"
                         id="maLoaiThietBi"
+                        value="{{this.idloai}}"
                       />
                       <span class="text-danger"> *</span>
                     </td>
@@ -38,6 +39,7 @@
                         type="text"
                         name="tenLoaiThietBi"
                         id="tenLoaiThietBi"
+                        value="{{this.tenLoaiThietBi}}"
                       /><span class="text-danger"> *</span>
                     </td>
                   </tr>
@@ -48,7 +50,7 @@
                   <tr>
                     <th scope="row">Mô tả loại thiết bị:</th>
                     <td>
-                      <input required type="text" name="moTaLoaiThietBi" id="moTaLoaiThietBi" /><span class="text-danger"> *</span>
+                      <input required type="text" name="moTaLoaiThietBi" id="moTaLoaiThietBi" value="{{this.moTaLoaiThietBi}}"/><span class="text-danger"> *</span>
                     </td>
                   </tr>
                   <tr>
@@ -62,10 +64,6 @@
                       <button id="them" class="btn btn-success">
                         <i class="fa fa-edit"></i>
                         Cập nhật thông tin loại thiết bị
-                      </button>
-                      <button id="xoa" type="reset" class="btn btn-danger">
-                        <i class="fa fa-eraser"></i>
-                        Xoá
                       </button>
                     </td>
                   </tr>

@@ -1,79 +1,45 @@
-<div class="row bg-light">
-            <h1 id="title" class="p-3">Thêm loại thiết bị
-            </h1>
-          </div>
-          <div class="row mt-5">
-            <div class="col-md-3"></div>
-            <div class="col-md-6 border rounded">
-              <h2 class="text-center">Nhập đầy đủ thông tin loại thiết bị
-                :</h2>
-              <hr />
-              <form action="">
-                <table class="table">
-                  <tr>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Mã loại thiết bị
-                      :</th>
-                    <td>
-                      <input
-                        required
-                        type="text"
-                        name="maLoaiThietBi"
-                        id="maLoaiThietBi"
-                      />
-                      <span class="text-danger"> *</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Tên loại thiết bị
-                      :</th>
-                    <td>
-                      <input
-                        required
-                        type="text"
-                        name="tenLoaiThietBi"
-                        id="tenLoaiThietBi"
-                      /><span class="text-danger"> *</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Mô tả loại thiết bị:</th>
-                    <td>
-                      <input required type="text" name="moTaLoaiThietBi" id="moTaLoaiThietBi" /><span class="text-danger"> *</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td><span class="my-5">&nbsp;</span></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                    </th>
-                    <td>
-                      <button id="them" class="btn btn-success">
-                        <i class="fa fa-plus"></i>
-                        Thêm loại thiết bị
-
-                      </button>
-                      <button id="xoa" type="reset" class="btn btn-danger">
-                        <i class="fa fa-eraser"></i>
-                        Xoá
-                      </button>
-                    </td>
-                  </tr>
-                </table>
-              </form>
-            </div>
-            <div class="col-md-3"></div>
-          </div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="white-box">
+        <div class="d-flex justify-content-between" c>
+          <h3 class="box-title">Thêm loại thiết bị</h3>
+        </div>
+        <div class="table-responsive">
+          <form action="" method="post">
+            <table class="table text-nowrap">
+              <tr>
+                <th class="border-top-0">Mã loại thiết bị
+                </th>
+                <td>
+                  <input type="text" name="idLoaiThietBi" id="idLoaiThietBi" required>
+                </td>
+              </tr>
+              <tr>
+                <th class="border-top-0">Tên loại thiết bị
+                </th>
+                <td>
+                  <input type="text" name="tenLoaiTB" id="tenLoaiTB" required>
+                </td>
+              </tr>
+              <tr>
+                <th class="border-top-0">Tài khoản thiết bị</th>
+                <td>
+                  <input type="text" name="tkTB" id="tkTB" required>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  <button id="them" class="btn btn-success">
+                    <i class="fa fa-plus"></i>
+                    Thêm loại thiết bị
+                  </button>
+                </td>
+              </tr>
+            </table>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
