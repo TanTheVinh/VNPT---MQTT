@@ -1,84 +1,58 @@
-<div class="row bg-light">
-          <h1 id="title" class="p-3">Thiết bị: {{this.idthietbi}}</h1>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="white-box">
+        <div class="d-flex justify-content-between" c>
+          <h3 class="box-title">Thiết bị: {{this.idthietbi}}</h3>
         </div>
-        <div class="row mt-5 mx-2 justify-content-center">
-          <div class="col-md-5 border rounded p-4">
-            <h2>Thông tin thiết bị
-              :</h2>
-            <hr />
-            <table class="table">
+        <div class="table-responsive">
+          <form action="" method="post">
+            <table class="table text-nowrap">
               <tr>
-                <td></td>
-                <td></td>
+                <th class="border-top-0">Mã thiết bị
+                </th>
+                <td>
+                  {{this.idThietBi}}
+                </td>
               </tr>
               <tr>
-                <th scope="row">Mã thiết bị
-                  :</th>
-                <td><span id="maThietBi">Ma 1</span></td>
+                <th class="border-top-0">Tên thiết bị
+                </th>
+                <td>
+                  {{this.tenThietBi}}
+                </td>
               </tr>
               <tr>
-                <td></td>
-                <td></td>
+                <th class="border-top-0">Mã loại thiết bị</th>
+                <td>
+                  {{this.loaiThietBi}}
+                </td>
               </tr>
               <tr>
-                <th scope="row">Tên thiết bị
-                  :</th>
-                <td><span id="tenThietBi">Ten 1</span></td>
+                <th class="border-top-0">Tài khoản thiết bị</th>
+                <td>
+                  {{this.taiKhoan}}
+                </td>
               </tr>
               <tr>
-                <td></td>
-                <td></td>
+                <th class="border-top-0">Mật khẩu thiết bị</th>
+                <td>
+                  {{this.matKhau}}
+                </td>
               </tr>
               <tr>
-                <th scope="row">Địa chỉ thiết bị
-                  :</th>
-                <td><span id="diaChi">Dia chi 1</span></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <th scope="row">Toạ độ thiết bị:</th>
-                <td><span id="toaDo">Toa do 1</span></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <th scope="row">Tài khoản thiết bị:</th>
-                <td><span id="taiKhoan">Tai khoan 1</span></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <th scope="row">Mật khẩu thiết bị:</th>
-                <td><span id="matKhau">Mat khau 1</span></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <th scope="row">Tài khoản thiết bị:</th>
-                <td><span id="trangThai">Trang thai 1</span></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td><span class="my-5">&nbsp;</span></td>
+                <th class="border-top-0">Trạng thái thiết bị
+                </th>
+                <td>
+                  {{this.trangThai}}
+                </td>
               </tr>
               <tr>
                 <th scope="row">
-                  <!-- Button trigger modal -->
                   <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     <i class="fa fa-inbox"></i>
                     Gửi lệnh
                   </button>
-
-                  <!-- Modal -->
                   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog">
@@ -99,30 +73,37 @@
                   </div>
                 </th>
                 <td>
-                  <a id="chinhSua" href="editInfoDevice.html" class="btn btn-info"><i class="fa fa-edit"></i>Chỉnh sửa thông tin</a>
+                  <a id="chinhSua" href="editInfoDevice.html" class="btn btn-info"><i class="fa fa-edit"></i>Chỉnh sửa
+                    thông tin</a>
                 </td>
               </tr>
             </table>
-          </div>
-          <div class="col-md-3 border rounded p-4 mx-4">
-            <h2>Publish</h2>
-            <hr />
-            <div class="overflow-auto" style="height: 500px">
-              <ul class="p-0" style="list-style-type: none">
-                <li class="border rounded p-2">test test test</li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md-3 border rounded p-4">
-            <h2>Lịch sử hoạt động</h2>
-            <hr />
-            <div class="overflow-auto" style="height: 500px">
-              <ul class="p-0" style="list-style-type: none">
-                <li class="border rounded p-2">test test test</li>
-              </ul>
-            </div>
-          </div>
+          </form>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
-            integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous">
-          </script>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
+    integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous">
+  </script>
+</div>
+
+<div class="col-md-3 border rounded p-4 mx-4">
+  <h2>Publish</h2>
+  <hr />
+  <div class="overflow-auto" style="height: 500px">
+    <ul class="p-0" style="list-style-type: none">
+      <li class="border rounded p-2">test test test</li>
+    </ul>
+  </div>
+</div>
+<div class="col-md-3 border rounded p-4">
+  <h2>Lịch sử hoạt động</h2>
+  <hr />
+  <div class="overflow-auto" style="height: 500px">
+    <ul class="p-0" style="list-style-type: none">
+      <li class="border rounded p-2">test test test</li>
+    </ul>
+  </div>
+</div>
+</div>

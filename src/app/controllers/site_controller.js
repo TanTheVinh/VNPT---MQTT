@@ -8,22 +8,9 @@ class site_controller {
         pool
             .query('select count(*) as dangketnoi from thietbi where trangthai = true')
             .then(result => {
-<<<<<<< HEAD
                 const user = result.rows[0];
                 //res.json({ user });
-                res.render('index', { temp });
-=======
-                soluong.dangketnoi = result.rows[0].dangketnoi;
-                pool
-                    .query('select count(*) as ngatketnoi from thietbi where trangthai = false')
-                    .then(result => {
-                        soluong.ngatketnoi = result.rows[0].ngatketnoi;
-                        // res.json({ soluong });
-                        console.log({soluong});
-                        res.render('index', { soluong });
-                    })
-                    .catch(next);
->>>>>>> fd8f1216110b0b85e91ef0cbefed11294daa3380
+                res.render('index', { user });
             })
             .catch(next);        
     }

@@ -1,155 +1,82 @@
-<div class="row bg-light">
-            <h1 id="title" class="p-3">Chỉnh sửa thông tin
-              thiết bị</h1>
-          </div>
-          <div class="row mt-5">
-            <div class="col-md-3"></div>
-            <div class="col-md-6 border rounded">
-              <h2 class="text-center">Cập nhật thông tin
-                thiết bị:</h2>
-              <hr />
-              <form action="">
-                <table class="table">
-                  <tr>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Mã thiết bị
-                      :</th>
-                    <td>
-                      <input
-                        required
-                        type="text"
-                        name="maThietBi"
-                        id="maThietBi"
-                      />
-                      <span class="text-danger"> *</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Tên thiết bị
-                      :</th>
-                    <td>
-                      <input
-                        required
-                        type="text"
-                        name="tenThietBi"
-                        id="tenThietBi"
-                      /><span class="text-danger"> *</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Địa chỉ thiết bị
-                      :</th>
-                    <td>
-                      <input required type="text" name="diaChi" id="diaChi" /><span class="text-danger"> *</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Toạ độ thiết bị
-                      :</th>
-                    <td>
-                      <input required type="text" name="toaDo" id="toaDo" /><span class="text-danger"> *</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Tài khoản thiết bị
-                      :</th>
-                    <td>
-                      <input
-                        required
-                        type="text"
-                        name="taiKhoan"
-                        id="taiKhoan"
-                      /><span class="text-danger"> *</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Mật khẩu thiết bị
-                      :</th>
-                    <td>
-                      <input
-                        required
-                        type="password"
-                        name="matKhau"
-                        id="matKhau"
-                      /><span class="text-danger"> *</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Nhập lại mật khẩu 
-                      thiết bị:</th>
-                    <td>
-                      <input
-                        required
-                        type="password"
-                        name="nhapLaiMatKhau"
-                        id="nhapLaiMatKhau"
-                      /><span class="text-danger"> *</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Trạng thái thiết bị
-                      :</th>
-                    <td>
-                      <select name="trangThai" id="trangThai">
-                        <option value="1">Kết nối
-                        </option>
-                        <option value="0">Ngắt kết nối
-                        </option>
-                      </select>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td><span class="my-5">&nbsp;</span></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                    </th>
-                    <td>
-                      <button id="capNhat" class="btn btn-success">
-                        <i class="fa fa-edit"></i>
-                        Cập nhật thông tin
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="white-box">
+        <div class="d-flex justify-content-between" c>
+          <h3 class="box-title">Thêm thiết bị</h3>
+        </div>
+        <div class="table-responsive">
+          <form action="" method="post">
+            <table class="table text-nowrap">
+            <tr>
+              <th class="border-top-0">Mã thiết bị
+              </th>
+              <td>
+                <input type="text" name="idThietBi" id="idThietBi" required value="{{this.idThietBi}}">
+              </td>
+            </tr>
+            <tr>
+              <th class="border-top-0">Tên thiết bị
+              </th>
+              <td>
+                <input type="text" name="tenTB" id="tenTB" required value="{{this.tenThietBi}}">
+              </td>
+            </tr>
+            <tr>
+              <th class="border-top-0">Mã loại thiết bị</th>
+              <td>
+                {{!-- {{this.loaiThietBi}} --}}
+                <select name="" id="">
+                  <option value="">
 
-                      </button>
-                      <button id="xoa" type="reset" class="btn btn-danger">
-                        <i class="fa fa-eraser"></i>
-                        Xoá
-                      </button>
-                    </td>
-                  </tr>
-                </table>
-              </form>
-            </div>
-            <div class="col-md-3"></div>
-          </div>
+                  </option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <th class="border-top-0">Tài khoản thiết bị</th>
+              <td>
+                <input type="text" name="tkTB" id="tkTB" required value="{{this.taiKhoan}}">
+              </td>
+            </tr>
+            <tr>
+              <th class="border-top-0">Mật khẩu thiết bị</th>
+              <td>
+                <input type="password" name="mkTB" id="mkTB" required value="{{this.matKhau}}">
+              </td>
+            </tr>
+            <tr>
+              <th class="border-top-0">Nhập lại mật khẩu thiết bị
+              </th>
+              <td>
+                <input type="password" name="xnMKTB" id="xnMKTB" required value="{{this.matKhau}}">
+              </td>
+            </tr>
+            <tr>
+              <th class="border-top-0">Trạng thái thiết bị
+              </th>
+              <td>
+                {{!-- {{this.trangThai}} --}}
+                <select name="" id="">
+                  <option value="">
+
+                  </option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                  <a id="chinhSua" href="editInfoDevice.html" class="btn btn-info">
+                    <i class="fa fa-edit"></i>
+                    Chỉnh sửa
+                    thông tin
+                  </a>
+              </td>
+            </tr>
+          </table>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
