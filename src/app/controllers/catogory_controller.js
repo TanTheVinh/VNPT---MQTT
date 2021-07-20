@@ -20,8 +20,8 @@ class catogory_controller {
         .query('select * from loaithietbi where idloai = $1', [req.params.id])
         .then(result => {
             const loaithietbi = result.rows;
-            res.json({ loaithietbi });
-            // res.render('infoTypeDevice',{ loaithietbi });
+            //res.json({ loaithietbi });
+            res.render('infoTypeDevice',{ loaithietbi });
         })
         .catch(next);
     }
