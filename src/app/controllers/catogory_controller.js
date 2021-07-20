@@ -35,6 +35,16 @@ class catogory_controller {
     add(req, res, next){
         res.render('addTypeDevice');
     }
+
+    // [DELETE] /list-catogory/delete/:id
+    delete(req, res, next){
+        pool
+            .query('delete from loaithietbi where idloai = $1', [req.params.id])
+            .then(() => {
+                res.redirect('back');
+            })
+            .catch(next);
+    }
 }
 
 module.exports = new catogory_controller;

@@ -28,6 +28,7 @@
     </thead>
     <tbody>
       {{#each thietbi}}
+      <form action="/list-device/delete/{{this.idthietbi}}?_method=DELETE" method="post">
       <tr>
         <td>{{this.idthietbi}}</td>
         <td>{{this.idloai}}</td>
@@ -44,11 +45,12 @@
           <a href="/list-device/detail/{{this.idthietbi}}" class="btn btn-info">
             <i class="fa fa-info-circle"></i> Xem chi tiết
           </a>
-          <button class="btn btn-danger">
+          <button class="btn btn-danger" type="submit">
             <i class="fa fa-trash-alt"></i> Xoá
           </button>
         </td>
       </tr>
+      </form>
       {{/each}}
     </tbody>
   </table>

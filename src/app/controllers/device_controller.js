@@ -12,7 +12,7 @@ class device_controller {
                 const thietbi = result.rows;
                 // res.json({ thietbi });
                 res.render('listDevice', { thietbi });
-                console.log({thietbi});
+                // console.log({thietbi});
             })
             .catch(next)
     }
@@ -43,7 +43,11 @@ class device_controller {
     // [DELETE] /list-device/delete/:id
     delete(req, res, next){
         pool
-            query('delete from thietbi where idthietbi = $1', [req.params.id])
+            .query('delete from thietbi where idthietbi = $1', [req.params.id])
+            .then(() => {
+                res.redirect('back');
+            })
+            .catch(next);
     }
 }
 
