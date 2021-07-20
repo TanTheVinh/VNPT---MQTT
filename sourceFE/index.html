@@ -9,6 +9,18 @@
     <link href="plugins/bower_components/chartist/dist/chartist.min.css" rel="stylesheet">
     <link rel="stylesheet" href="plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css">
     <link href="css/style.min.css" rel="stylesheet">
+    <script src="@@path/vendor/chartist/dist/chartist.min.js"></script>
+    <script src="@@path/vendor/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+    <script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/app-style-switcher.js"></script>
+    <script src="plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <script src="js/waves.js"></script>
+    <script src="js/sidebarmenu.js"></script>
+    <script src="js/custom.js"></script>
+    <script src="plugins/bower_components/chartist/dist/chartist.min.js"></script>
+    <script src="plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+    <script src="js/pages/dashboards/dashboard1.js"></script>
 </head>
 
 <body>
@@ -133,27 +145,40 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div id="ct-visits" style="height: 405px;">
-                                <div class="chartist-tooltip" style="top: -17px; left: -12px;">
-                                    <span class="chartist-tooltip-value">6</span>
-                                </div>
-                            </div>
+                            <div class="bar-chart"></div>
+                            <script>
+                                new Chartist.Bar('.bar-chart', {
+                                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                                    series: [
+                                        [5, 4, 3, 7, 5, 10, 3],
+                                        [3, 2, 9, 5, 4, 6, 4]
+                                    ]
+                                }, {
+                                    low: 0,
+                                    showArea: true,
+                                    plugins: [
+                                        Chartist.plugins.tooltip()
+                                    ],
+                                    axisX: {
+                                        // On the x-axis start means top and end means bottom
+                                        position: 'end'
+                                    },
+                                    axisY: {
+                                        // On the y-axis start means left and end means right
+                                        showGrid: false,
+                                        showLabel: false,
+                                        offset: 0
+                                    }
+                                });
+                            </script>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/app-style-switcher.js"></script>
-    <script src="plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
-    <script src="js/waves.js"></script>
-    <script src="js/sidebarmenu.js"></script>
-    <script src="js/custom.js"></script>
-    <script src="plugins/bower_components/chartist/dist/chartist.min.js"></script>
-    <script src="plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
-    <script src="js/pages/dashboards/dashboard1.js"></script>
+
+    
 </body>
 
 </html>
