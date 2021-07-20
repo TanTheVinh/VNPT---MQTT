@@ -4,15 +4,21 @@ class site_controller {
 
     // [GET] /
     index(req, res, next){
-        // res.render('home');
+        const soluong = {};
         pool
-        .query (`SELECT count(*) FROM thietbi`)
-        .then (result =>{
-            const temp = result.rows[0];
-           // res.json({temp});
-            res.render('index',{temp});
-        })
-        .catch(next); 
+            .query('select count(*) as dangketnoi from thietbi where trangthai = true')
+            .then(result => {
+                const dangketnoi = result.rows[0].dangketnoi;
+                pool
+                    .query('select count(*) as ngatketnoi from thietbi where trangthai = false')
+                    .then(result => {
+                        const ngatketnoi = result.rows[0].ngatketnoi
+                       // res.json({ soluong });
+                         res.render('index', { ngatketnoi, dangketnoi });
+                    })
+                    .catch(next);
+            })
+            .catch(next);        
     }
 
     // [GET] /login

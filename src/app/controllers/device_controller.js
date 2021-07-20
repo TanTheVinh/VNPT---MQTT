@@ -10,6 +10,7 @@ class device_controller {
                 const thietbi = result.rows;
                 // res.json({ thietbi });
                 res.render('listDevice', { thietbi });
+                console.log({thietbi});
             })
             .catch(next)
     }
@@ -17,24 +18,27 @@ class device_controller {
     //[GET] /list-device/detail
     detail(req, res, next){
         pool
-            .query('select * from thietbi where ', [req.params.id])
+            .query('select * from thietbi where idthietbi = $1', [req.params.id])
             .then(result => {
-                const thietbi = result.rows[0];
-                res.json({ thietbi });
+                const thietbi = result.rows;
+                // res.json({ thietbi });
+                res.render('infoDevice', { thietbi });
+
             })
             .catch(next);
-        // res.render('infoDevice');
     }
 
     //[GET] /list-device/edit
     edit(req, res, next){
         res.render('editInfoDevice');
+        
     }
 
     //[GET] /list-device/add
     add(req, res, next){
         const device = req.body;
-       // const add_device = ('insert into thietbi( idthietbi, idloai, tenthietbi, taikhoan, matkhau, trangthai) values (${device.maThietBi},'')
+        const add_device = `insert into thietbi(idthietbi, firstname, lastname, location) 
+        values(${user.id}, '${user.firstname}', '${user.lastname}', '${user.location}')`
         res.render('addDevice');
     }
 }
