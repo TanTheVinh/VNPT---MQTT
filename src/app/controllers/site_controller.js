@@ -8,8 +8,8 @@ class site_controller {
             .query('select * from thietbi')
             .then(result => {
                 const user = result.rows[0];
-                res.json({ user });
-                // res.render('index', { temp });
+                //res.json({ user });
+                res.render('index', { temp });
             })
             .catch(next)
     }
