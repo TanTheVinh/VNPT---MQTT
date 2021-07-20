@@ -33,8 +33,8 @@ class device_controller {
 
     //[GET] /list-device/add
     add(req, res, next){
-        const divice = req.body;
-        const add_device = ('insert into thietbi( idthietbi, idloai, tenthietbi, taikhoan, matkhau, trangthai) values (')
+        const device = req.body;
+       // const add_device = ('insert into thietbi( idthietbi, idloai, tenthietbi, taikhoan, matkhau, trangthai) values (${device.maThietBi},'')
         res.render('addDevice');
     }
 }
