@@ -18,11 +18,11 @@ class device_controller {
     //[GET] /list-device/detail
     detail(req, res, next){
         pool
-            .query('select * from thietbi where ', [req.params.id])
+            .query('select * from thietbi where idthietbi = $1', [req.params.id])
             .then(result => {
-                const thietbi = result.rows[0];
-                res.json({ thietbi });
-                // res.render('infoDevice');
+                const thietbi = result.rows;
+                // res.json({ thietbi });
+                res.render('infoDevice', { thietbi });
 
             })
             .catch(next);
