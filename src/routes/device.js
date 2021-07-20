@@ -8,5 +8,5 @@ router.get('/detail/:id', deviceController.detail);
 router.get('/add', deviceController.add);
 router.get('/', deviceController.list);
 router.delete('/delete/:id', deviceController.delete);
-
+router.put('/edit/:id', deviceController.edit);
 module.exports = router;

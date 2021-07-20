@@ -24,12 +24,33 @@ class site_controller {
 
     // [GET] /login
     login(req, res, next){
+         
         res.render('login');
     }   
 
     // [GET] /change-password
     changepass(req, res, next){
-        res.render('changePassword');
+        pool
+        .query('select * from nguoidung where matkhau =$1', [req.body.matkhau])
+            .then(result => {
+                const nguoidung = result.rows;        
+                res.render('changePassword',{nguoidung});
+
+            })
+            .catch(next);
+        
+    }
+    //[PUT]//change-password
+    updatepass(req, res, next){
+        const nguoidung = req.body;
+        pool
+        .query(`update nguoidung set
+        matkhau = '${nguoidung.matkhau}'
+        where idnguoidung = ${nguoidung.idnguoidung}`)
+        .then(() => {
+            res.redirect('back');
+        })
+        .catch(next);
     }
 }
 
