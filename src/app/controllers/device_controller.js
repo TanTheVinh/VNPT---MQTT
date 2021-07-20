@@ -1,3 +1,5 @@
+const { query } = require("express");
+const { Query } = require("pg");
 const pool = require("../../config/db/database");
 
 class device_controller {
@@ -15,7 +17,7 @@ class device_controller {
             .catch(next)
     }
 
-    //[GET] /list-device/detail
+    //[GET] /list-device/detail/:id
     detail(req, res, next){
         pool
             .query('select * from thietbi where idthietbi = $1', [req.params.id])
@@ -28,7 +30,7 @@ class device_controller {
             .catch(next);
     }
 
-    //[GET] /list-device/edit
+    //[GET] /list-device/edit/:id
     edit(req, res, next){
         res.render('editInfoDevice');
         
@@ -40,6 +42,12 @@ class device_controller {
         const add_device = `insert into thietbi(idthietbi, firstname, lastname, location) 
         values(${user.id}, '${user.firstname}', '${user.lastname}', '${user.location}')`
         res.render('addDevice');
+    }
+
+    // [DELETE] /list-device/delete/:id
+    delete(req, res, next){
+        pool
+            query('delete from thietbi where idthietbi = $1', [req.params.id])
     }
 }
 

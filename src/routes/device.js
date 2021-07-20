@@ -7,5 +7,6 @@ router.get('/edit/:id', deviceController.edit);
 router.get('/detail/:id', deviceController.detail);
 router.get('/add', deviceController.add);
 router.get('/', deviceController.list);
+router.delete('/delete/:id', deviceController.delete);
 
 module.exports = router;

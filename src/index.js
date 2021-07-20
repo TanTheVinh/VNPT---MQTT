@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const handlebars = require('express-handlebars');
+const methodOverride = require('method-override');
 const app = express();
 const port = 3000;
 
@@ -15,6 +16,8 @@ db.connect(() => {
 
 //static file
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(methodOverride('_method'))
 
 app.engine('hbs', handlebars({
   extname: '.hbs'

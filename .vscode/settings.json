@@ -10,5 +10,6 @@
             "database": "mqtt",
             "password": "7714119"
         }
-    ]
+    ],
+    "liveServer.settings.port": 5501
 }

@@ -1,137 +1,50 @@
-<div class="row bg-light">
-            <h1 id="title" class="p-3">Bảng điều khiển</h1>
-          </div>
-          <div class="row" id="showStatistical">
-            <div id="topOfShow" class="mx-auto d-flex justify-content-around">
-              <div id="showConnected"  class="bg-success mt-3 text-white p-3">
-                Đang kết nối: {{dangketnoi}}
-              </div>
-              <div id="showDisconnected" class="bg-danger my-3 text-white p-3">
-                Ngắt kết nối: {{ngatketnoi}}
-              </div>
+<div class="row justify-content-center">
+    <div class="col-lg-6 col-md-12">
+        <div class="white-box analytics-info">
+            <h3 class="box-title">Total Visit</h3>
+            <ul class="list-inline two-part d-flex align-items-center mb-0">
+                <li>
+                    <div id="sparklinedash"><canvas width="67" height="30"
+                            style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
+                    </div>
+                </li>
+                <li class="ms-auto"><span class="counter text-success">659</span></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-12">
+        <div class="white-box analytics-info">
+            <h3 class="box-title">Total Page Views</h3>
+            <ul class="list-inline two-part d-flex align-items-center mb-0">
+                <li>
+                    <div id="sparklinedash2"><canvas width="67" height="30"
+                            style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
+                    </div>
+                </li>
+                <li class="ms-auto"><span class="counter text-purple">869</span></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="white-box">
+            <h3 class="box-title">Products Yearly Sales</h3>
+            <div class="d-md-flex">
+                <ul class="list-inline d-flex ms-auto">
+                    <li class="ps-3">
+                        <h5><i class="fa fa-circle me-1 text-info"></i>Mac</h5>
+                    </li>
+                    <li class="ps-3">
+                        <h5><i class="fa fa-circle me-1 text-inverse"></i>Windows</h5>
+                    </li>
+                </ul>
             </div>
-            <div id="bottOfShow" class="p-4">
-              <div
-                id="showCircularGraphicDisplay"
-                class="my-3"
-                style="grid-row: 1/3"
-              >
-              <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-              </div>
+            <div id="ct-visits" style="height: 405px;">
+                <div class="chartist-tooltip" style="top: -17px; left: -12px;"><span
+                        class="chartist-tooltip-value">6</span>
+                </div>
             </div>
-          </div>
-          <script>
-      window.onload = function () {
-      
-      var chart = new CanvasJS.Chart("chartContainer", {
-        animationEnabled: true,
-        exportEnabled: true,
-        title:{
-          text: "Gold Medals Won in Olympics"             
-        }, 
-        axisY:{
-          title: "Number of Medals"
-        },
-        toolTip: {
-          shared: true
-        },
-        legend:{
-          cursor:"pointer",
-          itemclick: toggleDataSeries
-        },
-        data: [{        
-          type: "spline",  
-          name: "US",        
-          showInLegend: true,
-          dataPoints: [
-            { label: "Atlanta 1996" , y: 44 },     
-            { label:"Sydney 2000", y: 37 },     
-            { label: "Athens 2004", y: 36 },     
-            { label: "Beijing 2008", y: 36 },     
-            { label: "London 2012", y: 46 },
-            { label: "Rio 2016", y: 46 }
-          ]
-        }, 
-        {        
-          type: "spline",
-          name: "China",        
-          showInLegend: true,
-          dataPoints: [
-            { label: "Atlanta 1996" , y: 16 },     
-            { label:"Sydney 2000", y: 28 },     
-            { label: "Athens 2004", y: 32 },     
-            { label: "Beijing 2008", y: 48 },     
-            { label: "London 2012", y: 38 },
-            { label: "Rio 2016", y: 26 }
-          ]
-        },
-        {        
-          type: "spline",  
-          name: "Britain",        
-          showInLegend: true,
-          dataPoints: [
-            { label: "Atlanta 1996" , y: 1 },     
-            { label:"Sydney 2000", y: 11 },     
-            { label: "Athens 2004", y: 9 },     
-            { label: "Beijing 2008", y: 19 },     
-            { label: "London 2012", y: 29 },
-            { label: "Rio 2016", y: 27 }
-          ]
-        },
-        {        
-          type: "spline",  
-          name: "Russia",        
-          showInLegend: true,
-          dataPoints: [
-            { label: "Atlanta 1996" , y: 26 },     
-            { label:"Sydney 2000", y: 32 },     
-            { label: "Athens 2004", y: 28 },     
-            { label: "Beijing 2008", y: 22 },     
-            { label: "London 2012", y: 20 },
-            { label: "Rio 2016", y: 19 }
-          ]
-        },
-        {        
-          type: "spline",  
-          name: "S Korea",        
-          showInLegend: true,
-          dataPoints: [
-            { label: "Atlanta 1996" , y: 7 },     
-            { label:"Sydney 2000", y: 8 },     
-            { label: "Athens 2004", y: 9 },     
-            { label: "Beijing 2008", y: 13 },     
-            { label: "London 2012", y: 13 },
-            { label: "Rio 2016", y: 9 }
-          ]
-        },  
-        {        
-          type: "spline",  
-          name: "Germany",        
-          showInLegend: true,
-          dataPoints: [
-            { label: "Atlanta 1996" , y: 20 },     
-            { label:"Sydney 2000", y: 13 },     
-            { label: "Athens 2004", y: 13 },     
-            { label: "Beijing 2008", y: 16 },     
-            { label: "London 2012", y: 11 },
-            { label: "Rio 2016", y: 17 }
-          ]
-        }]
-      });
-      
-      chart.render();
-      
-      function toggleDataSeries(e) {
-        if(typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-          e.dataSeries.visible = false;
-        }
-        else {
-          e.dataSeries.visible = true;            
-        }
-        chart.render();
-      }
-      
-      }
-      </script>
-      <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
- 
+        </div>
+    </div>
+</div>
