@@ -10,13 +10,22 @@ class device_controller {
                 const thietbi = result.rows;
                 // res.json({ thietbi });
                 res.render('listDevice', { thietbi });
+                console.log({thietbi});
             })
             .catch(next)
     }
 
     //[GET] /list-device/detail
     detail(req, res, next){
-        res.render('infoDevice');
+        pool
+            .query('select * from thietbi where idthietbi = $1', [req.params.id])
+            .then(result => {
+                const thietbi = result.rows;
+                // res.json({ thietbi });
+                res.render('infoDevice', { thietbi });
+
+            })
+            .catch(next);
     }
 
     //[GET] /list-device/edit

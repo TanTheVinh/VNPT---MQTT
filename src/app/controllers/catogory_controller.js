@@ -1,3 +1,4 @@
+const pool = require("../../config/db/database");
 
 class catogory_controller {
 
@@ -15,7 +16,14 @@ class catogory_controller {
 
     //[GET] /list-catogory/detail
     detail(req, res, next){
-        res.render('infoTypeDevice');
+        pool
+        .query('select * from loaithietbi where idloai = $1', [req.params.id])
+        .then(result => {
+            const loaithietbi = result.rows;
+            res.json({ loaithietbi });
+            // res.render('infoTypeDevice',{ loaithietbi });
+        })
+        .catch(next);
     }
 
     //[GET] /list-catogory/edit
