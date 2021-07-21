@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-12">
@@ -91,3 +92,138 @@
   </div>
 </div>
 >>>>>>> 99e518d8d7820068674d7ddd0d611d94f1daa210
+=======
+<div class="page-wrapper">
+            <div class="page-breadcrumb bg-white">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 col-md-5 col-sm-6 col-xs-12">
+                      <h1 id="title">Chỉnh sửa thông tin
+                        thiết bị</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+              <div class="col">
+                <div class="row">
+                  <div class="col-md-3"></div>
+                  <div class="col-md-6 border rounded white-box">
+                    <h2 class="text-center">Cập nhật thông tin
+                      thiết bị:</h2>
+                    <hr />
+                    <form action="">
+                      <table class="table ">
+                        {{#if thietbi}}
+                        <tr>
+                          <th scope="row">Mã thiết bị
+                            :</th>
+                          <td>
+                            <input
+                              required
+                              type="text"
+                              name="maThietBi"
+                              id="maThietBi"
+                              value="{{this.idthietbi}}"
+                            />
+                            <span class="text-danger"> *</span>
+                          </td>
+                        </tr>
+                        
+                        <tr>
+                          <th scope="row">Tên thiết bị
+                            :</th>
+                          <td>
+                            <input
+                              required
+                              type="text"
+                              name="tenThietBi"
+                              id="tenThietBi"
+                              value="{{this.tenthietbe}}"
+                            /><span class="text-danger"> *</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Loại thiết bị
+                            :</th>
+                          <td>
+                            <select name="" id="">
+                              {{#each loaithietbi}}
+                                <option value="this.idloai">{{this.tenloai}}</option>
+                              {{/each}}
+                            </select>
+                            <span class="text-danger"> *</span>
+                          </td>
+                        </tr> 
+                        <tr>
+                          <th scope="row">Tài khoản thiết bị
+                            :</th>
+                          <td>
+                            <input
+                              required
+                              type="text"
+                              name="taiKhoan"
+                              id="taiKhoan"
+                              value="{{this.taikhoan}}"
+                            /><span class="text-danger"> *</span>
+                          </td>
+                        </tr>
+                        
+                        <tr>
+                          <th scope="row">Mật khẩu thiết bị
+                            :</th>
+                          <td>
+                            <input
+                              required
+                              type="password"
+                              name="matKhau"
+                              id="matKhau"
+                              value="{{this.matkhau}}"
+                            /><span class="text-danger"> *</span>
+                          </td>
+                        </tr>
+                        
+                        <tr>
+                          <th scope="row">Nhập lại mật khẩu 
+                            thiết bị:</th>
+                          <td>
+                            <input
+                              required
+                              type="password"
+                              name="nhapLaiMatKhau"
+                              id="nhapLaiMatKhau"
+                              value="{{this.matkhau}}"
+                            /><span class="text-danger"> *</span>
+                          </td>
+                        </tr>
+                        
+                        <tr>
+                          <th scope="row">Trạng thái thiết bị
+                            :</th>
+                          <td>
+                            <select name="trangThai" id="trangThai">
+                              <option value="1">Kết nối
+                              </option>
+                              <option value="0">Ngắt kết nối
+                              </option>
+                            </select>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th scope="row">
+                          </th>
+                          <td>
+                            <button id="capNhat" type="submit" class="btn btn-success">
+                              <i class="fa fa-edit"></i>
+                              Cập nhật thông tin
+                            </button>
+                          </td>
+                        </tr>
+                        {{/if}}
+                      </table>
+                    </form>
+                  </div>
+                  <div class="col-md-3"></div>
+                </div>
+              </div>
+            </div>
+        </div>
+>>>>>>> 2f95b7bb001c81f2e9d00c7a88728dd9af7d425a

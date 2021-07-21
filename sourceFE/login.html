@@ -25,46 +25,44 @@
       align-items: center;
     }
   </style>
-  <body>
+  <body class="bg-dark">
     <div class="container">
       <div class="row">
-        <div class="col-md-4 offset-md-4">
-          <div class="login-form bg-light p-4">
+        <div class="col-md-4 offset-md-4 bg-light">
+          <div class="login-form p-4">
             <form action="" method="" class="row g-3">
-              <h4>Xin chao!</h4>
+              <h4>Xin chào
+                !</h4>
               <div class="col-12">
-                <label>Tai khoan</label>
+                <label>Tài khoản:
+                </label>
                 <input
                   type="text"
                   name="taiKhoan"
                   class="form-control"
-                  placeholder="Tai khoan"
+                  placeholder="Tài khoản
+                  "
                 />
               </div>
               <div class="col-12">
-                <label>Mat khau</label>
+                <label>Mật khẩu:
+                </label>
                 <input
                   type="password"
                   name="matKhau"
                   class="form-control"
-                  placeholder="Mat khau"
+                  placeholder="Mật khẩu
+                  "
                 />
               </div>
               <div class="col-6">
-                <button type="submit" class="btn btn-dark">Dang nhap</button>
+                <button type="submit" class="btn btn-dark">Đăng nhập
+                </button>
               </div>
             </form>
           </div>
         </div>
       </div>
     </div>
-    <script>
-      var myModal = document.getElementById("myModal");
-      var myInput = document.getElementById("myInput");
-
-      myModal.addEventListener("shown.bs.modal", function () {
-        myInput.focus();
-      });
-    </script>
   </body>
 </html>

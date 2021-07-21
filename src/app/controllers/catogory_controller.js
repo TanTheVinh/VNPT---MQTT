@@ -20,20 +20,58 @@ class catogory_controller {
         .query('select * from loaithietbi where idloai = $1', [req.params.id])
         .then(result => {
             const loaithietbi = result.rows;
-            //res.json({ loaithietbi });
+           // res.json({ loaithietbi });
             res.render('infoTypeDevice',{ loaithietbi });
         })
         .catch(next);
     }
 
-    //[GET] /list-catogory/edit
+    //[GET] /list-catogory/edit/:id
     edit(req, res, next){
-        res.render('editInfoTypeDevice');
+        pool
+        .query(`Select * from loaithietbi where idloai=${req.params.id}`)
+        .then(result => {
+            const loaithietbi = result.rows;
+            res.json({ loaithietbi });
+            //res.render('editInfoTypeDevice');
+        })
+        .catch(next);
+        
+    }
+    //[PUT]/list-catogory/:id
+    update(req, res, next){
+        const category = req.body;
+        pool
+        .query(`update loaithietbi set
+        tenloai = '${category.tenloai}',
+        mota = '${category.mota}'
+        where idloai = ${category.idloai}`)
+        .then(() => {
+            res.redirect('back');
+        })
+        .catch(next);
     }
 
-    //[GET] /list-catogory/add
+    //[GET] /list-category/add
     add(req, res, next){
-        res.render('addTypeDevice');
+        const category = req.body
+        pool
+        .query(`insert into loaithietbi(idloai, tenloai, mota) 
+        values( default, '${category.tenloai}', '${category.mota}')`)
+        .then(() => res.redirect('back'))
+        .catch(err => {
+            err.send('them that bai')
+        });
+    }
+
+    // [DELETE] /list-catogory/delete/:id
+    delete(req, res, next){
+        pool
+            .query('delete from loaithietbi where idloai = $1', [req.params.id])
+            .then(() => {
+                res.redirect('back');
+            })
+            .catch(next);
     }
 }
 
