@@ -11,7 +11,7 @@ class device_controller {
             .query(`select * from thietbi`)
             .then(result => {
                 const thietbi = result.rows;
-                // res.json({ thietbi });
+                res.json({ thietbi });
                 res.render('listDevice', { thietbi });
                 // console.log({thietbi});
             })
@@ -23,9 +23,9 @@ class device_controller {
         pool
             .query('select * from thietbi where idthietbi = $1', [req.params.id])
             .then(result => {
-                const thietbi = result.rows;
-               // res.json({ thietbi });
-                res.render('infoDevice', { thietbi });
+                const thietbi = result.rows[0];
+                res.json({ thietbi });
+                // res.render('infoDevice', { thietbi });
 
             })
             .catch(next);
