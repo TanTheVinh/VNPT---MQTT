@@ -59,21 +59,32 @@ class device_controller {
         })
         .catch(next);
     }
-    //[POST] /list-device/add
+    //[GET] /list-device/add
     add(req, res, next){
+        pool
+            .query(`select * from thietbi`)
+            .then(result => {
+                const thiebi = result.rows;
+                // res.json({ thietbi });
+                res.render('addDevice', { thietbi });
+                // console.log({thietbi});
+            })
+            .catch(next);
+    }
+    //[POST] /list-device/create
+    create(req, res, next){
         const thietbi = req.body;
         res.json(req.body.tenthietbi);
-        // const query_device = (`insert into thietbi(idthietbi, idloai, tenthietbi, taikhoan, matkhau, trangthai) 
-        // values( default, '${thietbi.idloai}', '${thietbi.tenthietbi}', '${thietbi.taikhoan}', '${thietbi.matkhau}', '${thietbi.trangthai}' )`);
-        // pool.query( query_device, (err, res ) => {
-        //     if(!err){
-        //         res.send('thêm thành công');
-        //         res.redirect('back');
-        //     }
-        //     else{ console.log(err.message) }
+        const query_device = (`insert into thietbi(idthietbi, idloai, tenthietbi, taikhoan, matkhau, trangthai) 
+        values( default, '${thietbi.idloai}', '${thietbi.tenthietbi}', '${thietbi.taikhoan}', '${thietbi.matkhau}', '${thietbi.trangthai}' )`);
+        pool.query( query_device, (err, res ) => {
+            if(!err){
+                res.send('thêm thành công');
+                res.redirect('back');
+            }
+            else{ console.log("no") }
 
-        // })
-        //     .catch(next);
+        })
     }
 
     // [DELETE] /list-device/delete/:id
