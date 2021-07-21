@@ -1,3 +1,4 @@
+const md5 = require("md5");
 const pool = require("../../config/db/database");
 
 class site_controller {
@@ -25,10 +26,30 @@ class site_controller {
     // [GET] /login
     login(req, res, next){
         res.render('login');
-    }   
+    }
+    
+    // [POST] /
+    check(req, res, next){
+        const account = Object.values(req.body);
+        account[1] = md5(account[1]);
+        pool
+            .query('select * from nguoidung where taikhoan = $1 and matkhau = $2', account)
+            .then(result => {
+                const user = result.rows[0];
+                if(user === undefined){
+                    res.json({user});
+                    res.render('login', {user});
+                }
+                else{
+                    res.json({user});
+                    res.render('index', {user});
+                }
+            })
+            .catch(next)
+    }
 
     // [GET] /change-password
-    changepass(req, res, next){
+    change_pass(req, res, next){
         res.render('changePassword');
     }
 }

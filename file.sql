@@ -182,9 +182,9 @@ INSERT INTO public.thietbi(idloai, tenthietbi, taikhoan, matkhau, trangthai) VAL
 INSERT INTO public.thietbi(idloai, tenthietbi, taikhoan, matkhau, trangthai) VALUES (2, 'Amon', 'nhietke01', '3b5a7330cdf28e5919d2473ed7e292bf', true);
 INSERT INTO public.thietbi(idloai, tenthietbi, taikhoan, matkhau, trangthai) VALUES (3, 'Leon', 'luongnuoc01', '7663097be6eb4eef78169c0279a5bebc', false);
 
-INSERT INTO public.nguoidung(taikhooan, matkhau, tennguoidung, quyen) VALUES ('thevinh01', 'dfa2cf42e689dc76107c5d4c91d03007', 'Tần Thế Vinh', 'admin');
-INSERT INTO public.nguoidung(taikhooan, matkhau, tennguoidung, quyen) VALUES ('hoathuan01', '0eda5e8fc717c2871c7786b0a048a74d', 'Phan Hòa Thuận', 'admin');
-INSERT INTO public.nguoidung(taikhooan, matkhau, tennguoidung, quyen) VALUES ('quangthang01', '2909b73d05447fe510ecf365e7fb15eb', 'Lê Quang Thắng', 'admin');
+INSERT INTO public.nguoidung(taikhoan, matkhau, tennguoidung, quyen) VALUES ('thevinh01', 'dfa2cf42e689dc76107c5d4c91d03007', 'Tần Thế Vinh', 'admin');
+INSERT INTO public.nguoidung(taikhoan, matkhau, tennguoidung, quyen) VALUES ('hoathuan01', '0eda5e8fc717c2871c7786b0a048a74d', 'Phan Hòa Thuận', 'admin');
+INSERT INTO public.nguoidung(taikhoan, matkhau, tennguoidung, quyen) VALUES ('quangthang01', '2909b73d05447fe510ecf365e7fb15eb', 'Lê Quang Thắng', 'admin');
 
 INSERT INTO public.dulieu(idthietbi, thoigiangui, chitiet) VALUES (1, '2021-02-01 04:05:06', 'hello');
 INSERT INTO public.dulieu(idthietbi, thoigiangui, chitiet) VALUES (2, '2021-02-01 04:05:06', 'hello');
