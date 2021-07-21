@@ -1,46 +1,42 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="white-box">
-                <div class="d-flex justify-content-between" c>
-                    <h3 class="box-title">Loại thiết bị: {{this.idloai}}</h3>
+<div class="page-wrapper">
+            <div class="page-breadcrumb bg-white">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h1 id="title">Loại thiết bị: </h1>
+                    </div>
                 </div>
-                <div class="table-responsive">
-                    <form action="" method="post">
-                        <table class="table text-nowrap">
-                            <tr>
-                                <th class="border-top-0">Mã loại thiết bị
-                                </th>
-                                <td>
-                                    {{this.idloai}}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th class="border-top-0">Tên loại thiết bị
-                                </th>
-                                <td>
-                                    {{this.tenLoaiThietBi}}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th class="border-top-0">Mô tả loại thiết bị</th>
-                                <td>
-                                    {{this.moTaLoaiThietBi}}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th class="border-top-0"></th>
-                                <td>
-                                    <a id="chinhSua" href="#" class="btn btn-info">
-                                        <i class="fa fa-edit"></i>
-                                        Chỉnh sửa thông tin
-                                    </a>
-                                </td>
-                            </tr>
-                        </table>
-                    </form>
+            </div>
+            <div class="container-fluid">
+                <div class="row justify-content-center mt-md-5">
+                    <div class="col-sm-12 col-md-4">
+                        <div class="table-responsive white-box">
+                            <table class="table text-nowrap">
+                                {{#if loaithietbi}}
+                                <tr>
+                                    <th>Mã loại thiết bị
+                                        :</th>
+                                    <td><span id="maLoaiThietBi">{{this.idloai}}</span></td>
+                                </tr>
+                                <tr>
+                                    <th>Tên loại thiết bị
+                                        :</th>
+                                    <td><span id="tenLoaiThietBi">{{this.tenloai}}</span></td>
+                                </tr>
+                                <tr>
+                                    <th>Mô tả
+                                        loại thiết bị:</th>
+                                    <td><span id="moTaLoaiThietBi">{{this.mota}}</span></td>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <td><a id="chinhSua" href="editInfoTypeDevice.html" class="btn btn-info"><i
+                                                class="fa fa-edit"></i>Chỉnh sửa thông tin
+                                        </a></td>
+                                </tr>
+                                {{/if}}
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
