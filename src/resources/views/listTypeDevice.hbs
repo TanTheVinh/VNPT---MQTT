@@ -1,41 +1,49 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="white-box">
-        <div class="d-flex justify-content-between" c>
-          <h3 class="box-title">Danh sách loại thiết bị</h3>
-          <a href="#" class="btn btn-success">Thêm loại thiết bị</a>
-        </div>
-        <div class="table-responsive">
-          <table class="table text-nowrap">
-            <thead>
-              <tr>
-                <th class="border-top-0">Mã loại thiết bị
-                </th>
-                <th class="border-top-0">Tên loại thiết bị
-                </th>
-                <th colspan="2" class="border-top-0">Thao tác</th>
-              </tr>
-            </thead>
-            <tbody>
-              {{#each loaithietbi}}
-              <tr>
-                <td>{{this.idloai}}</td>
-                <td>{{this.tenloai}}</td>
-                <td colspan="2">
-                  <a href="/list-device/detail/{{this.idloai}}" class="btn btn-info">
-                    <i class="fa fa-info-circle"></i> Xem chi tiết
-                  </a>
-                  <form action="" method="post">
-                    <button class="btn btn-danger">
+<div class="page-wrapper">
+  <div class="page-breadcrumb bg-white">
+    <div class="row align-items-center">
+      <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+        <h2 class="d-inline-block">Danh sách loại thiết bị</h2>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="white-box">
+          <a href="addTypeDevice.hbs" class="btn btn-success">
+            Thêm loại thiết bị
+          </a>
+          <div class="table-responsive">
+            <table class="table text-nowrap text-center">
+              <thead>
+                <tr>
+                  <th scope="col">Mã loại thiết bị</th>
+                  <th scope="col">Tên loại thiết bị
+                  </th>
+                  <th scope="col">Thao tác
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each maloai}}
+                <tr>
+                  <th scope="row">{{this.idloai}}</th>
+                  <td>{{this.tenloai}}</td>
+                  <td>
+                    <a href="infoTypeDevice" class="btn btn-info">
+                      <i class="fa fa-info-circle"></i> Xem chi tiết
+                    </a>
+                    <form action="" method="post">
+                      <button type="submit" class="btn btn-danger">
                       <i class="fa fa-trash-alt"></i> Xoá
-                    </button>
-                  </form>
-                </td>
-              </tr>
-              {{/each}}
-            </tbody>
-          </table>
+                      </button>
+                    </form>
+                  </td>
+                </tr>
+                {{/each}}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

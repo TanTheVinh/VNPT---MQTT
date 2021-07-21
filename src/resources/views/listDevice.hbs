@@ -1,34 +1,36 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="white-box">
-        <div class="d-flex justify-content-between" c>
-          <h3 class="box-title">Danh sách thiết bị</h3>
-          <a href="#" class="btn btn-success">Thêm thiết bị</a>
-        </div>
-        <div class="table-responsive">
-          <table class="table text-nowrap">
-            <thead>
-              <tr>
-                <th class="border-top-0">Mã thiết bị
-                </th>
-                <th class="border-top-0">Tên thiết bị
-                </th>
-                <th class="border-top-0">Mã loại thiết bị</th>
-                <th class="border-top-0">Tài khoản thiết bị</th>
-                <th class="border-top-0">Trạng thái thiết bị
-                </th>
-                <th colspan="2" class="border-top-0">Thao tác
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {{#each thietbi}}
-              <form action="/list-device/delete/{{this.idthietbi}}?_method=DELETE" method="post">
+<div class="page-wrapper">
+  <div class="page-breadcrumb bg-white">
+    <div class="row align-items-center">
+      <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+        <h2 class="d-inline-block">Danh sách thiết bị</h2>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="white-box">
+          <a href="addDevice.html" class="btn btn-success">
+            Thêm thiết bị
+          </a>
+          <div class="table-responsive">
+            <table class="table text-nowrap text-center">
+              <thead>
+                <tr>
+                  <th class="border-top-0">Mã thiết bị</th>
+                  <th class="border-top-0">Tên thiết bị</th>
+                  <th class="border-top-0">Loại thiết bị</th>
+                  <th class="border-top-0">Tài khoản</th>
+                  <th class="border-top-0">Trạng thái</th>
+                  <th class="border-top-0">Thao tác</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each thietbi}}
                 <tr>
                   <td>{{this.idthietbi}}</td>
-                  <td>{{this.idloai}}</td>
                   <td>{{this.tenthietbi}}</td>
+                  <td>{{this.idloai}}</td>
                   <td>{{this.taikhoan}}</td>
                   <td>
                     {{#if trangthai}}
@@ -37,19 +39,23 @@
                     <button class="btn btn-danger">Ngắt kết nối</button>
                     {{/if}}
                   </td>
-                  <td colspan="2">
-                    <a href="/list-device/detail/{{this.idthietbi}}" class="btn btn-info">
-                      <i class="fa fa-info-circle"></i> Xem chi tiết
-                    </a>
-                    <button class="btn btn-danger" type="submit">
-                      <i class="fa fa-trash-alt"></i> Xoá
-                    </button>
+                  <td>
+                    <form action="">
+                      <a class="btn btn-info" href="infoDevice.html">
+                        <i class="fa fa-info-circle"></i>
+                        Xem chi tiết
+                      </a>
+                      <button type="submit" class="btn btn-danger">
+                        <i class="fa fa-trash-alt"></i>
+                        Xoá
+                      </button>
+                    </form>
                   </td>
                 </tr>
-              </form>
-              {{/each}}
-            </tbody>
-          </table>
+                {{/each}}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
