@@ -24,7 +24,7 @@ class device_controller {
             .query('select * from thietbi where idthietbi = $1', [req.params.id])
             .then(result => {
                 const thietbi = result.rows;
-               // res.json({ thietbi });
+                //res.json({ thietbi });
                 res.render('infoDevice', { thietbi });
 
             })
