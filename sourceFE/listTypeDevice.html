@@ -47,54 +47,69 @@
             </nav>
         </header>
         <aside class="left-sidebar" data-sidebarbg="skin6">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <!-- User Profile-->
-                        <li class="sidebar-item pt-2">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.html"
-                                aria-expanded="false">
-                                <i class="far fa-clock" aria-hidden="true"></i>
-                                <span class="hide-menu">Bảng điều khiển</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="profile.html"
-                                aria-expanded="false">
-                                <i class="fa fa-user" aria-hidden="true"></i>
-                                <span class="hide-menu">Profile</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="basic-table.html"
-                                aria-expanded="false">
-                                <i class="fa fa-table" aria-hidden="true"></i>
-                                <span class="hide-menu">Danh sách thiết bị
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-
-                </nav>
-                <!-- End Sidebar navigation -->
+          <div class="scroll-sidebar">
+              <nav class="sidebar-nav">
+                  <ul id="sidebarnav">
+                      <li class="sidebar-item pt-2">
+                          <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.html"
+                              aria-expanded="false">
+                              <i class="far fa-clock" aria-hidden="true"></i>
+                              <span class="hide-menu">Bảng điều khiển</span>
+                          </a>
+                      </li>
+                      <li class="sidebar-item">
+                          <a class="sidebar-link waves-effect waves-dark sidebar-link" href="listDevice.html"
+                              aria-expanded="false">
+                              <i class="fa fa-table" aria-hidden="true"></i>
+                              <span class="hide-menu">Danh sách thiết bị
+                              </span>
+                          </a>
+                      </li>
+                      <li class="sidebar-item">
+                          <a class="sidebar-link waves-effect waves-dark sidebar-link" href="listTypeDevice.html"
+                              aria-expanded="false">
+                              <i class="fa fa-table" aria-hidden="true"></i>
+                              <span class="hide-menu">Danh sách loại thiết bị
+                              </span>
+                          </a>
+                      </li>
+                      <li class="sidebar-item">
+                          <a class="sidebar-link waves-effect waves-dark sidebar-link" href="changePassword.html"
+                              aria-expanded="false">
+                              <i class="fa fa-user" aria-hidden="true"></i>
+                              <span class="hide-menu">Đổi mật khẩu
+                              </span>
+                          </a>
+                      </li>
+                      <li class="sidebar-item">
+                          <a class="sidebar-link waves-effect waves-dark sidebar-link" href="profile.html"
+                              aria-expanded="false">
+                              <i class="fa fa-sign-out-alt" aria-hidden="true"></i>
+                              <span class="hide-menu">Đăng xuất
+                              </span>
+                          </a>
+                      </li>
+                  </ul>
+              </nav>
+          </div>
+      </aside>
+      <div class="page-wrapper">
+        <div class="page-breadcrumb bg-white">
+          <div class="row align-items-center">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+              <h2 class="d-inline-block">Danh sách loại thiết bị</h2>
             </div>
-            <!-- End Sidebar scroll-->
-        </aside>
-        <div class="page-wrapper">
-            <div class="page-breadcrumb bg-white">
-                <div class="row align-items-center">
-                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                      <h2 class="">Danh sách loại thiết bị
-                      </h2>
-                    </div>
-                </div>
-            </div>
-            <div class="container-fluid">
-              <div class="col">
-                <div class="row p-5">
-                  <table class="table table-striped text-center">
+          </div>
+        </div>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="white-box">
+                <a href="addTypeDevice.html" class="btn btn-success">
+                  Thêm loại thiết bị
+                </a>
+                <div class="table-responsive">
+                  <table class="table text-nowrap text-center">
                     <thead>
                       <tr>
                         <th scope="col">Mã loại thiết bị</th>
@@ -109,8 +124,8 @@
                     <tbody>
                       <tr>
                         <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
+                        <td>2</td>
+                        <td>3</td>
                         <td>
                           <a href="infoTypeDevice.html" class="btn btn-info">
                             <i class="fa fa-info-circle"></i> Xem chi tiết
@@ -119,20 +134,6 @@
                           <button class="btn btn-danger">
                             <i class="fa fa-trash-alt"></i> Xoá
                           </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>
-                          <a href="editInfoTypeDevice.html" class="btn btn-info">
-                            <i class="fa fa-info-circle"></i> Xem chi tiết
-    
-                          </a>
-                          <a href="#" class="btn btn-danger">
-                            <i class="fa fa-trash-alt"></i> Xoá
-                          </a>
                         </td>
                       </tr>
                     </tbody>
