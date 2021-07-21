@@ -15,12 +15,12 @@
             <h2 class="text-center">Nhập đầy đủ thông tin thiết bị
               :</h2>
             <hr />
-            <form action="">
+            <form action="" method="post">
               <table class="table">
                 <tr>
                   <th scope="row">Tên thiết bị:</th>
                   <td>
-                    <input required type="text" name="tenThietBi" id="tenThietBi" /><span class="text-danger"> *</span>
+                    <input required type="text" name="tenThietBi" id="tenThietBi" minlength="1" maxlength="50"/><span class="text-danger"> *</span>
                   </td>
                 </tr>
                 <tr>
@@ -37,13 +37,13 @@
                   <th scope="row">Tài khoản thiết bị
                     :</th>
                   <td>
-                    <input required type="text" name="taiKhoan" id="taiKhoan" /><span class="text-danger"> *</span>
+                    <input required type="text" name="taiKhoan" id="taiKhoan"  minlength="1" maxlength="30"/><span class="text-danger"> *</span>
                   </td>
                 </tr>
                 <tr>
                   <th scope="row">Mật khẩu thiết bị:</th>
                   <td>
-                    <input required type="password" name="matKhau" id="matKhau" /><span class="text-danger"> *</span>
+                    <input required type="password" name="matKhau" id="matKhau"  minlength="1" maxlength="50"/><span class="text-danger"> *</span>
                   </td>
                 </tr>
                 <tr>

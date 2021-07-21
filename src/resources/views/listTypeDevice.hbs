@@ -26,20 +26,22 @@
               </thead>
               <tbody>
                 {{#each maloai}}
-                <tr>
-                  <th scope="row">{{this.idloai}}</th>
-                  <td>{{this.tenloai}}</td>
-                  <td>
-                    <a href="#" class="btn btn-info">
-                      <i class="fa fa-info-circle"></i> Xem chi tiết
-                    </a>
-                    <form action="#" method="delete">
-                      <button type="submit" class="btn btn-danger">
-                      <i class="fa fa-trash-alt"></i> Xoá
-                      </button>
-                    </form>
-                  </td>
-                </tr>
+                  <tr>
+                    <th scope="row">{{this.idloai}}</th>
+                    <td>{{this.tenloai}}</td>
+                    <td>
+                      <a href="#" class="btn btn-info">
+                        <i class="fa fa-info-circle"></i>
+                        Xem chi tiết
+                      </a>
+                      <form action="#" method="delete">
+                        <button type="submit" class="btn btn-danger">
+                          <i class="fa fa-trash-alt"></i>
+                          Xoá
+                        </button>
+                      </form>
+                    </td>
+                  </tr>
                 {{/each}}
               </tbody>
             </table>
