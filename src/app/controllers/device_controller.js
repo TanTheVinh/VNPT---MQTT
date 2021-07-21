@@ -8,7 +8,7 @@ class device_controller {
     //[GET] /list-device/
     list(req, res, next){
         pool
-            .query('select * from thietbi')
+            .query(`select * from thietbi`)
             .then(result => {
                 const thietbi = result.rows;
                 // res.json({ thietbi });
@@ -59,7 +59,7 @@ class device_controller {
         })
         .catch(next);
     }
-    //[GET] /list-device/add
+    //[POST] /list-device/add
     add(req, res, next){
         const thietbi = req.body;
         res.json(req.body.tenthietbi);

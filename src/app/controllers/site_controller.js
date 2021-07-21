@@ -15,7 +15,6 @@ class site_controller {
                     .then(result => {
                         soluong.ngatketnoi = result.rows[0].ngatketnoi;
                         // res.json({ soluong });
-                        // console.log({soluong});
                         res.render('index', { soluong });
                     })
                     .catch(next);
@@ -25,7 +24,6 @@ class site_controller {
 
     // [GET] /login
     login(req, res, next){
-         
         res.render('login');
     }
     
@@ -38,11 +36,11 @@ class site_controller {
             .then(result => {
                 const user = result.rows[0];
                 if(user === undefined){
-                    res.json({user});
+                    // res.json({user});
                     res.render('login', {user});
                 }
                 else{
-                    res.json({user});
+                    // res.json({user});
                     res.render('index', {user});
                 }
             })
@@ -61,7 +59,7 @@ class site_controller {
             .catch(next);
         
     }
-    //[PUT]//change-password
+    //[PUT] /change-password
     updatepass(req, res, next){
         const nguoidung = req.body;
         pool
