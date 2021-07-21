@@ -7,7 +7,7 @@ function route(app) {
     app.use('/list-catogory', catogoryRouter);
     app.use('/list-device', deviceRouter);
     app.use('/', siteRouter);
-    
+//    app.use('/login', loginrouter);
 
 }
 
