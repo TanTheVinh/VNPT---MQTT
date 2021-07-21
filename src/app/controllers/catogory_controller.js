@@ -65,8 +65,8 @@ class catogory_controller {
     }
     //[POST] /list-category/insert
     insert(req, res, next){
-        // res.json(req.body);
-        // const category = req.body
+         const category = req.body
+         res.json({category});
         // pool
         // .query(`insert into loaithietbi(idloai, tenloai, mota) 
         // values( default, '${category.tenloai}', '${category.mota}')`)
@@ -74,17 +74,7 @@ class catogory_controller {
         // .catch(err => {
         //     err.send('them that bai')
         // });
-            const category = req.body;
-            let insertQuery = (`insert into loaithietbi(idloai, tenloai, mota) 
-             values( default, '${category.tenloai}', '${category.mota}')`)
-        
-            pool.query(insertQuery, (err, result)=>{
-                if(!err){
-                    res.send('Insertion was successful')
-                }
-                else{ console.log(err.message) }
-            })
-            client.end;
+ 
         
     }
 

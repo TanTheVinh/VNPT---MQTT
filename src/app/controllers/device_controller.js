@@ -64,9 +64,9 @@ class device_controller {
         pool
             .query(`select * from thietbi`)
             .then(result => {
-                const thiebi = result.rows;
-                // res.json({ thietbi });
-                res.render('addDevice', { thietbi });
+                const device = result.rows;
+               //  res.json({device} );
+                res.render('addDevice', { device });
                 // console.log({thietbi});
             })
             .catch(next);
