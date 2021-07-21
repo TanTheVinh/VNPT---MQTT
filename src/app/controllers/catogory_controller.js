@@ -19,7 +19,7 @@ class catogory_controller {
         pool
         .query('select * from loaithietbi where idloai = $1', [req.params.id])
         .then(result => {
-            const loaithietbi = result.rows;
+            const loaithietbi = result.rows[0];
            // res.json({ loaithietbi });
             res.render('infoTypeDevice',{ loaithietbi });
         })
@@ -63,6 +63,7 @@ class catogory_controller {
         })
         .catch(next)
     }
+    
     //[POST] /list-category/insert
     insert(req, res, next){
          const category = req.body

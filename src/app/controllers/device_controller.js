@@ -11,7 +11,7 @@ class device_controller {
             .query(`select * from thietbi`)
             .then(result => {
                 const thietbi = result.rows;
-                // res.json({ thietbi });
+                res.json({ thietbi });
                 res.render('listDevice', { thietbi });
                 // console.log({thietbi});
             })
