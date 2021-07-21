@@ -24,7 +24,7 @@ class device_controller {
             .query('select * from thietbi where idthietbi = $1', [req.params.id])
             .then(result => {
                 const thietbi = result.rows;
-                // res.json({ thietbi });
+               // res.json({ thietbi });
                 res.render('infoDevice', { thietbi });
 
             })
@@ -34,15 +34,16 @@ class device_controller {
     //[GET] /list-device/edit/:id
     edit(req, res, next){
         pool
-        .query('select * from thietbi where idthietbi = $1', [req.params.id])
+        .query(`Select * from thietbi where idthietbi=${req.params.id}`)
             .then(result => {
-                const thietbi = result.rows;        
-                res.render('editInfoDevice',{ thiebi });
+                const thietbi = result.rows; 
+                res.json({thietbi}) ;      
+                //res.render('editInfoDevice',{ thiebi });
 
             })
             .catch(next);
     }
-    //[PUT] list-device/:id
+    //[PUT] list-device/edit/:id
     update(req, res, next){
         const thietbi = req.body;
         pool
@@ -61,17 +62,18 @@ class device_controller {
     //[GET] /list-device/add
     add(req, res, next){
         const thietbi = req.body;
-        const query_device = (`insert into thietbi(idthietbi, idloai, tenthietbi, taikhoan, matkhau, trangthai) 
-        values( default, '${thietbi.idloai}', '${thietbi.tenthietbi}', '${thietbi.taikhoan}', '${thietbi.matkhau}', '${thietbi.trangthai}' )`);
-        pool.query( query_device, (err, res ) => {
-            if(!err){
-                res.send('thêm thành công');
-                res.redirect('back');
-            }
-            else{ console.log(err.message) }
+        res.json(req.body.tenthietbi);
+        // const query_device = (`insert into thietbi(idthietbi, idloai, tenthietbi, taikhoan, matkhau, trangthai) 
+        // values( default, '${thietbi.idloai}', '${thietbi.tenthietbi}', '${thietbi.taikhoan}', '${thietbi.matkhau}', '${thietbi.trangthai}' )`);
+        // pool.query( query_device, (err, res ) => {
+        //     if(!err){
+        //         res.send('thêm thành công');
+        //         res.redirect('back');
+        //     }
+        //     else{ console.log(err.message) }
 
-        })
-            .catch(next);
+        // })
+        //     .catch(next);
     }
 
     // [DELETE] /list-device/delete/:id

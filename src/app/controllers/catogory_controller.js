@@ -20,7 +20,7 @@ class catogory_controller {
         .query('select * from loaithietbi where idloai = $1', [req.params.id])
         .then(result => {
             const loaithietbi = result.rows;
-            //res.json({ loaithietbi });
+           // res.json({ loaithietbi });
             res.render('infoTypeDevice',{ loaithietbi });
         })
         .catch(next);
@@ -29,11 +29,11 @@ class catogory_controller {
     //[GET] /list-catogory/edit/:id
     edit(req, res, next){
         pool
-        .query('select * from loaithietbi where idloai = $1', [req.params.id])
+        .query(`Select * from loaithietbi where idloai=${req.params.id}`)
         .then(result => {
             const loaithietbi = result.rows;
-            //res.json({ loaithietbi });
-            res.render('editInfoTypeDevice');
+            res.json({ loaithietbi });
+            //res.render('editInfoTypeDevice');
         })
         .catch(next);
         
