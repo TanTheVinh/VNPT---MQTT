@@ -29,8 +29,9 @@
                     :</th>
                   <td>
                     <select name="" id="">
-                      <option value="">Loại thiết bị</option>
-
+                      {{#each device}}
+                      <option value="{{this.idloai}}">{{this.tenthietbi}}</option>
+                      {{/each}}
                     </select>
                     <span class="text-danger"> *</span>
                   </td>
@@ -74,11 +75,19 @@
                   </th>
                   <td>
 
-
-
-                    <button type="submit" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button disabled type="submit" class="btn btn-success" data-bs-toggle="modal"
+                      data-bs-target="#exampleModal">
                       <i class="fa fa-plus"></i>
                       Thêm thiết bị
+                      <script>
+                        $(document).onblur(function () {
+                          var mk = $("matKhau").val;
+                          var mkc = $("nhapLaiMatKhau").val;
+                          if(mk == mkc)
+                          console.log(mk);
+                          console.log(mkc);
+                        });
+                      </script>
                     </button>
 
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
