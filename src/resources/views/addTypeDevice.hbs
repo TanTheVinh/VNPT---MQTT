@@ -12,6 +12,17 @@
       <div class="row mt-5">
         <div class="col-md-3"></div>
         <div class="col-md-6 border rounded white-box">
+          <h2 class="text-center">Nhập đầy đủ thông tin loại thiết bị
+            :</h2>
+          <hr />
+          <form method="POST" action="/list-catogory/insert">
+            <table class="table">
+
+              <tr>
+                <th scope="row">Mã loại thiết bị
+                  :</th>
+                <td>
+                  <input required type="text" name="maLoaiThietBi" id="maLoaiThietBi" />
           <h2 class="text-center">Nhập đầy đủ thông tin loại thiết bị :</h2>
           <hr />
           <form action="">
@@ -31,30 +42,19 @@
               </tr>
 
               <tr>
-                <th scope="row">Tên loại thiết bị :</th>
+                <th scope="row">Tên loại thiết bị
+                  :</th>
                 <td>
-                  <input
-                    required
-                    type="text"
-                    name="tenLoaiThietBi"
-                    id="tenLoaiThietBi"
-                    minlength="1"
-                    maxlength="50"
-                  /><span class="text-danger"> *</span>
+                  <input required type="text" name="tenLoaiThietBi" id="tenLoaiThietBi" /><span class="text-danger">
+                    *</span>
                 </td>
               </tr>
 
               <tr>
                 <th scope="row">Mô tả loại thiết bị:</th>
                 <td>
-                  <input
-                    required
-                    type="text"
-                    name="moTaLoaiThietBi"
-                    id="moTaLoaiThietBi"
-                    minlength="1"
-                    maxlength="50"
-                  /><span class="text-danger"> *</span>
+                  <input required type="text" name="moTaLoaiThietBi" id="moTaLoaiThietBi" /><span class="text-danger">
+                    *</span>
                 </td>
               </tr>
               <tr>

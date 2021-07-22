@@ -25,6 +25,7 @@
                 </tr>
               </thead>
               <tbody>
+<<<<<<< HEAD
                 {{#each loaithietbi}}
                   <tr>
                     <th scope="row">{{this.idloai}}</th>
@@ -52,6 +53,28 @@
                       </form>
                     </td>
                   </tr>
+=======
+                {{#each maloai}}
+                <tr>
+                  <th scope="row">{{this.idloai}}</th>
+                  <td>{{this.tenloai}}</td>
+                  <td>
+                    <form class="d-inline-block" action="list-catogory/detail/{{this.idthietbi}}" method="get">
+                      <button class="btn btn-info" type="submit">
+                        <i class="fa fa-info-circle"></i>
+                        Xem chi tiết
+                      </button>
+                    </form>
+                    <form class="d-inline-block" action="/list-catogory/delete/{{this.idthietbi}}?_method=DELETE"
+                      method="DELETE">
+                      <button type="submit" class="btn btn-danger">
+                        <i class="fa fa-trash-alt"></i>
+                        Xoá
+                      </button>
+                    </form>
+                  </td>
+                </tr>
+>>>>>>> 037be54a531a977075152c634fa2e2364ffbf3f0
                 {{/each}}
               </tbody>
             </table>

@@ -18,6 +18,7 @@
               <thead>
                 <tr>
                   <th class="border-top-0">Mã thiết bị</th>
+                  <th class="border-top-0">Mã đơn vị</th>
                   <th class="border-top-0">Tên thiết bị</th>
                   <th class="border-top-0">Loại thiết bị</th>
                   <th class="border-top-0">Tài khoản</th>
@@ -27,37 +28,9 @@
               </thead>
               <tbody>
                 {{#each thietbi}}
-                  <tr>
-                    <td>{{this.idthietbi}}</td>
-                    <td>{{this.tenthietbi}}</td>
-                    <td>{{this.idloai}}</td>
-                    <td>{{this.taikhoan}}</td>
-                    <td>
-                      {{#if trangthai}}
-                        <button class="btn btn-success">Đang kết nối</button>
-                      {{else}}
-                        <button class="btn btn-danger">Ngắt kết nối</button>
-                      {{/if}}
-                    </td>
-                    <td>
-                        <a class="btn btn-info" href="list-device/detail/{{this.idthietbi}}">
-                          <i class="fa fa-info-circle"></i>
-                          Xem chi tiết
-                        </a>
-                      <form
-                        class="d-inline-block"
-                        action="/list-device/delete/{{this.idthietbi}}?_method=DELETE"
-                        method="post"
-                      >
-                        <button type="submit" class="btn btn-danger">
-                          <i class="fa fa-trash-alt"></i>
-                          Xoá
-                        </button>
-                      </form>
-                    </td>
-                  </tr>
                 <tr>
                   <td>{{this.idthietbi}}</td>
+                  <td>{{this.iddonvi}}</td>
                   <td>{{this.tenthietbi}}</td>
                   <td>{{this.idloai}}</td>
                   <td>{{this.taikhoan}}</td>
@@ -69,11 +42,12 @@
                     {{/if}}
                   </td>
                   <td>
-                    <form action="">
-                      <a class="btn btn-info" href="/list-device/detail/{{this.idthietbi}}">
-                        <i class="fa fa-info-circle"></i>
-                        Xem chi tiết
-                      </a>
+                    <a class="btn btn-info" href="list-device/detail/{{this.idthietbi}}">
+                      <i class="fa fa-info-circle"></i>
+                      Xem chi tiết
+                    </a>
+                    <form class="d-inline-block" action="/list-device/delete/{{this.idthietbi}}?_method=DELETE"
+                      method="post">
                       <button type="submit" class="btn btn-danger">
                         <i class="fa fa-trash-alt"></i>
                         Xoá
