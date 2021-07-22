@@ -1,4 +1,4 @@
-// scafholding
+
 * {
     outline: none;
 }
@@ -46,11 +46,6 @@ a.link {
 }
 
 
-
-/*******************
-Blockquote
-*******************/
-
 html body blockquote {
     border-left: 5px solid $primary;
     border: 1px solid $border-color;
@@ -62,13 +57,9 @@ html body blockquote {
 }
 
 ol li {
-    // margin: 5px 0;
+
 }
 
-
-/*******************
-Thumb size
-*******************/
 
 .thumb-sm {
     height: 32px;
@@ -94,10 +85,6 @@ Thumb size
 }
 
 
-/*******************
-Opacity
-*******************/
-
 .op-5 {
     opacity: 0.5;
 }
@@ -106,11 +93,6 @@ Opacity
     opacity: 0.3;
 }
 
-
-
-/*******************
-font weight
-*******************/
 
 html body {
     .font-bold {
@@ -162,10 +144,6 @@ html body {
 
 
 
-/*******************
-Background colors
-*******************/
-
 html body {
     .bg-megna {
         background-color: $cyan;
@@ -187,11 +165,6 @@ html body {
     }
 }
 
-
-
-/*******************
-Rounds
-*******************/
 
 .round {
     line-height: 48px;
@@ -237,21 +210,10 @@ Rounds
 
 
 
-
-
-/*******************
-Labels
-*******************/
-
 .label-rounded {
     border-radius: 60px;
 }
 
-
-
-/*******************
- Badge
-******************/
 
 .badge {
     font-weight: $font-weight-light;
@@ -274,11 +236,6 @@ Labels
 }
 
 
-
-/*******************
-List-style-none
-******************/
-
 ul.list-style-none {
     margin: 0px;
     padding: 0px;
@@ -296,10 +253,6 @@ ul.list-style-none {
     }
 }
 
-
-/*******************
-Card
-******************/
 
 .card {
     margin-bottom: 20px;
@@ -372,9 +325,7 @@ Card
     background: $info;
     color:$white;
 }
-/*******************
-Labels
-*******************/
+
 
 .label {
     padding: 3px 10px;
@@ -436,12 +387,6 @@ Labels
 
 
 
-
-
-
-// 
-// 5-feb-2021
-// 
 
 .card-body {
     padding: 1.25rem;
