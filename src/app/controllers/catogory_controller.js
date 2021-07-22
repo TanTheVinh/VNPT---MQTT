@@ -53,16 +53,31 @@ class catogory_controller {
     }
 
     //[GET] /list-category/add
-    add(req, res, next){        
-        pool
-        .query('select * from loaithietbi')
-        .then(result => {
-            const loaithietbi = result.rows;
-            // res.json({ loaithietbi });
-            res.render('addTypeDevice', { loaithietbi });
-        })
-        .catch(next)
+    add(req, res, next){     
+            res.render('addTypeDevice');
     }
+    //[POST] /list-category/insert
+    insert(req, res, next){ 
+        const { tenloai, mota } = req.body;
+        pool
+        .query('INSERT INTO loaithietbi (tenloai, mota) VALUES ($1, $2)', [tenloai,mota]);
+        res.json({
+            message: 'thêm thành công',
+            body: {
+                loaithietbi: {tenloai, mota}
+            }
+        })
+        .then(() =>{
+            res.redirect('list-device')
+        })
+        
+        .catch(next);
+    }
+<<<<<<< HEAD
+ 
+        
+    
+=======
 
     //[POST] /list-category/insert
     insert(req, res, next){
@@ -76,6 +91,7 @@ class catogory_controller {
         //     err.send('them that bai')
         // });
     }
+>>>>>>> 6c5c230166b07c9543b93999610fc3f5b37e70d4
 
     // [DELETE] /list-catogory/delete/:id
     delete(req, res, next){

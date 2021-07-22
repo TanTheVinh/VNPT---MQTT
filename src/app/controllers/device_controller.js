@@ -1,3 +1,4 @@
+const { json } = require("body-parser");
 const e = require("express");
 const { query } = require("express");
 const { Query } = require("pg");
@@ -85,18 +86,16 @@ class device_controller {
     }
     //[POST] /list-device/create
     create(req, res, next){
-        const thietbi = req.body;
-        res.json(req.body.tenthietbi);
-        const query_device = (`insert into thietbi(idthietbi, idloai, tenthietbi, taikhoan, matkhau, trangthai) 
-        values( default, '${thietbi.idloai}', '${thietbi.tenthietbi}', '${thietbi.taikhoan}', '${thietbi.matkhau}', '${thietbi.trangthai}' )`);
-        pool.query( query_device, (err, res ) => {
-            if(!err){
-                res.send('thêm thành công');
-                res.redirect('back');
-            }
-            else{ console.log("no") }
-
+            const {idthietbi, tenthietbi, taikhoan, matkhau, trangthai } = req.body;
+            pool
+            .query('INSERT INTO thietbi (idloai, tenthietbi, taikhoan, matkhau, trangthai) VALUES ($1, $2, $3, $4, $5)', [ idloai, tenthietbi, taikhoan, matkhau, trangthai]);
+            res.json({
+                message: 'thêm thành công'
+            })
+            .then(() =>{
+                res.redirect('list-device')
         })
+            .catch(next);
     }
 
     // [DELETE] /list-device/delete/:id
