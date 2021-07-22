@@ -88,7 +88,8 @@ class device_controller {
             })
             .catch(next);
     }
-    //[POST] /list-device/create
+
+    // [POST] /list-device/create
     create(req, res, next){
         res.json(req.body)
         //     const {idthietbi, tenthietbi, taikhoan, matkhau, trangthai } = req.body;
