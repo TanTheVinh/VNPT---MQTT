@@ -16,27 +16,30 @@ class catogory_controller {
 
     //[GET] /list-catogory/detail
     detail(req, res, next){
-        res.json(req.body)
-        // pool
-        //     .query('select * from loaithietbi where idloai = $1', [req.params.id])
-        //     .then(result => {
-        //         const loaithietbi = result.rows[0];
-        //     // res.json({ loaithietbi });
-        //         res.render('infoTypeDevice',{ loaithietbi });
-        //     })
-        //     .catch(next);
+       // res.json(req.body)
+        pool
+            .query('select * from loaithietbi where idloai = $1', [req.params.id])
+            .then(result => {
+                const loaithietbi = result.rows[0];
+            // res.json({ loaithietbi });
+                res.render('infoTypeDevice',{ loaithietbi });
+            })
+            .catch(next);
     }
 
     //[GET] /list-catogory/edit/:id
     edit(req, res, next){
-        pool
-        .query(`Select * from loaithietbi where idloai=${req.params.id}`)
-        .then(result => {
-            const loaithietbi = result.rows;
-            res.json({ loaithietbi });
-            //res.render('editInfoTypeDevice');
-        })
-        .catch(next);
+         pool
+         .query(`Select * from loaithietbi where idloai=${req.params.id}`)
+         const loaithietbi = result.rows;
+         res.json(loaithietbi);
+
+        // .then(result => {
+        //     
+           
+        //    // res.render('editInfoTypeDevice',{loaithietbi});
+        // })
+        // .catch(next);
         
     }
     //[PUT]/list-catogory/edit/:id
