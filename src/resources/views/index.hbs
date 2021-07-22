@@ -1,9 +1,9 @@
 <div class="page-wrapper">
     <div class="page-breadcrumb bg-white">
         <div class="row align-items-center">
-            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+            <h1>
                 Bảng thống kê
-            </div>
+            </h1>
         </div>
     </div>
     <div class="container-fluid">
@@ -18,7 +18,7 @@
                                     style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
                             </div>
                         </li>
-                        <li class="ms-auto"><span class="counter text-success">659</span></li>
+                        <li class="ms-auto"><span class="counter text-success">{{soluong.dangketnoi}}</span></li>
                     </ul>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                                     style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
                             </div>
                         </li>
-                        <li class="ms-auto"><span class="counter text-purple">869</span></li>
+                        <li class="ms-auto"><span class="counter text-purple">{{soluong.ngatketnoi}}</span></li>
                     </ul>
                 </div>
             </div>
@@ -39,39 +39,22 @@
         <div class="row">
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                 <div class="white-box">
-                    <h3 class="box-title">Products Yearly Sales</h3>
-                    <div class="d-md-flex">
-                        <ul class="list-inline d-flex ms-auto">
-                            <li class="ps-3">
-                                <h5><i class="fa fa-square me-1" style="color: #d70206;"></i>Chu thich 1</h5>
-                            </li>
-                            <li class="ps-3">
-                                <h5><i class="fa fa-square me-1" style="color: #f05b4f"></i>Chu thich 2</h5>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="bar-chart"></div>
-                    <script>
-                        new Chartist.Bar('.bar-chart', {
-                            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                            series: [
-                                [5, 4, 3, 7, 5, 10, 3],
-                                [3, 2, 9, 5, 4, 6, 4]
-                            ]
-                        }, {
-                            low: 0,
-                            showArea: true,
-                            plugins: [
-                                Chartist.plugins.tooltip()
-                            ],
-                            axisX: {
-                                position: 'end'
+                    <h3 class="box-title">Số lượng kết nối</h3>
+                    <canvas id="myChart" width="900" height="300"></canvas>
+                    <script type="text/javascript">
+                        var ctx = document.getElementById("myChart");
+                        var myChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: ["Đang kết nối", "Ngắt kết nối"],
+                                datasets: [{
+                                    label: 'Số lượng',
+                                    data: [{{soluong.dangketnoi}}, {{soluong.ngatketnoi}}],
+                                    backgroundColor: ['#d70206',
+                                        '#f05b4f'
+                                    ],
+                                }]
                             },
-                            axisY: {
-                                showGrid: false,
-                                showLabel: false,
-                                offset: 0
-                            }
                         });
                     </script>
                 </div>
