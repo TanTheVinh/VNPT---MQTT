@@ -73,25 +73,9 @@ class catogory_controller {
         
         .catch(next);
     }
-<<<<<<< HEAD
  
         
     
-=======
-
-    //[POST] /list-category/insert
-    insert(req, res, next){
-         const category = req.body
-         res.json({category});
-        // pool
-        // .query(`insert into loaithietbi(idloai, tenloai, mota) 
-        // values( default, '${category.tenloai}', '${category.mota}')`)
-        // .then(() => res.redirect('back'))
-        // .catch(err => {
-        //     err.send('them that bai')
-        // });
-    }
->>>>>>> 6c5c230166b07c9543b93999610fc3f5b37e70d4
 
     // [DELETE] /list-catogory/delete/:id
     delete(req, res, next){

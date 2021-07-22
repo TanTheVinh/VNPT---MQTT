@@ -55,7 +55,7 @@
                   <th scope="row">Nhập lại mật khẩu thiết bị:</th>
                   <td>
                     <input required type="password" name="nhapLaiMatKhau" id="nhapLaiMatKhau" /><span
-                      class="text-danger"> *</span>
+                      class="text-danger" id="errCF"> *</span>
                   </td>
                 </tr>
                 <tr>
@@ -75,21 +75,25 @@
                   </th>
                   <td>
 
-                    <button disabled type="submit" class="btn btn-success" data-bs-toggle="modal"
+                    <button id="addDevice" type="submit" class="btn btn-success" data-bs-toggle="modal"
                       data-bs-target="#exampleModal">
                       <i class="fa fa-plus"></i>
                       Thêm thiết bị
-                      <script>
-                        $(document).onblur(function () {
-                          var mk = $("matKhau").val;
-                          var mkc = $("nhapLaiMatKhau").val;
-                          if(mk == mkc)
-                          console.log(mk);
-                          console.log(mkc);
-                        });
-                      </script>
                     </button>
-
+                    <script>
+                      $("#reg_confirm_pass").blur(function () {
+                        var pass = $("#matKhau").val();
+                        var pass2 = $("#nhapLaiMatKhau").val();
+                        if (pass.length == 0) {
+                          $("#enter").prop('disabled', true)
+                        } else if (pass == pass2) {
+                          $("#enter").prop('disabled', false)
+                        } else {
+                          $("#enter").prop('disabled', true)
+                          $("#errCF").innerHTML = "khong trung";
+                        }
+                      });
+                    </script>
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                       aria-hidden="true">
                       <div class="modal-dialog">
