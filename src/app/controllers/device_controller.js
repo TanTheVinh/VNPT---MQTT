@@ -11,7 +11,7 @@ class device_controller {
             .query(`select * from thietbi`)
             .then(result => {
                 const thietbi = result.rows;
-                res.json({ thietbi });
+                // res.json({ thietbi });
                 res.render('listDevice', { thietbi });
                 // console.log({thietbi});
             })
@@ -20,13 +20,25 @@ class device_controller {
 
     //[GET] /list-device/detail/:id
     detail(req, res, next){
+        const thietbi = {};
         pool
             .query('select * from thietbi where idthietbi = $1', [req.params.id])
             .then(result => {
-                const thietbi = result.rows[0];
-                res.json({ thietbi });
-                // res.render('infoDevice', { thietbi });
-
+                thietbi.thongtin = result.rows[0];
+                pool
+                    .query('select * from lichsu where idthietbi = $1', [req.params.id])
+                    .then(result => {
+                        thietbi.lichsu = result.rows;
+                        pool
+                            .query('select * from dulieu where idthietbi = $1', [req.params.id])
+                            .then(result => {
+                                thietbi.dulieu = result.rows;
+                                res.json({ thietbi });
+                                res.render('infoDevice', { thietbi });
+                            })
+                            .catch(next);
+                    })
+                    .catch(next);
             })
             .catch(next);
     }
