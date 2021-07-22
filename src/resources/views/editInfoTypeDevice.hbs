@@ -13,14 +13,14 @@
         <div class="col-md-6 border rounded white-box">
           <h2 class="text-center">Cập nhật thông tin loại thiết bị:</h2>
           <hr />
-          <form method="POST" action="">
+          <form method="POST" action="/list-catogory/update/{{loaithietbi.idloai}}?_method=PUT">
             <table class="table">
               {{#if loaithietbi}}
               <tr>
                 <th scope="row">Mã loại thiết bị
                   :</th>
                 <td>
-                  <input required  type="text" name="maLoaiThietBi" id="maLoaiThietBi" value="{{this.idloai}}" />
+                  <input required  type="text" name="maLoaiThietBi" id="maLoaiThietBi" value="{{loaithietbi.idloai}}" />
                   <span class="text-danger"> *</span>
                 </td>
               </tr>
@@ -29,7 +29,7 @@
                 <th scope="row">Tên loại thiết bị
                   :</th>
                 <td>
-                  <input required type="text" name="tenLoaiThietBi" id="tenLoaiThietBi" value="{{this.tenloai}}" /><span
+                  <input required type="text" name="tenloai" id="tenloai" value="{{loaithietbi.tenloai}}" /><span
                     class="text-danger"> *</span>
                 </td>
               </tr>
@@ -37,7 +37,7 @@
               <tr>
                 <th scope="row">Mô tả loại thiết bị:</th>
                 <td>
-                  <input required type="text" name="moTaLoaiThietBi" id="moTaLoaiThietBi" value="{{this.mota}}" /><span
+                  <input required type="text" name="mota" id="mota" value="{{loaithietbi.mota}}" /><span
                     class="text-danger"> *</span>
                 </td>
               </tr>

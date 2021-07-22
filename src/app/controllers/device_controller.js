@@ -47,14 +47,12 @@ class device_controller {
     //[GET] /list-device/edit/:id
     edit(req, res, next){
         pool
-        .query(`Select * from thietbi where idthietbi=${req.params.id}`)
-            .then(result => {
-                const thietbi = result.rows; 
-                res.json({thietbi}) ;      
-                //res.render('editInfoDevice',{ thiebi });
-
-            })
- //           .catch(next);
+        .query(`Select * from thietbi where idthietbi=$1`, [req.params.id])
+        .then(result => {
+           const thietbi = result.rows[0];
+          res.render('editInfoDevice',{thietbi});
+        })
+       .catch(next);
     }
     //[PUT] list-device/edit/:id
     update(req, res, next){
