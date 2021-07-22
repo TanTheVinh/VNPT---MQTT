@@ -33,7 +33,7 @@ class device_controller {
                             .query('select * from dulieu where idthietbi = $1', [req.params.id])
                             .then(result => {
                                 thietbi.dulieu = result.rows;
-                                res.json({ thietbi });
+                                //res.json({ thietbi });
                                 res.render('infoDevice', { thietbi });
                             })
                             .catch(next);
