@@ -58,17 +58,21 @@ class device_controller {
     }
     //[PUT] list-device/edit/:id
     update(req, res, next){
-        const thietbi = req.body;
+        const id = req.params.id;
+        const { idloai, tenthietbi, taikhoan, matkhau, trangthai } = req.body;
         pool
         .query(`update thietbi
-        set idloai = '${thietbi.idloai}',
-        tenthietbi = '${thietbi.tenthietbi}',
-        taikhoan = '${thietbi.taikhoan}'
-        matkhau = '${thietbi.matkhau}'
-        trangthai = '${thietbi.trangthai}'
-        where idthietbi = ${thietbi.idthietbi}`)
+        set idloai = $1,
+        tenthietbi = $2,
+        taikhoan = $3,
+        matkhau = $4
+        trangthai = $5
+        where idthietbi = $6`, [idloai, tenthietbi, taikhoan, matkhau, trangthai, id]);
+        res.json({
+            message: 'chỉnh sửa thiết bị thành công'
+        })
         .then(() => {
-            res.redirect('back');
+            res.redirect('list-device');
         })
         .catch(next);
     }
