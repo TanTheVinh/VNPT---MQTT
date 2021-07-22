@@ -77,13 +77,9 @@ class catogory_controller {
         
         .catch(next);
     }
-<<<<<<< HEAD
  
         
     
-=======
-
->>>>>>> edd631aebeae0b9ca61e2c477b5d71551c19e0aa
 
     // [DELETE] /list-catogory/delete/:id
     delete(req, res, next){

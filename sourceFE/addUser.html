@@ -42,7 +42,7 @@
               class="ti-menu ti-close"></i></a>
         </div>
         <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
-          <a href="index.html" class="page-title text-white p-2 fs-6">Bảng điều khiển</a>
+          <h2 class="page-title text-white p-2">Bảng điều khiển</h2>
           <ul class="navbar-nav ms-auto d-flex align-items-center">
             <li class=" in">
               <form role="search" class="app-search d-none d-md-block me-3">
@@ -68,7 +68,7 @@
             </li>
             <li class="sidebar-item">
               <a class="sidebar-link waves-effect waves-dark sidebar-link" href="listDevice.html" aria-expanded="false">
-                <i class="fa fa-table" aria-hidden="true"></i>
+                <i class="fa fa-th-list" aria-hidden="true"></i>
                 <span class="hide-menu">Danh sách thiết bị
                 </span>
               </a>
@@ -76,8 +76,22 @@
             <li class="sidebar-item">
               <a class="sidebar-link waves-effect waves-dark sidebar-link" href="listTypeDevice.html"
                 aria-expanded="false">
-                <i class="fa fa-table" aria-hidden="true"></i>
+                <i class="fa fa-list" aria-hidden="true"></i>
                 <span class="hide-menu">Danh sách loại thiết bị
+                </span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link waves-effect waves-dark sidebar-link" href="listUser.html" aria-expanded="false">
+                <i class="fa fa-users" aria-hidden="true"></i>
+                <span class="hide-menu">Danh sách người dùng
+                </span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link waves-effect waves-dark sidebar-link" href="listUnit.html" aria-expanded="false">
+                <i class="fa fa-table" aria-hidden="true"></i>
+                <span class="hide-menu">Danh sách đơn vị
                 </span>
               </a>
             </li>
@@ -104,122 +118,107 @@
       <div class="page-breadcrumb bg-white">
         <div class="row align-items-center">
           <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-            <h1 id="title">Thêm thiết bị:</h1>
+            <h1>Thêm người dùng
+            </h1>
           </div>
         </div>
       </div>
       <div class="container-fluid">
         <div class="col">
-          <div class="row bg-light">
+          <div class="row mt-5">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 border rounded white-box">
+              <h2 class="text-center">Nhập đầy đủ thông tin người dùng
+                :</h2>
+              <hr />
+              <form action="">
+                <table class="table">
 
-          </div>
-          <div class="row mx-2 justify-content-center">
-            <div class="row">
-              <div class="col-md-3"></div>
-              <div class="col-md-6 border rounded white-box">
-                <h2 class="text-center">Nhập đầy đủ thông tin thiết bị
-                  :</h2>
-                <hr />
-                <form action="">
-                  <table class="table">
 
-                    <tr>
-                      <th scope="row">Tên thiết bị:</th>
-                      <td>
-                        <input required type="text" name="tenThietBi" id="tenThietBi" />
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <th scope="row">Loại thiết bị
-                        :</th>
-                      <td>
-                        <select name="" id="">
-                          <option value="">Loại thiết bị</option>
-                        </select>
-                        
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <th scope="row">Tài khoản thiết bị
-                        :</th>
-                      <td>
-                        <input required type="text" name="taiKhoan" id="taiKhoan" />
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <th scope="row">Mật khẩu thiết bị:</th>
-                      <td>
-                        <input type="password" id="password" >
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <th scope="row">Nhập lại mật khẩu thiết bị:</th>
-                      <td>
-                        <input type="password" id="confirmPassword" >
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <th scope="row">Trạng thái thiết bị
-                        :</th>
-                      <td>
-                        <select name="trangThai" id="trangThai">
-                          <option value="1">Kết nối
-                          </option>
-                          <option value="0">Ngắt kết nối
-                          </option>
-                        </select>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">
-                      </th>
-                      <td>
-                        <button id="save-btn" type="submit" class="btn btn-success" disabled="disabled"><i class="fa fa-plus"></i>Thêm thiết
-                          bị</button>
-                        <button id="xoa" type="reset" class="btn btn-danger">
-                          <i class="fa fa-eraser"></i>
-                          Xoá
-                        </button>
-                      </td>
-                    </tr>
-                  </table>
-                </form>
-                <script>
-                  (function ($, window, document) {
-                    $(function () {
-                      $("form input").on({
-                        "keyup": function () {
-                          var pass = $('#password').val();
-                          var confirmPass = $('#confirmPassword').val();
-                          var saveButton = $("#save-btn");
-                          if (pass == confirmPass) {
-                            saveButton.removeAttr('disabled');
-                          } else {
-                            saveButton.attr('disabled', 'disabled');
-                          }
+                  <tr>
+                    <th scope="row">Tên người dùng
+                      :</th>
+                    <td>
+                      <input required type="text" name="name" id="name" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Tài khoản người dùng
+                      :</th>
+                    <td>
+                      <input required type="text" name="username" id="username" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Mật khẩu người dùng
+                      :</th>
+                    <td>
+                      <input type="password" id="password">
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Nhập lại mật khẩu người dùng
+                      :</th>
+                    <td>
+                      <input type="password" id="confirmPassword">
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Đơn vị
+                      :</th>
+                    <td>
+                      <select name="" id="">
+                        <option value="">1</option>
+                      </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Quyền
+                      :</th>
+                    <td>
+                      <select name="" id="">
+                        <option value="">1</option>
+                      </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                    </th>
+                    <td>
+                      <button id="save-btn" type="submit" class="btn btn-success" disabled="disabled"><i
+                          class="fa fa-plus"></i>Thêm người dùng</button>
+                      <button id="xoa" type="reset" class="btn btn-danger">
+                        <i class="fa fa-eraser"></i>
+                        Xoá
+                      </button>
+                    </td>
+                  </tr>
+                </table>
+              </form>
+              <script>
+                (function ($, window, document) {
+                  $(function () {
+                    $("form input").on({
+                      "keyup": function () {
+                        var pass = $('#password').val();
+                        var confirmPass = $('#confirmPassword').val();
+                        var saveButton = $("#save-btn");
+                        if (pass == confirmPass) {
+                          saveButton.removeAttr('disabled');
+                        } else {
+                          saveButton.attr('disabled', 'disabled');
                         }
-                      });
+                      }
                     });
-                  }(window.jQuery, window, document));
-                </script>
-              </div>
-              <div class="col-md-3"></div>
+                  });
+                }(window.jQuery, window, document));
+              </script>
             </div>
+            <div class="col-md-3"></div>
           </div>
         </div>
       </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
-      integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous">
-    </script>
-  </div>
-  </div>
-  </div>
   </div>
 
 </body>

@@ -1,132 +1,114 @@
 <div class="page-wrapper">
-  <div class="page-breadcrumb bg-white">
-    <div class="row align-items-center">
-      <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-        <h1 id="title">Thêm thiết bị:</h1>
+      <div class="page-breadcrumb bg-white">
+        <div class="row align-items-center">
+          <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+            <h1 id="title">Thêm thiết bị:</h1>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-  <div class="container-fluid">
-    <div class="col">
-      <div class="row mx-2 justify-content-center">
-        <div class="row">
-          <div class="col-md-3"></div>
-          <div class="col-md-6 border rounded white-box">
-            <h2 class="text-center">Nhập đầy đủ thông tin thiết bị
-              :</h2>
-            <hr />
-            <form method="POST" action="/list-device/create">
-              <table class="table">
-                <tr>
-                  <th scope="row">Tên thiết bị:</th>
-                  <td>
-                    <input required type="text" name="tenThietBi" id="tenThietBi" minlength="1" maxlength="50" /><span
-                      class="text-danger"> *</span>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">Loại thiết bị
-                    :</th>
-                  <td>
-                    <select name="" id="">
-                      {{#each device}}
-                      <option value="{{this.idloai}}">{{this.tenthietbi}}</option>
-                      {{/each}}
-                    </select>
-                    <span class="text-danger"> *</span>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">Tài khoản thiết bị
-                    :</th>
-                  <td>
-                    <input required type="text" name="taiKhoan" id="taiKhoan" minlength="1" maxlength="30" /><span
-                      class="text-danger"> *</span>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">Mật khẩu thiết bị:</th>
-                  <td>
-                    <input required type="password" name="matKhau" id="matKhau" minlength="1" maxlength="50" /><span
-                      class="text-danger"> *</span>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">Nhập lại mật khẩu thiết bị:</th>
-                  <td>
-                    <input required type="password" name="nhapLaiMatKhau" id="nhapLaiMatKhau" /><span
-                      class="text-danger" id="errCF"> *</span>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">Trạng thái thiết bị
-                    :</th>
-                  <td>
-                    <select name="trangThai" id="trangThai">
-                      <option value="1">Kết nối
-                      </option>
-                      <option value="0">Ngắt kết nối
-                      </option>
-                    </select>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">
-                  </th>
-                  <td>
+      <div class="container-fluid">
+        <div class="col">
+          <div class="row bg-light">
 
-                    <button id="addDevice" type="submit" class="btn btn-success" data-bs-toggle="modal"
-                      data-bs-target="#exampleModal">
-                      <i class="fa fa-plus"></i>
-                      Thêm thiết bị
-                    </button>
-                    <script>
-                      $("#reg_confirm_pass").blur(function () {
-                        var pass = $("#matKhau").val();
-                        var pass2 = $("#nhapLaiMatKhau").val();
-                        if (pass.length == 0) {
-                          $("#enter").prop('disabled', true)
-                        } else if (pass == pass2) {
-                          $("#enter").prop('disabled', false)
-                        } else {
-                          $("#enter").prop('disabled', true)
-                          $("#errCF").innerHTML = "khong trung";
+          </div>
+          <div class="row mx-2 justify-content-center">
+            <div class="row">
+              <div class="col-md-3"></div>
+              <div class="col-md-6 border rounded white-box">
+                <h2 class="text-center">Nhập đầy đủ thông tin thiết bị
+                  :</h2>
+                <hr />
+                <form action="">
+                  <table class="table">
+
+                    <tr>
+                      <th scope="row">Tên thiết bị:</th>
+                      <td>
+                        <input required type="text" name="tenThietBi" id="tenThietBi" />
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">Loại thiết bị
+                        :</th>
+                      <td>
+                        <select name="" id="">
+                          <option value="">Loại thiết bị</option>
+                        </select>
+                        
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">Tài khoản thiết bị
+                        :</th>
+                      <td>
+                        <input required type="text" name="taiKhoan" id="taiKhoan" />
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">Mật khẩu thiết bị:</th>
+                      <td>
+                        <input type="password" id="password" >
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">Nhập lại mật khẩu thiết bị:</th>
+                      <td>
+                        <input type="password" id="confirmPassword" >
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">Trạng thái thiết bị
+                        :</th>
+                      <td>
+                        <select name="trangThai" id="trangThai">
+                          <option value="1">Kết nối
+                          </option>
+                          <option value="0">Ngắt kết nối
+                          </option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                      </th>
+                      <td>
+                        <button id="save-btn" type="submit" class="btn btn-success" disabled="disabled"><i class="fa fa-plus"></i>Thêm thiết
+                          bị</button>
+                        <button id="xoa" type="reset" class="btn btn-danger">
+                          <i class="fa fa-eraser"></i>
+                          Xoá
+                        </button>
+                      </td>
+                    </tr>
+                  </table>
+                </form>
+                <script>
+                  (function ($, window, document) {
+                    $(function () {
+                      $("form input").on({
+                        "keyup": function () {
+                          var pass = $('#password').val();
+                          var confirmPass = $('#confirmPassword').val();
+                          var saveButton = $("#save-btn");
+                          if (pass == confirmPass) {
+                            saveButton.removeAttr('disabled');
+                          } else {
+                            saveButton.attr('disabled', 'disabled');
+                          }
                         }
                       });
-                    </script>
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                      aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Xác thực thiết bị
-                            </h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body">
-                            <input required type="text" name="TK" id="TK">
-                            <input required type="password" name="MK" id="MK">
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Thoát</button>
-                            <button type="button" class="btn btn-success">Xác thực thiết bị
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <button id="xoa" type="reset" class="btn btn-danger">
-                      <i class="fa fa-eraser"></i>
-                      Xoá
-                    </button>
-                  </td>
-                </tr>
-              </table>
-            </form>
+                    });
+                  }(window.jQuery, window, document));
+                </script>
+              </div>
+              <div class="col-md-3"></div>
+            </div>
           </div>
-          <div class="col-md-3"></div>
         </div>
       </div>
     </div>
-  </div>
-</div>
