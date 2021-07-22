@@ -16,14 +16,15 @@ class catogory_controller {
 
     //[GET] /list-catogory/detail
     detail(req, res, next){
-        pool
-            .query('select * from loaithietbi where idloai = $1', [req.params.id])
-            .then(result => {
-                const loaithietbi = result.rows[0];
-            // res.json({ loaithietbi });
-                res.render('infoTypeDevice',{ loaithietbi });
-            })
-            .catch(next);
+        res.json(req.body)
+        // pool
+        //     .query('select * from loaithietbi where idloai = $1', [req.params.id])
+        //     .then(result => {
+        //         const loaithietbi = result.rows[0];
+        //     // res.json({ loaithietbi });
+        //         res.render('infoTypeDevice',{ loaithietbi });
+        //     })
+        //     .catch(next);
     }
 
     //[GET] /list-catogory/edit/:id
@@ -62,20 +63,23 @@ class catogory_controller {
     }
     //[POST] /list-category/insert
     insert(req, res, next){ 
+        //res.json(req.body)
         const { tenloai, mota } = req.body;
         pool
-        .query('INSERT INTO loaithietbi (tenloai, mota) VALUES ($1, $2)', [tenloai,mota]);
-        res.json({
-            message: 'thêm thành công',
-            body: {
-                loaithietbi: {tenloai, mota}
-            }
-        })
-        .then(() =>{
-            res.redirect('list-device')
-        })
+        .query('INSERT INTO loaithietbi (tenloai, mota) VALUES ($1, $2)', [tenloai,mota])
         
-        .catch(next);
+        .then(() =>{
+            res.redirect('back')
+            res.json({
+                message: 'thêm thành công',
+                body: {
+                    loaithietbi: {tenloai, mota}
+                }
+            })
+        }).catch(next);
+
+        
+        
     }
  
         
