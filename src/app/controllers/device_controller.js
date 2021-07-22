@@ -50,8 +50,8 @@ class device_controller {
         .query(`Select * from thietbi where idthietbi=${req.params.id}`)
             .then(result => {
                 const thietbi = result.rows; 
-                //res.json({thietbi}) ;      
-                res.render('editInfoDevice',{ thietbi });
+                res.json({thietbi}) ;      
+                //res.render('editInfoDevice',{ thietbi });
                 console.log(thietbi);
 
             })
