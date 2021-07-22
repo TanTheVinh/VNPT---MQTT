@@ -29,9 +29,9 @@
                   <th scope="row">Loại thiết bị
                     :</th>
                   <td>
-                    <select name="" id="">
+                    <select name="idloai" id="idloai">
                       {{#each loaithietbi}}
-                        <option name="idloai" id="idloai" value="{{this.idloai}}">{{this.tenloai}}</option>
+                        <option  value="{{this.idloai}}">{{this.tenloai}}</option>
                       {{/each}}
                     </select>
 
@@ -60,18 +60,18 @@
                   </td>
                 </tr>
 
-                <tr>
+                {{!-- <tr>
                   <th scope="row">Trạng thái thiết bị
                     :</th>
                   <td>
-                    <select name="trangThai" id="trangThai">
+                    <select name="trangthai" id="trangthai">
                       <option value="1">Kết nối
                       </option>
                       <option value="0">Ngắt kết nối
                       </option>
                     </select>
                   </td>
-                </tr>
+                </tr> --}}
                 <tr>
                   <th scope="row">
                   </th>
@@ -111,4 +111,4 @@
       </div>
     </div>
   </div>
-</div>// Tabs
+</div>

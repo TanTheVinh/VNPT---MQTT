@@ -62,9 +62,16 @@ class device_controller {
             and 
             idthietbi = $1`, [req.params.id])
             .then(result => {
+<<<<<<< HEAD
                 const thietbi = result.rows[0]; 
                 // res.json({thietbi}) ;      
                 res.render('editInfoDevice', { thietbi });
+=======
+                const thietbi = result.rows; 
+                //res.json({thietbi}) ;      
+                res.render('editInfoDevice',{ thietbi });
+                console.log(thietbi);
+>>>>>>> c565079c12e3bd8e2e17b1c2fcfd26b0debd1352
 
             })
             .catch(next);
@@ -102,6 +109,7 @@ class device_controller {
 
     // [POST] /list-device/create
     create(req, res, next){
+<<<<<<< HEAD
         // res.json(req.body)
             const thietbi = Object.values(req.body);
             thietbi[3] = md5(thietbi[3]);
@@ -112,6 +120,21 @@ class device_controller {
             .then(() =>{
                 res.redirect('/list-device')
             })
+=======
+        //res.json(req.body)
+            const {idloai, tenthietbi, taikhoan, matkhau, trangthai } = req.body;
+            pool
+            .query('INSERT INTO thietbi (idloai, tenthietbi, taikhoan, matkhau, trangthai) VALUES ($1, $2, $3, $4, $5)', [ idloai, tenthietbi, taikhoan, matkhau, trangthai])
+            .then(() =>{
+                res.redirect('back')
+                res.json({
+                    message: 'thêm thành công',
+                    body: {
+                        thietbi: {idloai, tenthietbi, taikhoan, matkhau, trangthai}
+                    }
+                })
+        })
+>>>>>>> c565079c12e3bd8e2e17b1c2fcfd26b0debd1352
             .catch(next);
     }
 
