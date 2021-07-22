@@ -11,29 +11,27 @@
                     <div class="col-sm-12 col-md-4">
                         <div class="table-responsive white-box">
                             <table class="table text-nowrap">
-                                {{#if loaithietbi}}
                                 <tr>
                                     <th>Mã loại thiết bị
                                         :</th>
-                                    <td><span id="maLoaiThietBi">{{this.idloai}}</span></td>
+                                    <td><span id="maLoaiThietBi">{{loaithietbi.idloai}}</span></td>
                                 </tr>
                                 <tr>
                                     <th>Tên loại thiết bị
                                         :</th>
-                                    <td><span id="tenLoaiThietBi">{{this.tenloai}}</span></td>
+                                    <td><span id="tenLoaiThietBi">{{loaithietbi.tenloai}}</span></td>
                                 </tr>
                                 <tr>
                                     <th>Mô tả
                                         loại thiết bị:</th>
-                                    <td><span id="moTaLoaiThietBi">{{this.mota}}</span></td>
+                                    <td><span id="moTaLoaiThietBi">{{loaithietbi.mota}}</span></td>
                                 </tr>
                                 <tr>
                                     <th></th>
-                                    <td><a id="chinhSua" href="/list-category/edit/{{this.idloai}}" class="btn btn-info"><i
+                                    <td><a id="chinhSua" href="/list-category/edit/{{loaithietbi.idloai}}" class="btn btn-info"><i
                                                 class="fa fa-edit"></i>Chỉnh sửa thông tin
                                         </a></td>
                                 </tr>
-                                {{/if}}
                             </table>
                         </div>
                     </div>

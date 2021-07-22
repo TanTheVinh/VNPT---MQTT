@@ -5,25 +5,25 @@ class catogory_controller {
     //[GET] /list-catogory/
     list(req, res, next){
         pool
-        .query('select * from loaithietbi')
-        .then(result => {
-            const loaithietbi = result.rows;
-            // res.json({ loaithietbi });
-            res.render('listTypeDevice', { loaithietbi });
-        })
-        .catch(next)
+            .query('select * from loaithietbi')
+            .then(result => {
+                const loaithietbi = result.rows;
+                // res.json({ loaithietbi });
+                res.render('listTypeDevice', { loaithietbi });
+            })
+            .catch(next)
     }
 
     //[GET] /list-catogory/detail
     detail(req, res, next){
         pool
-        .query('select * from loaithietbi where idloai = $1', [req.params.id])
-        .then(result => {
-            const loaithietbi = result.rows;
-           // res.json({ loaithietbi });
-            res.render('infoTypeDevice',{ loaithietbi });
-        })
-        .catch(next);
+            .query('select * from loaithietbi where idloai = $1', [req.params.id])
+            .then(result => {
+                const loaithietbi = result.rows[0];
+            // res.json({ loaithietbi });
+                res.render('infoTypeDevice',{ loaithietbi });
+            })
+            .catch(next);
     }
 
     //[GET] /list-catogory/edit/:id
@@ -38,7 +38,7 @@ class catogory_controller {
         .catch(next);
         
     }
-    //[PUT]/list-catogory/:id
+    //[PUT]/list-catogory/edit/:id
     update(req, res, next){
         const category = req.body;
         pool
@@ -73,9 +73,25 @@ class catogory_controller {
         
         .catch(next);
     }
+<<<<<<< HEAD
  
         
     
+=======
+
+    //[POST] /list-category/insert
+    insert(req, res, next){
+         const category = req.body
+         res.json({category});
+        // pool
+        // .query(`insert into loaithietbi(idloai, tenloai, mota) 
+        // values( default, '${category.tenloai}', '${category.mota}')`)
+        // .then(() => res.redirect('back'))
+        // .catch(err => {
+        //     err.send('them that bai')
+        // });
+    }
+>>>>>>> 6c5c230166b07c9543b93999610fc3f5b37e70d4
 
     // [DELETE] /list-catogory/delete/:id
     delete(req, res, next){

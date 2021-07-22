@@ -2,9 +2,9 @@ const Pool = require('pg').Pool;
 
 var pool = new Pool({
     host: 'localhost',
-    database: 'MQTT',
+    database: 'mqtt',
     user: 'postgres',
-    password: 'sa',
+    password: 'thevinh',
     port: 5432
 });
 
