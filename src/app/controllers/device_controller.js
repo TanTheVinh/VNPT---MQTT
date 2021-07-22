@@ -82,7 +82,7 @@ class device_controller {
             .query(`select * from thietbi`)
             .then(result => {
                 const device = result.rows;
-               //  res.json({device} );
+                //res.json({device} );
                 res.render('addDevice', { device });
                 // console.log({thietbi});
             })
