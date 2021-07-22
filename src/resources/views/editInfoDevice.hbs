@@ -17,12 +17,12 @@
           <hr />
           <form  action="">
             <table class="table ">
-
+              {{#if thietbi}}
               <tr>
                 <th scope="row">Mã thiết bị
                   :</th>
                 <td>
-                  <input disabled type="text" name="maThietBi" id="maThietBi" value="{{thietbi.idthietbi}}" />
+                  <input disabled type="text" name="maThietBi" id="maThietBi" value="{{this.idthietbi}}" />
                   
                 </td>
               </tr>
@@ -30,7 +30,7 @@
                 <th scope="row">Mã đơn vị
                   :</th>
                 <td>
-                  <input required type="text" name="idDonvi" id="idDonvi" value="{{thietbi.iddonvi}}" />
+                  <input required disabled type="text" name="idDonvi" id="idDonvi" value="{{this.iddonvi}}" />
                   
                 </td>
               </tr>
@@ -38,7 +38,7 @@
                 <th scope="row">Tên thiết bị
                   :</th>
                 <td>
-                  <input required type="text" name="tenThietBi" id="tenThietBi" value="{{thietbi.tenthietbe}}" />
+                  <input required type="text" name="tenThietBi" id="tenThietBi" value="{{this.tenthietbi}}" />
                 </td>
               </tr>
               <tr>
@@ -47,7 +47,7 @@
                 <td>
                   <select name="" id="">
                     {{!-- {{#each loaithietbi}} --}}
-                    <option value="{{thietbi.idloai}}">{{thietbi.tenloai}}</option>
+                    {{!-- <option value="{{thietbi.idloai}}">{{this.tenloai}}</option> --}}
                     {{!-- {{/each}} --}}
                   </select>
                   
@@ -57,24 +57,7 @@
                 <th scope="row">Tài khoản thiết bị
                   :</th>
                 <td>
-                  <input required type="text" name="taiKhoan" id="taiKhoan" value="{{thietbi.taikhoan}}" />
-                </td>
-              </tr>
-
-              <tr>
-                <th scope="row">Mật khẩu thiết bị
-                  :</th>
-                <td>
-                  <input required type="password" name="matKhau" id="matKhau" value="{{thietbi.matkhau}}" />
-                </td>
-              </tr>
-
-              <tr>
-                <th scope="row">Nhập lại mật khẩu
-                  thiết bị:</th>
-                <td>
-                  <input required type="password" name="nhapLaiMatKhau" id="nhapLaiMatKhau"
-                    value="{{thietbi.matkhau}}" />
+                  <input required type="text" name="taiKhoan" id="taiKhoan" value="{{this.taikhoan}}" />
                 </td>
               </tr>
 
@@ -100,6 +83,7 @@
                   </button>
                 </td>
               </tr>
+              {{/if}}
             </table>
           </form>
         </div>

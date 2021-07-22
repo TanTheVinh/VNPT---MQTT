@@ -68,8 +68,8 @@ class device_controller {
                 res.render('editInfoDevice', { thietbi });
 =======
                 const thietbi = result.rows; 
-                //res.json({thietbi}) ;      
-                res.render('editInfoDevice',{ thietbi });
+                res.json({thietbi}) ;      
+                //res.render('editInfoDevice',{ thietbi });
                 console.log(thietbi);
 >>>>>>> c565079c12e3bd8e2e17b1c2fcfd26b0debd1352
 
