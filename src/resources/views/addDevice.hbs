@@ -1,114 +1,114 @@
 <div class="page-wrapper">
-      <div class="page-breadcrumb bg-white">
-        <div class="row align-items-center">
-          <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-            <h1 id="title">Thêm thiết bị:</h1>
-          </div>
-        </div>
+  <div class="page-breadcrumb bg-white">
+    <div class="row align-items-center">
+      <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+        <h1 id="title">Thêm thiết bị:</h1>
       </div>
-      <div class="container-fluid">
-        <div class="col">
-          <div class="row bg-light">
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="col">
+      <div class="row mx-2 justify-content-center">
+        <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-6 border rounded white-box">
+            <h2 class="text-center">Nhập đầy đủ thông tin thiết bị
+              :</h2>
+            <hr />
+            <form action="">
+              <table class="table">
 
+                <tr>
+                  <th scope="row">Tên thiết bị:</th>
+                  <td>
+                    <input required type="text" name="tenThietBi" id="tenThietBi" />
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row">Loại thiết bị
+                    :</th>
+                  <td>
+                    <select name="" id="">
+                      {{#each device}}
+                        <option value="{{this.idloai}}">{{this.tenloai}}</option>
+                      {{/each}}
+                    </select>
+
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row">Tài khoản thiết bị
+                    :</th>
+                  <td>
+                    <input required type="text" name="taiKhoan" id="taiKhoan" />
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row">Mật khẩu thiết bị:</th>
+                  <td>
+                    <input type="password" id="password">
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row">Nhập lại mật khẩu thiết bị:</th>
+                  <td>
+                    <input type="password" id="confirmPassword">
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row">Trạng thái thiết bị
+                    :</th>
+                  <td>
+                    <select name="trangThai" id="trangThai">
+                      <option value="1">Kết nối
+                      </option>
+                      <option value="0">Ngắt kết nối
+                      </option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                  </th>
+                  <td>
+                    <button id="save-btn" type="submit" class="btn btn-success" disabled="disabled"><i
+                        class="fa fa-plus"></i>Thêm thiết
+                      bị</button>
+                    <button id="xoa" type="reset" class="btn btn-danger">
+                      <i class="fa fa-eraser"></i>
+                      Xoá
+                    </button>
+                  </td>
+                </tr>
+              </table>
+            </form>
+            <script>
+              (function ($, window, document) {
+                $(function () {
+                  $("form input").on({
+                    "keyup": function () {
+                      var pass = $('#password').val();
+                      var confirmPass = $('#confirmPassword').val();
+                      var saveButton = $("#save-btn");
+                      if (pass == confirmPass) {
+                        saveButton.removeAttr('disabled');
+                      } else {
+                        saveButton.attr('disabled', 'disabled');
+                      }
+                    }
+                  });
+                });
+              }(window.jQuery, window, document));
+            </script>
           </div>
-          <div class="row mx-2 justify-content-center">
-            <div class="row">
-              <div class="col-md-3"></div>
-              <div class="col-md-6 border rounded white-box">
-                <h2 class="text-center">Nhập đầy đủ thông tin thiết bị
-                  :</h2>
-                <hr />
-                <form action="">
-                  <table class="table">
-
-                    <tr>
-                      <th scope="row">Tên thiết bị:</th>
-                      <td>
-                        <input required type="text" name="tenThietBi" id="tenThietBi" />
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <th scope="row">Loại thiết bị
-                        :</th>
-                      <td>
-                        <select name="" id="">
-                          <option value="">Loại thiết bị</option>
-                        </select>
-                        
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <th scope="row">Tài khoản thiết bị
-                        :</th>
-                      <td>
-                        <input required type="text" name="taiKhoan" id="taiKhoan" />
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <th scope="row">Mật khẩu thiết bị:</th>
-                      <td>
-                        <input type="password" id="password" >
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <th scope="row">Nhập lại mật khẩu thiết bị:</th>
-                      <td>
-                        <input type="password" id="confirmPassword" >
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <th scope="row">Trạng thái thiết bị
-                        :</th>
-                      <td>
-                        <select name="trangThai" id="trangThai">
-                          <option value="1">Kết nối
-                          </option>
-                          <option value="0">Ngắt kết nối
-                          </option>
-                        </select>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">
-                      </th>
-                      <td>
-                        <button id="save-btn" type="submit" class="btn btn-success" disabled="disabled"><i class="fa fa-plus"></i>Thêm thiết
-                          bị</button>
-                        <button id="xoa" type="reset" class="btn btn-danger">
-                          <i class="fa fa-eraser"></i>
-                          Xoá
-                        </button>
-                      </td>
-                    </tr>
-                  </table>
-                </form>
-                <script>
-                  (function ($, window, document) {
-                    $(function () {
-                      $("form input").on({
-                        "keyup": function () {
-                          var pass = $('#password').val();
-                          var confirmPass = $('#confirmPassword').val();
-                          var saveButton = $("#save-btn");
-                          if (pass == confirmPass) {
-                            saveButton.removeAttr('disabled');
-                          } else {
-                            saveButton.attr('disabled', 'disabled');
-                          }
-                        }
-                      });
-                    });
-                  }(window.jQuery, window, document));
-                </script>
-              </div>
-              <div class="col-md-3"></div>
-            </div>
-          </div>
+          <div class="col-md-3"></div>
         </div>
       </div>
     </div>
+  </div>
+</div>

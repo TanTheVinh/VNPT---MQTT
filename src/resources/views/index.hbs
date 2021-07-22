@@ -1,84 +1,82 @@
 <div class="page-wrapper">
-            <div class="page-breadcrumb bg-white">
-                <div class="row align-items-center">
-                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        Bảng thống kê
-                    </div>
-                </div>
+    <div class="page-breadcrumb bg-white">
+        <div class="row align-items-center">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                Bảng thống kê
             </div>
-            <div class="container-fluid">
-                <div class="row justify-content-center">
-                    <div class="col-lg-6 col-md-12">
-                        <div class="white-box analytics-info">
-                            <h3 class="box-title">Kết nối
-                            </h3>
-                            <ul class="list-inline two-part d-flex align-items-center mb-0">
-                                <li>
-                                    <div id="sparklinedash"><canvas width="67" height="30"
-                                            style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
-                                    </div>
-                                </li>
-                                <li class="ms-auto"><span class="counter text-success">659</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-12">
-                        <div class="white-box analytics-info">
-                            <h3 class="box-title">Ngắt kết nối</h3>
-                            <ul class="list-inline two-part d-flex align-items-center mb-0">
-                                <li>
-                                    <div id="sparklinedash2"><canvas width="67" height="30"
-                                            style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
-                                    </div>
-                                </li>
-                                <li class="ms-auto"><span class="counter text-purple">869</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                        <div class="white-box">
-                            <h3 class="box-title">Products Yearly Sales</h3>
-                            <div class="d-md-flex">
-                                <ul class="list-inline d-flex ms-auto">
-                                    <li class="ps-3">
-                                        <h5><i class="fa fa-square me-1" style="color: #d70206;"></i>Chu thich 1</h5>
-                                    </li>
-                                    <li class="ps-3">
-                                        <h5><i class="fa fa-square me-1" style="color: #f05b4f"></i>Chu thich 2</h5>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="bar-chart"></div>
-                            <script>
-                                new Chartist.Bar('.bar-chart', {
-                                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                                    series: [
-                                        [5, 4, 3, 7, 5, 10, 3],
-                                        [3, 2, 9, 5, 4, 6, 4]
-                                    ]
-                                }, {
-                                    low: 0,
-                                    showArea: true,
-                                    plugins: [
-                                        Chartist.plugins.tooltip()
-                                    ],
-                                    axisX: {
-                                        position: 'end'
-                                    },
-                                    axisY: {
-                                        showGrid: false,
-                                        showLabel: false,
-                                        offset: 0
-                                    }
-                                });
-                            </script>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="setSession"></div>
         </div>
     </div>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-12">
+                <div class="white-box analytics-info">
+                    <h3 class="box-title">Kết nối
+                    </h3>
+                    <ul class="list-inline two-part d-flex align-items-center mb-0">
+                        <li>
+                            <div id="sparklinedash"><canvas width="67" height="30"
+                                    style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
+                            </div>
+                        </li>
+                        <li class="ms-auto"><span class="counter text-success">659</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="white-box analytics-info">
+                    <h3 class="box-title">Ngắt kết nối</h3>
+                    <ul class="list-inline two-part d-flex align-items-center mb-0">
+                        <li>
+                            <div id="sparklinedash2"><canvas width="67" height="30"
+                                    style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
+                            </div>
+                        </li>
+                        <li class="ms-auto"><span class="counter text-purple">869</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <div class="white-box">
+                    <h3 class="box-title">Products Yearly Sales</h3>
+                    <div class="d-md-flex">
+                        <ul class="list-inline d-flex ms-auto">
+                            <li class="ps-3">
+                                <h5><i class="fa fa-square me-1" style="color: #d70206;"></i>Chu thich 1</h5>
+                            </li>
+                            <li class="ps-3">
+                                <h5><i class="fa fa-square me-1" style="color: #f05b4f"></i>Chu thich 2</h5>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bar-chart"></div>
+                    <script>
+                        new Chartist.Bar('.bar-chart', {
+                            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                            series: [
+                                [5, 4, 3, 7, 5, 10, 3],
+                                [3, 2, 9, 5, 4, 6, 4]
+                            ]
+                        }, {
+                            low: 0,
+                            showArea: true,
+                            plugins: [
+                                Chartist.plugins.tooltip()
+                            ],
+                            axisX: {
+                                position: 'end'
+                            },
+                            axisY: {
+                                showGrid: false,
+                                showLabel: false,
+                                offset: 0
+                            }
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="setSession"></div>
 </div>

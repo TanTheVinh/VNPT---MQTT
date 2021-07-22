@@ -79,27 +79,28 @@ class device_controller {
     //[GET] /list-device/add
     add(req, res, next){
         pool
-            .query(`select * from thietbi`)
+            .query(`select * from loaithietbi`)
             .then(result => {
-                const device = result.rows;
+                const loaithietbi = result.rows;
                 //res.json({device} );
-                res.render('addDevice', { device });
-                // console.log({thietbi});
+                res.render('addDevice', { loaithietbi });
+                 console.log({loaithietbi});
             })
             .catch(next);
     }
     //[POST] /list-device/create
     create(req, res, next){
-            const {idthietbi, tenthietbi, taikhoan, matkhau, trangthai } = req.body;
-            pool
-            .query('INSERT INTO thietbi (idloai, tenthietbi, taikhoan, matkhau, trangthai) VALUES ($1, $2, $3, $4, $5)', [ idloai, tenthietbi, taikhoan, matkhau, trangthai]);
-            res.json({
-                message: 'thêm thành công'
-            })
-            .then(() =>{
-                res.redirect('list-device')
-        })
-            .catch(next);
+        res.json(req.body)
+        //     const {idthietbi, tenthietbi, taikhoan, matkhau, trangthai } = req.body;
+        //     pool
+        //     .query('INSERT INTO thietbi (idloai, tenthietbi, taikhoan, matkhau, trangthai) VALUES ($1, $2, $3, $4, $5)', [ idloai, tenthietbi, taikhoan, matkhau, trangthai]);
+        //     res.json({
+        //         message: 'thêm thành công'
+        //     })
+        //     .then(() =>{
+        //         res.redirect('list-device')
+        // })
+        //     .catch(next);
     }
 
     // [DELETE] /list-device/delete/:id
