@@ -62,6 +62,7 @@ class catogory_controller {
     }
     //[POST] /list-category/insert
     insert(req, res, next){ 
+        //res.json(req.body)
         const { tenloai, mota } = req.body;
         pool
         .query('INSERT INTO loaithietbi (tenloai, mota) VALUES ($1, $2)', [tenloai,mota]);

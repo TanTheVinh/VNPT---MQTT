@@ -50,8 +50,8 @@ class device_controller {
         .query(`Select * from thietbi where idthietbi=${req.params.id}`)
             .then(result => {
                 const thietbi = result.rows; 
-                res.json({thietbi}) ;      
-                //res.render('editInfoDevice',{ thiebi });
+                //res.json({thietbi}) ;      
+                res.render('editInfoDevice',{thiebi});
 
             })
             .catch(next);
@@ -90,17 +90,17 @@ class device_controller {
     }
     //[POST] /list-device/create
     create(req, res, next){
-        res.json(req.body)
-        //     const {idthietbi, tenthietbi, taikhoan, matkhau, trangthai } = req.body;
-        //     pool
-        //     .query('INSERT INTO thietbi (idloai, tenthietbi, taikhoan, matkhau, trangthai) VALUES ($1, $2, $3, $4, $5)', [ idloai, tenthietbi, taikhoan, matkhau, trangthai]);
-        //     res.json({
-        //         message: 'thêm thành công'
-        //     })
-        //     .then(() =>{
-        //         res.redirect('list-device')
-        // })
-        //     .catch(next);
+        //res.json(req.body)
+            const {idloai, tenthietbi, taikhoan, matkhau, trangthai } = req.body;
+            pool
+            .query('INSERT INTO thietbi (idloai, tenthietbi, taikhoan, matkhau, trangthai) VALUES ($1, $2, $3, $4, $5)', [ idloai, tenthietbi, taikhoan, matkhau, trangthai]);
+            res.json({
+                message: 'thêm thành công'
+            })
+            .then(() =>{
+                res.redirect('list-device')
+        })
+            .catch(next);
     }
 
     // [DELETE] /list-device/delete/:id
