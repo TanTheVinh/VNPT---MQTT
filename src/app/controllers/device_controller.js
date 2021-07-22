@@ -1,3 +1,4 @@
+const { json } = require("body-parser");
 const e = require("express");
 const { query } = require("express");
 const { Query } = require("pg");
@@ -57,17 +58,21 @@ class device_controller {
     }
     //[PUT] list-device/edit/:id
     update(req, res, next){
-        const thietbi = req.body;
+        const id = req.params.id;
+        const { idloai, tenthietbi, taikhoan, matkhau, trangthai } = req.body;
         pool
         .query(`update thietbi
-        set idloai = '${thietbi.idloai}',
-        tenthietbi = '${thietbi.tenthietbi}',
-        taikhoan = '${thietbi.taikhoan}'
-        matkhau = '${thietbi.matkhau}'
-        trangthai = '${thietbi.trangthai}'
-        where idthietbi = ${thietbi.idthietbi}`)
+        set idloai = $1,
+        tenthietbi = $2,
+        taikhoan = $3,
+        matkhau = $4
+        trangthai = $5
+        where idthietbi = $6`, [idloai, tenthietbi, taikhoan, matkhau, trangthai, id]);
+        res.json({
+            message: 'chỉnh sửa thiết bị thành công'
+        })
         .then(() => {
-            res.redirect('back');
+            res.redirect('list-device');
         })
         .catch(next);
     }
@@ -77,7 +82,7 @@ class device_controller {
             .query(`select * from thietbi`)
             .then(result => {
                 const device = result.rows;
-               //  res.json({device} );
+                //res.json({device} );
                 res.render('addDevice', { device });
                 // console.log({thietbi});
             })
@@ -85,18 +90,16 @@ class device_controller {
     }
     //[POST] /list-device/create
     create(req, res, next){
-        const thietbi = req.body;
-        res.json(req.body.tenthietbi);
-        const query_device = (`insert into thietbi(idthietbi, idloai, tenthietbi, taikhoan, matkhau, trangthai) 
-        values( default, '${thietbi.idloai}', '${thietbi.tenthietbi}', '${thietbi.taikhoan}', '${thietbi.matkhau}', '${thietbi.trangthai}' )`);
-        pool.query( query_device, (err, res ) => {
-            if(!err){
-                res.send('thêm thành công');
-                res.redirect('back');
-            }
-            else{ console.log("no") }
-
+            const {idthietbi, tenthietbi, taikhoan, matkhau, trangthai } = req.body;
+            pool
+            .query('INSERT INTO thietbi (idloai, tenthietbi, taikhoan, matkhau, trangthai) VALUES ($1, $2, $3, $4, $5)', [ idloai, tenthietbi, taikhoan, matkhau, trangthai]);
+            res.json({
+                message: 'thêm thành công'
+            })
+            .then(() =>{
+                res.redirect('list-device')
         })
+            .catch(next);
     }
 
     // [DELETE] /list-device/delete/:id
