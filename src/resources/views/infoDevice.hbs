@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-12">
@@ -54,10 +53,7 @@
                     <i class="fa fa-inbox"></i>
                     Gửi lệnh
                   </button>
-<<<<<<< HEAD
-                  <!-- Modal -->
-=======
->>>>>>> 99e518d8d7820068674d7ddd0d611d94f1daa210
+
                   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog">
@@ -74,112 +70,235 @@
                           <button type="button" class="btn btn-success">Gửi</button>
                         </div>
                       </div>
-=======
-<div class="page-wrapper">
-            <div class="page-breadcrumb bg-white">
-                <div class="row align-items-center">
-                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                      <h1 id="title">Thiết bị:</h1>
->>>>>>> 2f95b7bb001c81f2e9d00c7a88728dd9af7d425a
-                    </div>
-                </div>
-            </div>
-            <div class="container-fluid">
-              <div class="col">
-                <div class="row mt-5 mx-2 justify-content-center">
-                  <div class="col-md-5 border rounded p-4 white-box">
-                    <h2>Thông tin thiết bị
-                      :</h2>
-                    <hr />
-                    <table class="table">
-                      {{#if thietbi}}
-                      <tr>
-                        <th>Mã thiết bị
-                          :</th>
-                        <td><span id="maThietBi">{{this.idthietbi}}</span></td>
-                      </tr>
-                      
-                      <tr>
-                        <th>Tên thiết bị
-                          :</th>
-                        <td><span id="tenThietBi">{{this.tenthietbi}}</span></td>
-                      </tr>
-                      
-                      <tr>
-                        <th>Loại thiết bị
-                          :</th>
-                        <td><span id="diaChi">{{this.idloai}}</span></td>
-                      </tr>
-                      
-                      <tr>
-                        <th>Tài khoản thiết bị:</th>
-                        <td><span id="taiKhoan">{{this.taikhoan}}</span></td>
-                      </tr>
-                      
-                      <tr>
-                        <th>Mật khẩu thiết bị:</th>
-                        <td><span id="matKhau">{{this.matkhau}}</span></td>
-                      </tr>
-                      
-                      <tr>
-                        <th>Tài khoản thiết bị:</th>
-                        <td><span id="trangThai">{{this.trangthai}}</span></td>
-                      </tr>
-                      <tr>
-                        <th>
-                          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <i class="fa fa-inbox"></i>
-                            Gửi lệnh
-                          </button>
-        
-                          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5 class="modal-title" id="exampleModalLabel">Gửi lệnh</h5>
-                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                  <input type="text" name="mesg" id="mesg">
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Thoát</button>
-                                  <button type="button" class="btn btn-success">Gửi</button>
-                                </div>
-                              </div>
+                      <div class="page-wrapper">
+                        <div class="page-breadcrumb bg-white">
+                          <div class="row align-items-center">
+                            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                              <h1 id="title">Thiết bị:</h1>
+
                             </div>
                           </div>
-                        </th>
-                        <td>
-                          <a id="chinhSua" href="editInfoDevice.hbs" class="btn btn-info"><i class="fa fa-edit"></i>Chỉnh sửa thông tin</a>
-                        </td>
-                      </tr>
-                      {{/if}}
-                    </table>
-                  </div>
-                  <div class="col-md-3 border rounded p-4 mx-4 white-box">
-                    <h2>Publish</h2>
-                    <hr />
-                    <div class="overflow-auto" style="height: 500px">
-                      <ul class="p-0" style="list-style-type: none">
-                        <li class="border rounded p-2">test test test</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="col-md-3 border rounded p-4 white-box">
-                    <h2>Lịch sử hoạt động</h2>
-                    <hr />
-                    <div class="overflow-auto" style="height: 500px">
-                      <ul class="p-0" style="list-style-type: none">
-                        <li class="border rounded p-2">test test test</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
-                    integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous">
-                  </script>
-              </div>
-            </div>
-        </div>
+                        </div>
+                        <div class="container-fluid">
+                          <div class="col">
+                            <div class="row mt-5 mx-2 justify-content-center">
+                              <div class="col-md-5 border rounded p-4 white-box">
+                                <h2>Thông tin thiết bị
+                                  :</h2>
+                                <hr />
+                                <table class="table">
+                                  {{#if thietbi}}
+                                  <tr>
+                                    <th>Mã thiết bị
+                                      :</th>
+                                    <td><span id="maThietBi">{{this.idthietbi}}</span></td>
+                                  </tr>
+
+                                  <tr>
+                                    <th>Tên thiết bị
+                                      :</th>
+                                    <td><span id="tenThietBi">{{this.tenthietbi}}</span></td>
+                                  </tr>
+
+                                  <tr>
+                                    <th>Loại thiết bị
+                                      :</th>
+                                    <td><span id="diaChi">{{this.idloai}}</span></td>
+                                  </tr>
+
+                                  <tr>
+                                    <th>Tài khoản thiết bị:</th>
+                                    <td><span id="taiKhoan">{{this.taikhoan}}</span></td>
+                                  </tr>
+
+                                  <tr>
+                                    <th>Mật khẩu thiết bị:</th>
+                                    <td><span id="matKhau">{{this.matkhau}}</span></td>
+                                  </tr>
+
+                                  <tr>
+                                    <th>Tài khoản thiết bị:</th>
+                                    <td><span id="trangThai">{{this.trangthai}}</span></td>
+                                  </tr>
+                                  <tr>
+                                    <th>
+                                      <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal">
+                                        <i class="fa fa-inbox"></i>
+                                        Gửi lệnh
+                                      </button>
+
+                                      <div class="modal fade" id="exampleModal" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title" id="exampleModalLabel">Gửi lệnh</h5>
+                                              <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                              <input type="text" name="mesg" id="mesg">
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-dark"
+                                                data-bs-dismiss="modal">Thoát</button>
+                                              <button type="button" class="btn btn-success">Gửi</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </th>
+                                    <td>
+                                      <a id="chinhSua" href="editInfoDevice.hbs" class="btn btn-info"><i
+                                          class="fa fa-edit"></i>Chỉnh sửa thông tin</a>
+                                    </td>
+                                  </tr>
+                                  {{/if}}
+                                </table>
+                              </div>
+                              <div class="col-md-3 border rounded p-4 mx-4 white-box">
+                                <h2>Publish</h2>
+                                <hr />
+                                <div class="overflow-auto" style="height: 500px">
+                                  <ul class="p-0" style="list-style-type: none">
+                                    <li class="border rounded p-2">test test test</li>
+                                  </ul>
+                                  <div class="page-breadcrumb bg-white">
+                                    <div class="row align-items-center">
+                                      <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                                        <h1 id="title">Thiết bị:</h1>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="container-fluid">
+                                    <div class="col">
+                                      <div class="row mt-5 mx-2 justify-content-center">
+                                        {{!-- {{#if thietbi}} --}}
+                                        <div class="col-md-5 border rounded p-4 white-box">
+                                          <h2>Thông tin thiết bị
+                                            :</h2>
+                                          <hr />
+                                          <table class="table">
+                                            {{!-- {{#if thongtin}} --}}
+                                            <tr>
+                                              <th>Mã thiết bị
+                                                :</th>
+                                              <td><span id="maThietBi">{{thietbi.thongtin.idthietbi}}</span></td>
+                                            </tr>
+
+                                            <tr>
+                                              <th>Tên thiết bị
+                                                :</th>
+                                              <td><span id="tenThietBi">{{thietbi.thongtin.tenthietbi}}</span></td>
+                                            </tr>
+
+                                            <tr>
+                                              <th>Loại thiết bị
+                                                :</th>
+                                              <td><span id="loai">{{thietbi.thongtin.idloai}}</span></td>
+                                            </tr>
+
+                                            <tr>
+                                              <th>Tài khoản thiết bị:</th>
+                                              <td><span id="taiKhoan">{{thietbi.thongtin.taikhoan}}</span></td>
+                                            </tr>
+
+                                            <tr>
+                                              <th>Mật khẩu thiết bị:</th>
+                                              <td><span id="matKhau">{{thietbi.thongtin.matkhau}}</span></td>
+                                            </tr>
+
+                                            <tr>
+                                              <th>Tài khoản thiết bị:</th>
+                                              <td><span id="trangThai">
+                                                  {{#if thietbi.thongtin.trangthai}}
+                                                  <button class="btn btn-success">Đang kết nối</button>
+                                                  {{else}}
+                                                  <button class="btn btn-danger">Ngắt kết nối</button>
+                                                  {{/if}}
+                                                </span></td>
+                                            </tr>
+                                            <tr>
+                                              <th>
+                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                                  data-bs-target="#exampleModal">
+                                                  <i class="fa fa-inbox"></i>
+                                                  Gửi lệnh
+                                                </button>
+
+                                                <div class="modal fade" id="exampleModal" tabindex="-1"
+                                                  aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                  <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                      <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Gửi lệnh</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                          aria-label="Close"></button>
+                                                      </div>
+                                                      <div class="modal-body">
+                                                        <input type="text" name="mesg" id="mesg">
+                                                      </div>
+                                                      <div class="modal-footer">
+                                                        <button type="button" class="btn btn-dark"
+                                                          data-bs-dismiss="modal">Thoát</button>
+                                                        <button type="button" class="btn btn-success">Gửi</button>
+                                                      </div>
+                                                    </div>
+
+                                                  </div>
+                                                </div>
+                                              </th>
+                                              <td>
+                                                <a id="chinhSua" href="/list-device/edit/{{thietbi.thongtin.idthietbi}}"
+                                                  class="btn btn-info"><i class="fa fa-edit"></i>Chỉnh sửa thông tin</a>
+                                              </td>
+                                            </tr>
+                                            {{!-- {{/if}} --}}
+                                          </table>
+                                        </div>
+                                        <div class="col-md-3 border rounded p-4 mx-4 white-box">
+                                          <h2>Publish</h2>
+                                          <hr />
+                                          <div class="overflow-auto" style="height: 500px">
+                                            <ul class="p-0" style="list-style-type: none">
+                                              {{#each thongtin.dulieu}}
+                                              <li class="border rounded p-2 mb-2">
+                                                <span>
+                                                  Thời gian gửi: {{thongtin.dulieu.thoigiangui}}
+                                                  <br>
+                                                  Chi tiết: {{thongtin.dulieu.chitiet}}
+                                                </span>
+                                              </li>
+                                              {{/each}}
+                                            </ul>
+                                          </div>
+                                        </div>
+                                        <div class="col-md-3 border rounded p-4 white-box">
+                                          <h2>Lịch sử hoạt động</h2>
+                                          <hr />
+                                          <div class="overflow-auto" style="height: 500px">
+                                            <ul class="p-0" style="list-style-type: none">
+                                              {{#each thongtin.lichsu}}
+                                              <li class="border rounded p-2 mb-2">
+                                                <span>
+                                                  Thời gian tương tác: {{thongtin.lichsu.thoigiantt}}
+                                                  <br>
+                                                  Thao tác: {{thongtin.lichsu.thaotac}}
+                                                </span>
+                                              </li>
+                                              {{/each}}
+                                            </ul>
+                                          </div>
+                                        </div>
+
+                                        {{!-- {{/if}} --}}
+                                      </div>
+                                      <script
+                                        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
+                                        integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc"
+                                        crossorigin="anonymous">
+                                      </script>
+                                    </div>
+                                  </div>
+                                </div>

@@ -10,7 +10,7 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="white-box">
-          <a href="addTypeDevice.hbs" class="btn btn-success">
+          <a href="list-catogory/add" class="btn btn-success">
             Thêm loại thiết bị
           </a>
           <div class="table-responsive">
@@ -26,20 +26,32 @@
               </thead>
               <tbody>
                 {{#each maloai}}
-                <tr>
-                  <th scope="row">{{this.idloai}}</th>
-                  <td>{{this.tenloai}}</td>
-                  <td>
-                    <a href="infoTypeDevice.hbs" class="btn btn-info">
-                      <i class="fa fa-info-circle"></i> Xem chi tiết
-                    </a>
-                    <form action="" method="post">
-                      <button type="submit" class="btn btn-danger">
-                      <i class="fa fa-trash-alt"></i> Xoá
-                      </button>
-                    </form>
-                  </td>
-                </tr>
+                  <tr>
+                    <th scope="row">{{this.idloai}}</th>
+                    <td>{{this.tenloai}}</td>
+                    <td>
+                      <form
+                        class="d-inline-block"
+                        action="list-catogory/detail/{{this.idthietbi}}"
+                        method="get"
+                      >
+                        <button class="btn btn-info" type="submit">
+                          <i class="fa fa-info-circle"></i>
+                          Xem chi tiết
+                        </button>
+                      </form>
+                      <form
+                        class="d-inline-block"
+                        action="/list-catogory/delete/{{this.idthietbi}}?_method=DELETE"
+                        method="DELETE"
+                      >
+                        <button type="submit" class="btn btn-danger">
+                          <i class="fa fa-trash-alt"></i>
+                          Xoá
+                        </button>
+                      </form>
+                    </td>
+                  </tr>
                 {{/each}}
               </tbody>
             </table>

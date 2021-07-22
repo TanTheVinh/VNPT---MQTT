@@ -10,7 +10,7 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="white-box">
-          <a href="addDevice.html" class="btn btn-success">
+          <a href="/list-device/add" class="btn btn-success">
             Thêm thiết bị
           </a>
           <div class="table-responsive">
@@ -27,6 +27,35 @@
               </thead>
               <tbody>
                 {{#each thietbi}}
+                  <tr>
+                    <td>{{this.idthietbi}}</td>
+                    <td>{{this.tenthietbi}}</td>
+                    <td>{{this.idloai}}</td>
+                    <td>{{this.taikhoan}}</td>
+                    <td>
+                      {{#if trangthai}}
+                        <button class="btn btn-success">Đang kết nối</button>
+                      {{else}}
+                        <button class="btn btn-danger">Ngắt kết nối</button>
+                      {{/if}}
+                    </td>
+                    <td>
+                        <a class="btn btn-info" href="list-device/detail/{{this.idthietbi}}">
+                          <i class="fa fa-info-circle"></i>
+                          Xem chi tiết
+                        </a>
+                      <form
+                        class="d-inline-block"
+                        action="/list-device/delete/{{this.idthietbi}}?_method=DELETE"
+                        method="post"
+                      >
+                        <button type="submit" class="btn btn-danger">
+                          <i class="fa fa-trash-alt"></i>
+                          Xoá
+                        </button>
+                      </form>
+                    </td>
+                  </tr>
                 <tr>
                   <td>{{this.idthietbi}}</td>
                   <td>{{this.tenthietbi}}</td>
@@ -41,11 +70,11 @@
                   </td>
                   <td>
                     <form action="">
-                      <a class="btn btn-info" href="infoDevice.html">
+                      <a class="btn btn-info" href="/list-device/detail/{{this.idthietbi}}">
                         <i class="fa fa-info-circle"></i>
                         Xem chi tiết
                       </a>
-                      <button class="btn btn-danger">
+                      <button type="submit" class="btn btn-danger">
                         <i class="fa fa-trash-alt"></i>
                         Xoá
                       </button>

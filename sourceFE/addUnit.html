@@ -1,29 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<<<<<<< HEAD
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MQTT - admin dashboard</title>
-    <!-- FONT AWESOME -->
-    <link
-      rel="stylesheet"
-      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
-      crossorigin="anonymous"
-    />
-    <!-- BOOTSTRAP -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
-
-  </head>
-=======
->>>>>>> 99e518d8d7820068674d7ddd0d611d94f1daa210
 
 <head>
     <meta charset="utf-8">
@@ -71,50 +47,6 @@
             </nav>
         </header>
         <aside class="left-sidebar" data-sidebarbg="skin6">
-<<<<<<< HEAD
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <!-- User Profile-->
-                        <li class="sidebar-item pt-2">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.html"
-                                aria-expanded="false">
-                                <i class="far fa-clock" aria-hidden="true"></i>
-                                <span class="hide-menu">Bảng điều khiển</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="profile.html"
-                                aria-expanded="false">
-                                <i class="fa fa-user" aria-hidden="true"></i>
-                                <span class="hide-menu">Profile</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="basic-table.html"
-                                aria-expanded="false">
-                                <i class="fa fa-table" aria-hidden="true"></i>
-                                <span class="hide-menu">Danh sách thiết bị
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-
-<<<<<<< HEAD
-                      </button>
-                    </td>
-                  </tr>
-                </table>
-              </form>
-=======
-                </nav>
-                <!-- End Sidebar navigation -->
-            </div>
-            <!-- End Sidebar scroll-->
-        </aside>
-=======
           <div class="scroll-sidebar">
               <nav class="sidebar-nav">
                   <ul id="sidebarnav">
@@ -161,119 +93,64 @@
               </nav>
           </div>
       </aside>
->>>>>>> 2f95b7bb001c81f2e9d00c7a88728dd9af7d425a
         <div class="page-wrapper">
             <div class="page-breadcrumb bg-white">
                 <div class="row align-items-center">
-                    <div class="col-lg-4 col-md-5 col-sm-6 col-xs-12">
-                      <h1 id="title">Chỉnh sửa thông tin
-                        thiết bị</h1>
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                      <h1 >Thêm đơn vị
+                      </h1>
                     </div>
                 </div>
             </div>
             <div class="container-fluid">
               <div class="col">
-                <div class="row">
+                <div class="row mt-5">
                   <div class="col-md-3"></div>
                   <div class="col-md-6 border rounded white-box">
-                    <h2 class="text-center">Cập nhật thông tin
-                      thiết bị:</h2>
+                    <h2 class="text-center">Nhập đầy đủ thông tin đơn vị
+                      :</h2>
                     <hr />
                     <form action="">
-                      <table class="table ">
+                      <table class="table">
                         
                         <tr>
-                          <th scope="row">Mã thiết bị
+                          <th scope="row">Mã đơn vị
                             :</th>
                           <td>
                             <input
                               required
                               type="text"
-                              name="maThietBi"
-                              id="maThietBi"
+                              name="maLoaiThietBi"
+                              id="maLoaiThietBi"
                             />
                             <span class="text-danger"> *</span>
                           </td>
                         </tr>
                         
                         <tr>
-                          <th scope="row">Tên thiết bị
+                          <th scope="row">Tên đơn vị
                             :</th>
                           <td>
                             <input
                               required
                               type="text"
-                              name="tenThietBi"
-                              id="tenThietBi"
+                              name="tenLoaiThietBi"
+                              id="tenLoaiThietBi"
                             /><span class="text-danger"> *</span>
-                          </td>
-                        </tr>
-                        
-                        <tr>
-                          <th scope="row">Loại thiết bị
-                            :</th>
-                          <td>
-                            <input required type="text" name="loaitb" id="loaitb" /><span class="text-danger"> *</span>
-                          </td>
-                        </tr>
-                        <tr>
-                          <th scope="row">Tài khoản thiết bị
-                            :</th>
-                          <td>
-                            <input
-                              required
-                              type="text"
-                              name="taiKhoan"
-                              id="taiKhoan"
-                            /><span class="text-danger"> *</span>
-                          </td>
-                        </tr>
-                        
-                        <tr>
-                          <th scope="row">Mật khẩu thiết bị
-                            :</th>
-                          <td>
-                            <input
-                              required
-                              type="password"
-                              name="matKhau"
-                              id="matKhau"
-                            /><span class="text-danger"> *</span>
-                          </td>
-                        </tr>
-                        
-                        <tr>
-                          <th scope="row">Nhập lại mật khẩu 
-                            thiết bị:</th>
-                          <td>
-                            <input
-                              required
-                              type="password"
-                              name="nhapLaiMatKhau"
-                              id="nhapLaiMatKhau"
-                            /><span class="text-danger"> *</span>
-                          </td>
-                        </tr>
-                        
-                        <tr>
-                          <th scope="row">Trạng thái thiết bị
-                            :</th>
-                          <td>
-                            <select name="trangThai" id="trangThai">
-                              <option value="1">Kết nối
-                              </option>
-                              <option value="0">Ngắt kết nối
-                              </option>
-                            </select>
                           </td>
                         </tr>
                         <tr>
                           <th scope="row">
                           </th>
                           <td>
-                            <button id="capNhat" class="btn btn-success">
-                              <i class="fa fa-edit"></i>
-                              Cập nhật thông tin
+                            <button id="them" type="submit" class="btn btn-success">
+                              <i class="fa fa-plus"></i>
+                              Thêm đơn vị
+      
+                            </button>
+                            <button id="xoa" type="reset" class="btn btn-danger">
+                              <i class="fa fa-eraser"></i>
+                              Xoá
                             </button>
                           </td>
                         </tr>
@@ -283,7 +160,6 @@
                   <div class="col-md-3"></div>
                 </div>
               </div>
->>>>>>> 99e518d8d7820068674d7ddd0d611d94f1daa210
             </div>
         </div>
     </div>
