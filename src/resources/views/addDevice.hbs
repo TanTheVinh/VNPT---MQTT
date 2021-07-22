@@ -21,7 +21,7 @@
                 <tr>
                   <th scope="row">Tên thiết bị:</th>
                   <td>
-                    <input required type="text" name="tenThietBi" id="tenThietBi" />
+                    <input required type="text" name="tenthietbi" id="tenthietbi" minlength="1" maxlength="50"/>
                   </td>
                 </tr>
 
@@ -30,7 +30,7 @@
                     :</th>
                   <td>
                     <select name="" id="">
-                      {{#each device}}
+                      {{#each loaithietbi}}
                         <option value="{{this.idloai}}">{{this.tenloai}}</option>
                       {{/each}}
                     </select>
@@ -42,21 +42,21 @@
                   <th scope="row">Tài khoản thiết bị
                     :</th>
                   <td>
-                    <input required type="text" name="taiKhoan" id="taiKhoan" />
+                    <input required type="text" name="taikhoan" id="taikhoan" minlength="1" maxlength="30"/>
                   </td>
                 </tr>
 
                 <tr>
                   <th scope="row">Mật khẩu thiết bị:</th>
                   <td>
-                    <input type="password" id="password">
+                    <input type="password" name="matkhau" id="password" minlength="1" maxlength="50">
                   </td>
                 </tr>
 
                 <tr>
                   <th scope="row">Nhập lại mật khẩu thiết bị:</th>
                   <td>
-                    <input type="password" id="confirmPassword">
+                    <input type="password" id="confirmPassword" minlength="1" maxlength="50">
                   </td>
                 </tr>
 
