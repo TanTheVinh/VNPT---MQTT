@@ -30,7 +30,9 @@
                     :</th>
                   <td>
                     <select name="" id="">
-                      <option value="">Loại thiết bị</option>
+                      {{#each device}}
+                        <option value="{{this.idloai}}">{{this.tenloai}}</option>
+                      {{/each}}
                     </select>
 
                   </td>

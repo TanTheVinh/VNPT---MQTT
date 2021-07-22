@@ -52,7 +52,9 @@
                   :</th>
                 <td>
                   <select name="" id="">
-                    <option value="">1</option>
+                    {{#each donvi}}
+                      <option value="{{this.iddonvi}}">{{this.tendonvi}}</option>
+                    {{/each}}
                   </select>
                 </td>
               </tr>
