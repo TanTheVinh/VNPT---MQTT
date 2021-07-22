@@ -53,30 +53,29 @@ class catogory_controller {
     }
 
     //[GET] /list-category/add
-    add(req, res, next){        
-        pool
-        .query('select * from loaithietbi')
-        .then(result => {
-            const loaithietbi = result.rows;
-            // res.json({ loaithietbi });
-            res.render('addTypeDevice', { loaithietbi });
-        })
-        .catch(next)
+    add(req, res, next){     
+            res.render('addTypeDevice');
     }
     //[POST] /list-category/insert
-    insert(req, res, next){
-         const category = req.body
-         res.json({category});
-        // pool
-        // .query(`insert into loaithietbi(idloai, tenloai, mota) 
-        // values( default, '${category.tenloai}', '${category.mota}')`)
-        // .then(() => res.redirect('back'))
-        // .catch(err => {
-        //     err.send('them that bai')
-        // });
+    insert(req, res, next){ 
+        const { tenloai, mota } = req.body;
+        pool
+        .query('INSERT INTO loaithietbi (tenloai, mota) VALUES ($1, $2)', [tenloai,mota]);
+        res.json({
+            message: 'thêm thành công',
+            body: {
+                loaithietbi: {tenloai, mota}
+            }
+        })
+        .then(() =>{
+            res.redirect('list-device')
+        })
+        
+        .catch(next);
+    }
  
         
-    }
+    
 
     // [DELETE] /list-catogory/delete/:id
     delete(req, res, next){
