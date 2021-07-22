@@ -40,14 +40,18 @@ class catogory_controller {
     }
     //[PUT]/list-catogory/edit/:id
     update(req, res, next){
-        const category = req.body;
+        const id = req.params.id;
+        const { tenloai, mota } = req.body;
         pool
-        .query(`update loaithietbi set
-        tenloai = '${category.tenloai}',
-        mota = '${category.mota}'
-        where idloai = ${category.idloai}`)
+        .query(`update loaithietbi
+        set tenloai = $1,
+        mota = $2,
+        where idloai = $3`, [tenloai, mota, id])
+        res.json({
+            message: 'chỉnh sửa loại thiết bị thành công'
+        })
         .then(() => {
-            res.redirect('back');
+            res.redirect('listTypeDevice');
         })
         .catch(next);
     }
@@ -73,9 +77,13 @@ class catogory_controller {
         
         .catch(next);
     }
+<<<<<<< HEAD
  
         
     
+=======
+
+>>>>>>> edd631aebeae0b9ca61e2c477b5d71551c19e0aa
 
     // [DELETE] /list-catogory/delete/:id
     delete(req, res, next){
