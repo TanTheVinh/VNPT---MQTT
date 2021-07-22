@@ -112,7 +112,7 @@ IDLOAI
 /*==============================================================*/
 create table NGUOIDUNG (
    IDNGUOIDUNG          SERIAL,
-   TAIKHOOAN            VARCHAR(25)          not null,
+   TAIKHOAN             VARCHAR(25)           not null,
    MATKHAU              VARCHAR(50)          not null,
    TENNGUOIDUNG         VARCHAR(20)          not null,
    QUYEN                VARCHAR(20)          not null,
@@ -175,7 +175,7 @@ alter table THIETBI
 
 INSERT INTO public.loaithietbi(tenloai, mota) VALUES ('Máy tính', null);
 INSERT INTO public.loaithietbi(tenloai, mota) VALUES ('Nhiệt kế', null);
-INSERT INTO public.loaithietbi(tenloai, mota) VALUES ('Đo lượng nước', null);
+INSERT INTO public.loaithietbi(tenloai, mota) VALUES ('Lượng nước', null);
 
 INSERT INTO public.thietbi(idloai, tenthietbi, taikhoan, matkhau, trangthai) VALUES (1, 'Dell', 'maytinh01', 'dc819a95e66913d46ca261c070519f3c', true);
 INSERT INTO public.thietbi(idloai, tenthietbi, taikhoan, matkhau, trangthai) VALUES (1, 'Asus', 'maytinh02', 'dc819a95e66913d46ca261c070519f3c', true);

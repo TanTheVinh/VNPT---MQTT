@@ -27,7 +27,7 @@ class site_controller {
         res.render('login');
     }
     
-    // [POST] /
+    // [POST] /login
     check(req, res, next){
         const account = Object.values(req.body);
         account[1] = md5(account[1]);
@@ -35,14 +35,8 @@ class site_controller {
             .query('select * from nguoidung where taikhoan = $1 and matkhau = $2', account)
             .then(result => {
                 const user = result.rows[0];
-                if(user === undefined){
                     // res.json({user});
                     res.render('login', {user});
-                }
-                else{
-                    // res.json({user});
-                    res.render('index', {user});
-                }
             })
             .catch(next)
     }
@@ -54,7 +48,6 @@ class site_controller {
             .then(result => {
                 const nguoidung = result.rows;        
                 res.render('changePassword',{nguoidung});
-
             })
             .catch(next);
         
