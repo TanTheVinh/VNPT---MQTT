@@ -51,7 +51,7 @@ class device_controller {
             .then(result => {
                 const thietbi = result.rows; 
                 //res.json({thietbi}) ;      
-                res.render('editInfoDevice',{thiebi});
+                res.render('editInfoDevice',{ thiebi });
 
             })
             .catch(next);
