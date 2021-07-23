@@ -14,7 +14,7 @@ class site_controller {
                     .query('select count(*) as ngatketnoi from thietbi where trangthai = false')
                     .then(result => {
                         soluong.ngatketnoi = result.rows[0].ngatketnoi;
-                        res.json({ soluong });
+                        //res.json({ soluong });
                         res.render('index', { soluong });
                         // pool
                         //     .query(
@@ -47,8 +47,8 @@ class site_controller {
             .then(result => {
                 const user = result.rows[0];
                     sessionStorage.setItem("idnguoidung", user.idnguoidung);
-                    res.json({user});
-                    // res.render('login', {user});
+                    //res.json({user});
+                     res.render('login', {user});
             })
             .catch(next)
     }

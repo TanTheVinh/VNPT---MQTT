@@ -5,8 +5,7 @@ class device_controller {
     //[GET] /list-device/
     list(req, res, next){
         pool
-            .query(`select * from thietbi, loaithietbi 
-                where thietbi.idloai = loaithietbi.idloai`)
+            .query(`select * from thietbi where iddonvi=`)
             .then(result => {
                 const thietbi = result.rows;
                 // res.json({ thietbi });
@@ -96,8 +95,8 @@ class device_controller {
             thietbi[3] = md5(thietbi[3]);
             // res.json(thietbi);
             pool
-            .query('INSERT INTO thietbi (tenthietbi, idloai, taikhoan, matkhau, trangthai) '
-                + 'VALUES ($1, $2, $3, $4, false)', thietbi)
+            .query('INSERT INTO thietbi (tenthietbi, idloai, iddonvi taikhoan, matkhau, trangthai) '
+                + 'VALUES ($1, $2, $3, $4, $5, false)', thietbi)
             .then(() =>{
                 res.redirect('/list-device')
             })
