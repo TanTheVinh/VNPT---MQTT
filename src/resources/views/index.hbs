@@ -42,13 +42,14 @@
                     <h3 class="box-title">Số lượng kết nối</h3>
                     <canvas id="myChart" width="900" height="300"></canvas>
                     <script type="text/javascript">
+                        var start = Date.now();
                         var ctx = document.getElementById("myChart");
                         var myChart = new Chart(ctx, {
                             type: 'bar',
                             data: {
-                                labels: ["Đang kết nối", "Ngắt kết nối"],
+                                labels: ["Đang kết nối", start],
                                 datasets: [{
-                                    label: 'Số lượng',
+                                    label: 'Số lượng lệnh',
                                     data: [{{soluong.dangketnoi}}, {{soluong.ngatketnoi}}],
                                     backgroundColor: ['#d70206',
                                         '#f05b4f'

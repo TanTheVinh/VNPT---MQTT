@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -12,9 +12,6 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
-  <script>
-    
-  </script>
   </head>
   <style>
     html,
@@ -28,7 +25,15 @@
       align-items: center;
     }
   </style>
-  <body class="bg-dark">
+  <body class="bg-dark"> --}}
+    <div class="page-wrapper ">
+  <div class="page-breadcrumb bg-white">
+    <div class="row align-items-center">
+      <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+        <h1 id="title">Đăng nhập</h1>
+      </div>
+    </div>
+  </div>
     <div class="container">
       <div class="row">
         <div class="col-md-4 offset-md-4 bg-light">
@@ -69,5 +74,9 @@
         </div>
       </div>
     </div>
-  </body>
-</html>
+
+    <script>
+      sessionStorage.setItem("lastname", "Smith");
+    </script>
+  {{!-- </body>
+</html> --}}

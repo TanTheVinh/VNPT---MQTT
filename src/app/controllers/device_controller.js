@@ -1,4 +1,5 @@
 const pool = require("../../config/db/database");
+const session = require('express-session');
 
 class device_controller {
 
@@ -9,7 +10,7 @@ class device_controller {
                 where thietbi.idloai = loaithietbi.idloai`)
             .then(result => {
                 const thietbi = result.rows;
-                // res.json({ thietbi });
+                // res.json(req.session.fullname);
                 res.render('listDevice', { thietbi });
                 // console.log({thietbi});
             })
