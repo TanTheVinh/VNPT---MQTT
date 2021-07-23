@@ -14,8 +14,19 @@ class site_controller {
                     .query('select count(*) as ngatketnoi from thietbi where trangthai = false')
                     .then(result => {
                         soluong.ngatketnoi = result.rows[0].ngatketnoi;
-                        // res.json({ soluong });
+                        res.json({ soluong });
                         res.render('index', { soluong });
+                        // pool
+                        //     .query(
+                        //         `select to_char(thoigiangui,'day') as day,
+                        //         extract(year from thoigiangui) as year,
+                        //         count(thoigiangui) as soluonglenh
+                        //         from dulieu group by 1,2;`
+                        //     )
+                        //     .then(result => {
+
+                        //     })
+                        //     .catch(next);
                     })
                     .catch(next);
             })
