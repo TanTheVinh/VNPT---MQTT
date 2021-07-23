@@ -29,12 +29,15 @@ class catogory_controller {
 
     //[GET] /list-catogory/edit/:id
     edit(req, res, next){
-        pool
-        .query(`Select * from loaithietbi where idloai=${req.params.id}`)
+         pool
+         .query(`Select * from loaithietbi where idloai=$1`, [req.params.id])
+
+
         .then(result => {
-            const loaithietbi = result.rows;
-            res.json({ loaithietbi });
-            //res.render('editInfoTypeDevice');
+            const loaithietbi = result.rows[0];
+           // res.json(loaithietbi);
+           
+            res.render('editInfoTypeDevice',{loaithietbi});
         })
         .catch(next);
         
@@ -44,17 +47,14 @@ class catogory_controller {
         const id = req.params.id;
         const { tenloai, mota } = req.body;
         pool
-        .query(`update loaithietbi
-        set tenloai = $1,
-        mota = $2,
-        where idloai = $3`, [tenloai, mota, id])
-        res.json({
-            message: 'chỉnh sửa loại thiết bị thành công'
-        })
-        .then(() => {
-            res.redirect('listTypeDevice');
-        })
-        .catch(next);
+        .query('UPDATE loaithietbi SET tenloai = $1, mota = $2 WHERE idloai = $3', [
+            tenloai,
+            mota,
+            id
+        ])
+        .then(() =>{
+            res.redirect('back')
+        }).catch(next);
     }
 
     //[GET] /list-category/add

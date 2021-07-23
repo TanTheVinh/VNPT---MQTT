@@ -55,6 +55,14 @@ class device_controller {
     //[GET] /list-device/edit/:id
     edit(req, res, next){
         pool
+<<<<<<< HEAD
+        .query(`Select * from thietbi where idthietbi=$1`, [req.params.id])
+        .then(result => {
+           const thietbi = result.rows[0];
+          res.render('editInfoDevice',{thietbi});
+        })
+       .catch(next);
+=======
         .query(
             `select * from thietbi, loaithietbi 
             where 
@@ -75,6 +83,7 @@ class device_controller {
 
             })
             .catch(next);
+>>>>>>> 6283ee4e8d14afaf7bc1d6eeb6ac0d72b6e9dc3f
     }
     //[PUT] list-device/edit/:id
     update(req, res, next){
