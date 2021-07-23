@@ -10,7 +10,7 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="white-box">
-          <a href="addUser.html" class="btn btn-success">
+          <a href="/list-user/add" class="btn btn-success">
             Thêm người dùng
           </a>
           <div class="table-responsive">
@@ -26,17 +26,20 @@
                   </th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody>{{#each nguoidung}}
                 <tr>
-                  <th scope="row">1</th>
-                  <td>2</td>
-                  <td>3</td>
+                  <th scope="row">{{this.idnguoidung}}</th>
+                  <td>{{this.tennguoidung}}</td>
+                  <td>{{this.tendonvi}}</td>
                   <td>
+                  <form class="d-inline-block" action="/list-user/delete/{{this.idnguoidung}}?_method=DELETE" method="post">
                     <button class="btn btn-danger">
                       <i class="fa fa-trash-alt"></i> Xoá
                     </button>
+                  </form>
                   </td>
                 </tr>
+                {{/each}}
               </tbody>
             </table>
           </div>
