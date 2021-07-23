@@ -1,8 +1,3 @@
-const { json } = require("body-parser");
-const e = require("express");
-const { query } = require("express");
-const md5 = require("md5");
-const { Query } = require("pg");
 const pool = require("../../config/db/database");
 
 class device_controller {
@@ -55,36 +50,14 @@ class device_controller {
     //[GET] /list-device/edit/:id
     edit(req, res, next){
         pool
-<<<<<<< HEAD
         .query(`Select * from thietbi where idthietbi=$1`, [req.params.id])
         .then(result => {
            const thietbi = result.rows[0];
           res.render('editInfoDevice',{thietbi});
         })
        .catch(next);
-=======
-        .query(
-            `select * from thietbi, loaithietbi 
-            where 
-            thietbi.idloai = loaithietbi.idloai 
-            and 
-            idthietbi = $1`, [req.params.id])
-            .then(result => {
-<<<<<<< HEAD
-                const thietbi = result.rows[0]; 
-                // res.json({thietbi}) ;      
-                res.render('editInfoDevice', { thietbi });
-=======
-                const thietbi = result.rows; 
-                res.json({thietbi}) ;      
-                //res.render('editInfoDevice',{ thietbi });
-                console.log(thietbi);
->>>>>>> c565079c12e3bd8e2e17b1c2fcfd26b0debd1352
-
-            })
-            .catch(next);
->>>>>>> 6283ee4e8d14afaf7bc1d6eeb6ac0d72b6e9dc3f
     }
+
     //[PUT] list-device/edit/:id
     update(req, res, next){
         const idthietbi = req.params.id;
@@ -118,7 +91,6 @@ class device_controller {
 
     // [POST] /list-device/create
     create(req, res, next){
-<<<<<<< HEAD
         // res.json(req.body)
             const thietbi = Object.values(req.body);
             thietbi[3] = md5(thietbi[3]);
@@ -129,21 +101,6 @@ class device_controller {
             .then(() =>{
                 res.redirect('/list-device')
             })
-=======
-        //res.json(req.body)
-            const {idloai, tenthietbi, taikhoan, matkhau, trangthai } = req.body;
-            pool
-            .query('INSERT INTO thietbi (idloai, tenthietbi, taikhoan, matkhau, trangthai) VALUES ($1, $2, $3, $4, $5)', [ idloai, tenthietbi, taikhoan, matkhau, trangthai])
-            .then(() =>{
-                res.redirect('back')
-                res.json({
-                    message: 'thêm thành công',
-                    body: {
-                        thietbi: {idloai, tenthietbi, taikhoan, matkhau, trangthai}
-                    }
-                })
-        })
->>>>>>> c565079c12e3bd8e2e17b1c2fcfd26b0debd1352
             .catch(next);
     }
 

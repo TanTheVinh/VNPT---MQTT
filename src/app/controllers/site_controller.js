@@ -46,8 +46,9 @@ class site_controller {
             .query('select * from nguoidung where taikhoan = $1 and matkhau = $2', account)
             .then(result => {
                 const user = result.rows[0];
-                    // res.json({user});
-                    res.render('login', {user});
+                    sessionStorage.setItem("idnguoidung", user.idnguoidung);
+                    res.json({user});
+                    // res.render('login', {user});
             })
             .catch(next)
     }
