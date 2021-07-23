@@ -1,3 +1,4 @@
+const session = require("express-session");
 const md5 = require("md5");
 const pool = require("../../config/db/database");
 
@@ -14,19 +15,19 @@ class site_controller {
                     .query('select count(*) as ngatketnoi from thietbi where trangthai = false')
                     .then(result => {
                         soluong.ngatketnoi = result.rows[0].ngatketnoi;
-                        //res.json({ soluong });
-                        res.render('index', { soluong });
-                        // pool
-                        //     .query(
-                        //         `select to_char(thoigiangui,'day') as day,
-                        //         extract(year from thoigiangui) as year,
-                        //         count(thoigiangui) as soluonglenh
-                        //         from dulieu group by 1,2;`
-                        //     )
-                        //     .then(result => {
-
-                        //     })
-                        //     .catch(next);
+                        pool
+                            .query(
+                                `select to_char(thoigiangui,'Mon') as month,
+                                extract(year from thoigiangui) as year,
+                                count(thoigiangui) as soluonglenh
+                                from dulieu group by 1,2;`
+                            )
+                            .then(result => {
+                                const bieudo = result.rows;
+                                // res.json({soluong, bieudo});
+                                res.render('index', { soluong, bieudo });
+                            })
+                            .catch(next);
                     })
                     .catch(next);
             })
@@ -35,7 +36,13 @@ class site_controller {
 
     // [GET] /login
     login(req, res, next){
-        res.render('login');
+        // console.log(req.session.idnguoidung);
+        if(req.session.idnguoidung === undefined){
+            res.render('login');
+        }
+        else{
+            res.redirect('/');
+        }
     }
     
     // [POST] /login
@@ -46,11 +53,18 @@ class site_controller {
             .query('select * from nguoidung where taikhoan = $1 and matkhau = $2', account)
             .then(result => {
                 const user = result.rows[0];
-                    sessionStorage.setItem("idnguoidung", user.idnguoidung);
-                    //res.json({user});
-                     res.render('login', {user});
+                if(req.session.idnguoidung === undefined){
+                    res.redirect('/login');
+                }
+                else{
+                    req.session.idnguoidung = user.idnguoidung;
+                    req.session.iddonvi = user.iddonvi;
+                    // console.log(req.session.idnguoidung);
+                    // res.json({user})
+                    res.redirect('/');
+                }
             })
-            .catch(next)
+            .catch(next);
     }
 
     // [GET] /change-password
@@ -59,7 +73,7 @@ class site_controller {
         .query('select * from nguoidung where matkhau =$1', [req.params.id])
             .then(result => {
                 const nguoidung = result.rows;        
-                res.render('changePassword',{nguoidung});
+                res.render('/changePassword',{nguoidung});
             })
             .catch(next);
         
@@ -76,7 +90,6 @@ class site_controller {
             message: 'đổi mật khẩu thành công'
         })
         .then(() => {
-            
             res.redirect('back');
         })
         .catch(next);

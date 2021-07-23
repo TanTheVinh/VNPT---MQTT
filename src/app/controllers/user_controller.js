@@ -40,20 +40,57 @@ class user_controller {
         .catch(next);
     
     }
-//[PUT]/list-catogory/edit/:id
-update(req, res, next){
-    const id = req.params.id;
-    const { iddonvi, taikhoan, matkhau, } = req.body;
-    pool
-    .query('UPDATE loaithietbi SET tenloai = $1, mota = $2 WHERE idloai = $3', [
-        tenloai,
-        mota,
-        id
-    ])
-    .then(() =>{
-        res.redirect('back')
-    }).catch(next);
-}
+//[PUT]/list-user/edit/:id
+    update(req, res, next){
+        const id = req.params.id;
+        const { iddonvi, taikhoan, matkhau, } = req.body;
+        pool
+        .query('UPDATE loaithietbi SET tenloai = $1, mota = $2 WHERE idloai = $3', [
+            tenloai,
+            mota,
+            id
+        ])
+        .then(() =>{
+            res.redirect('back')
+        }).catch(next);
+    }
+        //[GET] /list-device/add
+        add(req, res, next){
+            pool
+                .query(`select * from loaithietbi`)
+                .then(result => {
+                    const loaithietbi = result.rows;
+                    //res.json({device} );
+                    res.render('addDevice', { loaithietbi });
+                     console.log({loaithietbi});
+                })
+                .catch(next);
+        }
+    
+        // [POST] /list-device/create
+        create(req, res, next){
+            // res.json(req.body)
+                const thietbi = Object.values(req.body);
+                thietbi[3] = md5(thietbi[3]);
+                // res.json(thietbi);
+                pool
+                .query('INSERT INTO thietbi (tenthietbi, idloai, iddonvi taikhoan, matkhau, trangthai) '
+                    + 'VALUES ($1, $2, $3, $4, $5, false)', thietbi)
+                .then(() =>{
+                    res.redirect('/list-device')
+                })
+                .catch(next);
+        }
+    
+        // [DELETE] /list-user/delete/:id
+        delete(req, res, next){
+            pool
+                .query('delete from nguoidung where idnguoidung = $1', [req.params.id])
+                .then(() => {
+                    res.redirect('back');
+                })
+                .catch(next);
+        }
 
 }
 
