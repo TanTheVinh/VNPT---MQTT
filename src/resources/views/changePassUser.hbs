@@ -2,8 +2,7 @@
   <div class="page-breadcrumb bg-white">
     <div class="row align-items-center">
       <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-        <h1>Thêm người dùng
-        </h1>
+        <h1 id="title">Đổi mật khẩu</h1>
       </div>
     </div>
   </div>
@@ -11,68 +10,57 @@
     <div class="col">
       <div class="row mt-5">
         <div class="col-md-3"></div>
-        <div class="col-md-6 border rounded white-box">
-          <h2 class="text-center">Nhập đầy đủ thông tin người dùng
-            :</h2>
-          <hr />
+        <div class="col-md-6 border rounded white-box table-responsive">
           <form action="">
             <table class="table">
-
-
+              <tr>
+                <th scope="row">Tên tài khoản:</th>
+                <td>
+                  <input disabled type="text" name="tenTK" id="tenTK" value="{{taikhoan.tentaikhoan}}"/>
+                </td>
+              </tr>
               <tr>
                 <th scope="row">Tên người dùng
                   :</th>
                 <td>
-                  <input required type="text" name="tennguoidung" id="tennguoidung" minlength="1" maxlength="20"/>
+                  <input disabled type="text" name="tenND" id="tenND" value="{{taikhoan.tennguoidung}}"/>
                 </td>
               </tr>
               <tr>
-                <th scope="row">Tài khoản người dùng
+                <th scope="row">Quyền người dùng
                   :</th>
                 <td>
-                  <input required type="text" name="taikhoan" id="taikhoan" minlength="1" maxlength="25"/>
+                  <input disabled type="text" name="quyenND" id="quyenND" value="{{taikhoan.quyen}}"/>
                 </td>
               </tr>
               <tr>
-                <th scope="row">Mật khẩu người dùng
-                  :</th>
+                <th scope="row">Mật khẩu cũ:</th>
                 <td>
-                  <input type="password" name="matkhau" id="password" minlength="1" maxlength="50">
+                  <input required type="text" name="oldPassword" id="oldPassword" />
                 </td>
               </tr>
+
               <tr>
-                <th scope="row">Nhập lại mật khẩu người dùng
-                  :</th>
+                <th scope="row">Mật khẩu mới:</th>
+                <td>
+                  <input type="password" id="password">
+                </td>
+              </tr>
+
+              <tr>
+                <th scope="row">Nhập lại mật khẩu mới:</th>
                 <td>
                   <input type="password" id="confirmPassword">
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">Đơn vị
-                  :</th>
-                <td>
-                  <select name="" id="">
-                    {{#each donvi}}
-                      <option value="{{this.iddonvi}}">{{this.tendonvi}}</option>
-                    {{/each}}
-                  </select>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">Quyền
-                  :</th>
-                <td>
-                  <select name="" id="">
-                    <option value="">1</option>
-                  </select>
                 </td>
               </tr>
               <tr>
                 <th scope="row">
                 </th>
                 <td>
-                  <button id="save-btn" type="submit" class="btn btn-success" disabled="disabled"><i
-                      class="fa fa-plus"></i>Thêm người dùng</button>
+                  <button id="save-btn" type="submit" class="btn btn-success" disabled="disabled">
+                    <i class="fa fa-edit"></i>
+                    Đổi mật khẩu
+                  </button>
                   <button id="xoa" type="reset" class="btn btn-danger">
                     <i class="fa fa-eraser"></i>
                     Xoá

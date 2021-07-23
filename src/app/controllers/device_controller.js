@@ -1,18 +1,16 @@
-const { json } = require("body-parser");
-const e = require("express");
-const { query } = require("express");
-const { Query } = require("pg");
 const pool = require("../../config/db/database");
+const session = require('express-session');
 
 class device_controller {
 
     //[GET] /list-device/
     list(req, res, next){
         pool
-            .query(`select * from thietbi`)
+            .query(`select * from thietbi, loaithietbi 
+                where thietbi.idloai = loaithietbi.idloai`)
             .then(result => {
                 const thietbi = result.rows;
-                // res.json({ thietbi });
+                // res.json(req.session.fullname);
                 res.render('listDevice', { thietbi });
                 // console.log({thietbi});
             })
@@ -23,7 +21,13 @@ class device_controller {
     detail(req, res, next){
         const thietbi = {};
         pool
-            .query('select * from thietbi where idthietbi = $1', [req.params.id])
+            .query(
+                `select * from thietbi, loaithietbi 
+                where 
+                thietbi.idloai = loaithietbi.idloai 
+                and 
+                idthietbi = $1`, [req.params.id]
+            )
             .then(result => {
                 thietbi.thongtin = result.rows[0];
                 pool
@@ -34,7 +38,7 @@ class device_controller {
                             .query('select * from dulieu where idthietbi = $1', [req.params.id])
                             .then(result => {
                                 thietbi.dulieu = result.rows;
-                                //res.json({ thietbi });
+                                // res.json({ thietbi });
                                 res.render('infoDevice', { thietbi });
                             })
                             .catch(next);
@@ -47,58 +51,57 @@ class device_controller {
     //[GET] /list-device/edit/:id
     edit(req, res, next){
         pool
-        .query(`Select * from thietbi where idthietbi=${req.params.id}`)
-            .then(result => {
-                const thietbi = result.rows; 
-                res.json({thietbi}) ;      
-                //res.render('editInfoDevice',{ thiebi });
-
-            })
-            .catch(next);
+        .query(`Select * from thietbi where idthietbi=$1`, [req.params.id])
+        .then(result => {
+           const thietbi = result.rows[0];
+          res.render('editInfoDevice',{thietbi});
+        })
+       .catch(next);
     }
+
     //[PUT] list-device/edit/:id
     update(req, res, next){
-        const id = req.params.id;
-        const { idloai, tenthietbi, taikhoan, matkhau, trangthai } = req.body;
-        pool
-        .query(`update thietbi
-        set idloai = $1,
-        tenthietbi = $2,
-        taikhoan = $3,
-        matkhau = $4
-        trangthai = $5
-        where idthietbi = $6`, [idloai, tenthietbi, taikhoan, matkhau, trangthai, id]);
-        res.json({
-            message: 'chỉnh sửa thiết bị thành công'
-        })
-        .then(() => {
-            res.redirect('list-device');
-        })
-        .catch(next);
+        const idthietbi = req.params.id;
+        const thietbi = Object.values(req.body);
+        res.json(thietbi);
+        // pool
+        //     .query(`update thietbi
+        //     set idloai = $1,
+        //     tenthietbi = $2,
+        //     taikhoan = $3,
+        //     matkhau = $4
+        //     trangthai = $5
+        //     where idthietbi = $6`, [idloai, tenthietbi, taikhoan, matkhau, trangthai, id])
+        //     .then(() => {
+        //         res.redirect('/list-device');
+        //     })
+        //     .catch(next);
     }
     //[GET] /list-device/add
     add(req, res, next){
         pool
-            .query(`select * from thietbi`)
+            .query(`select * from loaithietbi`)
             .then(result => {
-                const device = result.rows;
+                const loaithietbi = result.rows;
                 //res.json({device} );
-                res.render('addDevice', { device });
-                // console.log({thietbi});
+                res.render('addDevice', { loaithietbi });
+                 console.log({loaithietbi});
             })
             .catch(next);
     }
-    //[POST] /list-device/create
+
+    // [POST] /list-device/create
     create(req, res, next){
-            const {idthietbi, tenthietbi, taikhoan, matkhau, trangthai } = req.body;
+        // res.json(req.body)
+            const thietbi = Object.values(req.body);
+            thietbi[3] = md5(thietbi[3]);
+            // res.json(thietbi);
             pool
-            .query('INSERT INTO thietbi (idloai, tenthietbi, taikhoan, matkhau, trangthai) VALUES ($1, $2, $3, $4, $5)', [ idloai, tenthietbi, taikhoan, matkhau, trangthai]);
-            res.json({
-                message: 'thêm thành công'
-            })
+            .query('INSERT INTO thietbi (tenthietbi, idloai, taikhoan, matkhau, trangthai) '
+                + 'VALUES ($1, $2, $3, $4, false)', thietbi)
             .then(() =>{
-                res.redirect('list-device')
-        })
+                res.redirect('/list-device')
+            })
             .catch(next);
     }
 
