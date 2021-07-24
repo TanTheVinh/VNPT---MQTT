@@ -102,8 +102,12 @@
               }(window.jQuery, window, document));
 
               function md5pass(){
+                password = document.getElementById("password").value;
+                if(password != ''){
                 document.getElementById("md5password").value = md5(document.getElementById("password").value);
+                }
               }
+
             </script>
           </div>
           <div class="col-md-3"></div>

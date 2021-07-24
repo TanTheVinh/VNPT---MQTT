@@ -6,44 +6,44 @@ class site_controller {
 
     // [GET] /
     index(req, res, next){
-        const soluong = {};
-        pool
-            .query('select count(*) as dangketnoi from thietbi where trangthai = true')
-            .then(result => {
-                soluong.dangketnoi = result.rows[0].dangketnoi;
-                pool
-                    .query('select count(*) as ngatketnoi from thietbi where trangthai = false')
-                    .then(result => {
-                        soluong.ngatketnoi = result.rows[0].ngatketnoi;
-                        pool
-                            .query(
-                                `select to_char(thoigiangui,'Mon') as month,
-                                extract(year from thoigiangui) as year,
-                                count(thoigiangui) as soluonglenh
-                                from dulieu group by 1,2;`
-                            )
-                            .then(result => {
-                                const bieudo = result.rows;
-                                // res.json({soluong, bieudo});
-                                res.render('index', { soluong, bieudo });
-                            })
-                            .catch(next);
-                    })
-                    .catch(next);
-            })
-            .catch(next);        
-    }
-
-    // [GET] /login
-    login(req, res, next){
-        // console.log(req.session.idnguoidung);
+         // console.log(req.session.idnguoidung);
         if(req.session.idnguoidung === undefined){
             res.render('login');
         }
         else{
-            res.redirect('/');
+            const soluong = {};
+            pool
+                .query('select count(*) as dangketnoi from thietbi where trangthai = true')
+                .then(result => {
+                    soluong.dangketnoi = result.rows[0].dangketnoi;
+                    pool
+                        .query('select count(*) as ngatketnoi from thietbi where trangthai = false')
+                        .then(result => {
+                            soluong.ngatketnoi = result.rows[0].ngatketnoi;
+                            pool
+                                .query(
+                                    `select to_char(thoigiangui,'Mon') as month,
+                                    extract(year from thoigiangui) as year,
+                                    count(thoigiangui) as soluonglenh
+                                    from dulieu group by 1,2;`
+                                )
+                                .then(result => {
+                                    const bieudo = result.rows;
+                                    // res.json({soluong, bieudo});
+                                    res.render('index', { soluong, bieudo });
+                                })
+                                .catch(next);
+                        })
+                        .catch(next);
+                })
+                .catch(next);       
         }
     }
+
+    // [GET] /login
+    // login(req, res, next){
+        
+    // }
     
     // [POST] /login
     check(req, res, next){
@@ -62,7 +62,7 @@ class site_controller {
                 } catch (error) {
                     // console.log(req.session);
                     // res.json({user})
-                    res.redirect('/login');
+                    res.redirect('/');
                     
                 }
             })

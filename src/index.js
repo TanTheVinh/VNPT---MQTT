@@ -37,8 +37,10 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }));
-// app.use((req, res, next) => {
-//   res.locals.Session = req.session;
+
+// alert
+// app.use((req, res, next)=>{
+//   app.locals.success = req.flash('success')
 //   next();
 // });
 

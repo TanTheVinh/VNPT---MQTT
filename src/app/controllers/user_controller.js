@@ -6,7 +6,9 @@ class user_controller {
     //[GET] /list-user/
     list(req, res, next){
         pool
-            .query('SELECT * FROM nguoidung, donvi where nguoidung.iddonvi = donvi.iddonvi')
+            .query(`SELECT * FROM nguoidung, donvi 
+                where nguoidung.iddonvi = donvi.iddonvi 
+                and nguoidung.iddonvi = $1`, [req.session.iddonvi])
             .then(result => {
                 const nguoidung = result.rows;
                 // res.json({ nguoidung });

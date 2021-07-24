@@ -94,9 +94,15 @@ class device_controller {
                     .query(`select * from donvi`)
                     .then(result => {
                         const donvi = result.rows;
-                        // res.json({loaithietbi, donvi});
-                        res.render('addDevice', { loaithietbi, donvi });
-                        // console.log({loaithietbi, donvi});
+                        pool
+                            .query(`select tenthietbi, taikhoan from thietbi`)
+                            .then(result => {
+                                const thietbi = result.rows;
+                                // res.json({thietbi, loaithietbi, donvi});
+                                res.render('addDevice', {thietbi, loaithietbi, donvi});
+                                // console.log({loaithietbi, donvi});
+                            })
+                            .catch(next);
                     })
                     .catch(next);
             })
