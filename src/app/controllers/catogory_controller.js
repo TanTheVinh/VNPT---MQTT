@@ -16,7 +16,7 @@ class catogory_controller {
 
     //[GET] /list-catogory/detail
     detail(req, res, next){
-        res.json(req.body)
+        //res.json(req.body)
         pool
             .query('select * from loaithietbi where idloai = $1', [req.params.id])
             .then(result => {

@@ -15,7 +15,7 @@
           <h2 class="text-center">Cập nhật thông tin
             thiết bị:</h2>
           <hr />
-          <form  action="">
+          <form method="POST" action="/list-device/edit/{{thietbi.idthietbi}}?_method=PUT">
             <table class="table ">
               {{#if thietbi}}
               <tr>
@@ -38,11 +38,7 @@
                 <th scope="row">Tên thiết bị
                   :</th>
                 <td>
-<<<<<<< HEAD
                   <input required type="text" name="tenThietBi" id="tenThietBi" value="{{thietbi.tenthietbi}}" />
-=======
-                  <input required type="text" name="tenThietBi" id="tenThietBi" value="{{this.tenthietbi}}" />
->>>>>>> 6283ee4e8d14afaf7bc1d6eeb6ac0d72b6e9dc3f
                 </td>
               </tr>
               <tr>
@@ -61,7 +57,7 @@
                 <th scope="row">Tài khoản thiết bị
                   :</th>
                 <td>
-                  <input required type="text" name="taiKhoan" id="taiKhoan" value="{{this.taikhoan}}" />
+                  <input required type="text" name="taiKhoan" id="taiKhoan" value="{{thietbi.taikhoan}}" />
                 </td>
               </tr>
 

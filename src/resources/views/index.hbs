@@ -42,17 +42,31 @@
                     <h3 class="box-title">Số lượng kết nối</h3>
                     <canvas id="myChart" width="900" height="300"></canvas>
                     <script type="text/javascript">
-                        var start = Date.now();
                         var ctx = document.getElementById("myChart");
                         var myChart = new Chart(ctx, {
                             type: 'bar',
                             data: {
-                                labels: ["Đang kết nối", start],
+                                labels: [
+                                {{#each bieudo}}
+                                    "{{bieudo.month}}",
+                                {{/each}}
+                                ],
                                 datasets: [{
-                                    label: 'Số lượng lệnh',
-                                    data: [{{soluong.dangketnoi}}, {{soluong.ngatketnoi}}],
-                                    backgroundColor: ['#d70206',
-                                        '#f05b4f'
+                                    label: {{bieudo.year}},
+                                    data: [
+                                        {
+                                            {{#each bieudo}}
+                                                "{{bieudo.soluonglenh}}",
+                                            {{/each}}
+                                        }, 
+                                    ],
+                                    backgroundColor: [
+                                        'rgba(255, 99, 132, 0.2)',
+				                        'rgba(54, 162, 235, 0.2)',
+				                        'rgba(255, 206, 86, 0.2)',
+				                        'rgba(75, 192, 192, 0.2)',
+				                        'rgba(153, 102, 255, 0.2)',
+				                        'rgba(255, 159, 64, 0.2)'
                                     ],
                                 }]
                             },
