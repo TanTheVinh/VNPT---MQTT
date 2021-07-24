@@ -53,15 +53,17 @@ class site_controller {
             .query('select * from nguoidung where taikhoan = $1 and matkhau = $2', account)
             .then(result => {
                 const user = result.rows[0];
-                if(req.session.idnguoidung === undefined){
-                    res.redirect('/login');
-                }
-                else{
+                console.log(req.session.idnguoidung);
+                try {
                     req.session.idnguoidung = user.idnguoidung;
                     req.session.iddonvi = user.iddonvi;
-                    // console.log(req.session.idnguoidung);
-                    // res.json({user})
+                    req.session.quyen = user.iddonvi;
                     res.redirect('/');
+                } catch (error) {
+                    // console.log(req.session);
+                    // res.json({user})
+                    res.redirect('/login');
+                    
                 }
             })
             .catch(next);
@@ -69,15 +71,19 @@ class site_controller {
 
     // [GET] /change-password
     changepass(req, res, next){
+        const idnguoidung = req.session.idnguoidung;
         pool
-        .query('select matkhau from nguoidung where idnguoidung =$1', [req.params.id])
+            .query(`select * from nguoidung where idnguoidung = $1`, [idnguoidung])
             .then(result => {
-                const nguoidung = result.rows;        
-                res.render('changePassword',{nguoidung});
+                const nguoidung = result.rows;
+                // res.json({nguoidung});
+                console.log({nguoidung});
+                res.render('changePassUser', { nguoidung });
             })
-            .catch(next);
-        
+            .catch(next)
     }
+        
+    
     //[PUT] /change-password
     updatepass(req, res, next){
         const { matkhau } = req.body;

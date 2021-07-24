@@ -5,13 +5,15 @@ class device_controller {
 
     //[GET] /list-device/
     list(req, res, next){
+        const iddonvi = req.session.iddonvi;
         pool
-            .query(`select * from thietbi where iddonvi=`)
+            .query(`select * from thietbi, loaithietbi 
+                where thietbi.idloai = loaithietbi.idloai and iddonvi = $1`, [iddonvi])
             .then(result => {
                 const thietbi = result.rows;
-                // res.json(req.session.fullname);
+                // res.json({thietbi});
+                console.log({thietbi});
                 res.render('listDevice', { thietbi });
-                // console.log({thietbi});
             })
             .catch(next)
     }
@@ -21,10 +23,12 @@ class device_controller {
         const thietbi = {};
         pool
             .query(
-                `select * from thietbi, loaithietbi 
+                `select * from thietbi, loaithietbi, donvi
                 where 
                 thietbi.idloai = loaithietbi.idloai 
                 and 
+                thietbi.iddonvi = donvi.iddonvi
+                and
                 idthietbi = $1`, [req.params.id]
             )
             .then(result => {
@@ -38,6 +42,7 @@ class device_controller {
                             .then(result => {
                                 thietbi.dulieu = result.rows;
                                 // res.json({ thietbi });
+                                // console.log({ thietbi });
                                 res.render('infoDevice', { thietbi });
                             })
                             .catch(next);
@@ -63,28 +68,35 @@ class device_controller {
         const idthietbi = req.params.id;
         const thietbi = Object.values(req.body);
         res.json(thietbi);
-        // pool
-        //     .query(`update thietbi
-        //     set idloai = $1,
-        //     tenthietbi = $2,
-        //     taikhoan = $3,
-        //     matkhau = $4
-        //     trangthai = $5
-        //     where idthietbi = $6`, [idloai, tenthietbi, taikhoan, matkhau, trangthai, id])
-        //     .then(() => {
-        //         res.redirect('/list-device');
-        //     })
-        //     .catch(next);
+        pool
+            .query(`update thietbi
+            set idloai = $1,
+            tenthietbi = $2,
+            taikhoan = $3,
+            matkhau = $4
+            trangthai = $5
+            where idthietbi = $6`, [idloai, tenthietbi, taikhoan, matkhau, trangthai, id])
+            .then(() => {
+                res.redirect('/list-device');
+            })
+            .catch(next);
     }
+    
     //[GET] /list-device/add
     add(req, res, next){
         pool
             .query(`select * from loaithietbi`)
             .then(result => {
                 const loaithietbi = result.rows;
-                //res.json({device} );
-                res.render('addDevice', { loaithietbi });
-                 console.log({loaithietbi});
+                pool
+                    .query(`select * from donvi`)
+                    .then(result => {
+                        const donvi = result.rows;
+                        // res.json({loaithietbi, donvi});
+                        res.render('addDevice', { loaithietbi, donvi });
+                        // console.log({loaithietbi, donvi});
+                    })
+                    .catch(next);
             })
             .catch(next);
     }
@@ -92,16 +104,15 @@ class device_controller {
     // [POST] /list-device/create
     create(req, res, next){
         // res.json(req.body)
-            const thietbi = Object.values(req.body);
-            thietbi[3] = md5(thietbi[3]);
-            // res.json(thietbi);
-            pool
-            .query('INSERT INTO thietbi (tenthietbi, idloai, iddonvi taikhoan, matkhau, trangthai) '
-                + 'VALUES ($1, $2, $3, $4, $5, false)', thietbi)
-            .then(() =>{
-                res.redirect('/list-device')
-            })
-            .catch(next);
+        const thietbi = Object.values(req.body);
+        // res.json(thietbi);
+        pool
+        .query('INSERT INTO thietbi (tenthietbi, iddonvi,idloai, taikhoan, matkhau, trangthai) '
+            + 'VALUES ($1, $2, $3, $4, $5, false)', thietbi)
+        .then(() =>{
+            res.redirect('/list-device')
+        })
+        .catch(next);
     }
 
     // [DELETE] /list-device/delete/:id
