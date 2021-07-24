@@ -71,15 +71,19 @@ class site_controller {
 
     // [GET] /change-password
     changepass(req, res, next){
+        const idnguoidung = req.session.idnguoidung;
         pool
-        .query('select * from nguoidung where matkhau =$1', [req.params.id])
+            .query(`select * from nguoidung where idnguoidung = $1`, [idnguoidung])
             .then(result => {
-                const nguoidung = result.rows;        
-                res.render('/changePassword',{nguoidung});
+                const nguoidung = result.rows;
+                // res.json({nguoidung});
+                console.log({nguoidung});
+                res.render('changePassUser', { nguoidung });
             })
-            .catch(next);
-        
+            .catch(next)
     }
+        
+    
     //[PUT] /change-password
     updatepass(req, res, next){
         const { matkhau } = req.body;

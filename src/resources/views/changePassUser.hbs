@@ -13,24 +13,25 @@
         <div class="col-md-6 border rounded white-box table-responsive">
           <form action="">
             <table class="table">
+              {{#each nguoidung}}
               <tr>
                 <th scope="row">Tên tài khoản:</th>
                 <td>
-                  <input disabled type="text" name="tenTK" id="tenTK" value="{{taikhoan.tentaikhoan}}"/>
+                  <input disabled type="text" name="tenTK" id="tenTK" value="{{this.taikhoan}}"/>
                 </td>
               </tr>
               <tr>
                 <th scope="row">Tên người dùng
                   :</th>
                 <td>
-                  <input disabled type="text" name="tenND" id="tenND" value="{{taikhoan.tennguoidung}}"/>
+                  <input disabled type="text" name="tenND" id="tenND" value="{{this.tennguoidung}}"/>
                 </td>
               </tr>
               <tr>
                 <th scope="row">Quyền người dùng
                   :</th>
                 <td>
-                  <input disabled type="text" name="quyenND" id="quyenND" value="{{taikhoan.quyen}}"/>
+                  <input disabled type="text" name="quyenND" id="quyenND" value="{{this.quyen}}"/>
                 </td>
               </tr>
               <tr>
@@ -67,6 +68,7 @@
                   </button>
                 </td>
               </tr>
+              {{/each}}
             </table>
           </form>
           <script>
