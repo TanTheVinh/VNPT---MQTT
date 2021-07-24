@@ -9,8 +9,8 @@ class unit_controller {
             .query('select * from donvi')
             .then(result => {
                 const donvi = result.rows;
-                //res.json({ donvi });
-                res.render('listUnit', { donvi });
+                 //res.json({ donvi });
+               res.render('listUnit', { donvi });
             })
             .catch(next)
     }
@@ -20,7 +20,6 @@ class unit_controller {
     }
     //[POST] /list-unit/insert
     insert(req, res, next){  
-        //res.json(req.body)
        const { tendonvi } = req.body;
         pool
         .query('INSERT INTO donvi (tendonvi) VALUES ($1)', [ tendonvi ])
@@ -30,19 +29,29 @@ class unit_controller {
             res.json({
                 message: 'thêm thành công',
                 body: {
-                    donvi: { tendonvi }
+                    donvi: {tendonvi}
                 }
             })
         }).catch(next);   
     }
     // [DELETE] /list-unit/delete/:id
     delete(req, res, next){
-        pool
-            .query('delete from donvi where iddonvi = $1', [req.params.id])
-            .then(() => {
-                res.redirect('back');
+        try {
+            pool.query('delete from donvi where iddonvi = $1', [req.params.id])
+            
+            res.redirect('back')
+            res.json({
+                message: 'xóa thành công',
+                body: {
+                    donvi: {tendonvi}
+                }
             })
-            .catch(next);
+        } catch (error) {
+            res.redirect('back'),
+            res.json({
+                message: 'xóa thất bại'
+            })
+        }
     }
 }
     

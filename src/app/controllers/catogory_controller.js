@@ -59,6 +59,7 @@ class catogory_controller {
 
     //[GET] /list-category/add
     add(req, res, next){     
+        pool
             res.render('addTypeDevice');
     }
     //[POST] /list-category/insert
@@ -79,15 +80,15 @@ class catogory_controller {
         }).catch(next);
     }
 
-    // [DELETE] /list-catogory/delete/:id
-    delete(req, res, next){
-        pool
-            .query('delete from loaithietbi where idloai = $1', [req.params.id])
-            .then(() => {
-                res.redirect('back');
-            })
-            .catch(next);
-    }
+        // [DELETE] /list-category/delete/:id
+        delete(req, res, next){
+            pool
+                .query('delete from loaithietbi where idloai = $1', [req.params.id])
+                .then(() => {
+                    res.redirect('back');
+                })
+                .catch(next);
+        }
 }
 
 module.exports = new catogory_controller;
