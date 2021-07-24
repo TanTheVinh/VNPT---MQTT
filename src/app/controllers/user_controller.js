@@ -6,7 +6,7 @@ class user_controller {
     //[GET] /list-user/
     list(req, res, next){
         pool
-            .query('SELECT e.idnguoidung, e.tennguoidung, e.iddonvi, c.tendonvi FROM nguoidung as e LEFT JOIN donvi as c ON e.iddonvi = c.iddonvi')
+            .query('SELECT * FROM nguoidung, donvi where nguoidung.iddonvi = donvi.iddonvi')
             .then(result => {
                 const nguoidung = result.rows;
                 // res.json({ nguoidung });
@@ -15,12 +15,10 @@ class user_controller {
             .catch(next)
     }
    
-    //[GET] /list-device/add
+    //[GET] /list-user/add
     add(req, res, next){
         pool
-            .query(`SELECT u.iddonvi, u.tendonvi, g.quyen
-            FROM donvi as u
-            FULL OUTER JOIN nguoidung as g ON u.iddonvi = g.iddonvi`)
+            .query(`SELECT * FROM nguoidung, donvi where iddonvi = g.iddonvi`)
             .then(result => {
                 const nguoidung = result.rows;
                 //res.json({nguoidung} );
@@ -30,7 +28,7 @@ class user_controller {
             .catch(next);
     }
     
-        // [POST] /list-device/insert
+        // [POST] /list-user/insert
         insert(req, res, next){
            // res.json(req.body)
             const nguoidung = Object.values(req.body);

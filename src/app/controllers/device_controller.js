@@ -34,11 +34,13 @@ class device_controller {
             .then(result => {
                 thietbi.thongtin = result.rows[0];
                 pool
-                    .query('select * from lichsu where idthietbi = $1', [req.params.id])
+                    .query(`select *, to_char(thoigiantt, 'dd Mon YYYY') as thoigian 
+                        from lichsu where idthietbi = $1`, [req.params.id])
                     .then(result => {
                         thietbi.lichsu = result.rows;
                         pool
-                            .query('select * from dulieu where idthietbi = $1', [req.params.id])
+                            .query(`select *, to_char(thoigiangui, 'dd Mon YYYY') as thoigian
+                                from dulieu where idthietbi = $1`, [req.params.id])
                             .then(result => {
                                 thietbi.dulieu = result.rows;
                                 // res.json({ thietbi });
