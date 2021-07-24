@@ -12,6 +12,7 @@ class device_controller {
             .then(result => {
                 const thietbi = result.rows;
                 // res.json({thietbi});
+                console.log({thietbi});
                 res.render('listDevice', { thietbi });
             })
             .catch(next)
@@ -41,6 +42,7 @@ class device_controller {
                             .then(result => {
                                 thietbi.dulieu = result.rows;
                                 // res.json({ thietbi });
+                                // console.log({ thietbi });
                                 res.render('infoDevice', { thietbi });
                             })
                             .catch(next);
@@ -102,16 +104,15 @@ class device_controller {
     // [POST] /list-device/create
     create(req, res, next){
         // res.json(req.body)
-            const thietbi = Object.values(req.body);
-            thietbi[3] = md5(thietbi[3]);
-            // res.json(thietbi);
-            pool
-            .query('INSERT INTO thietbi (tenthietbi, idloai, iddonvi taikhoan, matkhau, trangthai) '
-                + 'VALUES ($1, $2, $3, $4, $5, false)', thietbi)
-            .then(() =>{
-                res.redirect('/list-device')
-            })
-            .catch(next);
+        const thietbi = Object.values(req.body);
+        // res.json(thietbi);
+        pool
+        .query('INSERT INTO thietbi (tenthietbi, iddonvi,idloai, taikhoan, matkhau, trangthai) '
+            + 'VALUES ($1, $2, $3, $4, $5, false)', thietbi)
+        .then(() =>{
+            res.redirect('/list-device')
+        })
+        .catch(next);
     }
 
     // [DELETE] /list-device/delete/:id

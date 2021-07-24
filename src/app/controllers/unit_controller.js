@@ -37,13 +37,12 @@ class unit_controller {
     }
     // [DELETE] /list-unit/delete/:id
     delete(req, res, next){
-        
-        // pool
-        //     .query('delete from donvi where iddonvi = $1', [req.params.id])
-        //     .then(() => {
-        //         res.redirect('back');
-        //     })
-        //     .catch(next);
+        pool
+            .query('delete from donvi where iddonvi = $1', [req.params.id])
+            .then(() => {
+                res.redirect('back');
+            })
+            .catch(next);
     }
 }
     
