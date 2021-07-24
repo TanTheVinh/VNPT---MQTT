@@ -70,10 +70,10 @@ class site_controller {
     // [GET] /change-password
     changepass(req, res, next){
         pool
-        .query('select * from nguoidung where matkhau =$1', [req.params.id])
+        .query('select matkhau from nguoidung where idnguoidung =$1', [req.params.id])
             .then(result => {
                 const nguoidung = result.rows;        
-                res.render('/changePassword',{nguoidung});
+                res.render('changePassword',{nguoidung});
             })
             .catch(next);
         
