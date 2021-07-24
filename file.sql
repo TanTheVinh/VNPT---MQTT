@@ -137,7 +137,7 @@ IDLOAI
 create table NGUOIDUNG (
    IDNGUOIDUNG   SERIAL,
    IDDONVI              INT4                 null,
-   TAIKHOOAN            VARCHAR(25)          not null,
+   TAIKHOAN            VARCHAR(25)          not null,
    MATKHAU              VARCHAR(50)          not null,
    TENNGUOIDUNG         VARCHAR(20)          not null,
    QUYEN                VARCHAR(20)          not null,
@@ -233,11 +233,11 @@ INSERT INTO public.donvi(tendonvi) VALUES ('Cần Thơ');
 INSERT INTO public.donvi(tendonvi) VALUES ('Hậu Giang');
 INSERT INTO public.donvi(tendonvi) VALUES ('Vĩnh Long');
 
-INSERT INTO public.nguoidung(iddonvi, taikhooan, matkhau, tennguoidung, quyen) 
+INSERT INTO public.nguoidung(iddonvi, taikhoan, matkhau, tennguoidung, quyen) 
 VALUES (1, 'thevinh01', 'dfa2cf42e689dc76107c5d4c91d03007', 'Tần Thế Vinh', 'admin');
-INSERT INTO public.nguoidung(iddonvi, taikhooan, matkhau, tennguoidung, quyen) 
+INSERT INTO public.nguoidung(iddonvi, taikhoan, matkhau, tennguoidung, quyen) 
 VALUES (2, 'thevinh02', 'dfa2cf42e689dc76107c5d4c91d03007', 'Tần Thế Vinh 2', 'admin');
-INSERT INTO public.nguoidung(iddonvi, taikhooan, matkhau, tennguoidung, quyen) 
+INSERT INTO public.nguoidung(iddonvi, taikhoan, matkhau, tennguoidung, quyen) 
 VALUES (3, 'thevinh03', 'dfa2cf42e689dc76107c5d4c91d03007', 'Tần Thế Vinh 3', 'admin');
 
 INSERT INTO public.thietbi(idloai, iddonvi, tenthietbi, taikhoan, matkhau, trangthai)

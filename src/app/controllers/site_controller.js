@@ -38,7 +38,7 @@ class site_controller {
     login(req, res, next){
         // console.log(req.session.idnguoidung);
         if(req.session.idnguoidung === undefined){
-            res.redirect('/login');
+            res.render('login');
         }
         else{
             res.redirect('/');
@@ -53,15 +53,17 @@ class site_controller {
             .query('select * from nguoidung where taikhoan = $1 and matkhau = $2', account)
             .then(result => {
                 const user = result.rows[0];
-                if(req.session.idnguoidung === undefined){
-                    res.redirect('/login');
-                }
-                else{
+                console.log(req.session.idnguoidung);
+                try {
                     req.session.idnguoidung = user.idnguoidung;
                     req.session.iddonvi = user.iddonvi;
-                    // console.log(req.session.idnguoidung);
-                    // res.json({user})
+                    req.session.quyen = user.iddonvi;
                     res.redirect('/');
+                } catch (error) {
+                    // console.log(req.session);
+                    // res.json({user})
+                    res.redirect('/login');
+                    
                 }
             })
             .catch(next);

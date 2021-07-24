@@ -77,13 +77,7 @@ class catogory_controller {
                 }
             })
         }).catch(next);
-
-        
-        
     }
- 
-        
-    
 
     // [DELETE] /list-catogory/delete/:id
     delete(req, res, next){

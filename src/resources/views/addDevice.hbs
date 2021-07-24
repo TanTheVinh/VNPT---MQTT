@@ -14,13 +14,24 @@
           <div class="col-md-6 border rounded white-box">
             <h2 class="text-center">Nhập đầy đủ thông tin thiết bị:</h2>
             <hr />
-            <form method="POST" action="/list-device/create">
+            <form method="POST" action="/list-device/create" onclick="md5pass()">
               <table class="table">
 
                 <tr>
                   <th scope="row">Tên thiết bị:</th>
                   <td>
                     <input required type="text" name="tenthietbi" id="tenthietbi" minlength="1" maxlength="50"/>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row">Đơn vị:</th>
+                  <td>
+                    <select name="iddonvi" id="iddonvi">
+                      {{#each donvi}}
+                        <option  value="{{this.iddonvi}}">{{this.tendonvi}}</option>
+                      {{/each}}
+                    </select>
                   </td>
                 </tr>
 
@@ -47,6 +58,7 @@
                   <th scope="row">Mật khẩu thiết bị:</th>
                   <td>
                     <input type="password" name="matkhau" id="password" minlength="1" maxlength="50">
+                    <input type="hidden" name="md5matkhau" id="md5password" value="">
                   </td>
                 </tr>
 
@@ -88,6 +100,10 @@
                   });
                 });
               }(window.jQuery, window, document));
+
+              function md5pass(){
+                document.getElementById("md5password").value = md5(document.getElementById("password").value);
+              }
             </script>
           </div>
           <div class="col-md-3"></div>
