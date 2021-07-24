@@ -85,6 +85,7 @@ class catogory_controller {
             pool
                 .query('delete from loaithietbi where idloai = $1', [req.params.id])
                 .then(() => {
+                    alert("thêm thành công")
                     res.redirect('back');
                 })
                 .catch(next);

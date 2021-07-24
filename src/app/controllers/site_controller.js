@@ -77,7 +77,7 @@ class site_controller {
             .then(result => {
                 const nguoidung = result.rows;
                 // res.json({nguoidung});
-                console.log({nguoidung});
+                //console.log({nguoidung});
                 res.render('changePassUser', { nguoidung });
             })
             .catch(next)
@@ -86,19 +86,18 @@ class site_controller {
     
     //[PUT] /change-password
     updatepass(req, res, next){
-        const { matkhau } = req.body;
-        const id = req.params.id
+        const  matkhau =Object.values(req.body);
+        const passnd = md5(matkhau[0]);
+        const idnd = req.session.idnguoidung
         pool
-        .query(`update nguoidung set
-        matkhau = $1
-        where idnguoidung = $2`,  [matkhau, id]);
-        res.json({
-            message: 'đổi mật khẩu thành công'
-        })
-        .then(() => {
-            res.redirect('back');
-        })
-        .catch(next);
+        .query('UPDATE nguoidung SET matkhau = $1 WHERE idnguoidung = $2', [
+            passnd,
+            idnd
+        ])
+        .then(() =>{
+            req.session.destroy();
+            res.redirect('/');
+        }).catch(next);
     }
 }
 
