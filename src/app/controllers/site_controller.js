@@ -75,9 +75,9 @@ class site_controller {
         pool
             .query(`select * from nguoidung where idnguoidung = $1`, [idnguoidung])
             .then(result => {
-                const nguoidung = result.rows;
+                const nguoidung = result.rows[0];
                 // res.json({nguoidung});
-                console.log({nguoidung});
+                // console.log({nguoidung});
                 res.render('changePassUser', { nguoidung });
             })
             .catch(next)
@@ -86,19 +86,26 @@ class site_controller {
     
     //[PUT] /change-password
     updatepass(req, res, next){
-        const { matkhau } = req.body;
-        const id = req.params.id
+        const doimatkhau = Object.values(req.body);
         pool
-        .query(`update nguoidung set
-        matkhau = $1
-        where idnguoidung = $2`,  [matkhau, id]);
-        res.json({
-            message: 'đổi mật khẩu thành công'
-        })
-        .then(() => {
-            res.redirect('back');
-        })
-        .catch(next);
+            .query(`select * from nguoidung 
+                where idnguoidung = $1 and matkhau = $2`, [doimatkhau[0], doimatkhau[1]])
+            .then((result) => {
+                    const nguoidung = result.rows[0];
+                    if(nguoidung == undefined){
+                        res.redirect('change-password');
+                    }
+                    else{
+                        pool
+                            .query(`update nguoidung set matkhau = $1 
+                                where idnguoidung = $2`, [doimatkhau[2], doimatkhau[0]])
+                            .then((result) => {
+                                res.redirect('/');
+                            })
+                            .catch(next);
+                    }
+            })
+            .catch(next);
     }
 }
 
