@@ -22,6 +22,10 @@
                   </th>
                   <th scope="col">Đơn vị
                   </th>
+                  <th scope="col">Tài khoản
+                  </th>
+                  <th scope="col">Quyền
+                  </th>
                   <th scope="col">Thao tác
                   </th>
                 </tr>
@@ -31,6 +35,8 @@
                   <th scope="row">{{this.idnguoidung}}</th>
                   <td>{{this.tennguoidung}}</td>
                   <td>{{this.tendonvi}}</td>
+                  <td>{{this.taikhoan}}</td>
+                  <td>{{this.quyen}}</td>
                   <td>
                   <form class="d-inline-block" action="/list-user/delete/{{this.idnguoidung}}?_method=DELETE" method="post">
                     <button class="btn btn-danger">
