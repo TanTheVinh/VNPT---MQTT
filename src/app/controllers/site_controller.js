@@ -75,9 +75,9 @@ class site_controller {
         pool
             .query(`select * from nguoidung where idnguoidung = $1`, [idnguoidung])
             .then(result => {
-                const nguoidung = result.rows;
+                const nguoidung = result.rows[0];
                 // res.json({nguoidung});
-                //console.log({nguoidung});
+                // console.log({nguoidung});
                 res.render('changePassUser', { nguoidung });
             })
             .catch(next)
@@ -86,18 +86,28 @@ class site_controller {
     
     //[PUT] /change-password
     updatepass(req, res, next){
-        const  matkhau =Object.values(req.body);
-        const passnd = md5(matkhau[0]);
-        const idnd = req.session.idnguoidung
+        const doimatkhau = Object.values(req.body);
         pool
-        .query('UPDATE nguoidung SET matkhau = $1 WHERE idnguoidung = $2', [
-            passnd,
-            idnd
-        ])
-        .then(() =>{
-            req.session.destroy();
-            res.redirect('/');
-        }).catch(next);
+            .query(`select * from nguoidung 
+                where idnguoidung = $1 and matkhau = $2`, [doimatkhau[0], doimatkhau[1]])
+            .then((result) => {
+                    const nguoidung = result.rows[0];
+                    if(nguoidung == undefined){
+                        res.redirect('change-password');
+                    }
+                    else{
+                        pool
+                            .query(`update nguoidung set matkhau = $1 
+                                where idnguoidung = $2`, [doimatkhau[2], doimatkhau[0]])
+                            .then((result) => {
+                                res.redirect('/');
+                               // req.session.destroy();
+
+                            })
+                            .catch(next);
+                    }
+            })
+            .catch(next);
     }
 }
 

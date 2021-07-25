@@ -55,11 +55,12 @@ class catogory_controller {
         .then(() =>{
             res.redirect('back')
         }).catch(next);
+        
     }
 
     //[GET] /list-category/add
     add(req, res, next){     
-        pool
+        pool 
             res.render('addTypeDevice');
     }
     //[POST] /list-category/insert
