@@ -5,19 +5,31 @@ class unit_controller {
 
     //[GET] /list-unit/
     list(req, res, next){
-        pool
-            .query('select * from donvi')
-            .then(result => {
-                const donvi = result.rows;
-                 //res.json({ donvi });
-               res.render('listUnit', { donvi });
-            })
-            .catch(next)
+        if(req.session.idnguoidung === undefined){
+            res.redirect('/');
+        }
+        else{
+            pool
+                .query('select * from donvi')
+                .then(result => {
+                    const donvi = result.rows;
+                    //res.json({ donvi });
+                res.render('listUnit', { donvi });
+                })
+                .catch(next)
+        }
     }
+
     //[GET] /list-unit/add
-    add(req, res, next){     
-        res.render('addUnit');
+    add(req, res, next){    
+        if(req.session.idnguoidung === undefined){
+            res.redirect('/');
+        }
+        else{ 
+            res.render('addUnit');
+        }
     }
+
     //[POST] /list-unit/insert
     insert(req, res, next){  
        const { tendonvi } = req.body;
@@ -34,6 +46,7 @@ class unit_controller {
             })
         }).catch(next);   
     }
+
     // [DELETE] /list-unit/delete/:id
     delete(req, res, next){
         try {
