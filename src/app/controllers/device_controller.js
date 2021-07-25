@@ -71,7 +71,13 @@ class device_controller {
         }
         else{
             pool
-            .query(`Select * from thietbi where idthietbi=$1`, [req.params.id])
+            .query(`select * from thietbi, loaithietbi, donvi
+            where 
+            thietbi.idloai = loaithietbi.idloai 
+            and 
+            thietbi.iddonvi = donvi.iddonvi
+            and
+            idthietbi = $1`, [req.params.id])
             .then(result => {
             const thietbi = result.rows[0];
             res.render('editInfoDevice',{thietbi});

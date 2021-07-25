@@ -53,7 +53,7 @@ class site_controller {
             .query('select * from nguoidung where taikhoan = $1 and matkhau = $2', account)
             .then(result => {
                 const user = result.rows[0];
-                console.log(req.session.idnguoidung);
+                //console.log(req.session.idnguoidung);
                 try {
                     req.session.idnguoidung = user.idnguoidung;
                     req.session.iddonvi = user.iddonvi;
@@ -114,6 +114,15 @@ class site_controller {
             })
             .catch(next);
     }
+    //[POST]/log-out
+    logout(req,res,next){
+        if(req.session.idnguoidung){
+            req.session.destroy();
+            res.redirect('/');
+        }
+    }
+        
+    
 }
 
 module.exports = new site_controller;
