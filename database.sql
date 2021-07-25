@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*==============================================================*/
 /* DBMS name:      PostgreSQL 9.x                               */
 /* Created on:     7/19/2021 11:36:28 AM                        */
@@ -43,11 +44,15 @@ CREATE TABLE public.donvi (
 
 ALTER TABLE public.donvi OWNER TO postgres;
 >>>>>>> 34dbda849e4c52bee1f7e632e1d3ea79e22b7f74
+=======
+/*==============================================================*/
+/* DBMS name:      PostgreSQL 9.x                               */
+/* Created on:     7/23/2021 11:19:07 AM                        */
+/*==============================================================*/
+>>>>>>> 8af9c7d14fd835f164c1cd37b664e47c435a7148
 
---
--- Name: donvi_iddonvi_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 drop index RELATIONSHIP_3_FK;
 
@@ -62,34 +67,31 @@ CREATE SEQUENCE public.donvi_iddonvi_seq
     CACHE 1;
 
 >>>>>>> 34dbda849e4c52bee1f7e632e1d3ea79e22b7f74
+=======
+drop index DONVI_PK;
 
-ALTER TABLE public.donvi_iddonvi_seq OWNER TO postgres;
+drop table DONVI;
+>>>>>>> 8af9c7d14fd835f164c1cd37b664e47c435a7148
 
---
--- Name: donvi_iddonvi_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
+drop index RELATIONSHIP_4_FK;
 
-ALTER SEQUENCE public.donvi_iddonvi_seq OWNED BY public.donvi.iddonvi;
+drop index DULIEU_PK;
 
+drop table DULIEU;
 
---
--- Name: dulieu; Type: TABLE; Schema: public; Owner: postgres
---
+drop index RELATIONSHIP_3_FK;
 
-CREATE TABLE public.dulieu (
-    iddulieu integer NOT NULL,
-    idthietbi integer NOT NULL,
-    thoigiangui date NOT NULL,
-    chitiet text NOT NULL
-);
+drop index RELATIONSHIP_2_FK;
 
+drop index LICHSU_PK;
 
-ALTER TABLE public.dulieu OWNER TO postgres;
+drop table LICHSU;
 
---
--- Name: dulieu_iddulieu_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
+drop index LOAITHIETBI_PK;
 
+drop table LOAITHIETBI;
+
+<<<<<<< HEAD
 <<<<<<< HEAD
 /*==============================================================*/
 /* Table: DULIEU                                                */
@@ -239,496 +241,169 @@ CREATE SEQUENCE public.dulieu_iddulieu_seq
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
+=======
+drop index RELATIONSHIP_5_FK;
+>>>>>>> 8af9c7d14fd835f164c1cd37b664e47c435a7148
 
+drop index NGUOIDUNG_PK;
 
-ALTER TABLE public.dulieu_iddulieu_seq OWNER TO postgres;
+drop table NGUOIDUNG;
 
---
--- Name: dulieu_iddulieu_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
+drop index RELATIONSHIP_6_FK;
 
-ALTER SEQUENCE public.dulieu_iddulieu_seq OWNED BY public.dulieu.iddulieu;
+drop index RELATIONSHIP_1_FK;
 
+drop index THIETBI_PK;
 
---
--- Name: lichsu; Type: TABLE; Schema: public; Owner: postgres
---
+drop table THIETBI;
 
-CREATE TABLE public.lichsu (
-    idlichsu integer NOT NULL,
-    idnguoidung integer,
-    idthietbi integer NOT NULL,
-    thoigiantt date NOT NULL,
-    thaotac character varying(50) NOT NULL
+/*==============================================================*/
+/* Table: DONVI                                                 */
+/*==============================================================*/
+create table DONVI (
+   IDDONVI     SERIAL,
+   TENDONVI             VARCHAR(30)          not null,
+   constraint PK_DONVI primary key (IDDONVI)
 );
 
-
-ALTER TABLE public.lichsu OWNER TO postgres;
-
---
--- Name: lichsu_idlichsu_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.lichsu_idlichsu_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.lichsu_idlichsu_seq OWNER TO postgres;
-
---
--- Name: lichsu_idlichsu_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.lichsu_idlichsu_seq OWNED BY public.lichsu.idlichsu;
-
-
---
--- Name: loaithietbi; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.loaithietbi (
-    idloai integer NOT NULL,
-    tenloai character varying(50) NOT NULL,
-    mota text
+/*==============================================================*/
+/* Index: DONVI_PK                                              */
+/*==============================================================*/
+create unique index DONVI_PK on DONVI (
+IDDONVI
 );
 
-
-ALTER TABLE public.loaithietbi OWNER TO postgres;
-
---
--- Name: loaithietbi_idloai_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.loaithietbi_idloai_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.loaithietbi_idloai_seq OWNER TO postgres;
-
---
--- Name: loaithietbi_idloai_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.loaithietbi_idloai_seq OWNED BY public.loaithietbi.idloai;
-
-
---
--- Name: nguoidung; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.nguoidung (
-    idnguoidung integer NOT NULL,
-    iddonvi integer,
-    taikhooan character varying(25) NOT NULL,
-    matkhau character varying(50) NOT NULL,
-    tennguoidung character varying(20) NOT NULL,
-    quyen character varying(20) NOT NULL
+/*==============================================================*/
+/* Table: DULIEU                                                */
+/*==============================================================*/
+create table DULIEU (
+   IDDULIEU  SERIAL,
+   IDTHIETBI            INT4                 not null,
+   THOIGIANGUI          DATE                 not null,
+   CHITIET              TEXT                 not null,
+   constraint PK_DULIEU primary key (IDDULIEU)
 );
 
-
-ALTER TABLE public.nguoidung OWNER TO postgres;
-
---
--- Name: nguoidung_idnguoidung_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.nguoidung_idnguoidung_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.nguoidung_idnguoidung_seq OWNER TO postgres;
-
---
--- Name: nguoidung_idnguoidung_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.nguoidung_idnguoidung_seq OWNED BY public.nguoidung.idnguoidung;
-
-
---
--- Name: thietbi; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.thietbi (
-    idthietbi integer NOT NULL,
-    idloai integer NOT NULL,
-    iddonvi integer,
-    tenthietbi character varying(50) NOT NULL,
-    taikhoan character varying(30) NOT NULL,
-    matkhau character varying(50) NOT NULL,
-    trangthai boolean NOT NULL
+/*==============================================================*/
+/* Index: DULIEU_PK                                             */
+/*==============================================================*/
+create unique index DULIEU_PK on DULIEU (
+IDDULIEU
 );
 
-
-ALTER TABLE public.thietbi OWNER TO postgres;
-
---
--- Name: thietbi_idthietbi_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.thietbi_idthietbi_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.thietbi_idthietbi_seq OWNER TO postgres;
-
---
--- Name: thietbi_idthietbi_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.thietbi_idthietbi_seq OWNED BY public.thietbi.idthietbi;
-
-
---
--- Name: donvi iddonvi; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.donvi ALTER COLUMN iddonvi SET DEFAULT nextval('public.donvi_iddonvi_seq'::regclass);
-
-
---
--- Name: dulieu iddulieu; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.dulieu ALTER COLUMN iddulieu SET DEFAULT nextval('public.dulieu_iddulieu_seq'::regclass);
-
-
---
--- Name: lichsu idlichsu; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.lichsu ALTER COLUMN idlichsu SET DEFAULT nextval('public.lichsu_idlichsu_seq'::regclass);
-
-
---
--- Name: loaithietbi idloai; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.loaithietbi ALTER COLUMN idloai SET DEFAULT nextval('public.loaithietbi_idloai_seq'::regclass);
-
-
---
--- Name: nguoidung idnguoidung; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.nguoidung ALTER COLUMN idnguoidung SET DEFAULT nextval('public.nguoidung_idnguoidung_seq'::regclass);
-
-
---
--- Name: thietbi idthietbi; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.thietbi ALTER COLUMN idthietbi SET DEFAULT nextval('public.thietbi_idthietbi_seq'::regclass);
-
-
---
--- Data for Name: donvi; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.donvi (iddonvi, tendonvi) FROM stdin;
-1	tpHCM\n
-2	Cần Thơ
-3	Vĩnh Long\n
-\.
-
-
---
--- Data for Name: dulieu; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.dulieu (iddulieu, idthietbi, thoigiangui, chitiet) FROM stdin;
-2	2	2021-07-23	37
-1	1	2021-01-02	đã gửi
-3	3	2021-07-22	1000
-\.
-
-
---
--- Data for Name: lichsu; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.lichsu (idlichsu, idnguoidung, idthietbi, thoigiantt, thaotac) FROM stdin;
-1	3	1	2021-07-01	thêm
-2	1	3	2021-02-01	sửa
-3	2	2	2021-06-07	thêm
-\.
-
-
---
--- Data for Name: loaithietbi; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.loaithietbi (idloai, tenloai, mota) FROM stdin;
-1	đo nhiệt độ	đo nhiệt độ
-2	đo lượng mưa	đo lượng mưa
-3	máy tính	máy tính1
-\.
-
-
---
--- Data for Name: nguoidung; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.nguoidung (idnguoidung, iddonvi, taikhooan, matkhau, tennguoidung, quyen) FROM stdin;
-1	3	thuan	c1921ad3b7cc07f38a81334814a99657	Hòa Thuận	admin\n
-2	2	vinh	4107eaebd361f3477b630f4ed7452418	Thế Vinh	admin\n
-3	1	thang	6e0c130ca8cf53a2473bd88044b83da9	Quang Thắng	nv
-\.
-
-
---
--- Data for Name: thietbi; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.thietbi (idthietbi, idloai, iddonvi, tenthietbi, taikhoan, matkhau, trangthai) FROM stdin;
-1	3	1	laptopdell	laptop	312f91285e048e09bb4aefef23627994	t
-2	1	2	nhiệt độ1	nhietdo	4c2bc155a4b790aa9070080633b02855	f
-3	2	3	lượng mưa1	luongmua	a5a184f2e93bbd8700f49c5913955496	t
-\.
-
-
---
--- Name: donvi_iddonvi_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.donvi_iddonvi_seq', 1, true);
-
-
---
--- Name: dulieu_iddulieu_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.dulieu_iddulieu_seq', 1, false);
-
-
---
--- Name: lichsu_idlichsu_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.lichsu_idlichsu_seq', 1, false);
-
-
---
--- Name: loaithietbi_idloai_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.loaithietbi_idloai_seq', 3, true);
-
-
---
--- Name: nguoidung_idnguoidung_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.nguoidung_idnguoidung_seq', 1, false);
-
-
---
--- Name: thietbi_idthietbi_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.thietbi_idthietbi_seq', 1, false);
-
-
---
--- Name: donvi pk_donvi; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.donvi
-    ADD CONSTRAINT pk_donvi PRIMARY KEY (iddonvi);
-
-
---
--- Name: dulieu pk_dulieu; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.dulieu
-    ADD CONSTRAINT pk_dulieu PRIMARY KEY (iddulieu);
-
-
---
--- Name: lichsu pk_lichsu; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.lichsu
-    ADD CONSTRAINT pk_lichsu PRIMARY KEY (idlichsu);
-
-
---
--- Name: loaithietbi pk_loaithietbi; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.loaithietbi
-    ADD CONSTRAINT pk_loaithietbi PRIMARY KEY (idloai);
-
-
---
--- Name: nguoidung pk_nguoidung; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.nguoidung
-    ADD CONSTRAINT pk_nguoidung PRIMARY KEY (idnguoidung);
-
-
---
--- Name: thietbi pk_thietbi; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.thietbi
-    ADD CONSTRAINT pk_thietbi PRIMARY KEY (idthietbi);
-
-
---
--- Name: donvi_pk; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE UNIQUE INDEX donvi_pk ON public.donvi USING btree (iddonvi);
-
-
---
--- Name: dulieu_pk; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE UNIQUE INDEX dulieu_pk ON public.dulieu USING btree (iddulieu);
-
-
---
--- Name: lichsu_pk; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE UNIQUE INDEX lichsu_pk ON public.lichsu USING btree (idlichsu);
-
-
---
--- Name: loaithietbi_pk; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE UNIQUE INDEX loaithietbi_pk ON public.loaithietbi USING btree (idloai);
-
-
---
--- Name: nguoidung_pk; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE UNIQUE INDEX nguoidung_pk ON public.nguoidung USING btree (idnguoidung);
-
-
---
--- Name: relationship_1_fk; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX relationship_1_fk ON public.thietbi USING btree (idloai);
-
-
---
--- Name: relationship_2_fk; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX relationship_2_fk ON public.lichsu USING btree (idnguoidung);
-
-
---
--- Name: relationship_3_fk; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX relationship_3_fk ON public.lichsu USING btree (idthietbi);
-
-
---
--- Name: relationship_4_fk; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX relationship_4_fk ON public.dulieu USING btree (idthietbi);
-
-
---
--- Name: relationship_5_fk; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX relationship_5_fk ON public.nguoidung USING btree (iddonvi);
-
-
---
--- Name: relationship_6_fk; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX relationship_6_fk ON public.thietbi USING btree (iddonvi);
-
-
---
--- Name: thietbi_pk; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE UNIQUE INDEX thietbi_pk ON public.thietbi USING btree (idthietbi);
-
-
---
--- Name: dulieu fk_dulieu_relations_thietbi; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.dulieu
-    ADD CONSTRAINT fk_dulieu_relations_thietbi FOREIGN KEY (idthietbi) REFERENCES public.thietbi(idthietbi) ON UPDATE RESTRICT ON DELETE RESTRICT;
-
-
---
--- Name: lichsu fk_lichsu_relations_nguoidun; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.lichsu
-    ADD CONSTRAINT fk_lichsu_relations_nguoidun FOREIGN KEY (idnguoidung) REFERENCES public.nguoidung(idnguoidung) ON UPDATE RESTRICT ON DELETE RESTRICT;
-
-
---
--- Name: lichsu fk_lichsu_relations_thietbi; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.lichsu
-    ADD CONSTRAINT fk_lichsu_relations_thietbi FOREIGN KEY (idthietbi) REFERENCES public.thietbi(idthietbi) ON UPDATE RESTRICT ON DELETE RESTRICT;
-
-
---
--- Name: nguoidung fk_nguoidun_relations_donvi; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.nguoidung
-    ADD CONSTRAINT fk_nguoidun_relations_donvi FOREIGN KEY (iddonvi) REFERENCES public.donvi(iddonvi) ON UPDATE RESTRICT ON DELETE RESTRICT;
-
-
---
--- Name: thietbi fk_thietbi_relations_donvi; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.thietbi
-    ADD CONSTRAINT fk_thietbi_relations_donvi FOREIGN KEY (iddonvi) REFERENCES public.donvi(iddonvi) ON UPDATE RESTRICT ON DELETE RESTRICT;
-
-
---
--- Name: thietbi fk_thietbi_relations_loaithie; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.thietbi
-    ADD CONSTRAINT fk_thietbi_relations_loaithie FOREIGN KEY (idloai) REFERENCES public.loaithietbi(idloai) ON UPDATE RESTRICT ON DELETE RESTRICT;
-
-
+/*==============================================================*/
+/* Index: RELATIONSHIP_4_FK                                     */
+/*==============================================================*/
+create  index RELATIONSHIP_4_FK on DULIEU (
+IDTHIETBI
+);
+
+/*==============================================================*/
+/* Table: LICHSU                                                */
+/*==============================================================*/
+create table LICHSU (
+   IDLICHSU   SERIAL,
+   IDNGUOIDUNG          INT4                 null,
+   IDTHIETBI            INT4                 not null,
+   THOIGIANTT           DATE                 not null,
+   THAOTAC              VARCHAR(50)          not null,
+   constraint PK_LICHSU primary key (IDLICHSU)
+);
+
+/*==============================================================*/
+/* Index: LICHSU_PK                                             */
+/*==============================================================*/
+create unique index LICHSU_PK on LICHSU (
+IDLICHSU
+);
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_2_FK                                     */
+/*==============================================================*/
+create  index RELATIONSHIP_2_FK on LICHSU (
+IDNGUOIDUNG
+);
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_3_FK                                     */
+/*==============================================================*/
+create  index RELATIONSHIP_3_FK on LICHSU (
+IDTHIETBI
+);
+
+/*==============================================================*/
+/* Table: LOAITHIETBI                                           */
+/*==============================================================*/
+create table LOAITHIETBI (
+   IDLOAI   SERIAL,
+   TENLOAI              VARCHAR(50)          not null,
+   MOTA                 TEXT                 null,
+   constraint PK_LOAITHIETBI primary key (IDLOAI)
+);
+
+/*==============================================================*/
+/* Index: LOAITHIETBI_PK                                        */
+/*==============================================================*/
+create unique index LOAITHIETBI_PK on LOAITHIETBI (
+IDLOAI
+);
+
+/*==============================================================*/
+/* Table: NGUOIDUNG                                             */
+/*==============================================================*/
+create table NGUOIDUNG (
+   IDNGUOIDUNG   SERIAL,
+   IDDONVI              INT4                 null,
+   TAIKHOAN            VARCHAR(25)          not null,
+   MATKHAU              VARCHAR(50)          not null,
+   TENNGUOIDUNG         VARCHAR(20)          not null,
+   QUYEN                VARCHAR(20)          not null,
+   constraint PK_NGUOIDUNG primary key (IDNGUOIDUNG)
+);
+
+/*==============================================================*/
+/* Index: NGUOIDUNG_PK                                          */
+/*==============================================================*/
+create unique index NGUOIDUNG_PK on NGUOIDUNG (
+IDNGUOIDUNG
+);
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_5_FK                                     */
+/*==============================================================*/
+create  index RELATIONSHIP_5_FK on NGUOIDUNG (
+IDDONVI
+);
+
+/*==============================================================*/
+/* Table: THIETBI                                               */
+/*==============================================================*/
+create table THIETBI (
+   IDTHIETBI     SERIAL,
+   IDLOAI               INT4                 not null,
+   IDDONVI              INT4                 null,
+   TENTHIETBI           VARCHAR(50)          not null,
+   TAIKHOAN             VARCHAR(30)          not null,
+   MATKHAU              VARCHAR(50)          not null,
+   TRANGTHAI            BOOL                 not null,
+   constraint PK_THIETBI primary key (IDTHIETBI)
+);
+
+/*==============================================================*/
+/* Index: THIETBI_PK                                            */
+/*==============================================================*/
+create unique index THIETBI_PK on THIETBI (
+IDTHIETBI
+);
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_1_FK                                     */
+/*==============================================================*/
+create  index RELATIONSHIP_1_FK on THIETBI (
+IDLOAI
+);
+
+<<<<<<< HEAD
 --
 -- PostgreSQL database dump complete
 --
@@ -753,3 +428,93 @@ INSERT INTO public.dulieu(idthietbi, thoigiangui, chitiet) VALUES (1, '2021-02-0
 
 INSERT INTO public.lichsu(idnguoidung, idthietbi, thoigiantt, thaotac) VALUES (1, 1, '2021-02-02 04:05:06', 'Lệnh');
 INSERT INTO public.lichsu(idnguoidung, idthietbi, thoigiantt, thaotac) VALUES (1, 2, '2021-01-03 04:05:06', 'Lệnh');
+=======
+/*==============================================================*/
+/* Index: RELATIONSHIP_6_FK                                     */
+/*==============================================================*/
+create  index RELATIONSHIP_6_FK on THIETBI (
+IDDONVI
+);
+
+alter table DULIEU
+   add constraint FK_DULIEU_RELATIONS_THIETBI foreign key (IDTHIETBI)
+      references THIETBI (IDTHIETBI)
+      on delete restrict on update restrict;
+
+alter table LICHSU
+   add constraint FK_LICHSU_RELATIONS_NGUOIDUN foreign key (IDNGUOIDUNG)
+      references NGUOIDUNG (IDNGUOIDUNG)
+      on delete restrict on update restrict;
+
+alter table LICHSU
+   add constraint FK_LICHSU_RELATIONS_THIETBI foreign key (IDTHIETBI)
+      references THIETBI (IDTHIETBI)
+      on delete restrict on update restrict;
+
+alter table NGUOIDUNG
+   add constraint FK_NGUOIDUN_RELATIONS_DONVI foreign key (IDDONVI)
+      references DONVI (IDDONVI)
+      on delete restrict on update restrict;
+
+alter table THIETBI
+   add constraint FK_THIETBI_RELATIONS_LOAITHIE foreign key (IDLOAI)
+      references LOAITHIETBI (IDLOAI)
+      on delete restrict on update restrict;
+
+alter table THIETBI
+   add constraint FK_THIETBI_RELATIONS_DONVI foreign key (IDDONVI)
+      references DONVI (IDDONVI)
+      on delete restrict on update restrict;
+
+
+INSERT INTO public.loaithietbi(tenloai, mota) VALUES ('máy tính', 'máy tính');
+INSERT INTO public.loaithietbi(tenloai, mota) VALUES ('lọc nước', 'lọc nước');
+INSERT INTO public.loaithietbi(tenloai, mota) VALUES ('nhiệt kế', 'nhiệt kế');
+
+INSERT INTO public.donvi(tendonvi) VALUES ('TP.HCM');
+INSERT INTO public.donvi(tendonvi) VALUES ('Cần Thơ');
+INSERT INTO public.donvi(tendonvi) VALUES ('Hậu Giang');
+INSERT INTO public.donvi(tendonvi) VALUES ('Vĩnh Long');
+
+INSERT INTO public.nguoidung(iddonvi, taikhoan, matkhau, tennguoidung, quyen) 
+VALUES (1, 'thevinh01', 'dfa2cf42e689dc76107c5d4c91d03007', 'Tần Thế Vinh', 'admin');
+INSERT INTO public.nguoidung(iddonvi, taikhoan, matkhau, tennguoidung, quyen) 
+VALUES (2, 'thevinh02', 'dfa2cf42e689dc76107c5d4c91d03007', 'Tần Thế Vinh 2', 'admin');
+INSERT INTO public.nguoidung(iddonvi, taikhoan, matkhau, tennguoidung, quyen) 
+VALUES (3, 'thevinh03', 'dfa2cf42e689dc76107c5d4c91d03007', 'Tần Thế Vinh 3', 'admin');
+
+INSERT INTO public.thietbi(idloai, iddonvi, tenthietbi, taikhoan, matkhau, trangthai)
+VALUES (1, 3, 'máy tính 1', 'maytinh01', 'dc819a95e66913d46ca261c070519f3c', true);
+INSERT INTO public.thietbi(idloai, iddonvi, tenthietbi, taikhoan, matkhau, trangthai)
+VALUES (1, 2, 'máy tính 2', 'maytinh02', 'dc819a95e66913d46ca261c070519f3c', false);
+INSERT INTO public.thietbi(idloai, iddonvi, tenthietbi, taikhoan, matkhau, trangthai)
+VALUES (1, 1, 'máy tính 3', 'maytinh03', 'dc819a95e66913d46ca261c070519f3c', true);
+INSERT INTO public.thietbi(idloai, iddonvi, tenthietbi, taikhoan, matkhau, trangthai)
+VALUES (1, 1, 'máy tính 4', 'maytinh04', 'dc819a95e66913d46ca261c070519f3c', true);
+INSERT INTO public.thietbi(idloai, iddonvi, tenthietbi, taikhoan, matkhau, trangthai)
+VALUES (3, 1, 'nhiệt kế 1', 'nhietke01', '3b5a7330cdf28e5919d2473ed7e292bf', true);
+INSERT INTO public.thietbi(idloai, iddonvi, tenthietbi, taikhoan, matkhau, trangthai)
+VALUES (3, 4, 'nhiệt kế 2', 'nhietke02', '3b5a7330cdf28e5919d2473ed7e292bf', false);
+INSERT INTO public.thietbi(idloai, iddonvi, tenthietbi, taikhoan, matkhau, trangthai)
+VALUES (3, 3, 'nhiệt kế 3', 'nhietke03', '3b5a7330cdf28e5919d2473ed7e292bf', true);
+
+INSERT INTO public.lichsu(idnguoidung, idthietbi, thoigiantt, thaotac)
+VALUES (1, 3, '2021-07-08 06:04:06', 'đăng nhập');
+INSERT INTO public.lichsu(idnguoidung, idthietbi, thoigiantt, thaotac)
+VALUES (3, 1, '2021-08-08 06:04:06', 'gửi lệnh');
+INSERT INTO public.lichsu(idnguoidung, idthietbi, thoigiantt, thaotac)
+VALUES (2, 2, '2021-06-01 06:04:06', 'gửi lệnh');
+
+INSERT INTO public.dulieu(idthietbi, thoigiangui, chitiet)
+VALUES (3, '2021-09-09 04:05:06', 'test dữ liệu');
+INSERT INTO public.dulieu(idthietbi, thoigiangui, chitiet)
+VALUES (2, '2021-09-07 04:05:06', 'test dữ liệu');
+INSERT INTO public.dulieu(idthietbi, thoigiangui, chitiet)
+VALUES (4, '2021-09-09 04:05:06', 'test dữ liệu');
+INSERT INTO public.dulieu(idthietbi, thoigiangui, chitiet)
+VALUES (3, '2021-08-07 04:05:06', 'test dữ liệu');
+INSERT INTO public.dulieu(idthietbi, thoigiangui, chitiet)
+VALUES (5, '2021-07-09 04:05:06', 'test dữ liệu');
+INSERT INTO public.dulieu(idthietbi, thoigiangui, chitiet)
+VALUES (7, '2021-12-07 04:05:06', 'test dữ liệu');
+>>>>>>> 8af9c7d14fd835f164c1cd37b664e47c435a7148

@@ -6,18 +6,18 @@
             "port": 5432,
             "driver": "PostgreSQL",
             "name": "mqtt",
-<<<<<<< HEAD
             "database": "mqtt",
             "username": "postgres",
             "password": "7714119"
         }
     ]
-=======
+    [   
+        {
             "username": "postgres",
             "database": "mqtt",
+            "username": "selqthang",
             "password": "7714119"
         }
     ],
     "liveServer.settings.port": 5501
->>>>>>> 3efbd077ef1c0e66b88f5c136049d4f00d2e02b4
 }

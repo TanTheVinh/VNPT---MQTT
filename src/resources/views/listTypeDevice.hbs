@@ -31,16 +31,17 @@
                   <td>{{this.tenloai}}</td>
                   <td>
                     <form class="d-inline-block" action="/list-catogory/detail/{{this.idloai}}" method="get">
-                      <button class="btn btn-info" type="submit">
+                      <button class="btn btn-info" type="submit" data-placement="top" title="Xem chi tiết">
                         <i class="fa fa-info-circle"></i>
-                        Xem chi tiết
+                        
                       </button>
                     </form>
                     <form class="d-inline-block" action="/list-catogory/delete/{{this.idloai}}?_method=DELETE"
-                      method="DELETE">
-                      <button type="submit" class="btn btn-danger">
+                      method="POST">
+                      <button type="submit" class="btn btn-danger" onclick="myFunction()" data-toggle="tooltip"
+                        data-placement="top" title="Xoá">
                         <i class="fa fa-trash-alt"></i>
-                        Xoá
+                        
                       </button>
                     </form>
                   </td>
@@ -48,6 +49,11 @@
                 {{/each}}
               </tbody>
             </table>
+            <script>
+              function myFunction() {
+                alert('Xác nhận xóa loại thiết bị');
+              }
+            </script>
           </div>
         </div>
       </div>

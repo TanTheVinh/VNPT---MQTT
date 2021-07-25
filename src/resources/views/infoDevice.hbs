@@ -68,8 +68,7 @@
       <div class="row mt-5 mx-2 justify-content-center">
         {{!-- {{#if thietbi}} --}}
         <div class="col-md-5 border rounded p-4 white-box">
-          <h2 id="hello">Thông tin thiết bị
-            :</h2>
+          <h2 id="hello">Thông tin thiết bị:</h2>
           <hr />
           <table class="table">
             {{!-- {{#if thongtin}} --}}
@@ -81,7 +80,7 @@
             <tr>
               <th>Mã đơn vị
                 :</th>
-              <td><span id="maThietBi">{{thietbi.thongtin.iddonvi}}</span></td>
+              <td><span id="maThietBi">{{thietbi.thongtin.tendonvi}}</span></td>
             </tr>
             <tr>
               <th>Tên thiết bị
@@ -92,7 +91,7 @@
             <tr>
               <th>Loại thiết bị
                 :</th>
-              <td><span id="loai">{{thietbi.thongtin.idloai}}</span></td>
+              <td><span id="loai">{{thietbi.thongtin.tenloai}}</span></td>
             </tr>
 
             <tr>
@@ -117,6 +116,7 @@
             </tr>
             <tr>
               <th>
+<<<<<<< HEAD
                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
                   <i class="fa fa-inbox"></i>
                   Gửi lệnh
@@ -375,6 +375,9 @@
                     </div>
                   </div>
                 </div>
+=======
+                
+>>>>>>> 8af9c7d14fd835f164c1cd37b664e47c435a7148
               </th>
               <td>
                 <a id="chinhSua" href="/list-device/edit/{{thietbi.thongtin.idthietbi}}" class="btn btn-info"><i
@@ -386,34 +389,36 @@
             {{!-- {{/if}} --}}
           </table>
         </div>
+        {{!-- 
         <div class="col-md-3 border rounded p-4 mx-4 white-box">
           <h2>Publish</h2>
           <hr />
           <div class="overflow-auto" style="height: 500px">
             <ul class="p-0" style="list-style-type: none">
-              {{#each thongtin.dulieu}}
+              {{#each thietbi.dulieu}}
               <li class="border rounded p-2 mb-2">
                 <span>
-                  Thời gian gửi: {{thongtin.dulieu.thoigiangui}}
+                  Thời gian gửi: {{this.thoigian}}
                   <br>
-                  Chi tiết: {{thongtin.dulieu.chitiet}}
+                  Chi tiết: {{this.chitiet}}
                 </span>
               </li>
               {{/each}}
             </ul>
           </div>
-        </div>
+        </div> 
+        --}}
         <div class="col-md-3 border rounded p-4 white-box">
           <h2>Lịch sử hoạt động</h2>
           <hr />
           <div class="overflow-auto" style="height: 500px">
             <ul class="p-0" style="list-style-type: none">
-              {{#each thongtin.lichsu}}
+              {{#each thietbi.lichsu}}
               <li class="border rounded p-2 mb-2">
                 <span>
-                  Thời gian tương tác: {{thongtin.lichsu.thoigiantt}}
+                  Thời gian tương tác: {{this.thoigian}}
                   <br>
-                  Thao tác: {{thongtin.lichsu.thaotac}}
+                  Thao tác: {{this.thaotac}}
                 </span>
               </li>
               {{/each}}

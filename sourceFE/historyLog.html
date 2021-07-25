@@ -9,6 +9,20 @@
     <link href="plugins/bower_components/chartist/dist/chartist.min.css" rel="stylesheet">
     <link rel="stylesheet" href="plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css">
     <link href="css/style.min.css" rel="stylesheet">
+    <script src="@@path/vendor/chartist/dist/chartist.min.js"></script>
+    <script src="@@path/vendor/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+    <script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/app-style-switcher.js"></script>
+    <script src="plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <script src="js/waves.js"></script>
+    <script src="js/sidebarmenu.js"></script>
+    <script src="js/custom.js"></script>
+    <script src="plugins/bower_components/chartist/dist/chartist.min.js"></script>
+    <script src="plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+    <script src="js/pages/dashboards/dashboard1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+
 </head>
 
 <body>
@@ -28,8 +42,8 @@
                             <img src="plugins/images/logo-VNPTIT.png" alt="homepage" style="width: 200px;" />
                         </b>
                     </a>
-                    <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none" href="javascript:void(0)"><i
-                            class="ti-menu ti-close"></i></a>
+                    <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
+                        href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
                 </div>
                 <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
                     <h2 class="page-title text-white p-2">Bảng điều khiển</h2>
@@ -51,7 +65,8 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li class="sidebar-item pt-2">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.html" aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.html"
+                                aria-expanded="false">
                                 <i class="far fa-clock" aria-hidden="true"></i>
                                 <span class="hide-menu">Bảng điều khiển</span>
                             </a>
@@ -109,60 +124,50 @@
         </aside>
         <div class="page-wrapper">
             <div class="page-breadcrumb bg-white">
-                <div class="row align-items-center">
-                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h2 class="d-inline-block">Danh sách đơn vị</h2>
-                    </div>
+              <div class="row align-items-center">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                  <h2 class="d-inline-block">Lịch sử publish của thiết bị: </h2>
                 </div>
+              </div>
             </div>
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="white-box">
-                            <a href="addUnit.html" class="btn btn-success">
-                                Thêm đơn vị
-                            </a>
-                            <div class="table-responsive">
-                                <table class="table text-nowrap text-center">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Mã đơn vị</th>
-                                            <th scope="col">Tên đơn vị
-                                            </th>
-                                            <th scope="col">Thao tác
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>2</td>
-                                            <td>
-                                                <button class="btn btn-danger">
-                                                    <i class="fa fa-trash-alt"></i> Xoá
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="white-box">
+                    <div class="table-responsive">
+                      <table class="table text-center">
+                        <thead>
+                          <tr>
+                            <th class="border-top-0 col-sm-2">Thời gian thao tác</th>
+                            <th class="border-top-0">Chi tiết</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>MA 1</td>
+                            <td>Ten 1</td>
+                          </tr>
+                          <tr>
+                            <td>MA 1</td>
+                            <td>Ten 1</td>
+                          </tr>
+                          <tr>
+                            <td>MA 1</td>
+                            <td>Ten 1</td>
+                          </tr>
+                          <tr>
+                            <td>MA 1</td>
+                            <td class="text-start">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum unde expedita, quod eveniet asperiores voluptas. Repellat itaque nulla voluptatem laborum sunt earum dignissimos consequuntur voluptas commodi non dolores aliquam similique sequi libero nostrum repellendus dolore recusandae corporis laboriosam, nam debitis delectus. Omnis at cum deleniti quas nam velit sequi illum.</td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
+                  </div>
                 </div>
+              </div>
             </div>
-        </div>
+          </div>
     </div>
-    <script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/app-style-switcher.js"></script>
-    <script src="plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
-    <script src="js/waves.js"></script>
-    <script src="js/sidebarmenu.js"></script>
-    <script src="js/custom.js"></script>
-    <script src="plugins/bower_components/chartist/dist/chartist.min.js"></script>
-    <script src="plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js">
-    </script>
-    <script src="js/pages/dashboards/dashboard1.js"></script>
 </body>
 
 </html>

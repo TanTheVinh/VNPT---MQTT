@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="white-box">
-                    <a href="addUnit.html" class="btn btn-success">
+                    <a href="/list-unit/add/" class="btn btn-success">
                         Thêm đơn vị
                     </a>
                     <div class="table-responsive">
@@ -25,17 +25,29 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                {{#each donvi}}
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td>2</td>
+                                    <th scope="row">{{this.iddonvi}}</th>
+                                    <td>{{this.tendonvi}}</td>
                                     <td>
-                                        <button class="btn btn-danger">
-                                            <i class="fa fa-trash-alt"></i> Xoá
-                                        </button>
+                                        <form class="d-inline-block"
+                                            action="/list-unit/delete/{{this.iddonvi}}?_method=DELETE" method="post">
+                                            <button class="btn btn-danger" data-toggle="tooltip" data-placement="top"
+                                                title="Xoá" onclick="myFunction()">
+                                                <i class="fa fa-trash-alt"></i>
+                                            </button>
+                                        </form>
+                                    </td>
                                     </td>
                                 </tr>
+                                {{/each}}
                             </tbody>
                         </table>
+                        <script>
+                            function myFunction() {
+                                alert('Xác nhận xóa thiết bị');
+                            }
+                        </script>
                     </div>
                 </div>
             </div>

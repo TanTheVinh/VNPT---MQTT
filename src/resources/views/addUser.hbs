@@ -15,7 +15,7 @@
           <h2 class="text-center">Nhập đầy đủ thông tin người dùng
             :</h2>
           <hr />
-          <form action="">
+          <form method="POST" action="/list-user/insert">
             <table class="table">
 
 
@@ -51,8 +51,8 @@
                 <th scope="row">Đơn vị
                   :</th>
                 <td>
-                  <select name="" id="">
-                    {{#each donvi}}
+                  <select name="iddonvi" id="iddonvi">
+                    {{#each nguoidung}}
                       <option value="{{this.iddonvi}}">{{this.tendonvi}}</option>
                     {{/each}}
                   </select>
@@ -62,16 +62,18 @@
                 <th scope="row">Quyền
                   :</th>
                 <td>
-                  <select name="" id="">
-                    <option value="">1</option>
+                  <select name="quyen" id="quyen">
+                    <option name="quyen" id value="admin">admin</option>
+                    <option value="nv">nv</option>
                   </select>
+                    
                 </td>
               </tr>
               <tr>
                 <th scope="row">
                 </th>
                 <td>
-                  <button id="save-btn" type="submit" class="btn btn-success" disabled="disabled"><i
+                  <button id="save-btn" type="submit" onclick="myFunction()" class="btn btn-success" disabled="disabled"><i
                       class="fa fa-plus"></i>Thêm người dùng</button>
                   <button id="xoa" type="reset" class="btn btn-danger">
                     <i class="fa fa-eraser"></i>
@@ -98,7 +100,14 @@
                 });
               });
             }(window.jQuery, window, document));
+
+            
           </script>
+          <script>
+              function myFunction() {
+                alert('Xác nhận thêm người dùng');
+              }
+            </script>
         </div>
         <div class="col-md-3"></div>
       </div>

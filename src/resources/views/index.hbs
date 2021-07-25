@@ -47,20 +47,27 @@
                             type: 'bar',
                             data: {
                                 labels: [
-                                {{#each bieudo}}
-                                    "{{bieudo.month}}",
-                                {{/each}}
+                                    {{#each bieudo}}
+                                        {{this.month}},
+                                    {{/each}}
                                 ],
                                 datasets: [{
-                                    label: {{bieudo.year}},
+                                    label: [    {{#each bieudo}}
+                                                    {{this.year}},
+                                                {{/each}}
+                                            ],
                                     data: [
-                                        {
-                                            {{#each bieudo}}
-                                                "{{bieudo.soluonglenh}}",
-                                            {{/each}}
-                                        }, 
-                                    ],
+                                                {{#each bieudo}}
+                                                    {{this.soluonglenh}},
+                                                {{/each}} 
+                                            ],
                                     backgroundColor: [
+                                        'rgba(255, 99, 132, 0.2)',
+				                        'rgba(54, 162, 235, 0.2)',
+				                        'rgba(255, 206, 86, 0.2)',
+				                        'rgba(75, 192, 192, 0.2)',
+				                        'rgba(153, 102, 255, 0.2)',
+				                        'rgba(255, 159, 64, 0.2)',
                                         'rgba(255, 99, 132, 0.2)',
 				                        'rgba(54, 162, 235, 0.2)',
 				                        'rgba(255, 206, 86, 0.2)',

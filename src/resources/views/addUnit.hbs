@@ -15,7 +15,7 @@
           <h2 class="text-center">Nhập đầy đủ thông tin đơn vị
             :</h2>
           <hr />
-          <form action="">
+          <form method="POST" action="/list-unit/insert">
             <table class="table">
 
               {{!-- <tr>
@@ -31,7 +31,7 @@
                 <th scope="row">Tên đơn vị
                   :</th>
                 <td>
-                  <input required type="text" name="tenLoaiThietBi" id="tenLoaiThietBi" /><span class="text-danger">
+                  <input required type="text" name="tendonvi" id="tendonvi" /><span class="text-danger">
                     *</span>
                 </td>
               </tr>
@@ -39,7 +39,7 @@
                 <th scope="row">
                 </th>
                 <td>
-                  <button id="them" type="submit" class="btn btn-success">
+                  <button id="them" type="submit" class="btn btn-success" onclick="myFunction()">
                     <i class="fa fa-plus"></i>
                     Thêm đơn vị
 
@@ -52,6 +52,11 @@
               </tr>
             </table>
           </form>
+          <script>
+              function myFunction() {
+                alert('Xác nhận thêm đơn vị');
+              }
+            </script>
         </div>
         <div class="col-md-3"></div>
       </div>
