@@ -4,42 +4,55 @@ class catogory_controller {
 
     //[GET] /list-catogory/
     list(req, res, next){
-        pool
-            .query('select * from loaithietbi')
-            .then(result => {
-                const loaithietbi = result.rows;
-                // res.json({ loaithietbi });
-                res.render('listTypeDevice', { loaithietbi });
-            })
-            .catch(next)
+        if(req.session.idnguoidung === undefined){
+            res.redirect('/');
+        }
+        else{
+            pool
+                .query('select * from loaithietbi')
+                .then(result => {
+                    const loaithietbi = result.rows;
+                    // res.json({ loaithietbi });
+                    res.render('listTypeDevice', { loaithietbi });
+                })
+                .catch(next)
+        }
     }
 
     //[GET] /list-catogory/detail
     detail(req, res, next){
+        if(req.session.idnguoidung === undefined){
+            res.redirect('/');
+        }
+        else{
         //res.json(req.body)
-        pool
-            .query('select * from loaithietbi where idloai = $1', [req.params.id])
-            .then(result => {
-                const loaithietbi = result.rows[0];
-            // res.json({ loaithietbi });
-                res.render('infoTypeDevice',{ loaithietbi });
-            })
-            .catch(next);
+            pool
+                .query('select * from loaithietbi where idloai = $1', [req.params.id])
+                .then(result => {
+                    const loaithietbi = result.rows[0];
+                // res.json({ loaithietbi });
+                    res.render('infoTypeDevice',{ loaithietbi });
+                })
+                .catch(next);
+        }
     }
 
     //[GET] /list-catogory/edit/:id
     edit(req, res, next){
-         pool
-         .query(`Select * from loaithietbi where idloai=$1`, [req.params.id])
-
-
-        .then(result => {
-            const loaithietbi = result.rows[0];
-           // res.json(loaithietbi);
-           
-            res.render('editInfoTypeDevice',{loaithietbi});
-        })
-        .catch(next);
+        if(req.session.idnguoidung === undefined){
+            res.redirect('/');
+        }
+        else{
+            pool
+                .query(`Select * from loaithietbi where idloai=$1`, [req.params.id])
+                .then(result => {
+                    const loaithietbi = result.rows[0];
+                // res.json(loaithietbi);
+                
+                    res.render('editInfoTypeDevice',{loaithietbi});
+                })
+                .catch(next);
+        }
         
     }
     //[PUT]/list-catogory/edit/:id
@@ -59,10 +72,16 @@ class catogory_controller {
     }
 
     //[GET] /list-category/add
-    add(req, res, next){     
-        pool 
-            res.render('addTypeDevice');
+    add(req, res, next){
+        if(req.session.idnguoidung === undefined){
+            res.redirect('/');
+        }
+        else{     
+            pool
+                res.render('addTypeDevice');
+        }
     }
+
     //[POST] /list-category/insert
     insert(req, res, next){ 
         //res.json(req.body)
@@ -82,15 +101,14 @@ class catogory_controller {
     }
 
         // [DELETE] /list-category/delete/:id
-        delete(req, res, next){
-            pool
-                .query('delete from loaithietbi where idloai = $1', [req.params.id])
-                .then(() => {
-                    alert("thêm thành công")
-                    res.redirect('back');
-                })
-                .catch(next);
-        }
+    delete(req, res, next){
+        pool
+            .query('delete from loaithietbi where idloai = $1', [req.params.id])
+            .then(() => {
+                res.redirect('back');
+            })
+            .catch(next);
+    }
 }
 
 module.exports = new catogory_controller;

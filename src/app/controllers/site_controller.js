@@ -71,16 +71,21 @@ class site_controller {
 
     // [GET] /change-password
     changepass(req, res, next){
-        const idnguoidung = req.session.idnguoidung;
-        pool
-            .query(`select * from nguoidung where idnguoidung = $1`, [idnguoidung])
-            .then(result => {
-                const nguoidung = result.rows[0];
-                // res.json({nguoidung});
-                // console.log({nguoidung});
-                res.render('changePassUser', { nguoidung });
-            })
-            .catch(next)
+        if(req.session.idnguoidung === undefined){
+            res.redirect('/');
+        }
+        else{
+            const idnguoidung = req.session.idnguoidung;
+            pool
+                .query(`select * from nguoidung where idnguoidung = $1`, [idnguoidung])
+                .then(result => {
+                    const nguoidung = result.rows[0];
+                    // res.json({nguoidung});
+                    // console.log({nguoidung});
+                    res.render('changePassUser', { nguoidung });
+                })
+                .catch(next)
+        }
     }
         
     
