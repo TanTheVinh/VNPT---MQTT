@@ -5,64 +5,79 @@ class device_controller {
 
     //[GET] /list-device/
     list(req, res, next){
-        const iddonvi = req.session.iddonvi;
-        pool
-            .query(`select * from thietbi, loaithietbi 
-                where thietbi.idloai = loaithietbi.idloai and iddonvi = $1`, [iddonvi])
-            .then(result => {
-                const thietbi = result.rows;
-                // res.json({thietbi});
-                console.log({thietbi});
-                res.render('listDevice', { thietbi });
-            })
-            .catch(next)
+        if(req.session.idnguoidung === undefined){
+            res.redirect('/');
+        }
+        else{
+            const iddonvi = req.session.iddonvi;
+            pool
+                .query(`select * from thietbi, loaithietbi 
+                    where thietbi.idloai = loaithietbi.idloai and iddonvi = $1`, [iddonvi])
+                .then(result => {
+                    const thietbi = result.rows;
+                    // res.json({thietbi});
+                    console.log({thietbi});
+                    res.render('listDevice', { thietbi });
+                })
+                .catch(next)
+        }
     }
 
     //[GET] /list-device/detail/:id
     detail(req, res, next){
-        const thietbi = {};
-        pool
-            .query(
-                `select * from thietbi, loaithietbi, donvi
-                where 
-                thietbi.idloai = loaithietbi.idloai 
-                and 
-                thietbi.iddonvi = donvi.iddonvi
-                and
-                idthietbi = $1`, [req.params.id]
-            )
-            .then(result => {
-                thietbi.thongtin = result.rows[0];
-                pool
-                    .query(`select *, to_char(thoigiantt, 'dd Mon YYYY') as thoigian 
-                        from lichsu where idthietbi = $1`, [req.params.id])
-                    .then(result => {
-                        thietbi.lichsu = result.rows;
-                        pool
-                            .query(`select *, to_char(thoigiangui, 'dd Mon YYYY') as thoigian
-                                from dulieu where idthietbi = $1`, [req.params.id])
-                            .then(result => {
-                                thietbi.dulieu = result.rows;
-                                // res.json({ thietbi });
-                                // console.log({ thietbi });
-                                res.render('infoDevice', { thietbi });
-                            })
-                            .catch(next);
-                    })
-                    .catch(next);
-            })
-            .catch(next);
+        if(req.session.idnguoidung === undefined){
+            res.redirect('/');
+        }
+        else{
+            const thietbi = {};
+            pool
+                .query(
+                    `select * from thietbi, loaithietbi, donvi
+                    where 
+                    thietbi.idloai = loaithietbi.idloai 
+                    and 
+                    thietbi.iddonvi = donvi.iddonvi
+                    and
+                    idthietbi = $1`, [req.params.id]
+                )
+                .then(result => {
+                    thietbi.thongtin = result.rows[0];
+                    pool
+                        .query(`select *, to_char(thoigiantt, 'dd Mon YYYY') as thoigian 
+                            from lichsu where idthietbi = $1`, [req.params.id])
+                        .then(result => {
+                            thietbi.lichsu = result.rows;
+                            pool
+                                .query(`select *, to_char(thoigiangui, 'dd Mon YYYY') as thoigian
+                                    from dulieu where idthietbi = $1`, [req.params.id])
+                                .then(result => {
+                                    thietbi.dulieu = result.rows;
+                                    // res.json({ thietbi });
+                                    // console.log({ thietbi });
+                                    res.render('infoDevice', { thietbi });
+                                })
+                                .catch(next);
+                        })
+                        .catch(next);
+                })
+                .catch(next);
+        }
     }
 
     //[GET] /list-device/edit/:id
     edit(req, res, next){
-        pool
-        .query(`Select * from thietbi where idthietbi=$1`, [req.params.id])
-        .then(result => {
-           const thietbi = result.rows[0];
-          res.render('editInfoDevice',{thietbi});
-        })
-       .catch(next);
+        if(req.session.idnguoidung === undefined){
+            res.redirect('/');
+        }
+        else{
+            pool
+            .query(`Select * from thietbi where idthietbi=$1`, [req.params.id])
+            .then(result => {
+            const thietbi = result.rows[0];
+            res.render('editInfoDevice',{thietbi});
+            })
+        .catch(next);
+        }
     }
 
     //[PUT] list-device/edit/:id
@@ -86,27 +101,32 @@ class device_controller {
     
     //[GET] /list-device/add
     add(req, res, next){
-        pool
-            .query(`select * from loaithietbi`)
-            .then(result => {
-                const loaithietbi = result.rows;
-                pool
-                    .query(`select * from donvi`)
-                    .then(result => {
-                        const donvi = result.rows;
-                        pool
-                            .query(`select tenthietbi, taikhoan from thietbi`)
-                            .then(result => {
-                                const thietbi = result.rows;
-                                // res.json({thietbi, loaithietbi, donvi});
-                                res.render('addDevice', {thietbi, loaithietbi, donvi});
-                                // console.log({loaithietbi, donvi});
-                            })
-                            .catch(next);
-                    })
-                    .catch(next);
-            })
-            .catch(next);
+        if(req.session.idnguoidung === undefined){
+            res.redirect('/');
+        }
+        else{
+            pool
+                .query(`select * from loaithietbi`)
+                .then(result => {
+                    const loaithietbi = result.rows;
+                    pool
+                        .query(`select * from donvi`)
+                        .then(result => {
+                            const donvi = result.rows;
+                            pool
+                                .query(`select tenthietbi, taikhoan from thietbi`)
+                                .then(result => {
+                                    const thietbi = result.rows;
+                                    // res.json({thietbi, loaithietbi, donvi});
+                                    res.render('addDevice', {thietbi, loaithietbi, donvi});
+                                    // console.log({loaithietbi, donvi});
+                                })
+                                .catch(next);
+                        })
+                        .catch(next);
+                })
+                .catch(next);
+        }
     }
 
     // [POST] /list-device/create
