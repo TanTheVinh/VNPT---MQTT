@@ -20,7 +20,7 @@
                 <th scope="row">Mã loại thiết bị
                   :</th>
                 <td>
-                  <input required  type="text" name="maLoaiThietBi" id="maLoaiThietBi" value={{loaithietbi.idloai}} />
+                  <input required  type="text" name="maLoaiThietBi" id="maLoaiThietBi" value="{{loaithietbi.idloai}}" />
                   <span class="text-danger"> *</span>
                 </td>
               </tr>
@@ -29,7 +29,7 @@
                 <th scope="row">Tên loại thiết bị
                   :</th>
                 <td>
-                  <input required type="text" name="tenloai" id="tenloai" value={{loaithietbi.tenloai}} /><span
+                  <input required type="text" name="tenloai" id="tenloai" value="{{loaithietbi.tenloai}}" /><span
                     class="text-danger"> *</span>
                 </td>
               </tr>
@@ -37,7 +37,7 @@
               <tr>
                 <th scope="row">Mô tả loại thiết bị:</th>
                 <td>
-                  <input required type="text" name="mota" id="mota" value={{loaithietbi.mota}} /><span
+                  <input required type="text" name="mota" id="mota" value="{{loaithietbi.mota}}" /><span
                     class="text-danger"> *</span>
                 </td>
               </tr>
@@ -45,7 +45,7 @@
                 <th scope="row">
                 </th>
                 <td>
-                  <button id="them" class="btn btn-success">
+                  <button id="them" onclick="myFunction()" class="btn btn-success">
                     <i class="fa fa-edit"></i>
                     Cập nhật thông tin loại thiết bị
                   </button>
@@ -53,6 +53,11 @@
               </tr>
               {{/if}}
             </table>
+            <script>
+              function myFunction() {
+                alert('Xác nhận cập nhật thông tin loại thiết bị');
+              }
+            </script>
           </form>
         </div>
         <div class="col-md-3"></div>

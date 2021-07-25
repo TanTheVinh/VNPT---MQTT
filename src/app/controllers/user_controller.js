@@ -34,7 +34,7 @@ class user_controller {
                     const nguoidung = result.rows;
                     //res.json({nguoidung} );
                     res.render('addUser', { nguoidung });
-                        //console.log({nguoidung});
+                    console.log({nguoidung});
                 })
                 .catch(next);
         }

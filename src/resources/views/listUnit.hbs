@@ -25,22 +25,29 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                 {{#each donvi}}
+                                {{#each donvi}}
                                 <tr>
                                     <th scope="row">{{this.iddonvi}}</th>
                                     <td>{{this.tendonvi}}</td>
                                     <td>
-                                        <form class="d-inline-block" action="/list-unit/delete/{{this.iddonvi}}?_method=DELETE" method="post">
-                                        <button class="btn btn-danger">
-                                            <i class="fa fa-trash-alt"></i> Xoá
-                                        </button>
+                                        <form class="d-inline-block"
+                                            action="/list-unit/delete/{{this.iddonvi}}?_method=DELETE" method="post">
+                                            <button class="btn btn-danger" data-toggle="tooltip" data-placement="top"
+                                                title="Xoá" onclick="myFunction()">
+                                                <i class="fa fa-trash-alt"></i>
+                                            </button>
                                         </form>
-                                        </td>
+                                    </td>
                                     </td>
                                 </tr>
                                 {{/each}}
                             </tbody>
                         </table>
+                        <script>
+                            function myFunction() {
+                                alert('Xác nhận xóa thiết bị');
+                            }
+                        </script>
                     </div>
                 </div>
             </div>

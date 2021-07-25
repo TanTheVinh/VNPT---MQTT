@@ -16,44 +16,39 @@
             <hr />
             <form method="POST" action="/list-device/create" onclick="md5pass()">
               <table class="table">
-
                 <tr>
                   <th scope="row">Tên thiết bị:</th>
                   <td>
-                    <input required type="text" name="tenthietbi" id="tenthietbi" minlength="1" maxlength="50"/>
+                    <input required type="text" name="tenthietbi" id="tenthietbi" minlength="1" maxlength="50" />
                   </td>
                 </tr>
-
                 <tr>
                   <th scope="row">Đơn vị:</th>
                   <td>
                     <select name="iddonvi" id="iddonvi">
                       {{#each donvi}}
-                        <option  value="{{this.iddonvi}}">{{this.tendonvi}}</option>
+                      <option value="{{this.iddonvi}}">{{this.tendonvi}}</option>
                       {{/each}}
                     </select>
                   </td>
                 </tr>
-
                 <tr>
                   <th scope="row">Loại thiết bị
                     :</th>
                   <td>
                     <select name="idloai" id="idloai">
                       {{#each loaithietbi}}
-                        <option  value="{{this.idloai}}">{{this.tenloai}}</option>
+                      <option value="{{this.idloai}}">{{this.tenloai}}</option>
                       {{/each}}
                     </select>
                   </td>
                 </tr>
-
                 <tr>
                   <th scope="row">Tài khoản thiết bị:</th>
                   <td>
-                    <input required type="text" name="taikhoan" id="taikhoan" minlength="1" maxlength="30"/>
+                    <input required type="text" name="taikhoan" id="taikhoan" minlength="1" maxlength="30" />
                   </td>
                 </tr>
-
                 <tr>
                   <th scope="row">Mật khẩu thiết bị:</th>
                   <td>
@@ -61,7 +56,6 @@
                     <input type="hidden" name="md5matkhau" id="md5password" value="">
                   </td>
                 </tr>
-
                 <tr>
                   <th scope="row">Nhập lại mật khẩu thiết bị:</th>
                   <td>
@@ -72,8 +66,8 @@
                   <th scope="row">
                   </th>
                   <td>
-                    <button id="save-btn" type="submit" class="btn btn-success" disabled="disabled"><i
-                      class="fa fa-plus"></i>Thêm thiết bị
+                    <button id="save-btn" type="submit" onclick="myFunction()" class="btn btn-success add" disabled="disabled"><i
+                        class="fa fa-plus"></i>Thêm thiết bị
                     </button>
                     <button id="xoa" type="reset" class="btn btn-danger">
                       <i class="fa fa-eraser"></i>
@@ -91,7 +85,7 @@
                       var pass = $('#password').val();
                       var confirmPass = $('#confirmPassword').val();
                       var saveButton = $("#save-btn");
-                      if (pass == confirmPass) {
+                      if (pass!="" && pass == confirmPass) {
                         saveButton.removeAttr('disabled');
                       } else {
                         saveButton.attr('disabled', 'disabled');
@@ -101,13 +95,16 @@
                 });
               }(window.jQuery, window, document));
 
-              function md5pass(){
+              function md5pass() {
                 password = document.getElementById("password").value;
-                if(password != ''){
-                document.getElementById("md5password").value = md5(document.getElementById("password").value);
+                if (password != '') {
+                  document.getElementById("md5password").value = md5(document.getElementById("password").value);
                 }
               }
 
+              function myFunction() {
+                alert("Xác nhận thêm thiết bị!");
+              }
             </script>
           </div>
           <div class="col-md-3"></div>
