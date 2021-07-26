@@ -15,6 +15,11 @@
           <h2 class="text-center">Nhập đầy đủ thông tin loại thiết bị
             :</h2>
           <hr />
+          {{!-- {{#if message}}
+          <div class="alert alert-success" role="alert">
+            <h4>Thêm loại thiết bị {{message}}!</h4>
+          </div>
+          {{/if}} --}}
           <form method="POST" action="/list-catogory/insert">
             <table class="table">
               <tr>
@@ -35,10 +40,9 @@
                 <th scope="row">
                 </th>
                 <td>
-                  <button id="them" type="submit" class="btn btn-success"  onclick="myFunction()">
+                  <button id="them" type="submit" class="btn btn-success" onclick="myFunction()">
                     <i class="fa fa-plus"></i>
                     Thêm loại thiết bị
-
                   </button>
                   <button id="xoa" type="reset" class="btn btn-danger">
                     <i class="fa fa-eraser"></i>
@@ -48,14 +52,27 @@
               </tr>
             </table>
           </form>
+          <script type="text/javascript">
+            function myFunction() {
+              confirm('Xác nhận thêm loại thiết bị');
+            }
+
+            //var rp = {{message}};
+            //if(rp!=""){
+            //  alert(rp);
+            //}
+            //else{
+            //  console.log("none");
+            //}
+          </script>
+          {{#if message}}
+          <p id="rpl" class="d-none">{{message}}</p>
+          {{/if}}
           <script>
+            var rp = document.getElementById("rpl").innerHTML;
+            confirm(rp);
+          </script>
 
-              
-
-              function myFunction() {
-                alert('Xác nhận thêm loại thiết bị');
-              }
-            </script>
         </div>
       </div>
     </div>

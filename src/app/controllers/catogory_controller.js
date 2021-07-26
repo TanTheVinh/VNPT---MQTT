@@ -91,7 +91,8 @@ class catogory_controller {
         
         .then(() =>{
             res.render('addTypeDevice', {message: "thành công"})
-
+            //res.json(req.body);
+            //res.json({message: '"thành công"'});
         }).catch(next);
     }
         //     {
