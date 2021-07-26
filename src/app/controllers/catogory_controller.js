@@ -90,15 +90,21 @@ class catogory_controller {
         .query('INSERT INTO loaithietbi (tenloai, mota) VALUES ($1, $2)', [tenloai,mota])
         
         .then(() =>{
-            res.redirect('back')
-            res.json({
-                message: 'thêm thành công',
-                body: {
-                    loaithietbi: {tenloai, mota}
-                }
-            })
+            res.render('addTypeDevice', {message: "thành công"})
+
         }).catch(next);
     }
+        //     {
+        //         message: 'thêm thành công'
+        
+        //     // res.json({
+        //     //     message: 'thêm thành công',
+        //         // body: {
+        //         //     loaithietbi: {tenloai, mota}
+        //         // }
+        //     //})
+        
+        // })
 
         // [DELETE] /list-category/delete/:id
     delete(req, res, next){

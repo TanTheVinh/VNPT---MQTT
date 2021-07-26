@@ -69,36 +69,34 @@ class device_controller {
         if(req.session.idnguoidung === undefined){
             res.redirect('/');
         }
-        else{
+        else{ 
             pool
-            .query(`select * from thietbi, loaithietbi, donvi
-            where 
-            thietbi.idloai = loaithietbi.idloai 
-            and 
-            thietbi.iddonvi = donvi.iddonvi
-            and
-            idthietbi = $1`, [req.params.id])
+            .query(`select * from loaithietbi`)
             .then(result => {
-            const thietbi = result.rows[0];
-            res.render('editInfoDevice',{thietbi});
-            })
-        .catch(next);
+                 const loaithietbi = result.rows;
+               //  res.json(thietbi.loaithietbi)
+                pool
+                    .query(`select * from thietbi, donvi
+                    where 
+                    thietbi.iddonvi = donvi.iddonvi
+                    and
+                    idthietbi = $1`, [req.params.id])
+                    .then(result =>{
+                    const thietbi= result.rows[0];
+                    res.render('editInfoDevice',{ thietbi, loaithietbi });
+                    }).catch(next);
+
+            }).catch(next);
         }
     }
 
     //[PUT] list-device/edit/:id
     update(req, res, next){
-        const idthietbi = req.params.id;
-        const thietbi = Object.values(req.body);
-        res.json(thietbi);
+        const id = req.params.id;
+        const { tenthietbi, idloai, taikhoan, trangthai } = (req.body);
+        //res.json(req.body);
         pool
-            .query(`update thietbi
-            set idloai = $1,
-            tenthietbi = $2,
-            taikhoan = $3,
-            matkhau = $4
-            trangthai = $5
-            where idthietbi = $6`, [idloai, tenthietbi, taikhoan, matkhau, trangthai, id])
+            .query(`UPDATE thietbi SET tenthietbi = $1, idloai = $2, taikhoan =$3, trangthai =$4  WHERE idthietbi = $5`, [tenthietbi, idloai, taikhoan, trangthai, id])
             .then(() => {
                 res.redirect('/list-device');
             })

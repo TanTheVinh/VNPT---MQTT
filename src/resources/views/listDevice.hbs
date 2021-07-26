@@ -38,15 +38,42 @@
                     {{/if}}
                   </td>
                   <td>
-                    <a class="btn btn-info" href="/list-device/detail/{{this.idthietbi}}" method="GET" >
+                    <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top"
+                      title="Gửi lệnh" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                      <i class="fa fa-inbox"></i>
+
+                    </button>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                      aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Gửi lệnh</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <input type="text" name="mesg" id="mesg">
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Thoát</button>
+                            <button type="button" class="btn btn-success">Gửi</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <a class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Xem chi tiết"
+                      href="/list-device/detail/{{this.idthietbi}}" method="GET">
                       <i class="fa fa-info-circle"></i>
-                      Xem chi tiết
+                    </a>
+                    <a href="#" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Lịch sử">
+                      <i class="fa fa-history"></i>
                     </a>
                     <form class="d-inline-block" action="/list-device/delete/{{this.idthietbi}}?_method=DELETE"
                       method="post">
-                      <button type="submit" class="btn btn-danger">
+                      <button type="submit" class="btn btn-danger" onclick="myFunction()" data-toggle="tooltip"
+                        data-placement="top" title="Xoá">
                         <i class="fa fa-trash-alt"></i>
-                        Xoá
+
                       </button>
                     </form>
                   </td>
@@ -54,6 +81,11 @@
                 {{/each}}
               </tbody>
             </table>
+            <script>
+              function myFunction() {
+                alert('Xác nhận xóa thiết bị');
+              }
+            </script>
           </div>
         </div>
       </div>

@@ -61,11 +61,11 @@
                 <th scope="row">
                 </th>
                 <td>
-                  <button id="save-btn" type="submit" class="btn btn-success">
+                  <button id="save-btn" disabled="disabled" onclick="myFunction()" type="submit" class="btn btn-success">
                     <i class="fa fa-edit"></i>
                     Đổi mật khẩu
                   </button>
-                  <button id="xoa" type="reset" class="btn btn-danger" disabled="disabled">
+                  <button id="xoa" type="reset" class="btn btn-danger">
                     <i class="fa fa-eraser"></i>
                     Xoá
                   </button>
@@ -81,7 +81,7 @@
                       var pass = $('#password').val();
                       var confirmPass = $('#confirmPassword').val();
                       var saveButton = $("#save-btn");
-                      if (pass == confirmPass) {
+                      if (pass!="" && pass == confirmPass) {
                         saveButton.removeAttr('disabled');
                       } else {
                         saveButton.attr('disabled', 'disabled');
@@ -96,6 +96,11 @@
                 document.getElementById("md5password").value = md5(document.getElementById("password").value);
             }
           </script>
+          <script>
+              function myFunction() {
+                alert('Xác nhận đổi mật khẩu người dùng!');
+              }
+            </script>
         </div>
         <div class="col-md-3"></div>
       </div>
