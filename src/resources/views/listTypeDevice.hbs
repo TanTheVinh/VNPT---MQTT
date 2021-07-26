@@ -13,12 +13,9 @@
           <a href="/list-catogory/add" class="btn btn-success">
             Thêm loại thiết bị
           </a>
-
-   <button type="button" class="btn btn-danger" onclick="thongbao()" data-toggle="tooltip"
-                        data-placement="top" title="Xoá">
-                        </button>
- 
-
+          <button type="button" class="btn btn-danger" onclick="myFunction()">
+            Xoá
+          </button>
           <div class="table-responsive">
             <table class="table text-nowrap text-center">
               <thead>
@@ -39,7 +36,7 @@
                     <form class="d-inline-block" action="/list-catogory/detail/{{this.idloai}}" method="get">
                       <button class="btn btn-info" type="submit" data-placement="top" title="Xem chi tiết">
                         <i class="fa fa-info-circle"></i>
-                        
+
                       </button>
                     </form>
                     <form class="d-inline-block" action="/list-catogory/delete/{{this.idloai}}?_method=DELETE"
@@ -47,7 +44,7 @@
                       <button type="submit" class="btn btn-danger" onclick="myFunction()" data-toggle="tooltip"
                         data-placement="top" title="Xoá">
                         <i class="fa fa-trash-alt"></i>
-                        
+
                       </button>
                     </form>
                   </td>
@@ -55,16 +52,13 @@
                 {{/each}}
               </tbody>
             </table>
-            <script>
-              function thongbao(){
-             // var thongbao = {{message}};
-              alert('nghĩ');
-              }
-
-            </script>
-            <script>
+            <script type="text/javascript">
               function myFunction() {
                 alert('Xác nhận xóa loại thiết bị');
+                //var text = {{#each loaithietbi}}
+                //  console.log({{this.idloai}});
+                //{{/each}}
+                //console.log(text);
               }
             </script>
           </div>
