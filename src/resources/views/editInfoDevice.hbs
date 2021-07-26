@@ -36,17 +36,17 @@
                 <th scope="row">Tên thiết bị
                   :</th>
                 <td>
-                  <input required type="text" name="tenThietBi" id="tenThietBi" value="{{thietbi.tenthietbi}}" />
+                  <input required type="text" name="tenthietbi" id="tenthietbi" value="{{thietbi.tenthietbi}}" />
                 </td>
               </tr>
               <tr>
                 <th scope="row">Loại thiết bị
                   :</th>
                 <td>
-                  <select name="" id="">
-                    {{!-- {{#each madonvi}}
-                      <option value="{{this.idloai}}">{{this.tenloai}}</option>
-                    {{/each}} --}}
+                  <select name="idloai" id="idloai">
+                    {{#each loaithietbi}}
+                     <option value="{{this.idloai}}">{{this.tenloai}}</option> 
+                     {{/each}}
                   </select>
                   
                 </td>
@@ -55,7 +55,7 @@
                 <th scope="row">Tài khoản thiết bị
                   :</th>
                 <td>
-                  <input required type="text" name="taiKhoan" id="taiKhoan" value={{thietbi.taikhoan}} />
+                  <input required type="text" name="taikhoan" id="taiKhoan" value={{thietbi.taikhoan}} />
                 </td>
               </tr>
 
@@ -63,7 +63,7 @@
                 <th scope="row">Trạng thái thiết bị
                   :</th>
                 <td>
-                  <select name="trangThai" id="trangThai">
+                  <select name="trangthai" id="trangThai">
                     <option value="1">Kết nối
                     </option>
                     <option value="0">Ngắt kết nối
@@ -85,9 +85,10 @@
           </form>
           <script>
               function myFunction() {
-                alert('Xác nhận cập nhật thông tin thiết bị');
+                alert('Xác nhận cập nhật thông tin thiết bị ',);
               }
             </script>
+            
         </div>
         <div class="col-md-3"></div>
       </div>

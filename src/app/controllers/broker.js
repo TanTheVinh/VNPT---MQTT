@@ -16,23 +16,20 @@ broker.on('ready', () => {
 broker.on('published', (packet) => {
     message = packet.payload.toString();
     console.log(message);
-    var id = Math.floor(Math.random() * 100);
     var day = new Date().getDate();
     var month = new Date().getMonth()+1;
     var year = new Date().getFullYear();
     var date = `${year}-${month}-${day}`;
-    var arr = [date, message];
     if(message.slice(0, 1) != '{' && message.slice(0, 4) != 'mqtt'){
-        var dbInsert = `INSERT INTO public.dulieu(
-            idthietbi, thoigiangui, chitiet)
-            VALUES (1, $1, $2);`
         pool
-            .query(dbInsert, arr, (err, res) => {
-            if (err) {
-              console.log(err.stack);
-            } else {
-              console.log(res.rows[0]);
-            }
-          });
+            .query(`INSERT INTO public.dulieu(
+                idthietbi, thoigiangui, chitiet)
+                VALUES (1, $1, $2);`, [date, message]) 
+            .then(result => {
+                console.log(result.rows[0]);
+            })
+            .catch(err => {
+                console.log(err.stack);
+            });
     }
 });

@@ -84,23 +84,16 @@ class catogory_controller {
 
     //[POST] /list-category/insert
     insert(req, res, next){ 
-        //res.json(req.body)
+        // res.json({message: '"thành công"'})
         const { tenloai, mota } = req.body;
         pool
         .query('INSERT INTO loaithietbi (tenloai, mota) VALUES ($1, $2)', [tenloai,mota])
-        
         .then(() =>{
-            res.redirect('back')
-            // res.json({
-            //     message: 'thêm thành công',
-            //     body: {
-            //         loaithietbi: {tenloai, mota}
-            //     }
-            // })
+            res.render('addTypeDevice', {message: '"thành công"'}) //sửa cái này nè
         }).catch(next);
     }
 
-        // [DELETE] /list-category/delete/:id
+    // [DELETE] /list-category/delete/:id
     delete(req, res, next){
         pool
             .query('delete from loaithietbi where idloai = $1', [req.params.id])
