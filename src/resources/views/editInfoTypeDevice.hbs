@@ -45,7 +45,7 @@
                 <th scope="row">
                 </th>
                 <td>
-                  <button id="them" class="btn btn-success">
+                  <button id="them" onclick="myFunction()" class="btn btn-success">
                     <i class="fa fa-edit"></i>
                     Cập nhật thông tin loại thiết bị
                   </button>
@@ -53,6 +53,11 @@
               </tr>
               {{/if}}
             </table>
+            <script>
+              function myFunction() {
+                alert('Xác nhận cập nhật thông tin loại thiết bị');
+              }
+            </script>
           </form>
         </div>
         <div class="col-md-3"></div>

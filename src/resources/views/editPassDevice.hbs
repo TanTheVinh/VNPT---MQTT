@@ -22,7 +22,7 @@
                 <th scope="row">Mật khẩu thiết bị
                   :</th>
                 <td>
-                  <input required type="password" name="oldPassword" id="oldPassword" value="" />
+                  <input required type="password" name="oldPassword" id="oldPassword" />
                 </td>
               </tr>
               <tr>
@@ -46,7 +46,7 @@
                 <th scope="row">
                 </th>
                 <td>
-                  <button id="save-btn" type="submit" class="btn btn-success">
+                  <button id="save-btn" type="submit" onclick="myFunction()" class="btn btn-success">
                     <i class="fa fa-edit"></i>
                     Cập nhật thông tin
                   </button>
@@ -73,6 +73,11 @@
               });
             }(window.jQuery, window, document));
           </script>
+          <script>
+              function myFunction() {
+                alert('Xác nhận đổi mật khẩu thiết bị');
+              }
+            </script>
         </div>
         <div class="col-md-3"></div>
       </div>

@@ -59,29 +59,7 @@
             </tr>
             <tr>
               <th>
-                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                  <i class="fa fa-inbox"></i>
-                  Gửi lệnh
-                </button>
-
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                  aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Gửi lệnh</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        <input type="text" name="mesg" id="mesg">
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Thoát</button>
-                        <button type="button" class="btn btn-success">Gửi</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                
               </th>
               <td>
                 <a id="chinhSua" href="/list-device/edit/{{thietbi.thongtin.idthietbi}}" class="btn btn-info"><i
@@ -93,6 +71,7 @@
             {{!-- {{/if}} --}}
           </table>
         </div>
+        {{!-- 
         <div class="col-md-3 border rounded p-4 mx-4 white-box">
           <h2>Publish</h2>
           <hr />
@@ -109,7 +88,8 @@
               {{/each}}
             </ul>
           </div>
-        </div>
+        </div> 
+        --}}
         <div class="col-md-3 border rounded p-4 white-box">
           <h2>Lịch sử hoạt động</h2>
           <hr />

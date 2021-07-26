@@ -106,6 +106,8 @@ class site_controller {
                                 where idnguoidung = $2`, [doimatkhau[2], doimatkhau[0]])
                             .then((result) => {
                                 res.redirect('/');
+                               // req.session.destroy();
+
                             })
                             .catch(next);
                     }

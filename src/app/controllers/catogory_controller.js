@@ -68,6 +68,7 @@ class catogory_controller {
         .then(() =>{
             res.redirect('back')
         }).catch(next);
+        
     }
 
     //[GET] /list-category/add

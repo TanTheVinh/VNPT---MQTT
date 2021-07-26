@@ -6,8 +6,8 @@
             "port": 5432,
             "driver": "PostgreSQL",
             "name": "mqtt",
-            "username": "postgres",
             "database": "mqtt",
+            "username": "selqthang",
             "password": "7714119"
         }
     ],

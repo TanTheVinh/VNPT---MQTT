@@ -39,8 +39,9 @@
                   <td>{{this.quyen}}</td>
                   <td>
                   <form class="d-inline-block" action="/list-user/delete/{{this.idnguoidung}}?_method=DELETE" method="post">
-                    <button class="btn btn-danger">
-                      <i class="fa fa-trash-alt"></i> Xoá
+                    <button class="btn btn-danger" data-toggle="tooltip"
+                        data-placement="top" title="Xoá" onclick="myFunction()">
+                      <i class="fa fa-trash-alt"></i> 
                     </button>
                   </form>
                   </td>
@@ -48,6 +49,11 @@
                 {{/each}}
               </tbody>
             </table>
+            <script>
+              function myFunction() {
+                alert('Xác nhận xóa người dùng');
+              }
+            </script>
           </div>
         </div>
       </div>
