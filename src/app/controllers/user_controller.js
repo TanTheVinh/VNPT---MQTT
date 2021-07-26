@@ -29,7 +29,7 @@ class user_controller {
         }
         else{
             pool
-                .query(`SELECT * FROM nguoidung, donvi where iddonvi = g.iddonvi`)
+                .query(`SELECT * FROM nguoidung, donvi where nguoidung.iddonvi = donvi.iddonvi`)
                 .then(result => {
                     const nguoidung = result.rows;
                     //res.json({nguoidung} );

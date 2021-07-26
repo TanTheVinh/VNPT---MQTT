@@ -90,12 +90,12 @@ class catogory_controller {
         
         .then(() =>{
             res.redirect('back')
-            res.json({
-                message: 'thêm thành công',
-                body: {
-                    loaithietbi: {tenloai, mota}
-                }
-            })
+            // res.json({
+            //     message: 'thêm thành công',
+            //     body: {
+            //         loaithietbi: {tenloai, mota}
+            //     }
+            // })
         }).catch(next);
     }
 
