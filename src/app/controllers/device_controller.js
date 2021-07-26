@@ -1,5 +1,6 @@
 const pool = require("../../config/db/database");
 const session = require('express-session');
+const { render } = require("node-sass");
 
 class device_controller {
 
@@ -9,17 +10,35 @@ class device_controller {
             res.redirect('/');
         }
         else{
-            const iddonvi = req.session.iddonvi;
-            pool
-                .query(`select * from thietbi, loaithietbi 
-                    where thietbi.idloai = loaithietbi.idloai and iddonvi = $1`, [iddonvi])
-                .then(result => {
-                    const thietbi = result.rows;
-                    // res.json({thietbi});
-                    console.log({thietbi});
+            if(req.session.quyen == 'nv'){
+                const iddonvi = req.session.iddonvi;
+                pool
+                    .query(`select * from thietbi, loaithietbi 
+                        where thietbi.idloai = loaithietbi.idloai and iddonvi = $1`, [iddonvi])
+                    .then(result => {
+                        const thietbi = result.rows;
+                        // res.json({thietbi});
+                        // console.log({thietbi});
+                        res.render('listDevice', { thietbi });
+                    })
+                    .catch(next)
+            }else{
+                pool
+                .query(`SELECT  thietbi.idthietbi,
+                thietbi.idloai,
+                thietbi.iddonvi,
+                thietbi.tenthietbi,
+                thietbi.taikhoan,
+                thietbi.trangthai,
+                loaithietbi.tenloai
+            FROM thietbi INNER JOIN loaithietbi
+            ON 	thietbi.idloai  = loaithietbi.idloai`)
+                .then( result =>{
+                    const thietbi  = result.rows;
                     res.render('listDevice', { thietbi });
-                })
-                .catch(next)
+                }).catch(next)
+            }   
+
         }
     }
 
@@ -102,6 +121,11 @@ class device_controller {
             })
             .catch(next);
     }
+
+    // [GET] /list-device/change-pass/:id
+    changepass(req, res, next){
+        res.render('editPassDevice');
+    }
     
     //[GET] /list-device/add
     add(req, res, next){
@@ -109,7 +133,21 @@ class device_controller {
             res.redirect('/');
         }
         else{
-            pool
+            if(req.session.quyen == 'nv'){
+                pool
+                .query(`SELECT * FROM loaithietbi`)
+                .then( result => {
+                    const loaithietbi = result.rows;
+                    pool
+                    .query(`SELECT * FROM donvi where iddonvi=$1`, [req.session.iddonvi])
+                    .then( result => {
+                        const donvi = result.rows;
+                        res.render('addDevice', {loaithietbi, donvi});
+                    })
+                })
+
+            }else{
+                pool
                 .query(`select * from loaithietbi`)
                 .then(result => {
                     const loaithietbi = result.rows;
@@ -130,6 +168,9 @@ class device_controller {
                         .catch(next);
                 })
                 .catch(next);
+
+            }
+
         }
     }
 
@@ -143,6 +184,8 @@ class device_controller {
             + 'VALUES ($1, $2, $3, $4, $5, false)', thietbi)
         .then(() =>{
             res.redirect('/list-device')
+            // const message = 'Thêm thiết bị thành công';
+            // res.render('addDevice', {message})
         })
         .catch(next);
     }
@@ -155,6 +198,10 @@ class device_controller {
                 res.redirect('back');
             })
             .catch(next);
+    }
+
+    history(req, res, next){
+        res.render('publishLog');
     }
 }
 

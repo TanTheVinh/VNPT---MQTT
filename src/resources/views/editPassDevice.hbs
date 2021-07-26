@@ -75,9 +75,17 @@
           </script>
           <script>
               function myFunction() {
-                alert('Xác nhận đổi mật khẩu thiết bị');
+                confirm('Xác nhận đổi mật khẩu thiết bị');
               }
             </script>
+             </script>
+          {{#if message}}
+          <p id="rpl" class="d-none">{{message}}</p>
+          {{/if}}
+          <script>
+            var rp = document.getElementById("rpl").innerHTML;
+            confirm(rp);
+          </script>
         </div>
         <div class="col-md-3"></div>
       </div>

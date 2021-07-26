@@ -1,0 +1,44 @@
+<div class="page-wrapper">
+  <div class="page-breadcrumb bg-white">
+    <div class="row align-items-center">
+      <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+        <h1 id="title">Thông tin tài khoản người dùng</h1>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="col">
+      <div class="row mt-5">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 border rounded white-box table-responsive">
+          <form action="/update-password?_method=PUT" method="POST" onclick="md5pass()">
+            <table class="table">
+              <tr>
+                <th scope="row">Tên tài khoản:</th>
+                <td>
+                  <input disabled type="text" name="tenTK" id="tenTK" value="{{nguoidung.taikhoan}}"/>
+                  <input type="hidden" name="idnguoidung" id="tenTK" value="{{nguoidung.idnguoidung}}"/>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Tên người dùng
+                  :</th>
+                <td>
+                  <input disabled type="text" name="tenND" id="tenND" value="{{nguoidung.tennguoidung}}"/>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Quyền người dùng
+                  :</th>
+                <td>
+                  <input disabled type="text" name="quyenND" id="quyenND" value="{{nguoidung.quyen}}"/>
+                </td>
+              </tr>
+            </table>
+          </form>
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+    </div>
+  </div>
+</div>

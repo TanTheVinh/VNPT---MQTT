@@ -10,16 +10,29 @@ class user_controller {
             res.redirect('/');
         }
         else{
-            
             if(req.session.quyen == 'nv'){
                 pool
-                .query(``)
-                res.render('listUser', {quyen: "\"nv\""})
-                
+                .query(`SELECT
+                nguoidung.idnguoidung,
+                nguoidung.tennguoidung,
+                nguoidung.iddonvi,
+                nguoidung.taikhoan,
+                nguoidung.quyen,
+                donvi.tendonvi
+            FROM 
+                nguoidung
+            INNER JOIN 
+                donvi  ON nguoidung.iddonvi = donvi.iddonvi
+			WHERE donvi.iddonvi = $1 `, [req.session.iddonvi])
+                 .then( result =>{
+                const nguoidung = result.rows;
+                res.render('listUser', {nguoidung})
+                }).catch(next)
             }else{
                 pool
                 .query(`SELECT
                 nguoidung.idnguoidung,
+                nguoidung.tennguoidung,
                 nguoidung.iddonvi,
                 nguoidung.taikhoan,
                 nguoidung.quyen,
@@ -45,15 +58,26 @@ class user_controller {
             res.redirect('/');
         }
         else{
-            pool
-                .query(`SELECT * FROM donvi `)
+            if(req.session.quyen == 'nv'){
+                pool
+                .query(`SELECT * FROM donvi WHERE iddonvi=$1 `,[req.session.iddonvi])
+                .then( result =>{
+                    const donvi = result.rows;
+                    res.render('addUser', { donvi });
+                })
+            }else{
+
+                pool
+                .query(`SELECT * FROM donvi`)
                 .then(result => {
-                    const nguoidung = result.rows;
+                    const donvi = result.rows;
                     //res.json({nguoidung} );
-                    res.render('addUser', { nguoidung });
+                    res.render('addUser', { donvi });
                     //console.log({nguoidung});
                 })
                 .catch(next);
+            }
+
         }
     }
     

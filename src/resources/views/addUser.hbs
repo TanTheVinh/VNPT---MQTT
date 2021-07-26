@@ -52,7 +52,7 @@
                   :</th>
                 <td>
                   <select name="iddonvi" id="iddonvi">
-                    {{#each nguoidung}}
+                    {{#each donvi}}
                       <option value="{{this.iddonvi}}">{{this.tendonvi}}</option>
                     {{/each}}
                   </select>
@@ -105,9 +105,17 @@
           </script>
           <script>
               function myFunction() {
-                alert('Xác nhận thêm người dùng');
+                confirm('Xác nhận thêm người dùng');
               }
             </script>
+             </script>
+          {{#if message}}
+          <p id="rpl" class="d-none">{{message}}</p>
+          {{/if}}
+          <script>
+            var rp = document.getElementById("rpl").innerHTML;
+            confirm(rp);
+          </script>
         </div>
         <div class="col-md-3"></div>
       </div>

@@ -141,9 +141,17 @@
                       <td>2</td>
                       <td>3</td>
                       <td>
-                        <button class="btn btn-danger">
-                          <i class="fa fa-trash-alt"></i> Xoá
-                        </button>
+                        <form class="d-inline-block" onsubmit="myFunction()" action="" method="">
+                          <button type="submit" class="btn btn-danger" data-toggle="tooltip"
+                              data-placement="top" title="Xoá">
+                            <i class="fa fa-trash-alt"></i> 
+                          </button>
+                        </form>
+                        <script>
+                          function myFunction() {
+                            alert('Xác nhận xóa người dùng');
+                          }
+                        </script>
                       </td>
                     </tr>
                   </tbody>
