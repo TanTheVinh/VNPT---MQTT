@@ -89,7 +89,7 @@ class catogory_controller {
         pool
         .query('INSERT INTO loaithietbi (tenloai, mota) VALUES ($1, $2)', [tenloai,mota])
         .then(() =>{
-            res.render('addTypeDevice', {message: '"thành công"'}) //sửa cái này nè
+            res.render('addTypeDevice', {message: '"thành công"'})
         }).catch(next);
     }
 
