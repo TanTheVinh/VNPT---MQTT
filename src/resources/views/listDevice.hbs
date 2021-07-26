@@ -65,7 +65,7 @@
                       href="/list-device/detail/{{this.idthietbi}}" method="GET">
                       <i class="fa fa-info-circle"></i>
                     </a>
-                    <a href="#" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Lịch sử">
+                    <a href="/list-device/history/{{this.idthietbi}}" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Lịch sử">
                       <i class="fa fa-history"></i>
                     </a>
                     <form class="d-inline-block" action="/list-device/delete/{{this.idthietbi}}?_method=DELETE"
@@ -83,7 +83,7 @@
             </table>
             <script>
               function myFunction() {
-                alert('Xác nhận xóa thiết bị');
+                confirm('Xác nhận xóa thiết bị');
               }
             </script>
           </div>

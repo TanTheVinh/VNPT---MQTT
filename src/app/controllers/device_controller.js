@@ -1,5 +1,6 @@
 const pool = require("../../config/db/database");
 const session = require('express-session');
+const { render } = require("node-sass");
 
 class device_controller {
 
@@ -102,6 +103,11 @@ class device_controller {
             })
             .catch(next);
     }
+
+    // [GET] /list-device/change-pass/:id
+    changepass(req, res, next){
+        res.render('changePassUser');
+    }
     
     //[GET] /list-device/add
     add(req, res, next){
@@ -157,6 +163,10 @@ class device_controller {
                 res.redirect('back');
             })
             .catch(next);
+    }
+
+    history(req, res, next){
+        res.render('publishLog');
     }
 }
 

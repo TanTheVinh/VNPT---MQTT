@@ -55,9 +55,17 @@
             </table>
             <script>
               function myFunction() {
-                alert('Xác nhận cập nhật thông tin loại thiết bị');
+                confirm('Xác nhận cập nhật thông tin loại thiết bị');
               }
             </script>
+             </script>
+          {{#if message}}
+          <p id="rpl" class="d-none">{{message}}</p>
+          {{/if}}
+          <script>
+            var rp = document.getElementById("rpl").innerHTML;
+            confirm(rp);
+          </script>
           </form>
         </div>
         <div class="col-md-3"></div>

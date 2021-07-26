@@ -41,25 +41,36 @@
                 <div class="white-box">
                     <h3 class="box-title">Số lượng kết nối</h3>
                     <canvas id="myChart" width="900" height="300"></canvas>
+                    <div class="cJS d-none">
+                        <span id="lbls">
+                            {{#each bieudo}}
+                                {{this.month}},
+                            {{/each}}
+                        </span>
+                        <span id="lbl">
+                            {{#each bieudo}}
+                                {{this.year}},
+                            {{/each}}
+                        </span>
+                        <span id="dt">
+                            {{#each bieudo}}
+                                {{this.soluonglenh}},
+                            {{/each}} 
+                        </span>
+                    </div>
                     <script type="text/javascript">
                         var ctx = document.getElementById("myChart");
                         var myChart = new Chart(ctx, {
                             type: 'bar',
                             data: {
                                 labels: [
-                                    {{#each bieudo}}
-                                        {{this.month}},
-                                    {{/each}}
+                                    document.getElementById('lbls').innerHTML;
                                 ],
                                 datasets: [{
-                                    label: [    {{#each bieudo}}
-                                                    {{this.year}},
-                                                {{/each}}
+                                    label: [    document.getElementById('lbl').innerHTML;
                                             ],
                                     data: [
-                                                {{#each bieudo}}
-                                                    {{this.soluonglenh}},
-                                                {{/each}} 
+                                                document.getElementById('dt').innerHTML;
                                             ],
                                     backgroundColor: [
                                         'rgba(255, 99, 132, 0.2)',
