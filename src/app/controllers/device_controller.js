@@ -106,7 +106,7 @@ class device_controller {
 
     // [GET] /list-device/change-pass/:id
     changepass(req, res, next){
-        res.render('changePassUser');
+        res.render('editPassDevice');
     }
     
     //[GET] /list-device/add
