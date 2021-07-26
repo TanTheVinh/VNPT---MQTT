@@ -1,5 +1,6 @@
 const pool = require("../../config/db/database");
 const md5 = require('md5');
+const session = require("express-session");
 
 class user_controller {
 
@@ -9,16 +10,32 @@ class user_controller {
             res.redirect('/');
         }
         else{
-            pool
-                .query(`SELECT * FROM nguoidung, donvi 
-                    where nguoidung.iddonvi = donvi.iddonvi 
-                    and nguoidung.iddonvi = $1`, [req.session.iddonvi])
+            
+            if(req.session.quyen == 'nv'){
+                pool
+                .query(``)
+                res.render('listUser', {quyen: "\"nv\""})
+                
+            }else{
+                pool
+                .query(`SELECT
+                nguoidung.idnguoidung,
+                nguoidung.iddonvi,
+                nguoidung.taikhoan,
+                nguoidung.quyen,
+                donvi.tendonvi
+            FROM 
+                nguoidung
+            INNER JOIN 
+                donvi  ON nguoidung.iddonvi = donvi.iddonvi;`)
                 .then(result => {
-                    const nguoidung = result.rows;
-                    // res.json({ nguoidung });
+                    const nguoidung = result.rows
+                    
                     res.render('listUser', { nguoidung })
-                })
-                .catch(next)
+                }).catch(next)
+            }
+
+                    // 
         }
     }
    

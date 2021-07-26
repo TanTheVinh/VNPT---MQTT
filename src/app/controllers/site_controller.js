@@ -57,7 +57,7 @@ class site_controller {
                 try {
                     req.session.idnguoidung = user.idnguoidung;
                     req.session.iddonvi = user.iddonvi;
-                    req.session.quyen = user.iddonvi;
+                    req.session.quyen = user.quyen;
                     res.redirect('/');
                 } catch (error) {
                     // console.log(req.session);
