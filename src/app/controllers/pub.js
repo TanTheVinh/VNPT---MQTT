@@ -8,7 +8,7 @@ const message = 'Hello world!';
 
 client.on('connect', () => {
     setInterval(() => {
-        mqtt.client()
+        // mqtt.client()
         client.publish(topic, message);
         console.log('Message sent: ', message);
     }, 5000);

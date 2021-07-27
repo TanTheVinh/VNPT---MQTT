@@ -35,7 +35,6 @@ class unit_controller {
        const { tendonvi } = req.body;
         pool
         .query('INSERT INTO donvi (tendonvi) VALUES ($1)', [ tendonvi ])
-        
         .then(() =>{
             res.redirect('/list-unit')
             res.json({
@@ -51,7 +50,6 @@ class unit_controller {
     delete(req, res, next){
         try {
             pool.query('delete from donvi where iddonvi = $1', [req.params.id])
-            
             res.redirect('back')
             res.json({
                 message: 'xóa thành công',

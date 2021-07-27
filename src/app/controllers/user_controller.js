@@ -46,14 +46,14 @@ class user_controller {
         const nguoidung = Object.values(req.body);
         nguoidung[2] = md5(nguoidung[2]);
         pool
-        .query('INSERT INTO nguoidung (tennguoidung, taikhoan, matkhau, iddonvi, quyen) '
-            + 'VALUES ($1, $2, $3, $4, $5)', nguoidung)
-            //console.log(ok)
-        .then(() =>{
-            res.redirect('/list-user')
-        })
-        .catch(next);
-    }
+            .query('INSERT INTO nguoidung (tennguoidung, taikhoan, matkhau, iddonvi, quyen) '
+                + 'VALUES ($1, $2, $3, $4, $5)', nguoidung)
+                //console.log(ok)
+            .then(() =>{
+                res.redirect('/list-user')
+            })
+            .catch(next);
+        }
     
         // [DELETE] /list-user/delete/:id
     delete(req, res, next){
