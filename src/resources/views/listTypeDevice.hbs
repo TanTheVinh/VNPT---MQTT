@@ -36,12 +36,11 @@
 
                       </button>
                     </form>
-                    <form class="d-inline-block" action="/list-catogory/delete/{{this.idloai}}?_method=DELETE"
+                    <form id="dele" class="d-inline-block" action="/list-catogory/delete/{{this.idloai}}?_method=DELETE"
                       method="POST">
-                      <button type="submit" class="btn btn-danger" onclick="myFunction()" data-toggle="tooltip"
+                      <button type="button" onclick="myFunction()" class="btn btn-danger" data-toggle="tooltip"
                         data-placement="top" title="Xoá">
                         <i class="fa fa-trash-alt"></i>
-
                       </button>
                     </form>
                   </td>
@@ -51,7 +50,10 @@
             </table>
             <script type="text/javascript">
               function myFunction() {
-                confirm('Xác nhận xóa loại thiết bị');
+                var r = confirm('Xác nhận xóa loại thiết bị');
+                if (r == true) {
+                  document.getElementById('dele').submit();
+                } 
               }
             </script>
           </div>

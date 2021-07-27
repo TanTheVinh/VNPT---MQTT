@@ -68,9 +68,9 @@
                     <a href="/list-device/history/{{this.idthietbi}}" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Lịch sử">
                       <i class="fa fa-history"></i>
                     </a>
-                    <form class="d-inline-block" action="/list-device/delete/{{this.idthietbi}}?_method=DELETE"
+                    <form id="dele" class="d-inline-block" action="/list-device/delete/{{this.idthietbi}}?_method=DELETE"
                       method="post">
-                      <button type="submit" class="btn btn-danger" onclick="myFunction()" data-toggle="tooltip"
+                      <button type="button" class="btn btn-danger" onclick="myFunction()" data-toggle="tooltip"
                         data-placement="top" title="Xoá">
                         <i class="fa fa-trash-alt"></i>
 
@@ -81,9 +81,12 @@
                 {{/each}}
               </tbody>
             </table>
-            <script>
+            <script type="text/javascript">
               function myFunction() {
-                confirm('Xác nhận xóa thiết bị');
+                var r = confirm('Xác nhận xóa thiết bị');
+                if (r == true) {
+                  document.getElementById('dele').submit();
+                } 
               }
             </script>
           </div>

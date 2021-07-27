@@ -39,8 +39,8 @@
                   <td>{{this.taikhoan}}</td>
                   <td>{{this.quyen}}</td>
                   <td>
-                  <form class="d-inline-block" action="/list-user/delete/{{this.idnguoidung}}?_method=DELETE" method="post">
-                    <button class="btn btn-danger" data-toggle="tooltip"
+                  <form id="dele" class="d-inline-block" action="/list-user/delete/{{this.idnguoidung}}?_method=DELETE" method="post">
+                    <button type="button" class="btn btn-danger" data-toggle="tooltip"
                         data-placement="top" title="Xoá" onsubmit="myFunction()">
                       <i class="fa fa-trash-alt"></i> 
                     </button>
@@ -50,9 +50,12 @@
                 {{/each}}
               </tbody>
             </table>
-            <script>
+            <script type="text/javascript">
               function myFunction() {
-                confirm('Xác nhận xóa người dùng');
+                var r = confirm('Xác nhận xóa người dùng');
+                if (r == true) {
+                  document.getElementById('dele').submit();
+                } 
               }
             </script>
           </div>

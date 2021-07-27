@@ -30,9 +30,9 @@
                                     <th scope="row">{{this.iddonvi}}</th>
                                     <td>{{this.tendonvi}}</td>
                                     <td>
-                                        <form class="d-inline-block"
+                                        <form id="dele" class="d-inline-block"
                                             action="/list-unit/delete/{{this.iddonvi}}?_method=DELETE" method="post">
-                                            <button class="btn btn-danger" data-toggle="tooltip" data-placement="top"
+                                            <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top"
                                                 title="Xoá" onclick="myFunction()">
                                                 <i class="fa fa-trash-alt"></i>
                                             </button>
@@ -43,9 +43,12 @@
                                 {{/each}}
                             </tbody>
                         </table>
-                        <script>
+                        <script type="text/javascript">
                             function myFunction() {
-                                confirm('Xác nhận xóa thiết bị');
+                                var r = confirm('Xác nhận xóa đơn vị');
+                                if (r == true) {
+                                    document.getElementById('dele').submit();
+                                }
                             }
                         </script>
                     </div>
