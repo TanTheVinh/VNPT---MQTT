@@ -110,6 +110,8 @@ class user_controller {
             res.render('listUser', {message: '"không thể xóa"'})
         }
     }
+
+    
 }
 
 module.exports = new user_controller;

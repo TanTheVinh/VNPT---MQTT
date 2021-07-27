@@ -124,9 +124,43 @@ class device_controller {
 
     // [GET] /list-device/change-pass/:id
     changepass(req, res, next){
-        res.render('editPassDevice');
+        const idthietbi = req.params.id;
+        pool
+            .query(`select * from thietbi where idthietbi = $1`, [idthietbi])
+            .then(result => {
+                const thietbi = result.rows[0];
+                res.render('editPassDevice', {thietbi});
+            })
+            .catch(next);
     }
     
+    // [PUT] /list-device/change-pass/:id
+    updatepass(req, res, next){
+        res.json(req.body);
+        // const doimatkhau = Object.values(req.body);
+        // pool
+        //     .query(`select * from nguoidung 
+        //         where idnguoidung = $1 and matkhau = $2`, [doimatkhau[0], doimatkhau[1]])
+        //     .then((result) => {
+        //             const nguoidung = result.rows[0];
+        //             if(nguoidung == undefined){
+        //                 res.redirect('change-password');
+        //             }
+        //             else{
+        //                 pool
+        //                     .query(`update nguoidung set matkhau = $1 
+        //                         where idnguoidung = $2`, [doimatkhau[2], doimatkhau[0]])
+        //                     .then((result) => {
+        //                         res.redirect('/');
+        //                        // req.session.destroy();
+
+        //                     })
+        //                     .catch(next);
+        //             }
+        //     })
+        //     .catch(next);
+    }
+
     //[GET] /list-device/add
     add(req, res, next){
         if(req.session.idnguoidung === undefined){
@@ -183,7 +217,7 @@ class device_controller {
         .query('INSERT INTO thietbi (tenthietbi, iddonvi,idloai, taikhoan, matkhau, trangthai) '
             + 'VALUES ($1, $2, $3, $4, $5, false)', thietbi)
         .then(() =>{
-            res.ender('addDevice', {message: "\"thêm thành công\""})
+            res.render('addDevice', {message: "\"thêm thành công\""})
             // const message = 'Thêm thiết bị thành công';
             // res.render('addDevice', {message})
         })
