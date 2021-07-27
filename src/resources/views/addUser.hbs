@@ -73,7 +73,7 @@
                 <th scope="row">
                 </th>
                 <td>
-                  <button id="save-btn" type="submit" onclick="myFunction()" class="btn btn-success" disabled="disabled"><i
+                  <button id="save-btn" type="submit" class="btn btn-success" disabled="disabled"><i
                       class="fa fa-plus"></i>Thêm người dùng</button>
                   <button id="xoa" type="reset" class="btn btn-danger">
                     <i class="fa fa-eraser"></i>
@@ -103,18 +103,12 @@
 
             
           </script>
-          <script>
-              function myFunction() {
-                confirm('Xác nhận thêm người dùng');
-              }
-            </script>
-             </script>
           {{#if message}}
           <p id="rpl" class="d-none">{{message}}</p>
           {{/if}}
           <script>
             var rp = document.getElementById("rpl").innerHTML;
-            confirm(rp);
+            alert(rp);
           </script>
         </div>
         <div class="col-md-3"></div>
