@@ -54,16 +54,8 @@
           </form>
           <script type="text/javascript">
             function myFunction() {
-              alert('Xác nhận thêm loại thiết bị');
+              confirm('Xác nhận thêm loại thiết bị');
             }
-
-            //var rp = {{message}};
-            //if(rp!=""){
-            //  alert(rp);
-            //}
-            //else{
-            //  console.log("none");
-            //}
           </script>
           {{#if message}}
           <p id="rpl" class="d-none">{{message}}</p>
@@ -72,7 +64,6 @@
             var rp = document.getElementById("rpl").innerHTML;
             alert(rp);
           </script>
-
         </div>
       </div>
     </div>
