@@ -44,13 +44,13 @@ class unit_controller {
     insert(req, res, next){  
        const { tendonvi } = req.body;
        if(req.session.quyen == 'nv'){
-        res.redirect('/list-unit')
+        res.render('addUnit', {message: "\"không đủ quyền\""})
        }
         pool
         .query('INSERT INTO donvi (tendonvi) VALUES ($1)', [ tendonvi ])
         
         .then(() =>{
-            res.redirect('/list-unit')
+            res.render('addUnit',{ message:"\"thêm thành công\""})
         }).catch(next);   
     }
 
