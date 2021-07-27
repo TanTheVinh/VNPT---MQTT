@@ -44,13 +44,13 @@ class unit_controller {
     insert(req, res, next){  
        const { tendonvi } = req.body;
        if(req.session.quyen == 'nv'){
-        res.redirect('/list-unit',{message: "không đủ quyền"})
+        res.redirect('/list-unit')
        }
         pool
         .query('INSERT INTO donvi (tendonvi) VALUES ($1)', [ tendonvi ])
         
         .then(() =>{
-            res.redirect('/list-unit',{message: "thêm thành công"})
+            res.redirect('/list-unit')
         }).catch(next);   
     }
 
@@ -60,17 +60,8 @@ class unit_controller {
             pool.query('delete from donvi where iddonvi = $1', [req.params.id])
             
             res.redirect('back')
-            res.json({
-                message: 'xóa thành công',
-                body: {
-                    donvi: {tendonvi}
-                }
-            })
         } catch (error) {
-            res.redirect('back'),
-            res.json({
-                message: 'xóa thất bại'
-            })
+            res.redirect('back')
         }
     }
 }

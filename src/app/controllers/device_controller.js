@@ -117,7 +117,7 @@ class device_controller {
         pool
             .query(`UPDATE thietbi SET tenthietbi = $1, idloai = $2, taikhoan =$3, trangthai =$4  WHERE idthietbi = $5`, [tenthietbi, idloai, taikhoan, trangthai, id])
             .then(() => {
-                res.redirect('/list-device');
+                res.render('editInfoDevice',{message: "\"sửa thành công\""});
             })
             .catch(next);
     }
@@ -183,7 +183,7 @@ class device_controller {
         .query('INSERT INTO thietbi (tenthietbi, iddonvi,idloai, taikhoan, matkhau, trangthai) '
             + 'VALUES ($1, $2, $3, $4, $5, false)', thietbi)
         .then(() =>{
-            res.redirect('/list-device')
+            res.ender('addDevice', {message: "\"thêm thành công\""})
             // const message = 'Thêm thiết bị thành công';
             // res.render('addDevice', {message})
         })

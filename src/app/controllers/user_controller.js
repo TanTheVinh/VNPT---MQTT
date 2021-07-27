@@ -91,7 +91,7 @@ class user_controller {
             + 'VALUES ($1, $2, $3, $4, $5)', nguoidung)
             //console.log(ok)
         .then(() =>{
-            res.redirect('/list-user')
+            res.render('addUser',{message: "\"thêm thành công\""})
         })
         .catch(next);
     }
