@@ -15,31 +15,32 @@
           <h2 class="text-center">Cập nhật mật khẩu
             thiết bị:</h2>
           <hr />
-          <form  action="/list-device/change-password/{{thietbi.idthietbi}}?_method=PUT" method="POST">
+          <form action="/list-device/change-password/{{thietbi.idthietbi}}?_method=PUT" method="POST" onclick="md5pass()">
             <table class="table ">
               <tr>
-                <th scope="row">Mật khẩu thiết bị
-                  :</th>
+                <th scope="row">Mật khẩu cũ:</th>
                 <td>
-                  <input required type="password" name="oldPassword" id="oldPassword" />
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">Mật khẩu thiết bị
-                  :</th>
-                <td>
-                  <input required type="password" name="password" id="password" value="" />
+                  <input required type="password" id="oldPassword" />
+                  <input type="hidden" name="matkhaucu" id="md5oldpassword" value=""/>
                 </td>
               </tr>
 
+                <tr>
+                  <th scope="row">Mật khẩu mới:</th>
+                  <td>
+                    <input required type="password" id="password" minlength="1" maxlength="50">
+                    <input type="hidden" name="matkhaumoi" id="md5password" value="">
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row">Nhập lại mật khẩu mới:</th>
+                  <td>
+                    <input required type="password" id="confirmPassword" minlength="1" maxlength="50">
+                  </td>
+                </tr>
+                <tr>
               <tr>
-                <th scope="row">Nhập lại mật khẩu
-                  thiết bị:</th>
-                <td>
-                  <input required type="password" name="confirmPassword" id="confirmPassword"
-                    value="" />
-                </td>
-              </tr>
 
               <tr>
                 <th scope="row">
@@ -77,6 +78,12 @@
           <script>
             var rp = document.getElementById("rpl").innerHTML;
             alert(rp);
+          </script>
+          <script>
+            function md5pass(){
+                document.getElementById("md5oldpassword").value = md5(document.getElementById("oldPassword").value);
+                document.getElementById("md5password").value = md5(document.getElementById("password").value);
+            }
           </script>
         </div>
         <div class="col-md-3"></div>

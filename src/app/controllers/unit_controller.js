@@ -58,9 +58,10 @@ class unit_controller {
     delete(req, res, next){
         try {
             pool.query('delete from donvi where iddonvi = $1', [req.params.id])
-            res.redirect('back')
+            // res.redirect('back')
+            res.render('listUnit', {message: '"Xóa thành công"'});
         } catch (error) {
-            res.render('listUnit', {message: '"không thể xóa"'})
+            res.render('listUnit', {message: '"không thể xóa"'});
         }
     }
 }
