@@ -13,7 +13,7 @@
           <a href="/list-user/add" class="btn btn-success">
             Thêm người dùng
           </a>
-           <th scope="col">{{message}}</th>
+          <th scope="col">{{message}}</th>
           <div class="table-responsive">
             <table class="table text-nowrap text-center">
               <thead>
@@ -39,23 +39,25 @@
                   <td>{{this.taikhoan}}</td>
                   <td>{{this.quyen}}</td>
                   <td>
-                  <form id="dele" class="d-inline-block" action="/list-user/delete/{{this.idnguoidung}}?_method=DELETE" method="post">
-                    <button type="button" class="btn btn-danger" data-toggle="tooltip"
-                        data-placement="top" title="Xoá" onsubmit="myFunction()">
-                      <i class="fa fa-trash-alt"></i> 
-                    </button>
-                  </form>
+                    <form id="{{this.idloai}}" class="d-inline-block"
+                      action="/list-user/delete/{{this.idnguoidung}}?_method=DELETE" method="post">
+                      <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top"
+                        title="Xoá" onclick="myFunction({{this.idnguoidung}})">
+                        <i class="fa fa-trash-alt"></i>
+                      </button>
+                    </form>
                   </td>
                 </tr>
                 {{/each}}
               </tbody>
             </table>
-            <script type="text/javascript">
-              function myFunction() {
-                var r = confirm('Xác nhận xóa người dùng');
+            <script>
+              function myFunction(id) {
+                let r = confirm('Xác nhận xóa người dùng này');
                 if (r == true) {
-                  document.getElementById('dele').submit();
-                } 
+                  document.getElementById(id).submit();
+                  //alert(id);
+                }
               }
             </script>
           </div>

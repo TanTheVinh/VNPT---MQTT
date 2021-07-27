@@ -30,24 +30,24 @@
                                     <th scope="row">{{this.iddonvi}}</th>
                                     <td>{{this.tendonvi}}</td>
                                     <td>
-                                        <form id="dele" class="d-inline-block"
+                                        <form id="{{this.iddonvi}}" class="d-inline-block"
                                             action="/list-unit/delete/{{this.iddonvi}}?_method=DELETE" method="post">
-                                            <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top"
-                                                title="Xoá" onclick="myFunction()">
+                                            <button type="button" class="btn btn-danger" data-toggle="tooltip"
+                                                data-placement="top" title="Xoá" onclick="myFunction({{this.iddonvi}})">
                                                 <i class="fa fa-trash-alt"></i>
                                             </button>
                                         </form>
-                                    </td>
                                     </td>
                                 </tr>
                                 {{/each}}
                             </tbody>
                         </table>
-                        <script type="text/javascript">
-                            function myFunction() {
-                                var r = confirm('Xác nhận xóa đơn vị');
+                        <script>
+                            function myFunction(id) {
+                                let r = confirm('Xác nhận xóa đơn vị');
                                 if (r == true) {
-                                    document.getElementById('dele').submit();
+                                    document.getElementById(id).submit();
+                                    //alert(id);
                                 }
                             }
                         </script>

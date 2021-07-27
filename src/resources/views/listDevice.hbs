@@ -65,13 +65,14 @@
                       href="/list-device/detail/{{this.idthietbi}}" method="GET">
                       <i class="fa fa-info-circle"></i>
                     </a>
-                    <a href="/list-device/history/{{this.idthietbi}}" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Lịch sử">
+                    <a href="/list-device/history/{{this.idthietbi}}" class="btn btn-success" data-toggle="tooltip"
+                      data-placement="top" title="Lịch sử">
                       <i class="fa fa-history"></i>
                     </a>
-                    <form id="dele" class="d-inline-block" action="/list-device/delete/{{this.idthietbi}}?_method=DELETE"
-                      method="post">
-                      <button type="button" class="btn btn-danger" onclick="myFunction()" data-toggle="tooltip"
-                        data-placement="top" title="Xoá">
+                    <form id="{{this.idthietbi}}" class="d-inline-block"
+                      action="/list-device/delete/{{this.idthietbi}}?_method=DELETE" method="post">
+                      <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top"
+                        title="Xoá" onclick="myFunction({{this.idthietbi}})">
                         <i class="fa fa-trash-alt"></i>
 
                       </button>
@@ -81,12 +82,13 @@
                 {{/each}}
               </tbody>
             </table>
-            <script type="text/javascript">
-              function myFunction() {
-                var r = confirm('Xác nhận xóa thiết bị');
+            <script>
+              function myFunction(id) {
+                let r = confirm('Xác nhận xóa thiết bị');
                 if (r == true) {
-                  document.getElementById('dele').submit();
-                } 
+                  document.getElementById(id).submit();
+                  //alert(id);
+                }
               }
             </script>
           </div>
