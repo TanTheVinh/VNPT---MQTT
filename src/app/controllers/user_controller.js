@@ -86,6 +86,7 @@ class user_controller {
             pool
             .query('delete from nguoidung where idnguoidung = $1', [req.params.id])
             .then(() => {
+                
                 res.redirect('back');
             })
             .catch(next);

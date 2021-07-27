@@ -18,16 +18,17 @@ class unit_controller {
                 })
                 .catch(next)
 
-            }
-            pool
+            }else{
+                pool
                 .query('select * from donvi')
                 .then(result => {
                     const donvi = result.rows;
-                    const quyen = req.session.quyen;
-                    // res.json({ donvi, quyen });
-                    res.render('listUnit', { donvi, quyen });
+                    // res.json({ donvi });
+                    res.render('listUnit', { donvi });
                 })
                 .catch(next)
+            }
+ 
         }
     }
 
@@ -56,13 +57,19 @@ class unit_controller {
 
     // [DELETE] /list-unit/delete/:id
     delete(req, res, next){
-        try {
-            pool.query('delete from donvi where iddonvi = $1', [req.params.id])
-            // res.redirect('back')
-            res.render('listUnit', {message: '"Xóa thành công"'});
-        } catch (error) {
-            res.render('listUnit', {message: '"không thể xóa"'});
-        }
+            try{
+                pool
+                .query('delete from donvi where iddonvi = $1', [req.params.id])
+                .then(() => {
+                    // res.redirect('back');
+                res.render('listUnit', {message: '"xóa thành công"'});
+                })
+                .catch(next);
+            }
+            catch(err){
+                res.render('listUnit', {message: '"không thể xóa"'});
+            }
+    
     }
 }
     

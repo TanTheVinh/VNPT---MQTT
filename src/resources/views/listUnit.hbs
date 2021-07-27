@@ -27,13 +27,15 @@
                             <tbody>
                                 {{#each donvi}}
                                 <tr>
-                                    <th scope="row">{{this.iddonvi}}</th>
+                                    <th scope="row" >{{this.iddonvi}}</th>
+                                    
                                     <td>{{this.tendonvi}}</td>
                                     <td>
                                         <form id="dele" class="d-inline-block"
                                             action="/list-unit/delete/{{this.iddonvi}}?_method=DELETE" method="post">
+                                            <input type="hidden" name="iddonvi" value={{this.iddonvi}} >
                                             <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top"
-                                                title="Xoá" onclick="myFunction()">
+                                                title="Xoá" onclick= "myFunction()">
                                                 <i class="fa fa-trash-alt"></i>
                                             </button>
                                         </form>
