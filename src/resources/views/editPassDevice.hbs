@@ -15,7 +15,7 @@
           <h2 class="text-center">Cập nhật mật khẩu
             thiết bị:</h2>
           <hr />
-          <form  action="">
+          <form action="">
             <table class="table ">
               <tr>
                 <th scope="row">Mật khẩu thiết bị
@@ -36,8 +36,7 @@
                 <th scope="row">Nhập lại mật khẩu
                   thiết bị:</th>
                 <td>
-                  <input required type="password" name="confirmPassword" id="confirmPassword"
-                    value="" />
+                  <input required type="password" name="confirmPassword" id="confirmPassword" value="" />
                 </td>
               </tr>
 
@@ -76,7 +75,8 @@
           {{/if}}
           <script>
             var rp = document.getElementById("rpl").innerHTML;
-            alert(rp);
+            let ex = rp.slice(1, -1);
+            alert(ex);
           </script>
         </div>
         <div class="col-md-3"></div>

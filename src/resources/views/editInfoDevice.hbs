@@ -22,7 +22,7 @@
                   :</th>
                 <td>
                   <input disabled type="text" name="maThietBi" id="maThietBi" value="{{thietbi.idthietbi}}" />
-                  
+
                 </td>
               </tr>
               <tr>
@@ -45,10 +45,10 @@
                 <td>
                   <select name="idloai" id="idloai">
                     {{#each loaithietbi}}
-                     <option value="{{this.idloai}}">{{this.tenloai}}</option> 
-                     {{/each}}
+                    <option value="{{this.idloai}}">{{this.tenloai}}</option>
+                    {{/each}}
                   </select>
-                  
+
                 </td>
               </tr>
               <tr>
@@ -84,17 +84,18 @@
             </table>
           </form>
           <script>
-              function myFunction() {
-                alert('Xác nhận cập nhật thông tin thiết bị ',);
-              }
-            </script>
-             </script>
+            function myFunction() {
+              alert('Xác nhận cập nhật thông tin thiết bị ', );
+            }
+          </script>
+          </script>
           {{#if message}}
           <p id="rpl" class="d-none">{{message}}</p>
           {{/if}}
           <script>
             var rp = document.getElementById("rpl").innerHTML;
-            alert(rp);
+            let ex = rp.slice(1, -1);
+            alert(ex);
           </script>
         </div>
         <div class="col-md-3"></div>
