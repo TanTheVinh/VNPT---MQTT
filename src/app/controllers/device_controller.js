@@ -192,12 +192,18 @@ class device_controller {
 
     // [DELETE] /list-device/delete/:id
     delete(req, res, next){
-        pool
+        try{
+            pool
             .query('delete from thietbi where idthietbi = $1', [req.params.id])
             .then(() => {
                 res.redirect('back');
             })
             .catch(next);
+        }
+        catch(err){
+            res.render('listDevice', {message: '"không thể xóa"'});
+        }
+
     }
 
     history(req, res, next){

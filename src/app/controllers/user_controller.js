@@ -98,15 +98,18 @@ class user_controller {
     
         // [DELETE] /list-user/delete/:id
     delete(req, res, next){
-        pool
+        try{
+            pool
             .query('delete from nguoidung where idnguoidung = $1', [req.params.id])
             .then(() => {
                 res.redirect('back');
-
             })
             .catch(next);
+        }
+        catch(err){
+            res.render('listUser', {message: '"không thể xóa"'})
+        }
     }
-
 }
 
 module.exports = new user_controller;

@@ -23,8 +23,9 @@ class unit_controller {
                 .query('select * from donvi')
                 .then(result => {
                     const donvi = result.rows;
-                    //res.json({ donvi });
-                res.render('listUnit', { donvi });
+                    const quyen = req.session.quyen;
+                    // res.json({ donvi, quyen });
+                    res.render('listUnit', { donvi, quyen });
                 })
                 .catch(next)
         }
@@ -48,7 +49,6 @@ class unit_controller {
        }
         pool
         .query('INSERT INTO donvi (tendonvi) VALUES ($1)', [ tendonvi ])
-        
         .then(() =>{
             res.render('addUnit',{ message:"\"thêm thành công\""})
         }).catch(next);   
@@ -58,10 +58,9 @@ class unit_controller {
     delete(req, res, next){
         try {
             pool.query('delete from donvi where iddonvi = $1', [req.params.id])
-            
             res.redirect('back')
         } catch (error) {
-            res.redirect('back')
+            res.render('listUnit', {message: '"không thể xóa"'})
         }
     }
 }

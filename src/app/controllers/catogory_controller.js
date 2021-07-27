@@ -97,14 +97,12 @@ class catogory_controller {
 
     // [DELETE] /list-category/delete/:id
     delete(req, res, next){
-
             try {
                 pool
                 .query('delete from loaithietbi where idloai = $1', [req.params.id])
-                
                 res.redirect('back')
             } catch (error) {
-                res.redirect('back')
+                res.render('listTypeDevice', {message: '"không thể xóa"'})
             }
     }
 }
