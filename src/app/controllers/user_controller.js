@@ -1,5 +1,6 @@
 const pool = require("../../config/db/database");
 const md5 = require('md5');
+const session = require("express-session");
 
 class user_controller {
 
@@ -9,16 +10,45 @@ class user_controller {
             res.redirect('/');
         }
         else{
-            pool
-                .query(`SELECT * FROM nguoidung, donvi 
-                    where nguoidung.iddonvi = donvi.iddonvi 
-                    and nguoidung.iddonvi = $1`, [req.session.iddonvi])
+            if(req.session.quyen == 'nv'){
+                pool
+                .query(`SELECT
+                nguoidung.idnguoidung,
+                nguoidung.tennguoidung,
+                nguoidung.iddonvi,
+                nguoidung.taikhoan,
+                nguoidung.quyen,
+                donvi.tendonvi
+            FROM 
+                nguoidung
+            INNER JOIN 
+                donvi  ON nguoidung.iddonvi = donvi.iddonvi
+			WHERE donvi.iddonvi = $1 `, [req.session.iddonvi])
+                 .then( result =>{
+                const nguoidung = result.rows;
+                res.render('listUser', {nguoidung})
+                }).catch(next)
+            }else{
+                pool
+                .query(`SELECT
+                nguoidung.idnguoidung,
+                nguoidung.tennguoidung,
+                nguoidung.iddonvi,
+                nguoidung.taikhoan,
+                nguoidung.quyen,
+                donvi.tendonvi
+            FROM 
+                nguoidung
+            INNER JOIN 
+                donvi  ON nguoidung.iddonvi = donvi.iddonvi;`)
                 .then(result => {
-                    const nguoidung = result.rows;
-                    // res.json({ nguoidung });
+                    const nguoidung = result.rows
+                    
                     res.render('listUser', { nguoidung })
-                })
-                .catch(next)
+                }).catch(next)
+            }
+
+                    // 
         }
     }
    
@@ -28,15 +58,26 @@ class user_controller {
             res.redirect('/');
         }
         else{
-            pool
-                .query(`SELECT * FROM nguoidung, donvi where nguoidung.iddonvi = donvi.iddonvi`)
+            if(req.session.quyen == 'nv'){
+                pool
+                .query(`SELECT * FROM donvi WHERE iddonvi=$1 `,[req.session.iddonvi])
+                .then( result =>{
+                    const donvi = result.rows;
+                    res.render('addUser', { donvi });
+                })
+            }else{
+
+                pool
+                .query(`SELECT * FROM donvi`)
                 .then(result => {
-                    const nguoidung = result.rows;
+                    const donvi = result.rows;
                     //res.json({nguoidung} );
-                    res.render('addUser', { nguoidung });
+                    res.render('addUser', { donvi });
                     //console.log({nguoidung});
                 })
                 .catch(next);
+            }
+
         }
     }
     

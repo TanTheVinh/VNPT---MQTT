@@ -9,6 +9,16 @@ class unit_controller {
             res.redirect('/');
         }
         else{
+            if(req.session.quyen == 'nv'){
+                pool
+                .query('SELECT * FROM donvi WHERE iddonvi = $1', [req.session.iddonvi])
+                .then(result => {
+                    const donvi = result.rows;
+                res.render('listUnit', { donvi });
+                })
+                .catch(next)
+
+            }
             pool
                 .query('select * from donvi')
                 .then(result => {
@@ -33,17 +43,14 @@ class unit_controller {
     //[POST] /list-unit/insert
     insert(req, res, next){  
        const { tendonvi } = req.body;
+       if(req.session.quyen == 'nv'){
+        res.redirect('/list-unit',{message: "không đủ quyền"})
+       }
         pool
         .query('INSERT INTO donvi (tendonvi) VALUES ($1)', [ tendonvi ])
         
         .then(() =>{
-            res.redirect('/list-unit')
-            res.json({
-                message: 'thêm thành công',
-                body: {
-                    donvi: {tendonvi}
-                }
-            })
+            res.redirect('/list-unit',{message: "thêm thành công"})
         }).catch(next);   
     }
 
