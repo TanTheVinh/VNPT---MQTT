@@ -2,7 +2,7 @@
   <div class="page-breadcrumb bg-white">
     <div class="row align-items-center">
       <div class="col-lg-4 col-md-5 col-sm-6 col-xs-12">
-        <h1 id="title">Chỉnh sửa thông tin
+        <h1 id="title">Chỉnh sửa mật khẩu
           thiết bị</h1>
       </div>
     </div>
@@ -12,12 +12,11 @@
       <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6 border rounded white-box">
-          <h2 class="text-center">Cập nhật thông tin
+          <h2 class="text-center">Cập nhật mật khẩu
             thiết bị:</h2>
           <hr />
           <form  action="">
             <table class="table ">
-              {{#if thietbi}}
               <tr>
                 <th scope="row">Mật khẩu thiết bị
                   :</th>
@@ -52,7 +51,6 @@
                   </button>
                 </td>
               </tr>
-              {{/if}}
             </table>
           </form>
           <script>
@@ -73,12 +71,6 @@
               });
             }(window.jQuery, window, document));
           </script>
-          <script>
-              function myFunction() {
-                alert('Xác nhận đổi mật khẩu thiết bị');
-              }
-            </script>
-             </script>
           {{#if message}}
           <p id="rpl" class="d-none">{{message}}</p>
           {{/if}}
