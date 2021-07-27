@@ -40,7 +40,7 @@
                 <th scope="row">
                 </th>
                 <td>
-                  <button id="them" type="submit" class="btn btn-success" onclick="myFunction()">
+                  <button id="them" type="submit" class="btn btn-success" >
                     <i class="fa fa-plus"></i>
                     Thêm loại thiết bị
                   </button>
@@ -52,27 +52,13 @@
               </tr>
             </table>
           </form>
-          <script type="text/javascript">
-            function myFunction() {
-              confirm('Xác nhận thêm loại thiết bị');
-            }
-
-            //var rp = {{message}};
-            //if(rp!=""){
-            //  alert(rp);
-            //}
-            //else{
-            //  console.log("none");
-            //}
-          </script>
           {{#if message}}
           <p id="rpl" class="d-none">{{message}}</p>
           {{/if}}
           <script>
             var rp = document.getElementById("rpl").innerHTML;
-            confirm(rp);
+            alert(rp);
           </script>
-
         </div>
       </div>
     </div>

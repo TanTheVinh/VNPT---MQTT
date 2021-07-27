@@ -52,18 +52,12 @@
               </tr>
             </table>
           </form>
-          <script>
-              function myFunction() {
-                confirm('Xác nhận thêm đơn vị');
-              }
-            </script>
-             </script>
           {{#if message}}
           <p id="rpl" class="d-none">{{message}}</p>
           {{/if}}
           <script>
             var rp = document.getElementById("rpl").innerHTML;
-            confirm(rp);
+            alert(rp);
           </script>
         </div>
         <div class="col-md-3"></div>

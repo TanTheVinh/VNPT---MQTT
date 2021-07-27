@@ -66,7 +66,7 @@ class catogory_controller {
             id
         ])
         .then(() =>{
-            res.redirect('back')
+            res.render('editInfoTypeDevice',{ thongbao:"\"sửa thành công\"" })
         }).catch(next);
         
     }
@@ -89,7 +89,7 @@ class catogory_controller {
         pool
         .query('INSERT INTO loaithietbi (tenloai, mota) VALUES ($1, $2)', [tenloai,mota])
         .then(() =>{
-            res.render('addTypeDevice', {message: "thành công"})
+            res.render('addTypeDevice', {message: "\"thêm thành công\""})
             //res.json(req.body);
             //res.json({message: '"thành công"'});
         }).catch(next);
@@ -97,12 +97,13 @@ class catogory_controller {
 
     // [DELETE] /list-category/delete/:id
     delete(req, res, next){
-        pool
-            .query('delete from loaithietbi where idloai = $1', [req.params.id])
-            .then(() => {
-                res.redirect('back');
-            })
-            .catch(next);
+            try {
+                pool
+                .query('delete from loaithietbi where idloai = $1', [req.params.id])
+                res.redirect('back')
+            } catch (error) {
+                res.render('listTypeDevice', {message: '"không thể xóa"'})
+            }
     }
 }
 

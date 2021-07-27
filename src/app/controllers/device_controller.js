@@ -10,17 +10,35 @@ class device_controller {
             res.redirect('/');
         }
         else{
-            const iddonvi = req.session.iddonvi;
-            pool
-                .query(`select * from thietbi, loaithietbi 
-                    where thietbi.idloai = loaithietbi.idloai and iddonvi = $1`, [iddonvi])
-                .then(result => {
-                    const thietbi = result.rows;
-                    // res.json({thietbi});
-                    // console.log({thietbi});
+            if(req.session.quyen == 'nv'){
+                const iddonvi = req.session.iddonvi;
+                pool
+                    .query(`select * from thietbi, loaithietbi 
+                        where thietbi.idloai = loaithietbi.idloai and iddonvi = $1`, [iddonvi])
+                    .then(result => {
+                        const thietbi = result.rows;
+                        // res.json({thietbi});
+                        // console.log({thietbi});
+                        res.render('listDevice', { thietbi });
+                    })
+                    .catch(next)
+            }else{
+                pool
+                .query(`SELECT  thietbi.idthietbi,
+                thietbi.idloai,
+                thietbi.iddonvi,
+                thietbi.tenthietbi,
+                thietbi.taikhoan,
+                thietbi.trangthai,
+                loaithietbi.tenloai
+            FROM thietbi INNER JOIN loaithietbi
+            ON 	thietbi.idloai  = loaithietbi.idloai`)
+                .then( result =>{
+                    const thietbi  = result.rows;
                     res.render('listDevice', { thietbi });
-                })
-                .catch(next)
+                }).catch(next)
+            }   
+
         }
     }
 
@@ -99,7 +117,7 @@ class device_controller {
         pool
             .query(`UPDATE thietbi SET tenthietbi = $1, idloai = $2, taikhoan =$3, trangthai =$4  WHERE idthietbi = $5`, [tenthietbi, idloai, taikhoan, trangthai, id])
             .then(() => {
-                res.redirect('/list-device');
+                res.render('editInfoDevice',{message: "\"sửa thành công\""});
             })
             .catch(next);
     }
@@ -115,7 +133,21 @@ class device_controller {
             res.redirect('/');
         }
         else{
-            pool
+            if(req.session.quyen == 'nv'){
+                pool
+                .query(`SELECT * FROM loaithietbi`)
+                .then( result => {
+                    const loaithietbi = result.rows;
+                    pool
+                    .query(`SELECT * FROM donvi where iddonvi=$1`, [req.session.iddonvi])
+                    .then( result => {
+                        const donvi = result.rows;
+                        res.render('addDevice', {loaithietbi, donvi});
+                    })
+                })
+
+            }else{
+                pool
                 .query(`select * from loaithietbi`)
                 .then(result => {
                     const loaithietbi = result.rows;
@@ -136,6 +168,9 @@ class device_controller {
                         .catch(next);
                 })
                 .catch(next);
+
+            }
+
         }
     }
 
@@ -148,7 +183,7 @@ class device_controller {
         .query('INSERT INTO thietbi (tenthietbi, iddonvi,idloai, taikhoan, matkhau, trangthai) '
             + 'VALUES ($1, $2, $3, $4, $5, false)', thietbi)
         .then(() =>{
-            res.redirect('/list-device')
+            res.ender('addDevice', {message: "\"thêm thành công\""})
             // const message = 'Thêm thiết bị thành công';
             // res.render('addDevice', {message})
         })
@@ -157,12 +192,18 @@ class device_controller {
 
     // [DELETE] /list-device/delete/:id
     delete(req, res, next){
-        pool
+        try{
+            pool
             .query('delete from thietbi where idthietbi = $1', [req.params.id])
             .then(() => {
                 res.redirect('back');
             })
             .catch(next);
+        }
+        catch(err){
+            res.render('listDevice', {message: '"không thể xóa"'});
+        }
+
     }
 
     history(req, res, next){

@@ -12,7 +12,9 @@ class site_controller {
         }
         else{
             const soluong = {};
-            pool
+            const iddonvi = req.session.iddonvi;
+            if(req.session.quyen == 'admin'){
+                pool
                 .query('select count(*) as dangketnoi from thietbi where trangthai = true')
                 .then(result => {
                     soluong.dangketnoi = result.rows[0].dangketnoi;
@@ -30,7 +32,35 @@ class site_controller {
                                 .then(result => {
                                     const bieudo = result.rows;
                                     // res.json({soluong, bieudo});
-                                    res.render('index', { soluong, bieudo });
+                                    const quyen = req.session.quyen;
+                                    res.render('index', { soluong, bieudo, quyen });
+                                })
+                                .catch(next);
+                        })
+                        .catch(next);
+                })
+                .catch(next);    
+            }
+            pool
+                .query('select count(*) as dangketnoi from thietbi where trangthai = true and iddonvi = $1', [iddonvi])
+                .then(result => {
+                    soluong.dangketnoi = result.rows[0].dangketnoi;
+                    pool
+                        .query('select count(*) as ngatketnoi from thietbi where trangthai = false and iddonvi = $1', [iddonvi])
+                        .then(result => {
+                            soluong.ngatketnoi = result.rows[0].ngatketnoi;
+                            pool
+                                .query(
+                                    `select to_char(thoigiangui,'Mon') as month,
+                                    extract(year from thoigiangui) as year,
+                                    count(thoigiangui) as soluonglenh
+                                    from dulieu group by 1,2;`
+                                )
+                                .then(result => {
+                                    const bieudo = result.rows;
+                                    // res.json({soluong, bieudo});
+                                    const quyen = req.session.quyen;
+                                    res.render('index', { soluong, bieudo, quyen });
                                 })
                                 .catch(next);
                         })
@@ -57,7 +87,7 @@ class site_controller {
                 try {
                     req.session.idnguoidung = user.idnguoidung;
                     req.session.iddonvi = user.iddonvi;
-                    req.session.quyen = user.iddonvi;
+                    req.session.quyen = user.quyen;
                     res.redirect('/');
                 } catch (error) {
                     // console.log(req.session);
