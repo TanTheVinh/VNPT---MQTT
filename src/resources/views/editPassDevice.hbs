@@ -18,27 +18,38 @@
           <form action="">
             <table class="table ">
               <tr>
-                <th scope="row">Mật khẩu thiết bị
-                  :</th>
+                <th scope="row">Mật khẩu cũ:</th>
                 <td>
-                  <input required type="password" name="oldPassword" id="oldPassword" />
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">Mật khẩu thiết bị
-                  :</th>
-                <td>
-                  <input required type="password" name="password" id="password" value="" />
+                  <input required type="password" id="oldPassword" />
+                  <input type="hidden" name="matkhaucu" id="md5oldpassword" value=""/>
                 </td>
               </tr>
 
+                <tr>
+                  <th scope="row">Mật khẩu mới:</th>
+                  <td>
+                    <input required type="password" id="password" minlength="1" maxlength="50">
+                    <input type="hidden" name="matkhaumoi" id="md5password" value="">
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row">Nhập lại mật khẩu mới:</th>
+                  <td>
+                    <input required type="password" id="confirmPassword" minlength="1" maxlength="50">
+                  </td>
+                </tr>
+                <tr>
               <tr>
+<<<<<<< HEAD
                 <th scope="row">Nhập lại mật khẩu
                   thiết bị:</th>
                 <td>
                   <input required type="password" name="confirmPassword" id="confirmPassword" value="" />
                 </td>
               </tr>
+=======
+>>>>>>> fc4b6f0c56ada4e3919947a1d43c68c5ab7c9517
 
               <tr>
                 <th scope="row">
@@ -77,6 +88,12 @@
             var rp = document.getElementById("rpl").innerHTML;
             let ex = rp.slice(1, -1);
             alert(ex);
+          </script>
+          <script>
+            function md5pass(){
+                document.getElementById("md5oldpassword").value = md5(document.getElementById("oldPassword").value);
+                document.getElementById("md5password").value = md5(document.getElementById("password").value);
+            }
           </script>
         </div>
         <div class="col-md-3"></div>

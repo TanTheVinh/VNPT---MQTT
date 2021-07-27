@@ -124,9 +124,50 @@ class device_controller {
 
     // [GET] /list-device/change-pass/:id
     changepass(req, res, next){
-        res.render('editPassDevice');
+        if(req.session.idnguoidung === undefined){
+            res.redirect('/');
+        }
+        else{
+            const idthietbi = req.params.id;
+            pool
+                .query(`select * from thietbi where idthietbi = $1`, [idthietbi])
+                .then(result => {
+                    const thietbi = result.rows[0];
+                    res.render('editPassDevice', {thietbi});
+                })
+                .catch(next);
+        }
     }
     
+    // [PUT] /list-device/change-pass/:id
+    updatepass(req, res, next){
+        // res.json(req.body);
+        const idthietbi = req.params.id;
+        const doimatkhau = Object.values(req.body);
+        pool
+            .query(`select * from thietbi 
+                where idthietbi = $1 and matkhau = $2`, [idthietbi, doimatkhau[0]])
+            .then((result) => {
+                    const thietbi = result.rows[0];
+                    if(thietbi == undefined){
+                        // res.redirect('change-password');
+                        res.render('editPassDevice', {message: 'Mật khẩu không trùng khớp'})
+                    }
+                    else{
+                        pool
+                            .query(`update thietbi set matkhau = $1 
+                                where idthietbi = $2`, [doimatkhau[1], idthietbi])
+                            .then((result) => {
+                                // res.redirect('/');
+                               // req.session.destroy();
+                               res.render('editPassDevice', {message: 'Đổi mật khẩu thành công'})
+                            })
+                            .catch(next);
+                    }
+            })
+            .catch(next);
+    }
+
     //[GET] /list-device/add
     add(req, res, next){
         if(req.session.idnguoidung === undefined){
@@ -183,7 +224,7 @@ class device_controller {
         .query('INSERT INTO thietbi (tenthietbi, iddonvi,idloai, taikhoan, matkhau, trangthai) '
             + 'VALUES ($1, $2, $3, $4, $5, false)', thietbi)
         .then(() =>{
-            res.ender('addDevice', {message: "\"thêm thành công\""})
+            res.render('addDevice', {message: "\"thêm thành công\""})
             // const message = 'Thêm thiết bị thành công';
             // res.render('addDevice', {message})
         })
@@ -196,7 +237,8 @@ class device_controller {
             pool
             .query('delete from thietbi where idthietbi = $1', [req.params.id])
             .then(() => {
-                res.redirect('back');
+                // res.redirect('back');
+            res.render('listDevice', {message: '"xóa thành công"'});
             })
             .catch(next);
         }

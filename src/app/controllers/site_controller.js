@@ -122,21 +122,23 @@ class site_controller {
     //[PUT] /change-password
     updatepass(req, res, next){
         const doimatkhau = Object.values(req.body);
+        const idnguoidung = req.session.idnguoidung;
         pool
             .query(`select * from nguoidung 
-                where idnguoidung = $1 and matkhau = $2`, [doimatkhau[0], doimatkhau[1]])
+                where idnguoidung = $1 and matkhau = $2`, [idnguoidung, doimatkhau[0]])
             .then((result) => {
                     const nguoidung = result.rows[0];
                     if(nguoidung == undefined){
-                        res.redirect('change-password');
+                        res.render('changePassUser', { message: 'Đổi mật khẩu thất bại' });
                     }
                     else{
                         pool
                             .query(`update nguoidung set matkhau = $1 
-                                where idnguoidung = $2`, [doimatkhau[2], doimatkhau[0]])
+                                where idnguoidung = $2`, [doimatkhau[1], idnguoidung])
                             .then((result) => {
-                                res.redirect('/');
-                               // req.session.destroy();
+                                res.render('changePassUser', { message: 'Đổi mật khẩu thành công' });
+                                // res.redirect('/');
+                                // req.session.destroy();
 
                             })
                             .catch(next);
@@ -146,8 +148,11 @@ class site_controller {
     }
     //[POST]/log-out
     logout(req,res,next){
-        if(req.session.idnguoidung){
+        if(req.session.idnguoidung != undefined){
             req.session.destroy();
+            res.redirect('/');
+        }
+        else{
             res.redirect('/');
         }
     }
