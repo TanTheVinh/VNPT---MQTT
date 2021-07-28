@@ -235,12 +235,12 @@ class device_controller {
     delete(req, res, next){
         try{
             pool
-            .query('delete from thietbi where idthietbi = $1', [req.params.id])
-            .then(() => {
-                // res.redirect('back');
-            res.render('listDevice', {message: '"xóa thành công"'});
-            })
-            .catch(next);
+                .query('delete from thietbi where idthietbi = $1', [req.params.id])
+                .then(() => {
+                    // res.redirect('back');
+                    res.render('listDevice', {message: '"xóa thành công"'});
+                })
+                .catch(next);
         }
         catch(err){
             res.render('listDevice', {message: '"không thể xóa"'});
