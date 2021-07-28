@@ -1,4 +1,4 @@
-// Make the div behave like a button
+
 .btn-group,
 .btn-group-vertical {
   position: relative;
@@ -10,8 +10,6 @@
     flex: 1 1 auto;
   }
 
-  // Bring the hover, focused, and "active" buttons to the front to overlay
-  // the borders properly
   > .btn-check:checked + .btn,
   > .btn-check:focus + .btn,
   > .btn:hover,
@@ -22,7 +20,6 @@
   }
 }
 
-// Optional: Group multiple button groups together for a toolbar
 .btn-toolbar {
   display: flex;
   flex-wrap: wrap;

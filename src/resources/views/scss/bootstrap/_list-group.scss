@@ -1,29 +1,18 @@
-// Base class
-//
-// Easily usable on <ul>, <ol>, or <div>.
 
 .list-group {
   display: flex;
   flex-direction: column;
 
-  // No need to set list-style: none; since .list-group-item is block level
   padding-left: 0; // reset padding because ul and ol
   margin-bottom: 0;
   @include border-radius($list-group-border-radius);
 }
-
-
-// Interactive list items
-//
-// Use anchor or button elements instead of `li`s or `div`s to create interactive
-// list items. Includes an extra `.active` modifier class for selected items.
 
 .list-group-item-action {
   width: 100%; // For `<button>`s (anchors become 100% by default though)
   color: $list-group-action-color;
   text-align: inherit; // For `<button>`s (anchors inherit)
 
-  // Hover state
   &:hover,
   &:focus {
     z-index: 1; // Place hover/focus items above their siblings for proper border styling
@@ -37,11 +26,6 @@
     background-color: $list-group-action-active-bg;
   }
 }
-
-
-// Individual list items
-//
-// Use on `li`s or `div`s within the `.list-group` parent.
 
 .list-group-item {
   position: relative;
@@ -67,7 +51,6 @@
     background-color: $list-group-disabled-bg;
   }
 
-  // Include both here for `<a>`s and `<button>`s
   &.active {
     z-index: 2; // Place active items above their siblings for proper border styling
     color: $list-group-active-color;
@@ -84,11 +67,6 @@
     }
   }
 }
-
-
-// Horizontal
-//
-// Change the layout of list group items from vertical (default) to horizontal.
 
 @each $breakpoint in map-keys($grid-breakpoints) {
   @include media-breakpoint-up($breakpoint) {
@@ -127,11 +105,6 @@
 }
 
 
-// Flush list items
-//
-// Remove borders and border-radius to keep list group items edge-to-edge. Most
-// useful within other components (e.g., cards).
-
 .list-group-flush {
   @include border-radius(0);
 
@@ -145,12 +118,6 @@
 }
 
 
-// scss-docs-start list-group-modifiers
-// List group contextual variants
-//
-// Add modifier classes to change text and background color on individual items.
-// Organizationally, this must come after the `:hover` states.
-
 @each $state, $value in $theme-colors {
   $background: shift-color($value, $list-group-item-bg-scale);
   $color: shift-color($value, $list-group-item-color-scale);
@@ -160,4 +127,3 @@
 
   @include list-group-item-variant($state, $background, $color);
 }
-// scss-docs-end list-group-modifiers
