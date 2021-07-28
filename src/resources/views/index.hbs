@@ -39,45 +39,55 @@
         <div class="row">
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                 <div class="white-box">
-                    <h3 class="box-title">Số lượng kết nối</h3>
+                    <h3 class="box-title">Số lượng lệnh gửi từng tháng</h3>
                     <canvas id="myChart" width="900" height="300"></canvas>
                     <div class="cJS d-none">
                         <span id="lbls">
                             {{#each bieudo}}
-                                {{this.month}},
+                            "{{this.month}}" ,
                             {{/each}}
                         </span>
                         <span id="lbl">
                             {{#each bieudo}}
-                                {{this.year}},
+                            "{{this.year}}" ,
                             {{/each}}
                         </span>
                         <span id="dt">
                             {{#each bieudo}}
-                                {{this.soluonglenh}},
-                            {{/each}} 
+                            "{{this.soluonglenh}}" ,
+                            {{/each}}
                         </span>
                     </div>
+
                     <script type="text/javascript">
                         var ctx = document.getElementById("myChart");
+                        var lbls = document.getElementById('lbls').innerHTML;
+                        var lbl = document.getElementById('lbl').innerHTML;
+                        var dt = document.getElementById('dt').innerHTML;
                         var myChart = new Chart(ctx, {
-                            type: 'bar',
-                            data: {
-                                labels: [
-                                    document.getElementById('lbls').innerHTML;
-                                ],
-                                datasets: [{
-                                    label: [    document.getElementById('lbl').innerHTML;
-                                            ],
-                                    data: [
-                                                document.getElementById('dt').innerHTML;
-                                            ],
-                                    backgroundColor: [
-				                        'rgba(54, 162, 235, 0.6)',
-                                    ],
-                                }]
-                            },
-                        });
+                                    type: 'bar',
+                                    data: {
+                                        labels: ["Tháng Một", "Tháng Hai", "Tháng Ba", "Tháng Tư", "Tháng Năm", "Tháng Sáu", "Tháng Bảy", "Tháng Tám", "Tháng Chín", "Tháng Mười", "Tháng Mười Một", "Tháng Mười Hai"],
+                                        datasets: [{
+                                                label: 'Năm 2021',
+                                                data: [0,0,0,0,0,0,0,{{#each bieudo}}
+                                                            {{this.soluonglenh}},
+                                                        {{/each}}],
+                                                backgroundColor: 
+                                                        'rgba(54, 162, 235, 0.6)'
+                                                    ,
+                                                }]
+                                        },
+                                    options: {
+		                                scales: {
+			                                yAxes: [{
+                                                ticks: {
+                                                    beginAtZero:true
+                                                }
+                                                }]
+                                            }
+                                        }
+                                    });
                     </script>
                 </div>
             </div>
