@@ -57,19 +57,14 @@ class unit_controller {
 
     // [DELETE] /list-unit/delete/:id
     delete(req, res, next){
-            try{
-                pool
-                .query('delete from donvi where iddonvi = $1', [req.params.id])
-                .then(() => {
-                    // res.redirect('back');
-                res.render('listUnit', {message: '"xóa thành công"'});
-                })
-                .catch(next);
-            }
-            catch(err){
-                res.render('listUnit', {message: '"không thể xóa"'});
-            }
-    
+        try {
+            res.json({thietbi});
+            pool.query('delete from donvi where iddonvi = $1', [req.params.id])
+            //res.redirect('back')
+            res.render('listUnit', {message: '"Xóa thành công"'});
+        } catch (error) {
+            res.render('listUnit', {message: '"không thể xóa"'});
+        }
     }
 }
     

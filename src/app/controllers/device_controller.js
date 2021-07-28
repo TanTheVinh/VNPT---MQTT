@@ -237,8 +237,8 @@ class device_controller {
             pool
             .query('delete from thietbi where idthietbi = $1', [req.params.id])
             .then(() => {
-                // res.redirect('back');
-            res.render('listDevice', {message: '"xóa thành công"'});
+                res.redirect('back');
+                //res.render('listDevice', {message: '"xóa thành công"'});
             })
             .catch(next);
         }

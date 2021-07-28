@@ -135,17 +135,31 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <th scope="row">1</th>
-                                            <td>2</td>
+                                            <th scope="row">{{this.iddonvi}}</th>
+                                            <td>{{this.tendonvi}}</td>
                                             <td>
-                                                <button class="btn btn-danger">
-                                                    <i class="fa fa-trash-alt"></i> Xoá
-                                                </button>
+                                                <form id="dele" class="d-inline-block"
+                                                    action="/list-unit/delete/1?_method=DELETE" method="post">
+                                                    <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top"
+                                                        title="Xoá" onclick="myFunction()">
+                                                        <i class="fa fa-trash-alt"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
                                             </td>
                                         </tr>
+                                        
                                     </tbody>
                                 </table>
                             </div>
+                            <script>
+                                function myFunction() {
+                                    var r = confirm('Xác nhận xóa đơn vị');
+                                    if (r === true) {
+                                        document.getElementById('dele').submit();
+                                    }
+                                }
+                            </script>
                         </div>
                     </div>
                 </div>
