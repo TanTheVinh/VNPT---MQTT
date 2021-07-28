@@ -40,7 +40,7 @@
                 <th scope="row">
                 </th>
                 <td>
-                  <button id="save-btn" disabled="disabled" onclick="myFunction()" type="submit" class="btn btn-success">
+                  <button id="save-btn" disabled="disabled" type="submit" class="btn btn-success">
                     <i class="fa fa-edit"></i>
                     Đổi mật khẩu
                   </button>
@@ -75,11 +75,6 @@
                 document.getElementById("md5password").value = md5(document.getElementById("password").value);
             }
           </script>
-          <script>
-              function myFunction() {
-                confirm('Xác nhận đổi mật khẩu người dùng!');
-              }
-            </script>
         </div>
         <div class="col-md-3"></div>
       </div>

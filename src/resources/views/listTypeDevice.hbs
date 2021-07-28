@@ -36,10 +36,10 @@
 
                       </button>
                     </form>
-                    <form id="dele" class="d-inline-block" action="/list-catogory/delete/{{this.idloai}}?_method=DELETE"
-                      method="POST">
-                      <button type="button" onclick="myFunction()" class="btn btn-danger" data-toggle="tooltip"
-                        data-placement="top" title="Xoá">
+                    <form id="{{this.idloai}}" class="d-inline-block"
+                      action="/list-catogory/delete/{{this.idloai}}?_method=DELETE" method="POST">
+                      <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top"
+                        title="Xoá" onclick="myFunction({{this.idloai}})">
                         <i class="fa fa-trash-alt"></i>
                       </button>
                     </form>
@@ -48,12 +48,14 @@
                 {{/each}}
               </tbody>
             </table>
-            <script type="text/javascript">
-              function myFunction() {
-                var r = confirm('Xác nhận xóa loại thiết bị');
+            <script>
+              function myFunction(id) {
+                let r = confirm('Xác nhận xóa loại thiết bị');
                 if (r == true) {
-                  document.getElementById('dele').submit();
-                } 
+                  //alert("delete" + id);
+                  document.getElementById(id).submit();
+                  //alert(id);
+                }
               }
             </script>
           </div>

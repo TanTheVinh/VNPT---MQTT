@@ -15,7 +15,7 @@
           <h2 class="text-center">Cập nhật mật khẩu
             thiết bị:</h2>
           <hr />
-          <form action="/list-device/change-password/{{thietbi.idthietbi}}?_method=PUT" method="POST" onclick="md5pass()">
+          <form action="">
             <table class="table ">
               <tr>
                 <th scope="row">Mật khẩu cũ:</th>
@@ -41,6 +41,12 @@
                 </tr>
                 <tr>
               <tr>
+                <th scope="row">Nhập lại mật khẩu
+                  thiết bị:</th>
+                <td>
+                  <input required type="password" name="confirmPassword" id="confirmPassword" value="" />
+                </td>
+              </tr>
 
               <tr>
                 <th scope="row">
@@ -77,7 +83,8 @@
           {{/if}}
           <script>
             var rp = document.getElementById("rpl").innerHTML;
-            alert(rp);
+            let ex = rp.slice(1, -1);
+            alert(ex);
           </script>
           <script>
             function md5pass(){
