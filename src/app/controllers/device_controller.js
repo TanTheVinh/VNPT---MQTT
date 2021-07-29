@@ -184,6 +184,7 @@ class device_controller {
                     .then( result => {
                         const donvi = result.rows;
                         res.render('addDevice', {loaithietbi, donvi});
+                        
                     })
                 })
 
@@ -227,6 +228,7 @@ class device_controller {
             res.render('addDevice', {message: "\"thêm thành công\""})
             // const message = 'Thêm thiết bị thành công';
             // res.render('addDevice', {message})
+            
         })
         .catch(next);
     }
