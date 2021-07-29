@@ -50,11 +50,15 @@ app.use(session({
 server.on('ready',  () => {
   console.log('Mosca server is up and running');
     server.authenticate = function (client, username, password, callback) {
-        callback(null, (username === '1' && password.toString('ascii') === '2'));
+      callback(null, (username === '1' && password.toString('ascii') === '2'));
     };
 });
 
 
+server.on('published', (packet) => {
+  message = packet.payload.toString();
+  console.log(message);
+});  
 // 
 
 app.set('views', path.join(__dirname, 'resources', 'views'));
