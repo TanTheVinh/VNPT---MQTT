@@ -14,7 +14,7 @@
             Thêm thiết bị
           </a>
           <div class="table-responsive">
-            <table id="data" class="table text-nowrap text-center">
+            <table id="tbl" class="table text-nowrap text-center">
               <thead>
                 <tr>
                   <th class="border-top-0">Tên thiết bị</th>
@@ -24,7 +24,7 @@
                   <th class="border-top-0">Thao tác</th>
                 </tr>
               </thead>
-              <tbody>
+              {{!-- <tbody id="tbd">
                 {{#each thietbi}}
                 <tr>
                   <td>{{this.tenthietbi}}</td>
@@ -106,24 +106,24 @@
                       </div>
                     </div>
                     <a class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Xem chi tiết"
-                      href="/list-device/detail/{{this.idthietbi}}" method="GET">
+                      href="/list-device/detail/${{post.idthietbi}}" method="GET">
                       <i class="fa fa-info-circle"></i>
                     </a>
-                    <a href="/list-device/history/{{this.idthietbi}}" class="btn btn-success" data-toggle="tooltip"
+                    <a href="/list-device/history/${{post.idthietbi}}" class="btn btn-success" data-toggle="tooltip"
                       data-placement="top" title="Lịch sử">
                       <i class="fa fa-history"></i>
                     </a>
-                    <form id="{{this.idthietbi}}" class="d-inline-block"
-                      action="/list-device/delete/{{this.idthietbi}}?_method=DELETE" method="post">
+                    <form id="${{post.idthietbi}}" class="d-inline-block"
+                      action="/list-device/delete/${{post.idthietbi}}?_method=DELETE" method="post">
                       <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top"
-                        title="Xoá" onclick="myFunction({{this.idthietbi}})">
+                        title="Xoá" onclick="myFunction(${{post.idthietbi}})">
                         <i class="fa fa-trash-alt"></i>
                       </button>
                     </form>
                   </td>
                 </tr>
                 {{/each}}
-              </tbody>
+              </tbody> --}}
               <script>
                 function myfunc(){
                   $('#tk').val('');
@@ -136,13 +136,10 @@
                   //alert(id);
                 }
               }
-            </script>
+              </script>
             </table>
           </div>
-          {{!-- <div class="wrapper">
-            <ul class="anchorList">
-              <li><a href="#">All</a></li>
-            </ul>
+          <div class="">
             <script>
               if (document.readyState == "loading") {
                 document.addEventListener('DOMContentLoaded', App);
@@ -157,10 +154,10 @@
                   listData = listDataGenerator(100),
                   pageIndex = Math.ceil(listData.length / defaultPost);
 
-                let wrapper = document.querySelector('.wrapper');
+                let wrapper = $('#tbl');
 
                 //create ul List
-                let listDiv = document.createElement('ul');
+                let listDiv = document.createElement('tbody');
                 listDiv.classList.add('listStyle01');
                 wrapper.append(listDiv);
 
@@ -168,13 +165,13 @@
                 let listWrapper = document.querySelector('.listStyle01');
 
                 //create pagination div
-                let pagiDiv = document.createElement('div');
-                pagiDiv.classList.add('pagination');
+                let pagiDiv = document.createElement('tfoot');
+                pagiDiv.classList.add('pagination', 'm-3', 'justify-content-center');
                 wrapper.append(pagiDiv);
 
                 //select pagination container
                 let pagiWrapper = document.querySelector('.pagination');
-                console.log(pagiWrapper);
+                //console.log(pagiWrapper);
 
                 showPosts(listData, 0, defaultPost);
                 pagination(defaultIndex, pageIndex);
@@ -183,8 +180,64 @@
                   listWrapper.innerHTML = '';
 
                   listData.slice(startPos, endPost).map(post => {
-                    listWrapper.innerHTML = listWrapper.innerHTML + (
-                      `<li data-index=${post.key}><a href="#">${post.title}</a></li>`);
+                    let tt = post.trangthai;
+                    let btnTT = "";
+                    let btnS = "";
+                    if(tt == "\"true\""){
+                      btnTT = "<form id='log-out' action=''><button type='button' class='btn btn-success' onclick='cfm()'>Đang kết nối</button></form>";
+                      btnS = "<button type='button' class='btn btn-danger' data-toggle='tooltip' data-placement='top' title='Gửi lệnh' data-bs-toggle='modal' data-bs-target='#exampleModal'><i class='fa fa-inbox'></i></button>";
+                    }
+                    else{
+                      btnTT = "<button class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#login-Device'>Ngắt kết nối</button><div class='modal fade' id='login-Device' tabindex='-1' aria-labelledby='login-DeviceLabel' aria-hidden='true'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><h5 class='modal-title' id='login-DeviceLabel'>Đăng nhập thiết bị</h5><button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button></div><div class='modal-body'><form action='' method=''><div class=''><label for='tk'>Tài khoản thiết bị:</label><input type='text' name='tk' id='tk'></div><div class=''><label for='mk'>Mật khẩu thiết bị:</label><input type='password' name='mk' id='mk'></div></div></form><div class='modal-footer'><button type='button' class='btn btn-dark' data-bs-dismiss='modal' onclick='myfunc()'>Thoát</button><button type='submit' class='btn btn-success'>Đăng nhập</button></div></div></div></div>";
+                      btnS = "<button type='button' disabled class='btn btn-danger' data-toggle='tooltip' data-placement='top' title='Gửi lệnh' data-bs-toggle='modal' data-bs-target='#exampleModal'><i class='fa fa-inbox'></i></button>";
+                    }
+                    listWrapper.innerHTML += (
+                      `
+                      <tr>
+                  <td>${post.tenthietbi}</td>
+                  <td>${post.tenloai}</td>
+                  <td>${post.taikhoan}</td>
+                  <td>
+                    `+ btnTT +`
+                  </td>
+                  <td>
+                    `+ btnS +`
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                      aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Gửi lệnh</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <input type="text" name="mesg" id="mesg">
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Thoát</button>
+                            <button type="button" class="btn btn-success">Gửi</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <a class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Xem chi tiết"
+                      href="/list-device/detail/${post.idthietbi}" method="GET">
+                      <i class="fa fa-info-circle"></i>
+                    </a>
+                    <a href="/list-device/history/${post.idthietbi}" class="btn btn-success" data-toggle="tooltip"
+                      data-placement="top" title="Lịch sử">
+                      <i class="fa fa-history"></i>
+                    </a>
+                    <form id="${post.idthietbi}" class="d-inline-block"
+                      action="/list-device/delete/${post.idthietbi}?_method=DELETE" method="post">
+                      <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top"
+                        title="Xoá" onclick="myFunction(${post.idthietbi})">
+                        <i class="fa fa-trash-alt"></i>
+                      </button>
+                    </form>
+                  </td>
+               </tr>
+                      `);
                   })
                 }
 
@@ -201,7 +254,7 @@
 
                 function createControlButton(direction) {
                   let controlButton = document.createElement('button');
-                  controlButton.classList.add('controlBtn', `controlBtn-${direction}`);
+                  controlButton.classList.add('controlBtn', `controlBtn-${direction}`, 'btn', 'btn-info');
 
                   (direction == "prev") ? controlButton.innerText = "◄ Prev": controlButton.innerText = "Next ►";
 
@@ -246,17 +299,19 @@
                   }
 
                   for (let i = 0; i < rangeWithDots.length; i++) {
-                    let page = document.createElement('button');
+                    let page = document.createElement('a');
+                    page.setAttribute('href','/list-device/'+(i+1));
                     if (rangeWithDots[i] == current) {
-                      page.classList.add('page', 'current');
+                      page.classList.add('page', 'current', 'btn', 'btn-info');
                     } else if (rangeWithDots[i] == '...') {
                       page.addEventListener('click', e => e.preventDefault());
-                      page.classList.add('page');
+                      page.classList.add('page', 'btn', 'btn-info');
                     } else {
-                      page.classList.add('page');
+                      page.classList.add('page', 'btn', 'btn-info');
                       page.addEventListener('click', changePageIndex);
                     }
                     page.innerHTML = rangeWithDots[i];
+                    
                     pagiWrapper.append(page);
                   }
                   //re-render Post
@@ -293,19 +348,33 @@
                 }
 
                 function listDataGenerator(numPosts) {
-                  let listDataArray = [];
-
-                  for (let i = 0; i < numPosts; i++) {
-                    listDataArray[i] = {
-                      key: i,
-                      title: `Dummy title ${i+1}`
-                    };
-                  }
+                  let listDataArray = [
+                    {{#each thietbi}} 
+                      {
+                        idthietbi: '{{this.idthietbi}}',
+                        idloai: '{{this.idloai}}',
+                        iddonvi: '{{this.iddonvi}}',
+                        tenthietbi: '{{this.tenthietbi}}',
+                        taikhoan: '{{this.taikhoan}}',
+                        trangthai: '"{{this.trangthai}}"',
+                        tenloai: '{{this.tenloai}}'
+                      },
+                    {{/each}}
+                  ];
                   return listDataArray;
                 }
               }
             </script>
-          </div> --}}
+            <script>
+                      function cfm(){
+                        let cf = confirm("Xác nhận đăng xuất");
+                        if (cf == true) {
+                          document.getElementById('log-out').submit();
+                          //alert(id);
+                        }
+                      }
+                    </script>
+          </div>
         </div>
       </div>
     </div>
@@ -539,13 +608,13 @@
 
               var objJson = 
                   [{{#each thietbi}} {
-                    idthietbi: '{{this.idthietbi}}',
-                    idloai: '{{this.idloai}}',
-                    iddonvi: '{{this.iddonvi}}',
-                    tenthietbi: '{{this.tenthietbi}}',
-                    taikhoan: '{{this.taikhoan}}',
-                    trangthai: '"{{this.trangthai}}"',
-                    tenloai: '{{this.tenloai}}'
+                    idthietbi: '${{post.idthietbi}}',
+                    idloai: '${{post.idloai}}',
+                    iddonvi: '${{post.iddonvi}}',
+                    tenthietbi: '${{post.tenthietbi}}',
+                    taikhoan: '${{post.taikhoan}}',
+                    trangthai: '${{post.trangthai}}',
+                    tenloai: '${{post.tenloai}}'
                   },
                   {{/each}}]; 
                   console.log(objJson);
@@ -586,7 +655,7 @@
                           else{
                             btnTT = "<button class='btn btn-danger'>Ngắt kết nối</button>";
                           }
-                          listing_table.innerHTML +=  "<tr><td>"+ objJson[i].tenthietbi +"</td><td>"+ objJson[i].tenloai +"</td><td>"+ objJson[i].taikhoan +"</td><td>"+btnTT+"</td><td><button type='button' class='btn btn-danger' data-toggle='tooltip' data-placement='top'><i class='fa fa-inbox'></i></button><div class='modal fade' id='exampleModal' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><h5 class='modal-title' id='exampleModalLabel'>Gửi lệnh</h5><button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button></div><div class='modal-body'><input type='text' name='mesg' id='mesg'></div><div class='modal-footer'><button type='button' class='btn btn-dark' data-bs-dismiss='modal'>Thoát</button><button type='button' class='btn btn-success'>Gửi</button> </div> </div></div></div><a class='btn btn-info' data-toggle='tooltip' data-placement='top' title='Xem chi tiết' href='/list-device/detail/"+objJson[i].idthietbi+"' method='GET'><i class='fa fa-info-circle'></i></a><a href='/list-device/history/"+objJson[i].idthietbi+"' class='btn btn-success' data-toggle='tooltip' data-placement='top' title='Lịch sử'> <i class='fa fa-history'></i> </a><form id='"+objJson[i].idthietbi+"' class='d-inline-block' action='/list-device/delete/"+objJson[i].idthietbi+"?_method=DELETE' method='post'> <button type='button' class='btn btn-danger' data-toggle='tooltip' data-placement='top' title='Xoá' onclick='myFunction("+objJson[i].idthietbi+")'> <i class='fa fa-trash-alt'></i> </button> </form> </td> </tr>"
+                          listing_table.innerHTML +=  "<tr><td>"+ objJson[i].tenthietbi +"</td><td>"+ objJson[i].tenloai +"</td><td>"+ objJson[i].taikhoan +"</td><td>"+btnTT+"</td><td><button type='button' class='btn btn-danger' data-toggle='tooltip' data-placement='top'><i class='fa fa-inbox'></i></button><div class='modal fade' id='exampleModal' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><h5 class='modal-title' id='exampleModalLabel'>Gửi lệnh</h5><button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button></div><div class='modal-body'><input type='text' name='mesg' id='mesg'></div><div class='modal-footer'><button type='button' class='btn btn-dark' data-bs-dismiss='modal'>Thoát</button><button type='button' class='btn btn-success'>Gửi</button> </div> </div></div></div><a class='btn btn-info' data-toggle='tooltip' data-placement='top' title='Xem chi tiết' href='/list-device/detail/"+objJson[i].idthietbi+' method='GET'><i class='fa fa-info-circle'></i></a><a href='/list-device/history/"+objJson[i].idthietbi+' class='btn btn-success' data-toggle='tooltip' data-placement='top' title='Lịch sử'> <i class='fa fa-history'></i> </a><form id='+objJson[i].idthietbi+' class='d-inline-block' action='/list-device/delete/"+objJson[i].idthietbi+"?_method=DELETE' method='post'> <button type='button' class='btn btn-danger' data-toggle='tooltip' data-placement='top' title='Xoá' onclick='myFunction("+objJson[i].idthietbi+")'> <i class='fa fa-trash-alt'></i> </button> </form> </td> </tr>"
                           ;
                         }
                         
