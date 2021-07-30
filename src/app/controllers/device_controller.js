@@ -13,30 +13,41 @@ class device_controller {
         else{
             if(req.session.quyen == 'nv'){
                 const iddonvi = req.session.iddonvi;
+                const page = req.query.page;
                 pool
                     .query(`select * from thietbi, loaithietbi 
-                        where thietbi.idloai = loaithietbi.idloai and iddonvi = $1`, [iddonvi])
+                        where thietbi.idloai = loaithietbi.idloai and iddonvi = $1
+                        OFFSET (($2-1)*10) ROWS FETCH NEXT 10 ROWS ONLY`, [iddonvi, page])
                     .then(result => {
                         const thietbi = result.rows;
-                        // res.json(thietbi);
-                        // console.log({thietbi});
-                        res.render('listDevice', { thietbi });
+                        pool
+                            .query(`select count(*) from thietbi`)
+                            .then(result => {
+                                const count = result.rows[0];
+                                // res.json(thietbi);
+                                // console.log({thietbi});
+                                res.render('listDevice', { thietbi, count });
+                            })
+                            .catch(next);
                     })
                     .catch(next)
             }else{
+                const page = req.query.page;
                 pool
-                .query(`SELECT  thietbi.idthietbi,
-                thietbi.idloai,
-                thietbi.iddonvi,
-                thietbi.tenthietbi,
-                thietbi.taikhoan,
-                thietbi.trangthai,
-                loaithietbi.tenloai
-            FROM thietbi INNER JOIN loaithietbi
-            ON 	thietbi.idloai  = loaithietbi.idloai`)
+                .query(`select * from thietbi, loaithietbi 
+                where thietbi.idloai = loaithietbi.idloai
+                OFFSET (($1-1)*10) ROWS FETCH NEXT 10 ROWS ONLY`, [page])
                 .then( result =>{
                     const thietbi  = result.rows;
-                    res.render('listDevice', { thietbi });
+                    pool
+                        .query(`select count(*) from thietbi`)
+                        .then(result => {
+                            const count = result.rows[0];
+                            // res.json(thietbi);
+                            // console.log({thietbi});
+                            res.render('listDevice', { thietbi, count });
+                        })
+                        .catch(next);
                 }).catch(next)
             }   
         }
@@ -250,22 +261,29 @@ class device_controller {
 
     }
 
-    history(req, res, next){
+    historydata(req, res, next){
         res.render('publishLog');
     }
 
     connect(req, res, next){
-        // pool
-        //     .query(`select * from thietbi where idthietbi = $1`, [req.params.id])
-        //     .then(result => {
-        //         const thietbi = result.rows[0];
-        //         var username = thietbi.taikhoan;
-        //         var password = thietbi.matkhau;
-        //         var message = 'ma thiet bi la :' + req.params.id.toString();
-        //         pub(username, password, message);
-        //         res.send('ok');
-        //     })
-        //     .catch(next);
+        const account = Object.values(req.body);
+        account.unshift(req.params.id);
+        pool
+            .query(`select * from thietbi where 
+            idthietbi = $1 and taikhoan = $2 and matkhau = $3`, account)
+            .then(result => {
+                try {
+                    const thietbi = result.rows[0];
+                    var username = thietbi.taikhoan;
+                    var password = thietbi.matkhau;
+                    var message = 'ma thiet bi la :' + req.params.id.toString();
+                    pub(username, password, message);
+                } catch (error) {
+                    res.render('list-device', {message: 'tài khoản hoặc mật khẩu không đúng'})
+                }
+
+            })
+            .catch(next);
     }
 }
 

@@ -7,7 +7,7 @@ const pool = require('../../config/db/database');
     pool
         .query(`select * from thietbi where trangthai = true`)
         .then(result => {
-            const thietbi = result.rows[0];
+            const thietbi = result.rows;
             thietbi.forEach(element => {
                 const message = 'Hello world!';
                 const user = {
