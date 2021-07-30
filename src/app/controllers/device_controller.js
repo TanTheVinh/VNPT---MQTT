@@ -24,8 +24,8 @@ class device_controller {
                             .query(`select count(*) from thietbi`)
                             .then(result => {
                                 const count = result.rows[0];
-                                // res.json(thietbi);
-                                // console.log({thietbi});
+                                res.json({thietbi});
+                                // console.log({thietbi, count});
                                 res.render('listDevice', { thietbi, count });
                             })
                             .catch(next);
@@ -43,7 +43,7 @@ class device_controller {
                         .query(`select count(*) from thietbi`)
                         .then(result => {
                             const count = result.rows[0];
-                            // res.json(thietbi);
+                            // res.json({thietbi});
                             // console.log({thietbi});
                             res.render('listDevice', { thietbi, count });
                         })
