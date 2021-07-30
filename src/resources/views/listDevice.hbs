@@ -32,17 +32,60 @@
                   <td>{{this.taikhoan}}</td>
                   <td>
                     {{#if trangthai}}
-                    <button class="btn btn-success">Đang kết nối</button>
+                    <form id="log-out" action="">
+                      <button type="button" class="btn btn-success" onclick="cfm()">Đang kết nối</button>
+                    </form>
+                    <script>
+                      function cfm(){
+                        let cf = confirm("Xác nhận đăng xuất");
+                        if (cf == true) {
+                          document.getElementById('log-out').submit();
+                          //alert(id);
+                        }
+                      }
+                    </script>
                     {{else}}
-                    <button class="btn btn-danger">Ngắt kết nối</button>
+                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#login-Device">Ngắt kết
+                      nối</button>
+                    <div class="modal fade" id="login-Device" tabindex="-1" aria-labelledby="login-DeviceLabel"
+                      aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="login-DeviceLabel">Đăng nhập thiết bị</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="">
+                              <label for="tk">Tài khoản thiết bị:</label>
+                              <input type="text" name="tk" id="tk">
+                            </div>
+                            <div class="">
+                              <label for="mk">Mật khẩu thiết bị:</label>
+                              <input type="text" name="mk" id="mk">
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Thoát</button>
+                            <button type="button" class="btn btn-success">Đăng nhập</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                     {{/if}}
                   </td>
                   <td>
+                    {{#if trangthai}}
                     <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top"
                       title="Gửi lệnh" data-bs-toggle="modal" data-bs-target="#exampleModal">
                       <i class="fa fa-inbox"></i>
-
                     </button>
+                    {{else}}
+                    <button type="button" disabled class="btn btn-danger" data-toggle="tooltip" data-placement="top"
+                      title="Gửi lệnh" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                      <i class="fa fa-inbox"></i>
+                    </button>
+                    {{/if}}
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                       aria-hidden="true">
                       <div class="modal-dialog">
@@ -74,16 +117,13 @@
                       <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top"
                         title="Xoá" onclick="myFunction({{this.idthietbi}})">
                         <i class="fa fa-trash-alt"></i>
-
                       </button>
                     </form>
                   </td>
                 </tr>
                 {{/each}}
               </tbody>
-            </table>
-            <ul id="nav" class="pagination justify-content-center"></ul>
-            <script>
+              <script>
               function myFunction(id) {
                 let r = confirm('Xác nhận xóa thiết bị');
                 if (r == true) {
@@ -92,7 +132,485 @@
                 }
               }
             </script>
+            </table>
+          </div>
+          {{!-- <div class="wrapper">
+            <ul class="anchorList">
+              <li><a href="#">All</a></li>
+            </ul>
             <script>
+              if (document.readyState == "loading") {
+                document.addEventListener('DOMContentLoaded', App);
+              } else {
+                App();
+              }
+
+              function App() {
+                //common variables
+                let defaultIndex = 1,
+                  defaultPost = 5,
+                  listData = listDataGenerator(100),
+                  pageIndex = Math.ceil(listData.length / defaultPost);
+
+                let wrapper = document.querySelector('.wrapper');
+
+                //create ul List
+                let listDiv = document.createElement('ul');
+                listDiv.classList.add('listStyle01');
+                wrapper.append(listDiv);
+
+                //select list container
+                let listWrapper = document.querySelector('.listStyle01');
+
+                //create pagination div
+                let pagiDiv = document.createElement('div');
+                pagiDiv.classList.add('pagination');
+                wrapper.append(pagiDiv);
+
+                //select pagination container
+                let pagiWrapper = document.querySelector('.pagination');
+                console.log(pagiWrapper);
+
+                showPosts(listData, 0, defaultPost);
+                pagination(defaultIndex, pageIndex);
+
+                function showPosts(listData, startPos, endPost) {
+                  listWrapper.innerHTML = '';
+
+                  listData.slice(startPos, endPost).map(post => {
+                    listWrapper.innerHTML = listWrapper.innerHTML + (
+                      `<li data-index=${post.key}><a href="#">${post.title}</a></li>`);
+                  })
+                }
+
+                function getCurrentIndex() {
+                  let pageButton = document.querySelectorAll('.page');
+                  let currentIndex;
+                  pageButton.forEach(button => {
+                    if (button.classList.contains('current')) {
+                      currentIndex = Number(button.innerText);
+                    }
+                  })
+                  return currentIndex;
+                }
+
+                function createControlButton(direction) {
+                  let controlButton = document.createElement('button');
+                  controlButton.classList.add('controlBtn', `controlBtn-${direction}`);
+
+                  (direction == "prev") ? controlButton.innerText = "◄ Prev": controlButton.innerText = "Next ►";
+
+                  controlButton.addEventListener('click', function () {
+                    controlIndexChange(direction);
+                  });
+                  return controlButton;
+                }
+
+                function controlIndexChange(direction) {
+                  let pageList = document.querySelectorAll('.page');
+                  const current = getCurrentIndex();
+                  (direction == "next") ? pagination(current + 1): pagination(current - 1);
+                }
+
+                function pagination(index, pageLen = pageIndex) {
+                  pagiWrapper.innerHTML = '';
+                  let current = index,
+                    last = pageLen,
+                    delta = 2,
+                    left = current - delta,
+                    right = current + delta + 1,
+                    range = [],
+                    rangeWithDots = [],
+                    l = null;
+                  for (let i = 1; i <= last; i++) {
+                    if (i == 1 || i == last || i >= left && i < right) {
+                      range.push(i);
+                    }
+                  }
+
+                  for (let i of range) {
+                    if (l) {
+                      if (i - l === 2) {
+                        rangeWithDots.push(l + 1);
+                      } else if (i - l !== 1) {
+                        rangeWithDots.push('...');
+                      }
+                    }
+                    rangeWithDots.push(i);
+                    l = i;
+                  }
+
+                  for (let i = 0; i < rangeWithDots.length; i++) {
+                    let page = document.createElement('button');
+                    if (rangeWithDots[i] == current) {
+                      page.classList.add('page', 'current');
+                    } else if (rangeWithDots[i] == '...') {
+                      page.addEventListener('click', e => e.preventDefault());
+                      page.classList.add('page');
+                    } else {
+                      page.classList.add('page');
+                      page.addEventListener('click', changePageIndex);
+                    }
+                    page.innerHTML = rangeWithDots[i];
+                    pagiWrapper.append(page);
+                  }
+                  //re-render Post
+                  showPosts(listData, (current * defaultPost) - defaultPost, (current * defaultPost));
+
+                  //Show control button
+                  if (pageIndex >= 1) {
+                    pagiWrapper.append(createControlButton("next"));
+                    pagiWrapper.prepend(createControlButton("prev"));
+                  }
+
+                  //handle button display
+                  let prevButton = document.querySelector('.controlBtn-prev');
+                  let nextButton = document.querySelector('.controlBtn-next');
+                  if (pageLen <= 1) {
+                    prevButton.style.display = "none";
+                    nextButton.style.display = "none";
+                  } else if (current == 1) {
+                    prevButton.style.display = "none";
+                    nextButton.style.display = "inline-block";
+                  } else {
+                    prevButton.style.display = "inline-block";
+                    nextButton.style.display = "inline-block";
+                    if (pageLen == current) {
+                      nextButton.style.display = "none";
+                    }
+                  }
+
+                }
+
+                function changePageIndex(event) {
+                  let clickedItem = Number(event.target.innerText);
+                  pagination(clickedItem);
+                }
+
+                function listDataGenerator(numPosts) {
+                  let listDataArray = [];
+
+                  for (let i = 0; i < numPosts; i++) {
+                    listDataArray[i] = {
+                      key: i,
+                      title: `Dummy title ${i+1}`
+                    };
+                  }
+                  return listDataArray;
+                }
+              }
+            </script>
+          </div> --}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+{{!-- <div class="for-comment">
+  <style>
+.pagination.container{
+  width: 100%;
+  max-width: 940px;
+  margin: 0 auto;
+  position: relative;
+  text-align: center;
+}
+.pagination{
+  font-family: 'Open Sans', sans-serif;
+  color: #222;
+  padding: 30px 0;
+}
+.pagination p, .pagination li, .pagination a{
+  font-size: 14px;
+}
+.pagination a{
+  text-decoration: none;
+}
+.pagination ul{
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.pagination a{  
+  display: inline-block;
+  padding: 5px 10px;
+  color: #222;
+}
+.blocks .control, .blocks .is-active{
+  background-color: #cc2e4a;
+  color: #fff;
+  font-weight: bold;
+}
+</style>
+<div class="pagination container">
+              <div class="pagination blocks">
+              </div>
+              <div class="content">
+              </div>
+            </div>
+        
+        <script>
+          var allData = generateTestData(50);
+          console.log(JSON.stringify(allData));
+          var pagData = [];
+          var activePageID = 1;
+          var pagMaxLength = 5;
+
+          pagData = createRegisterArray(0, pagMaxLength);
+
+          function registerData(id) {
+            var pagData = [];
+
+
+            if (id < 4) {
+              pagData = createRegisterArray(0, pagMaxLength);
+            } else {
+              var startIndex = id - 4;
+              pagData = createRegisterArray(startIndex, pagMaxLength);
+            }
+
+            return pagData
+          }
+
+          function renderPagination() {
+            var pagHTML = '';
+            var pagData = registerData(activePageID);
+            console.log(JSON.stringify(pagData));
+
+            pagHTML = pagHTML + renderPrevBtn(pagData, activePageID);
+
+
+            for (i = 0; i < pagData.length; i++) {
+              if (pagData[i] == activePageID) {
+                pagHTML = pagHTML + '<a class="is-active page-link" href="#"><li class="page-item">' + pagData[i] + '</li></a>';
+              } else if (pagData[i] <= allData.length) {
+                pagHTML = pagHTML + '<a href="#" class="page-link" onclick="return gotoPage(' + pagData[i] + ');"><li class="page-item">' + pagData[i] +
+                  '</li></a>';
+              }
+
+            }
+
+            pagHTML = pagHTML + renderNextBtn(pagData, activePageID);
+
+            $(".pagination.blocks").html("<ul>" + pagHTML + "</ul>");
+            $(".content").html(allData[activePageID - 1].content);
+          }
+
+          function renderPrevBtn(data, id) {
+            var prevBtnHTML = '';
+            if (id > 1) {
+              if (typeof data != "undefined" && data.length > 0) {
+                prevBtnHTML = prevBtnHTML +
+                  '<a class="control page-link" href="#" onclick="return prevClick();"><li>Previous</li></a>';
+              }
+            }
+
+            return prevBtnHTML
+          }
+
+          //Markup Next Button
+          function renderNextBtn(data, id) {
+            var nextBtnHTML = '';
+
+            if (id < allData.length) {
+              if (typeof data != "undefined" && data.length > 0) {
+                nextBtnHTML = nextBtnHTML +
+                  '<a class="control page-link" href="#" onclick="return nextClick();"><li>Next</li></a>';
+              }
+            }
+
+
+            return nextBtnHTML
+          }
+
+          //previous click
+          function prevClick() {
+            activePageID = activePageID - 1
+            if (activePageID < 1) {
+              activePageID = 1;
+            }
+
+            console.log("activePageID: " + activePageID);
+            renderPagination();
+          }
+
+          //next click
+          function nextClick() {
+
+            activePageID = activePageID + 1
+
+            if (activePageID > allData.length) {
+              activePageID = allData.length;
+            }
+
+            console.log("activePageID: " + activePageID);
+            renderPagination();
+          }
+
+          //open page
+          function gotoPage(nr) {
+            activePageID = nr;
+            renderPagination();
+          }
+          function createRegisterArray(startIndex, maxLength) {
+            var registerArray = [];
+            var lastIndex = startIndex + maxLength;
+
+            console.log("startIndex: " + startIndex + ", lastIndex: " + lastIndex);
+
+            var firstRegNr = startIndex + 1;
+            var lastRegNr = firstRegNr + maxLength;
+
+            if (lastRegNr > allData.length) {
+              lastRegNr = allData.length + 1;
+            }
+
+            var diff = lastRegNr - firstRegNr;
+
+            if (diff < maxLength) {
+              firstRegNr = lastRegNr - (maxLength);
+              if (firstRegNr < 1) {
+                firstRegNr = 1;
+              }
+            }
+
+            console.log("firstRegNr: " + firstRegNr + ", lastRegNr: " + lastRegNr + ", diff: " + diff);
+
+            for (i = firstRegNr; i < lastRegNr; i++) {
+              registerArray.push(i); //store register number (starts with 1);
+            }
+
+            return registerArray;
+          }
+
+          function generateTestData(amountOfObjects) {
+            var retArray = [];
+            for (i = 0; i < amountOfObjects; i++) {
+              retArray.push({
+                _id: i,
+                content: "Page with ID " + i
+              });
+            }
+
+            return retArray;
+
+          }
+
+          //it is time to render, my friend
+          $(document).ready(function () {
+            renderPagination();
+          });
+        </script>
+        <ul id="nav" class="pagination justify-content-center"></ul>
+            
+        <table id="data" class="table text-nowrap text-center">
+              <thead>
+                <tr>
+                  <th class="border-top-0">Tên thiết bị</th>
+                  <th class="border-top-0">Loại thiết bị</th>
+                  <th class="border-top-0">Tài khoản</th>
+                  <th class="border-top-0">Tình trạng kết nối</th>
+                  <th class="border-top-0">Thao tác</th>
+                </tr>
+              </thead>
+              <tbody id="listingTable"></tbody>
+            </table>
+            <div class="w-25 m-auto">
+              <a href="javascript:prevPage()" class="btn btn-info" id="btn_prev">Trang trước</a>
+            <span class="">
+              Trang: <span id="page"></span><span id="ttpage"></span>
+            </span>
+            <a href="javascript:nextPage()" class="btn btn-info" id="btn_next">Trang sau</a>
+            </div>
+            <script>
+              var current_page = 1;
+              var records_per_page = 5;
+
+              var objJson = 
+                  [{{#each thietbi}} {
+                    idthietbi: '{{this.idthietbi}}',
+                    idloai: '{{this.idloai}}',
+                    iddonvi: '{{this.iddonvi}}',
+                    tenthietbi: '{{this.tenthietbi}}',
+                    taikhoan: '{{this.taikhoan}}',
+                    trangthai: '"{{this.trangthai}}"',
+                    tenloai: '{{this.tenloai}}'
+                  },
+                  {{/each}}]; 
+                  console.log(objJson);
+                      function prevPage() {
+                        if (current_page > 1) {
+                          current_page--;
+                          changePage(current_page);
+                          console.log(current_page);
+                        }
+                      }
+
+                      function nextPage() {
+                        if (current_page < numPages()) {
+                          current_page++;
+                          changePage(current_page);
+                          console.log(current_page);
+                        }
+                      }
+
+                      function changePage(page) {
+                        var btn_next = document.getElementById("btn_next");
+                        var btn_prev = document.getElementById("btn_prev");
+                        var listing_table = document.getElementById("listingTable");
+                        var page_span = document.getElementById("page");
+
+                        // Validate page
+                        if (page < 1) page = 1;
+                        if (page > numPages()) page = numPages();
+
+                        listing_table.innerHTML = "";
+
+                        for (var i = (page - 1) * records_per_page; i < (page * records_per_page); i++) {
+                          let tt = objJson[i].trangthai;
+                          let btnTT = "";
+                          if(tt=="\"true\""){
+                            btnTT = "<button class='btn btn-success'>Đang kết nối</button>";
+                          }
+                          else{
+                            btnTT = "<button class='btn btn-danger'>Ngắt kết nối</button>";
+                          }
+                          listing_table.innerHTML +=  "<tr><td>"+ objJson[i].tenthietbi +"</td><td>"+ objJson[i].tenloai +"</td><td>"+ objJson[i].taikhoan +"</td><td>"+btnTT+"</td><td><button type='button' class='btn btn-danger' data-toggle='tooltip' data-placement='top'><i class='fa fa-inbox'></i></button><div class='modal fade' id='exampleModal' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><h5 class='modal-title' id='exampleModalLabel'>Gửi lệnh</h5><button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button></div><div class='modal-body'><input type='text' name='mesg' id='mesg'></div><div class='modal-footer'><button type='button' class='btn btn-dark' data-bs-dismiss='modal'>Thoát</button><button type='button' class='btn btn-success'>Gửi</button> </div> </div></div></div><a class='btn btn-info' data-toggle='tooltip' data-placement='top' title='Xem chi tiết' href='/list-device/detail/"+objJson[i].idthietbi+"' method='GET'><i class='fa fa-info-circle'></i></a><a href='/list-device/history/"+objJson[i].idthietbi+"' class='btn btn-success' data-toggle='tooltip' data-placement='top' title='Lịch sử'> <i class='fa fa-history'></i> </a><form id='"+objJson[i].idthietbi+"' class='d-inline-block' action='/list-device/delete/"+objJson[i].idthietbi+"?_method=DELETE' method='post'> <button type='button' class='btn btn-danger' data-toggle='tooltip' data-placement='top' title='Xoá' onclick='myFunction("+objJson[i].idthietbi+")'> <i class='fa fa-trash-alt'></i> </button> </form> </td> </tr>"
+                          ;
+                        }
+                        
+                        page_span.innerHTML = page;
+
+                        if (page == 1) {
+                          btn_prev.style.visibility = "hidden";
+                        } else {
+                          btn_prev.style.visibility = "visible";
+                        }
+
+                        if (page == numPages()) {
+                          btn_next.style.visibility = "hidden";
+                        } else {
+                          btn_next.style.visibility = "visible";
+                        }
+                      }
+
+                      function numPages() {
+                        let nump = Math.ceil(objJson.length / records_per_page);
+                        $('#ttpage').html("/"+nump);
+                        return nump;
+                      }
+
+                      window.onload = function () {
+                        changePage(1);
+                      };
+            </script>
+        <script>
                         $(document).ready(function () {
                             $('#nav').children().remove();
                             var rowsShown = 5;
@@ -101,8 +619,8 @@
                             for (i = 0; i < numPages; i++) {
                                 var pageNum = i + 1;
                                 $('#nav').append(
-                                    '<li class="page-item"><a id="f" class="page-link" href="#" rel="' + i +
-                                    '">' + pageNum + '</a> </li>');
+                                    '<li class="page-item"><a id="f" class="page-link" href="#" rel=' + i +
+                                    '>' + pageNum + '</a> </li>');
                             }
                             $('#data tbody tr').hide();
                             $('#data tbody tr').slice(0, rowsShown).show();
@@ -120,10 +638,4 @@
                                 }, 300);
                             });
                         });
-                    </script>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+            </script></div> --}}
