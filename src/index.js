@@ -17,11 +17,11 @@ const server = new mosca.Server(settings);
 // 
 
 const route = require('./routes/');
-const db = require('./config/db/database');
+const pool = require('./config/db/database');
 const { options } = require('./routes/site');
 
 //Connect database
-db.connect(() => {
+pool.connect(() => {
   console.log('connect successfully');
 });
 
@@ -47,18 +47,28 @@ app.use(session({
 }));
 
 // test mosca
-server.on('ready',  () => {
-  console.log('Mosca server is up and running');
-    server.authenticate = function (client, username, password, callback) {
-      callback(null, (username === '1' && password.toString('ascii') === '2'));
-    };
-});
+// server.on('ready',  () => {
+//   console.log('Mosca server is up and running');
+//   pool
+//         .query(`select * from thietbi where trangthai = true`)
+//         .then(result => {
+//             const thietbi = result.rows[0];
+//             console.log(thietbi);
+//             server.authenticate = function (client, username, password, callback) {
+//                 let taikhoan = thietbi.taikhoan;
+//                 let matkhau = thietbi.matkhau;
+//                 callback(null, (username === taikhoan && password.toString('ascii') === matkhau));
+//             };
+//         })
+//         .catch();
+// });
 
-
-server.on('published', (packet) => {
+server.on('published', (packet, client) => {
   message = packet.payload.toString();
+  topic = packet.topic.toString();
   console.log(message);
-});  
+  console.log(topic);
+});
 // 
 
 app.set('views', path.join(__dirname, 'resources', 'views'));

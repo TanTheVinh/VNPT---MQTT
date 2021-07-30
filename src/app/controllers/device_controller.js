@@ -1,6 +1,7 @@
 const pool = require("../../config/db/database");
 const session = require('express-session');
 const { render } = require("node-sass");
+const pub = require('./pub');
 
 class device_controller {
 
@@ -17,7 +18,7 @@ class device_controller {
                         where thietbi.idloai = loaithietbi.idloai and iddonvi = $1`, [iddonvi])
                     .then(result => {
                         const thietbi = result.rows;
-                        // res.json({thietbi});
+                        // res.json(thietbi);
                         // console.log({thietbi});
                         res.render('listDevice', { thietbi });
                     })
@@ -38,7 +39,6 @@ class device_controller {
                     res.render('listDevice', { thietbi });
                 }).catch(next)
             }   
-
         }
     }
 
@@ -252,6 +252,20 @@ class device_controller {
 
     history(req, res, next){
         res.render('publishLog');
+    }
+
+    connect(req, res, next){
+        // pool
+        //     .query(`select * from thietbi where idthietbi = $1`, [req.params.id])
+        //     .then(result => {
+        //         const thietbi = result.rows[0];
+        //         var username = thietbi.taikhoan;
+        //         var password = thietbi.matkhau;
+        //         var message = 'ma thiet bi la :' + req.params.id.toString();
+        //         pub(username, password, message);
+        //         res.send('ok');
+        //     })
+        //     .catch(next);
     }
 }
 
