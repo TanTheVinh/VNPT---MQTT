@@ -36,6 +36,7 @@ class device_controller {
                 .then( result =>{
                     const thietbi  = result.rows;
                     res.render('listDevice', { thietbi });
+                    console.log({thietbi});
                 }).catch(next)
             }   
 

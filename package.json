@@ -30,6 +30,7 @@
     "method-override": "^3.0.0",
     "mosca": "^2.8.3",
     "mqtt": "^4.2.8",
+    "paginationjs": "^2.1.5",
     "pg": "^8.6.0"
   },
   "devDependencies": {
