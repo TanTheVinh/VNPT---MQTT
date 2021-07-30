@@ -39,45 +39,55 @@
         <div class="row">
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                 <div class="white-box">
-                    <h3 class="box-title">Số lượng kết nối</h3>
+                    <h3 class="box-title">Số lượng lệnh gửi từng tháng</h3>
                     <canvas id="myChart" width="900" height="300"></canvas>
+                    <div class="cJS d-none">
+                        <span id="lbls">
+                            {{#each bieudo}}
+                            "{{this.month}}" ,
+                            {{/each}}
+                        </span>
+                        <span id="lbl">
+                            {{#each bieudo}}
+                            "{{this.year}}" ,
+                            {{/each}}
+                        </span>
+                        <span id="dt">
+                            {{#each bieudo}}
+                            "{{this.soluonglenh}}" ,
+                            {{/each}}
+                        </span>
+                    </div>
+
                     <script type="text/javascript">
                         var ctx = document.getElementById("myChart");
+                        var lbls = document.getElementById('lbls').innerHTML;
+                        var lbl = document.getElementById('lbl').innerHTML;
+                        var dt = document.getElementById('dt').innerHTML;
                         var myChart = new Chart(ctx, {
-                            type: 'bar',
-                            data: {
-                                labels: [
-                                    {{#each bieudo}}
-                                        {{this.month}},
-                                    {{/each}}
-                                ],
-                                datasets: [{
-                                    label: [    {{#each bieudo}}
-                                                    {{this.year}},
-                                                {{/each}}
-                                            ],
-                                    data: [
-                                                {{#each bieudo}}
-                                                    {{this.soluonglenh}},
-                                                {{/each}} 
-                                            ],
-                                    backgroundColor: [
-                                        'rgba(255, 99, 132, 0.2)',
-				                        'rgba(54, 162, 235, 0.2)',
-				                        'rgba(255, 206, 86, 0.2)',
-				                        'rgba(75, 192, 192, 0.2)',
-				                        'rgba(153, 102, 255, 0.2)',
-				                        'rgba(255, 159, 64, 0.2)',
-                                        'rgba(255, 99, 132, 0.2)',
-				                        'rgba(54, 162, 235, 0.2)',
-				                        'rgba(255, 206, 86, 0.2)',
-				                        'rgba(75, 192, 192, 0.2)',
-				                        'rgba(153, 102, 255, 0.2)',
-				                        'rgba(255, 159, 64, 0.2)'
-                                    ],
-                                }]
-                            },
-                        });
+                                    type: 'bar',
+                                    data: {
+                                        labels: ["Tháng Một", "Tháng Hai", "Tháng Ba", "Tháng Tư", "Tháng Năm", "Tháng Sáu", "Tháng Bảy", "Tháng Tám", "Tháng Chín", "Tháng Mười", "Tháng Mười Một", "Tháng Mười Hai"],
+                                        datasets: [{
+                                                label: 'Năm 2021',
+                                                data: [0,0,0,0,0,0,0,{{#each bieudo}}
+                                                            {{this.soluonglenh}},
+                                                        {{/each}}],
+                                                backgroundColor: 
+                                                        'rgba(54, 162, 235, 0.6)'
+                                                    ,
+                                                }]
+                                        },
+                                    options: {
+		                                scales: {
+			                                yAxes: [{
+                                                ticks: {
+                                                    beginAtZero:true
+                                                }
+                                                }]
+                                            }
+                                        }
+                                    });
                     </script>
                 </div>
             </div>

@@ -2,7 +2,7 @@
   <div class="page-breadcrumb bg-white">
     <div class="row align-items-center">
       <div class="col-lg-4 col-md-5 col-sm-6 col-xs-12">
-        <h1 id="title">Chỉnh sửa thông tin
+        <h1 id="title">Chỉnh sửa mật khẩu
           thiết bị</h1>
       </div>
     </div>
@@ -12,47 +12,51 @@
       <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6 border rounded white-box">
-          <h2 class="text-center">Cập nhật thông tin
+          <h2 class="text-center">Cập nhật mật khẩu
             thiết bị:</h2>
           <hr />
-          <form  action="">
+          <form action="">
             <table class="table ">
-              {{#if thietbi}}
               <tr>
-                <th scope="row">Mật khẩu thiết bị
-                  :</th>
+                <th scope="row">Mật khẩu cũ:</th>
                 <td>
-                  <input required type="password" name="oldPassword" id="oldPassword" />
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">Mật khẩu thiết bị
-                  :</th>
-                <td>
-                  <input required type="password" name="password" id="password" value="" />
+                  <input required type="password" id="oldPassword" />
+                  <input type="hidden" name="matkhaucu" id="md5oldpassword" value=""/>
                 </td>
               </tr>
 
-              <tr>
+                <tr>
+                  <th scope="row">Mật khẩu mới:</th>
+                  <td>
+                    <input required type="password" id="password" minlength="1" maxlength="50">
+                    <input type="hidden" name="matkhaumoi" id="md5password" value="">
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row">Nhập lại mật khẩu mới:</th>
+                  <td>
+                    <input required type="password" id="confirmPassword" minlength="1" maxlength="50">
+                  </td>
+                </tr>
+                <tr>
+              {{!-- <tr>
                 <th scope="row">Nhập lại mật khẩu
                   thiết bị:</th>
                 <td>
-                  <input required type="password" name="confirmPassword" id="confirmPassword"
-                    value="" />
+                  <input required type="password" name="confirmPassword" id="confirmPassword" value="" />
                 </td>
-              </tr>
-
+              </tr> --}}
               <tr>
                 <th scope="row">
                 </th>
                 <td>
-                  <button id="save-btn" type="submit" onclick="myFunction()" class="btn btn-success">
+                  <button disabled id="save-btn" type="submit" onclick="myFunction()" class="btn btn-success">
                     <i class="fa fa-edit"></i>
-                    Cập nhật thông tin
+                    Cập nhật mật khẩu
                   </button>
                 </td>
               </tr>
-              {{/if}}
             </table>
           </form>
           <script>
@@ -73,11 +77,20 @@
               });
             }(window.jQuery, window, document));
           </script>
+          {{#if message}}
+          <p id="rpl" class="d-none">{{message}}</p>
+          {{/if}}
           <script>
-              function myFunction() {
-                alert('Xác nhận đổi mật khẩu thiết bị');
-              }
-            </script>
+            var rp = document.getElementById("rpl").innerHTML;
+            let ex = rp.slice(1, -1);
+            alert(ex);
+          </script>
+          <script>
+            function md5pass(){
+                document.getElementById("md5oldpassword").value = md5(document.getElementById("oldPassword").value);
+                document.getElementById("md5password").value = md5(document.getElementById("password").value);
+            }
+          </script>
         </div>
         <div class="col-md-3"></div>
       </div>

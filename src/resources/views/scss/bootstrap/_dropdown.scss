@@ -39,9 +39,6 @@
   }
 }
 
-// scss-docs-start responsive-breakpoints
-// We deliberately hardcode the `bs-` prefix because we check
-// this custom property in JS to determine Popper's positioning
 
 @each $breakpoint in map-keys($grid-breakpoints) {
   @include media-breakpoint-up($breakpoint) {
@@ -60,10 +57,7 @@
     }
   }
 }
-// scss-docs-end responsive-breakpoints
 
-// Allow for dropdowns to go bottom up (aka, dropup-menu)
-// Just add .dropup after the standard .dropdown class and you're set.
 .dropup {
   .dropdown-menu {
     top: auto;
@@ -112,7 +106,6 @@
 }
 
 
-// Dividers (basically an `<hr>`) within the dropdown
 .dropdown-divider {
   height: 0;
   margin: $dropdown-divider-margin-y 0;

@@ -13,8 +13,9 @@
           <a href="/list-user/add" class="btn btn-success">
             Thêm người dùng
           </a>
+          <th scope="col">{{message}}</th>
           <div class="table-responsive">
-            <table class="table text-nowrap text-center">
+            <table id="data" class="table text-nowrap text-center">
               <thead>
                 <tr>
                   <th scope="col">Mã người dùng</th>
@@ -38,22 +39,57 @@
                   <td>{{this.taikhoan}}</td>
                   <td>{{this.quyen}}</td>
                   <td>
-                  <form class="d-inline-block" action="/list-user/delete/{{this.idnguoidung}}?_method=DELETE" method="post">
-                    <button class="btn btn-danger" data-toggle="tooltip"
-                        data-placement="top" title="Xoá" onclick="myFunction()">
-                      <i class="fa fa-trash-alt"></i> 
-                    </button>
-                  </form>
+                    <form id="{{this.idnguoidung}}" class="d-inline-block"
+                      action="/list-user/delete/{{this.idnguoidung}}?_method=DELETE" method="post">
+                      <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top"
+                        title="Xoá" onclick="myFunction({{this.idnguoidung}})">
+                        <i class="fa fa-trash-alt"></i>
+                      </button>
+                    </form>
                   </td>
                 </tr>
                 {{/each}}
               </tbody>
             </table>
+            <ul id="nav" class="pagination justify-content-center"></ul>
             <script>
-              function myFunction() {
-                alert('Xác nhận xóa người dùng');
+              function myFunction(id) {
+                let r = confirm('Xác nhận xóa người dùng này');
+                if (r == true) {
+                  document.getElementById(id).submit();
+                  //alert(id);
+                }
               }
             </script>
+            <script>
+                        $(document).ready(function () {
+                            $('#nav').children().remove();
+                            var rowsShown = 5;
+                            var rowsTotal = $('#data tbody tr').length;
+                            var numPages = rowsTotal / rowsShown;
+                            for (i = 0; i < numPages; i++) {
+                                var pageNum = i + 1;
+                                $('#nav').append(
+                                    '<li class="page-item"><a id="f" class="page-link" href="#" rel="' + i +
+                                    '">' + pageNum + '</a> </li>');
+                            }
+                            $('#data tbody tr').hide();
+                            $('#data tbody tr').slice(0, rowsShown).show();
+                            $('#nav li a:first').addClass('active');
+                            $('#nav a').bind('click', function () {
+                                $('#nav a').removeClass('active');
+                                $(this).addClass('active');
+                                var currPage = $(this).attr('rel');
+                                var startItem = currPage * rowsShown;
+                                var endItem = parseInt(startItem, 10) + parseInt(rowsShown, 10);
+                                $('#data tbody tr').css('opacity', '0.0').hide().slice(startItem,
+                                    endItem).
+                                css('display', 'table-row').animate({
+                                    opacity: 1
+                                }, 300);
+                            });
+                        });
+                    </script>
           </div>
         </div>
       </div>

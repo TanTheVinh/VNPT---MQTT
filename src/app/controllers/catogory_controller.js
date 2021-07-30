@@ -66,7 +66,7 @@ class catogory_controller {
             id
         ])
         .then(() =>{
-            res.redirect('back')
+            res.render('editInfoTypeDevice',{ thongbao:"\"sửa thành công\"" })
         }).catch(next);
         
     }
@@ -84,30 +84,26 @@ class catogory_controller {
 
     //[POST] /list-category/insert
     insert(req, res, next){ 
-        //res.json(req.body)
+        // res.json({message: '"thành công"'})
         const { tenloai, mota } = req.body;
         pool
         .query('INSERT INTO loaithietbi (tenloai, mota) VALUES ($1, $2)', [tenloai,mota])
-        
         .then(() =>{
-            res.redirect('back')
-            res.json({
-                message: 'thêm thành công',
-                body: {
-                    loaithietbi: {tenloai, mota}
-                }
-            })
+            res.render('addTypeDevice', {message: "\"thêm thành công\""})
+            //res.json(req.body);
+            //res.json({message: '"thành công"'});
         }).catch(next);
     }
 
-        // [DELETE] /list-category/delete/:id
+    // [DELETE] /list-category/delete/:id
     delete(req, res, next){
-        pool
-            .query('delete from loaithietbi where idloai = $1', [req.params.id])
-            .then(() => {
-                res.redirect('back');
-            })
-            .catch(next);
+            try {
+                pool
+                .query('delete from loaithietbi where idloai = $1', [req.params.id])
+                res.redirect('back')
+            } catch (error) {
+                res.render('listTypeDevice', {message: '"không thể xóa"'})
+            }
     }
 }
 

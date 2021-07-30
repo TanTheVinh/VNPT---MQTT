@@ -1,5 +1,6 @@
 const pool = require("../../config/db/database");
 const session = require('express-session');
+const { render } = require("node-sass");
 
 class device_controller {
 
@@ -9,17 +10,36 @@ class device_controller {
             res.redirect('/');
         }
         else{
-            const iddonvi = req.session.iddonvi;
-            pool
-                .query(`select * from thietbi, loaithietbi 
-                    where thietbi.idloai = loaithietbi.idloai and iddonvi = $1`, [iddonvi])
-                .then(result => {
-                    const thietbi = result.rows;
-                    // res.json({thietbi});
-                    console.log({thietbi});
+            if(req.session.quyen == 'nv'){
+                const iddonvi = req.session.iddonvi;
+                pool
+                    .query(`select * from thietbi, loaithietbi 
+                        where thietbi.idloai = loaithietbi.idloai and iddonvi = $1`, [iddonvi])
+                    .then(result => {
+                        const thietbi = result.rows;
+                        // res.json({thietbi});
+                        // console.log({thietbi});
+                        res.render('listDevice', { thietbi });
+                    })
+                    .catch(next)
+            }else{
+                pool
+                .query(`SELECT  thietbi.idthietbi,
+                thietbi.idloai,
+                thietbi.iddonvi,
+                thietbi.tenthietbi,
+                thietbi.taikhoan,
+                thietbi.trangthai,
+                loaithietbi.tenloai
+            FROM thietbi INNER JOIN loaithietbi
+            ON 	thietbi.idloai  = loaithietbi.idloai`)
+                .then( result =>{
+                    const thietbi  = result.rows;
                     res.render('listDevice', { thietbi });
-                })
-                .catch(next)
+                    console.log({thietbi});
+                }).catch(next)
+            }   
+
         }
     }
 
@@ -69,43 +89,108 @@ class device_controller {
         if(req.session.idnguoidung === undefined){
             res.redirect('/');
         }
-        else{
+        else{ 
             pool
-            .query(`Select * from thietbi where idthietbi=$1`, [req.params.id])
+            .query(`select * from loaithietbi`)
             .then(result => {
-            const thietbi = result.rows[0];
-            res.render('editInfoDevice',{thietbi});
-            })
-        .catch(next);
+                 const loaithietbi = result.rows;
+               //  res.json(thietbi.loaithietbi)
+                pool
+                    .query(`select * from thietbi, donvi
+                    where 
+                    thietbi.iddonvi = donvi.iddonvi
+                    and
+                    idthietbi = $1`, [req.params.id])
+                    .then(result =>{
+                    const thietbi= result.rows[0];
+                    res.render('editInfoDevice',{ thietbi, loaithietbi });
+                    }).catch(next);
+
+            }).catch(next);
         }
     }
 
     //[PUT] list-device/edit/:id
     update(req, res, next){
-        const idthietbi = req.params.id;
-        const thietbi = Object.values(req.body);
-        res.json(thietbi);
+        const id = req.params.id;
+        const { tenthietbi, idloai, taikhoan, trangthai } = (req.body);
+        //res.json(req.body);
         pool
-            .query(`update thietbi
-            set idloai = $1,
-            tenthietbi = $2,
-            taikhoan = $3,
-            matkhau = $4
-            trangthai = $5
-            where idthietbi = $6`, [idloai, tenthietbi, taikhoan, matkhau, trangthai, id])
+            .query(`UPDATE thietbi SET tenthietbi = $1, idloai = $2, taikhoan =$3, trangthai =$4  WHERE idthietbi = $5`, [tenthietbi, idloai, taikhoan, trangthai, id])
             .then(() => {
-                res.redirect('/list-device');
+                res.render('editInfoDevice',{message: "\"sửa thành công\""});
             })
             .catch(next);
     }
+
+    // [GET] /list-device/change-pass/:id
+    changepass(req, res, next){
+        if(req.session.idnguoidung === undefined){
+            res.redirect('/');
+        }
+        else{
+            const idthietbi = req.params.id;
+            pool
+                .query(`select * from thietbi where idthietbi = $1`, [idthietbi])
+                .then(result => {
+                    const thietbi = result.rows[0];
+                    res.render('editPassDevice', {thietbi});
+                })
+                .catch(next);
+        }
+    }
     
+    // [PUT] /list-device/change-pass/:id
+    updatepass(req, res, next){
+        // res.json(req.body);
+        const idthietbi = req.params.id;
+        const doimatkhau = Object.values(req.body);
+        pool
+            .query(`select * from thietbi 
+                where idthietbi = $1 and matkhau = $2`, [idthietbi, doimatkhau[0]])
+            .then((result) => {
+                    const thietbi = result.rows[0];
+                    if(thietbi == undefined){
+                        // res.redirect('change-password');
+                        res.render('editPassDevice', {message: 'Mật khẩu không trùng khớp'})
+                    }
+                    else{
+                        pool
+                            .query(`update thietbi set matkhau = $1 
+                                where idthietbi = $2`, [doimatkhau[1], idthietbi])
+                            .then((result) => {
+                                // res.redirect('/');
+                               // req.session.destroy();
+                               res.render('editPassDevice', {message: 'Đổi mật khẩu thành công'})
+                            })
+                            .catch(next);
+                    }
+            })
+            .catch(next);
+    }
+
     //[GET] /list-device/add
     add(req, res, next){
         if(req.session.idnguoidung === undefined){
             res.redirect('/');
         }
         else{
-            pool
+            if(req.session.quyen == 'nv'){
+                pool
+                .query(`SELECT * FROM loaithietbi`)
+                .then( result => {
+                    const loaithietbi = result.rows;
+                    pool
+                    .query(`SELECT * FROM donvi where iddonvi=$1`, [req.session.iddonvi])
+                    .then( result => {
+                        const donvi = result.rows;
+                        res.render('addDevice', {loaithietbi, donvi});
+                        
+                    })
+                })
+
+            }else{
+                pool
                 .query(`select * from loaithietbi`)
                 .then(result => {
                     const loaithietbi = result.rows;
@@ -126,6 +211,9 @@ class device_controller {
                         .catch(next);
                 })
                 .catch(next);
+
+            }
+
         }
     }
 
@@ -138,19 +226,33 @@ class device_controller {
         .query('INSERT INTO thietbi (tenthietbi, iddonvi,idloai, taikhoan, matkhau, trangthai) '
             + 'VALUES ($1, $2, $3, $4, $5, false)', thietbi)
         .then(() =>{
-            res.redirect('/list-device')
+            res.render('addDevice', {message: "\"thêm thành công\""})
+            // const message = 'Thêm thiết bị thành công';
+            // res.render('addDevice', {message})
+            
         })
         .catch(next);
     }
 
     // [DELETE] /list-device/delete/:id
     delete(req, res, next){
-        pool
-            .query('delete from thietbi where idthietbi = $1', [req.params.id])
-            .then(() => {
-                res.redirect('back');
-            })
-            .catch(next);
+        try{
+            pool
+                .query('delete from thietbi where idthietbi = $1', [req.params.id])
+                .then(() => {
+                    // res.redirect('back');
+                    res.render('listDevice', {message: '"xóa thành công"'});
+                })
+                .catch(next);
+        }
+        catch(err){
+            res.render('listDevice', {message: '"không thể xóa"'});
+        }
+
+    }
+
+    history(req, res, next){
+        res.render('publishLog');
     }
 }
 

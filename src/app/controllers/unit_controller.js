@@ -9,12 +9,23 @@ class unit_controller {
             res.redirect('/');
         }
         else{
+            if(req.session.quyen == 'nv'){
+                pool
+                .query('SELECT * FROM donvi WHERE iddonvi = $1', [req.session.iddonvi])
+                .then(result => {
+                    const donvi = result.rows;
+                res.render('listUnit', { donvi });
+                })
+                .catch(next)
+
+            }
             pool
                 .query('select * from donvi')
                 .then(result => {
                     const donvi = result.rows;
-                    //res.json({ donvi });
-                res.render('listUnit', { donvi });
+                    const quyen = req.session.quyen;
+                    // res.json({ donvi, quyen });
+                    res.render('listUnit', { donvi, quyen });
                 })
                 .catch(next)
         }
@@ -33,37 +44,25 @@ class unit_controller {
     //[POST] /list-unit/insert
     insert(req, res, next){  
        const { tendonvi } = req.body;
+       if(req.session.quyen == 'nv'){
+        res.render('addUnit', {message: "\"không đủ quyền\""})
+       }
         pool
         .query('INSERT INTO donvi (tendonvi) VALUES ($1)', [ tendonvi ])
-        
         .then(() =>{
-            res.redirect('/list-unit')
-            res.json({
-                message: 'thêm thành công',
-                body: {
-                    donvi: {tendonvi}
-                }
-            })
+            res.render('addUnit',{ message:"\"thêm thành công\""})
         }).catch(next);   
     }
 
     // [DELETE] /list-unit/delete/:id
     delete(req, res, next){
         try {
+            res.json({thietbi});
             pool.query('delete from donvi where iddonvi = $1', [req.params.id])
-            
-            res.redirect('back')
-            res.json({
-                message: 'xóa thành công',
-                body: {
-                    donvi: {tendonvi}
-                }
-            })
+            //res.redirect('back')
+            res.render('listUnit', {message: '"Xóa thành công"'});
         } catch (error) {
-            res.redirect('back'),
-            res.json({
-                message: 'xóa thất bại'
-            })
+            res.render('listUnit', {message: '"không thể xóa"'});
         }
     }
 }

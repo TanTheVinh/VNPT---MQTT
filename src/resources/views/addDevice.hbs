@@ -66,7 +66,7 @@
                   <th scope="row">
                   </th>
                   <td>
-                    <button id="save-btn" type="submit" onclick="myFunction()" class="btn btn-success add" disabled="disabled"><i
+                    <button id="save-btn" type="submit" class="btn btn-success add" disabled="disabled"><i
                         class="fa fa-plus"></i>Thêm thiết bị
                     </button>
                     <button id="xoa" type="reset" class="btn btn-danger">
@@ -85,7 +85,7 @@
                       var pass = $('#password').val();
                       var confirmPass = $('#confirmPassword').val();
                       var saveButton = $("#save-btn");
-                      if (pass!="" && pass == confirmPass) {
+                      if (pass != "" && pass == confirmPass) {
                         saveButton.removeAttr('disabled');
                       } else {
                         saveButton.attr('disabled', 'disabled');
@@ -101,10 +101,16 @@
                   document.getElementById("md5password").value = md5(document.getElementById("password").value);
                 }
               }
-
-              function myFunction() {
-                alert("Xác nhận thêm thiết bị!");
-              }
+            </script>
+            </script>
+            {{#if message}}
+            <p id="rpl" class="d-none">{{message}}</p>
+            {{/if}}
+            <script>
+              var rp = document.getElementById("rpl").innerHTML;
+              let ex = rp.slice(1, -1);
+              alert(ex);
+              window.location = 'http://localhost:3000/list-device/add';
             </script>
           </div>
           <div class="col-md-3"></div>

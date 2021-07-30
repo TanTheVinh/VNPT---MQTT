@@ -14,7 +14,7 @@
             Thêm loại thiết bị
           </a>
           <div class="table-responsive">
-            <table class="table text-nowrap text-center">
+            <table id="data" class="table text-nowrap text-center">
               <thead>
                 <tr>
                   <th scope="col">Mã loại thiết bị</th>
@@ -33,15 +33,14 @@
                     <form class="d-inline-block" action="/list-catogory/detail/{{this.idloai}}" method="get">
                       <button class="btn btn-info" type="submit" data-placement="top" title="Xem chi tiết">
                         <i class="fa fa-info-circle"></i>
-                        
+
                       </button>
                     </form>
-                    <form class="d-inline-block" action="/list-catogory/delete/{{this.idloai}}?_method=DELETE"
-                      method="POST">
-                      <button type="submit" class="btn btn-danger" onclick="myFunction()" data-toggle="tooltip"
-                        data-placement="top" title="Xoá">
+                    <form id="{{this.idloai}}" class="d-inline-block"
+                      action="/list-catogory/delete/{{this.idloai}}?_method=DELETE" method="POST">
+                      <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top"
+                        title="Xoá" onclick="myFunction({{this.idloai}})">
                         <i class="fa fa-trash-alt"></i>
-                        
                       </button>
                     </form>
                   </td>
@@ -49,11 +48,46 @@
                 {{/each}}
               </tbody>
             </table>
+            <ul id="nav" class="pagination justify-content-center"></ul>
             <script>
-              function myFunction() {
-                alert('Xác nhận xóa loại thiết bị');
+              function myFunction(id) {
+                let r = confirm('Xác nhận xóa loại thiết bị');
+                if (r == true) {
+                  //alert("delete" + id);
+                  document.getElementById(id).submit();
+                  //alert(id);
+                }
               }
             </script>
+            <script>
+                        $(document).ready(function () {
+                            $('#nav').children().remove();
+                            var rowsShown = 5;
+                            var rowsTotal = $('#data tbody tr').length;
+                            var numPages = rowsTotal / rowsShown;
+                            for (i = 0; i < numPages; i++) {
+                                var pageNum = i + 1;
+                                $('#nav').append(
+                                    '<li class="page-item"><a id="f" class="page-link" href="#" rel="' + i +
+                                    '">' + pageNum + '</a> </li>');
+                            }
+                            $('#data tbody tr').hide();
+                            $('#data tbody tr').slice(0, rowsShown).show();
+                            $('#nav li a:first').addClass('active');
+                            $('#nav a').bind('click', function () {
+                                $('#nav a').removeClass('active');
+                                $(this).addClass('active');
+                                var currPage = $(this).attr('rel');
+                                var startItem = currPage * rowsShown;
+                                var endItem = parseInt(startItem, 10) + parseInt(rowsShown, 10);
+                                $('#data tbody tr').css('opacity', '0.0').hide().slice(startItem,
+                                    endItem).
+                                css('display', 'table-row').animate({
+                                    opacity: 1
+                                }, 300);
+                            });
+                        });
+                    </script>
           </div>
         </div>
       </div>

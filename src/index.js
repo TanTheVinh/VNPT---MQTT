@@ -8,6 +8,14 @@ const app = express();
 const port = 3000;
 const session = require('express-session');
 
+// lib test
+const mosca = require('mosca');
+const settings = {
+  port: 1234
+};
+const server = new mosca.Server(settings);
+// 
+
 const route = require('./routes/');
 const db = require('./config/db/database');
 const { options } = require('./routes/site');
@@ -38,11 +46,16 @@ app.use(session({
   saveUninitialized: false
 }));
 
-// alert
-// app.use((req, res, next)=>{
-//   app.locals.success = req.flash('success')
-//   next();
-// });
+// test mosca
+server.on('ready',  () => {
+  console.log('Mosca server is up and running');
+    server.authenticate = function (client, username, password, callback) {
+        callback(null, (username === '1' && password.toString('ascii') === '2'));
+    };
+});
+
+
+// 
 
 app.set('views', path.join(__dirname, 'resources', 'views'));
 

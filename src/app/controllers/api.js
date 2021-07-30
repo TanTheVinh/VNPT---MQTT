@@ -1,38 +1,19 @@
-const pool = require('./conect.js')
-const express = require('express');
-const app = express();
+// const client = mqtt.connect('ws://localhost:3000', {username:'1',password:'2'});
+// const client = mqtt.connect('tcp://localhost:1883', { username: '1', password: '2' });
 
-app.listen(3300, ()=>{
-    console.log("đã kết nối");
-})
+var settings = {
+port: 1883,
+http: {
+port: 3000,
+bundle: true,
+static: './'
+}
+//backend: ascoltatore
+};
 
-//get index
-pool.connect()
-app.get('/index', (req, res)=>{
-    pool.query(`SELECT count(*) FROM thietbi`, (err, result)=>{
-        if(!err){
-            const temp = result.rows[0];
-            res.send(result.rows);
-            res.render('index',{temp});
-        }
-    });
-    pool.end;
-})
-//get produc theo id
-pool.connect();
-app.get('/users/:id', (req, res)=>{
-    pool.query(`SELECT e.mathietbi, e.maloai, e.tenthietbi, e.diachi, e.toado, e.taikhoan, e.matkhau, c.thaotac, d.chitiet
-    FROM thietbi as e
-    INNER JOIN lichsu as c ON e.mathietbi = c.mathietbi
-    INNER JOIN dulieu as d ON e.mathietbi = d.mathietbi
-    WHERE
-      c.mathietbi = ${req.params.id}
-      AND
-      d.mathietbi = ${req.params.id}`, (err, result)=>{
-        if(!err){
-            res.json(result.rows);
-        }
-    });
-    pool.end;
-})
-pool.connect();
+server.on('ready', function () {
+    console.log('Mosca server is up and running');
+    server.authenticate = function (client, username, password, callback) {
+        callback(null, (username === '1' && password.toString('ascii') === '2'));
+    };
+});

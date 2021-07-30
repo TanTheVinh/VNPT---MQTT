@@ -52,11 +52,15 @@
               </tr>
             </table>
           </form>
+          {{#if message}}
+          <p id="rpl" class="d-none">{{message}}</p>
+          {{/if}}
           <script>
-              function myFunction() {
-                alert('Xác nhận thêm đơn vị');
-              }
-            </script>
+            var rp = document.getElementById("rpl").innerHTML;
+            let ex = rp.slice(1,-1);
+            alert(ex);
+            window.location = 'http://localhost:3000/list-unit/add/';
+          </script>
         </div>
         <div class="col-md-3"></div>
       </div>
