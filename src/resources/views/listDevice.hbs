@@ -253,9 +253,9 @@
                 }
 
                 function createControlButton(direction) {
-                  let controlButton = document.createElement('button');
+                  let controlButton = document.createElement('a');
                   controlButton.classList.add('controlBtn', `controlBtn-${direction}`, 'btn', 'btn-info');
-
+                  controlButton.setAttribute('href','/list-device&page='+(direction));
                   (direction == "prev") ? controlButton.innerText = "◄ Prev": controlButton.innerText = "Next ►";
 
                   controlButton.addEventListener('click', function () {
@@ -300,7 +300,7 @@
 
                   for (let i = 0; i < rangeWithDots.length; i++) {
                     let page = document.createElement('a');
-                    page.setAttribute('href','/list-device/'+(i+1));
+                    page.setAttribute('href','/list-device?page='+(i+1));
                     if (rangeWithDots[i] == current) {
                       page.classList.add('page', 'current', 'btn', 'btn-info');
                     } else if (rangeWithDots[i] == '...') {
