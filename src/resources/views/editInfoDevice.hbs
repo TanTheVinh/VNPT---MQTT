@@ -304,7 +304,7 @@
               <th scope="row">
               </th>
               <td>
-                <button type="button" onclick="myFunction()" class="btn btn-success">
+                <button type="button" id="up" onclick="myFunction()" class="btn btn-success">
                   <i class="fa fa-edit"></i>
                   Cập nhật thông tin
                 </button>
@@ -314,9 +314,23 @@
           </form>
           <script>
             function myFunction() {
-              let r = confirm('Xác nhận cập nhật thông tin thiết bị');
-              if (r == true) {
-                document.getElementById('capNhat').submit();
+              let a =$('#tenthietbi').val();
+              let b =$('#taiKhoan').val();
+              if( a != ""){
+                if(b != ""){
+                  let r = confirm('Xác nhận cập nhật thông tin loại thiết bị');
+                  if (r == true) {
+                    document.getElementById('capNhat').submit();
+                  }
+                }
+              }
+              else if( b != ""){
+                if(a != ""){
+                  let r = confirm('Xác nhận cập nhật thông tin thiết bị');
+                  if (r == true) {
+                    document.getElementById('capNhat').submit();
+                  }
+                }
               }
             }
           </script>

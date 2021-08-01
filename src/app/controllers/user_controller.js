@@ -34,8 +34,9 @@ class user_controller {
                 donvi  ON nguoidung.iddonvi = donvi.iddonvi;`)
                 .then(result => {
                     const nguoidung = result.rows
-                    
-                    res.render('listUser', { nguoidung })
+                    //res.json({nguoidung});
+                    res.render('listUser', { nguoidung });
+                    console.log({nguoidung});
                 }).catch(next)
             }
 
@@ -86,12 +87,13 @@ class user_controller {
             pool
             .query('delete from nguoidung where idnguoidung = $1', [req.params.id])
             .then(() => {
-                res.redirect('back');
+                //res.redirect('back');
+                res.render('listUser', {message: "\"xóa thành công\""})
             })
             .catch(next);
         }
         catch(err){
-            res.render('listUser', {message: '"không thể xóa"'})
+            res.render('listUser', {message: "\"không thể xóa\""})
         }
     }
 

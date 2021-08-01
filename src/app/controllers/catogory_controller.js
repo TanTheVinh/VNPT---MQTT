@@ -12,7 +12,7 @@ class catogory_controller {
                 .query('select * from loaithietbi')
                 .then(result => {
                     const loaithietbi = result.rows;
-                    // res.json({ loaithietbi });
+                    //res.json({ loaithietbi });
                     res.render('listTypeDevice', { loaithietbi });
                 })
                 .catch(next)
@@ -66,7 +66,7 @@ class catogory_controller {
             id
         ])
         .then(() =>{
-            res.render('editInfoTypeDevice',{ thongbao:"\"sửa thành công\"" })
+            res.render('editInfoTypeDevice',{ message: "\"sửa thành công\"" });
         }).catch(next);
         
     }
@@ -100,9 +100,10 @@ class catogory_controller {
             try {
                 pool
                 .query('delete from loaithietbi where idloai = $1', [req.params.id])
-                res.redirect('back')
+                // res.redirect('back')
+                res.render('listTypeDevice', {message: "\"xóa thành công\""})
             } catch (error) {
-                res.render('listTypeDevice', {message: '"không thể xóa"'})
+                res.render('listTypeDevice', {message: "\"không thể xóa\""})
             }
     }
 }
