@@ -29,7 +29,6 @@ class site_controller {
                             soluong.ngatketnoi = result.rows[0].ngatketnoi;
                             pool
                                 .query(
-<<<<<<< HEAD
                                     `select date_part('day',thoigiangui) as ngay, date_part('month',thoigiangui) as thang, date_part('year',thoigiangui) as nam from dulieu order by thoigiangui ASC;`
                                 )
                                 .then(result => {
@@ -38,20 +37,6 @@ class site_controller {
                                     const quyen = req.session.quyen;
                                  res.render('index', { soluong, bieudo, quyen });
                                 //   res.json({soluong, bieudo});
-=======
-                                    `select date_part('day',thoigiangui) as ngay, 
-                                    date_part('month',thoigiangui) as thang, 
-                                    date_part('year',thoigiangui) as nam 
-                                    from dulieu order by thoigiangui ASC;`
-                                )
-                                .then(result => {
-                                    const bieudo = result.rows;
-                                    
-                                    const quyen = req.session.quyen;
-                                    console.log({ soluong, bieudo, quyen });
-                                    //res.json({ soluong, bieudo, quyen });
-                                    res.render('index', { soluong, bieudo, quyen });
->>>>>>> fd74f8d35ca1a6c261bc64e3d703b993258dc2e0
                                 })
                                 .catch(next);
                         })
