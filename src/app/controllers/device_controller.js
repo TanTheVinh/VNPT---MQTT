@@ -11,6 +11,7 @@ class device_controller {
         if (req.session.idnguoidung === undefined) {
             res.redirect('/');
         } else {
+<<<<<<< HEAD
             var page;
             if (req.session.quyen == 'nv') {
                 const iddonvi = req.session.iddonvi;
@@ -19,6 +20,11 @@ class device_controller {
                 }else{
                      page = req.query.page;
                 }
+=======
+            const page = req.query.page;
+            if (req.session.quyen == 'nv') {
+                const iddonvi = req.session.iddonvi; 
+>>>>>>> f8bb0d57b1dec042cec8886087b4e28798b9481f
                 pool
                     .query(`select * from thietbi, loaithietbi 
                         where thietbi.idloai = loaithietbi.idloai and iddonvi = $1
@@ -52,7 +58,7 @@ class device_controller {
                         .query(`select count(*) from thietbi`)
                         .then(result => {
                             const count = result.rows[0];
-                             //res.json({thietbi});
+                            //res.json({thietbi});
                             // console.log({thietbi});
                             res.render('listDevice', { thietbi, count });
                         })
