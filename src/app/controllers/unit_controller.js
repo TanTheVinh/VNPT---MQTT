@@ -18,8 +18,8 @@ class unit_controller {
                 })
                 .catch(next)
 
-            }
-            pool
+            }else{
+                pool
                 .query('select * from donvi')
                 .then(result => {
                     const donvi = result.rows;
@@ -29,6 +29,8 @@ class unit_controller {
                     console.log({donvi});
                 })
                 .catch(next)
+            }
+ 
         }
     }
 

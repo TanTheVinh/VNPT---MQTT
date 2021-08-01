@@ -13,9 +13,11 @@ class device_controller {
         } else {
             if (req.session.quyen == 'nv') {
                 const iddonvi = req.session.iddonvi;
+                const page = req.query.page;
                 pool
                     .query(`select * from thietbi, loaithietbi 
-                        where thietbi.idloai = loaithietbi.idloai and iddonvi = $1`, [iddonvi])
+                        where thietbi.idloai = loaithietbi.idloai and iddonvi = $1
+                        OFFSET (($2-1)*10) ROWS FETCH NEXT 10 ROWS ONLY`, [iddonvi, page])
                     .then(result => {
                         const thietbi = result.rows;
                         // res.json({thietbi});
@@ -280,6 +282,7 @@ class device_controller {
         }
     }
 
+<<<<<<< HEAD
     // history(req, res, next){
     //     res.render('publishLog');
     // }
@@ -311,6 +314,31 @@ class device_controller {
             })
             .catch(next)
         }
+=======
+    historydata(req, res, next){
+        res.render('publishLog');
+>>>>>>> f3e60136a7c793897efa0be374500ac479876f4c
+    }
+
+    connect(req, res, next){
+        const account = Object.values(req.body);
+        account.unshift(req.params.id);
+        pool
+            .query(`select * from thietbi where 
+            idthietbi = $1 and taikhoan = $2 and matkhau = $3`, account)
+            .then(result => {
+                try {
+                    const thietbi = result.rows[0];
+                    var username = thietbi.taikhoan;
+                    var password = thietbi.matkhau;
+                    var message = 'ma thiet bi la :' + req.params.id.toString();
+                    pub(username, password, message);
+                } catch (error) {
+                    res.render('list-device', {message: 'tài khoản hoặc mật khẩu không đúng'})
+                }
+
+            })
+            .catch(next);
     }
 }
 
