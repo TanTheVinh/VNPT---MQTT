@@ -1,40 +1,35 @@
 const pool = require("../../config/db/database");
 const session = require('express-session');
-<<<<<<< HEAD
 const { render } = require("node-sass");
 const mqtt = require('mqtt');
 const pub = require('./pub');
-=======
-const {
-    render
-} = require("node-sass");
-
->>>>>>> fd74f8d35ca1a6c261bc64e3d703b993258dc2e0
 class device_controller {
 
     //[GET] /list-device/
     list(req, res, next) {
+
         if (req.session.idnguoidung === undefined) {
             res.redirect('/');
         } else {
+            var page;
             if (req.session.quyen == 'nv') {
                 const iddonvi = req.session.iddonvi;
-                const page = req.query.page;
+                if(req.query.page === undefined){
+                 page = 1;
+                }else{
+                     page = req.query.page;
+                }
                 pool
                     .query(`select * from thietbi, loaithietbi 
                         where thietbi.idloai = loaithietbi.idloai and iddonvi = $1
-                        OFFSET (($2-1)*10) ROWS FETCH NEXT 10 ROWS ONLY`, [iddonvi, page])
+                        OFFSET (($2-1)*5) ROWS FETCH NEXT 5 ROWS ONLY`, [iddonvi, page])
                     .then(result => {
                         const thietbi = result.rows;
                         pool
                             .query(`select count(*) from thietbi`)
                             .then(result => {
                                 const count = result.rows[0];
-<<<<<<< HEAD
                                // res.json({thietbi});
-=======
-                                // res.json({thietbi});
->>>>>>> fd74f8d35ca1a6c261bc64e3d703b993258dc2e0
                                 // console.log({thietbi, count});
                                 res.render('listDevice', { thietbi, count });
                             })
@@ -42,11 +37,15 @@ class device_controller {
                     })
                     .catch(next)
             } else {
+                if(req.query.page === undefined){
+                    page = 1;
+                    }else{
+                    page = req.query.page;
+                    }
                 pool
-<<<<<<< HEAD
                 .query(`select * from thietbi, loaithietbi 
                 where thietbi.idloai = loaithietbi.idloai
-                OFFSET (($1-1)*10) ROWS FETCH NEXT 10 ROWS ONLY`, [page])
+                OFFSET (($1-1)*5) ROWS FETCH NEXT 5 ROWS ONLY`, [page])
                 .then( result =>{
                     const thietbi  = result.rows;
                     pool
@@ -60,28 +59,6 @@ class device_controller {
                         .catch(next);
                 }).catch(next)
             }   
-=======
-                    .query(`SELECT  thietbi.idthietbi,
-                thietbi.idloai,
-                thietbi.iddonvi,
-                thietbi.tenthietbi,
-                thietbi.taikhoan,
-                thietbi.trangthai,
-                loaithietbi.tenloai
-            FROM thietbi INNER JOIN loaithietbi
-            ON 	thietbi.idloai  = loaithietbi.idloai`)
-                    .then(result => {
-                        const thietbi = result.rows;
-                        res.render('listDevice', {
-                            thietbi
-                        });
-                        console.log({
-                            thietbi
-                        });
-                    }).catch(next)
-            }
-
->>>>>>> fd74f8d35ca1a6c261bc64e3d703b993258dc2e0
         }
     }
 
@@ -249,7 +226,6 @@ class device_controller {
 
             } else {
                 pool
-<<<<<<< HEAD
                 .query(`select * from loaithietbi`)
                 .then(result => {
                     const loaithietbi = result.rows;
@@ -275,32 +251,6 @@ class device_controller {
                         .catch(next);
                 })
                 .catch(next);
-=======
-                    .query(`select * from loaithietbi`)
-                    .then(result => {
-                        const loaithietbi = result.rows;
-                        pool
-                            .query(`select * from donvi`)
-                            .then(result => {
-                                const donvi = result.rows;
-                                pool
-                                    .query(`select tenthietbi, taikhoan from thietbi`)
-                                    .then(result => {
-                                        const thietbi = result.rows;
-                                        // res.json({thietbi, loaithietbi, donvi});
-                                        res.render('addDevice', {
-                                            thietbi,
-                                            loaithietbi,
-                                            donvi
-                                        });
-                                        // console.log({loaithietbi, donvi});
-                                    })
-                                    .catch(next);
-                            })
-                            .catch(next);
-                    })
-                    .catch(next);
->>>>>>> fd74f8d35ca1a6c261bc64e3d703b993258dc2e0
 
             }
 
@@ -308,7 +258,6 @@ class device_controller {
     }
 
     // [POST] /list-device/create
-<<<<<<< HEAD
     create(req, res, next){
       //  res.json(req.body)
         const thietbi = req.body;
@@ -351,25 +300,6 @@ class device_controller {
         }
         
 
-=======
-    create(req, res, next) {
-        // res.json(req.body)
-        const thietbi = Object.values(req.body);
-        // res.json(thietbi);
-        pool
-            .query('INSERT INTO thietbi (tenthietbi, iddonvi,idloai, taikhoan, matkhau, trangthai) ' +
-                'VALUES ($1, $2, $3, $4, $5, false)', thietbi)
-            .then(() => {
-                res.render('addDevice', {
-                    message: "\"thêm thành công\""
-                })
-                // const message = 'Thêm thiết bị thành công';
-                // res.render('addDevice', {message})
-
-            })
-            .catch(next);
-    }
->>>>>>> fd74f8d35ca1a6c261bc64e3d703b993258dc2e0
 
     }
  

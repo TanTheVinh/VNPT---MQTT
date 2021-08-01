@@ -17,7 +17,7 @@ const server = new mosca.Server(settings);
 // 
 
 //morgan
-app.use(morgan('combined'));
+//app.use(morgan('combined'));
 
 const route = require('./routes/');
 const pool = require('./config/db/database');

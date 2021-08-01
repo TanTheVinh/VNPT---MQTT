@@ -10,6 +10,7 @@ class unit_controller {
         }
         else{
             if(req.session.quyen == 'nv'){
+                
                 pool
                 .query('SELECT * FROM donvi WHERE iddonvi = $1', [req.session.iddonvi])
                 .then(result => {
