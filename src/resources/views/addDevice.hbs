@@ -44,15 +44,19 @@
                   </td>
                 </tr>
                 <tr>
-                  <th scope="row">Tài khoản thiết bị:</th>
+                  <th scope="row">Tài khoản thiết bị: {{account.username}}</th>
                   <td>
                     <input required type="text" name="taikhoan" id="taikhoan" minlength="1" maxlength="30" />
+                    <input  type="hidden" name="kiemtratk" value="{{account.username}}"   />
+
                   </td>
                 </tr>
                 <tr>
-                  <th scope="row">Mật khẩu thiết bị:</th>
+                  <th scope="row">Mật khẩu thiết bị: {{account.password}}</th>
                   <td>
                     <input type="password" id="password" minlength="1" maxlength="50">
+                    <input type="hidden"  id="kiemtramk" value="{{account.password}}">
+                     <input type="hidden" name="kiemtramk" id="md5kiemtramk" value="">
                     <input type="hidden" name="md5matkhau" id="md5password" value="">
                   </td>
                 </tr>
@@ -96,8 +100,10 @@
               }(window.jQuery, window, document));
 
               function md5pass() {
+
                 password = document.getElementById("password").value;
                 if (password != '') {
+                  document.getElementById("md5kiemtramk").value = md5(document.getElementById("kiemtramk").value);
                   document.getElementById("md5password").value = md5(document.getElementById("password").value);
                 }
               }
