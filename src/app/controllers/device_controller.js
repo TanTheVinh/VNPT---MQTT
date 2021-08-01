@@ -22,7 +22,7 @@ class device_controller {
                 pool
                     .query(`select * from thietbi, loaithietbi 
                         where thietbi.idloai = loaithietbi.idloai and iddonvi = $1
-                        OFFSET (($2-1)*5) ROWS FETCH NEXT 5 ROWS ONLY`, [iddonvi, page])
+                        OFFSET (($2-1)*10) ROWS FETCH NEXT 10 ROWS ONLY`, [iddonvi, page])
                     .then(result => {
                         const thietbi = result.rows;
                         pool
@@ -45,7 +45,7 @@ class device_controller {
                 pool
                 .query(`select * from thietbi, loaithietbi 
                 where thietbi.idloai = loaithietbi.idloai
-                OFFSET (($1-1)*5) ROWS FETCH NEXT 5 ROWS ONLY`, [page])
+                OFFSET (($1-1)*10) ROWS FETCH NEXT 10 ROWS ONLY`, [page])
                 .then( result =>{
                     const thietbi  = result.rows;
                     pool
@@ -328,7 +328,7 @@ class device_controller {
 
 
     // history create by thang-dev
-    history(req, res, next) {
+    historydata(req, res, next) {
         if (req.session.idnguoidung === undefined) {
             res.redirect('/');
         } else {
