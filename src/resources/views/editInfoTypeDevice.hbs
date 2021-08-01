@@ -22,7 +22,6 @@
                 <td>
                   <input disabled required type="text" name="maLoaiThietBi" id="maLoaiThietBi"
                     value="{{loaithietbi.idloai}}" />
-                  <span class="text-danger"> *</span>
                 </td>
               </tr>
 
@@ -30,23 +29,21 @@
                 <th scope="row">Tên loại thiết bị
                   :</th>
                 <td>
-                  <input required type="text" name="tenloai" id="tenloai" value="{{loaithietbi.tenloai}}" /><span
-                    class="text-danger"> *</span>
+                  <input required type="text" name="tenloai" id="tenloai" value="{{loaithietbi.tenloai}}" />
                 </td>
               </tr>
 
               <tr>
                 <th scope="row">Mô tả loại thiết bị:</th>
                 <td>
-                  <input required type="text" name="mota" id="mota" value="{{loaithietbi.mota}}" /><span
-                    class="text-danger"> *</span>
+                  <input required type="text" name="mota" id="mota" value="{{loaithietbi.mota}}" />
                 </td>
               </tr>
               <tr>
                 <th scope="row">
                 </th>
                 <td>
-                  <button id="them" onclick="myFunction()" class="btn btn-success">
+                  <button id="them" type="button" onclick="myFunction()" class="btn btn-success">
                     <i class="fa fa-edit"></i>
                     Cập nhật thông tin loại thiết bị
                   </button>
@@ -56,9 +53,23 @@
             </table>
             <script>
               function myFunction() {
-                let r = confirm('Xác nhận cập nhật thông tin thiết bị');
-                if (r == true) {
-                  document.getElementById('capNhat').submit();
+                let a =$('#tenloai').val();
+                let b =$('#mota').val();
+                if( a != ""){
+                  if(b != ""){
+                    let r = confirm('Xác nhận cập nhật thông tin loại thiết bị');
+                    if (r == true) {
+                      document.getElementById('capNhat').submit();
+                    }
+                  }
+                }
+                else if( b != ""){
+                  if(a != ""){
+                    let r = confirm('Xác nhận cập nhật thông tin loại thiết bị');
+                    if (r == true) {
+                      document.getElementById('capNhat').submit();
+                    }
+                  }
                 }
               }
             </script>

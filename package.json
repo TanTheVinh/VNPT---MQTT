@@ -31,7 +31,8 @@
     "mosca": "^2.8.3",
     "mqtt": "^4.2.8",
     "paginationjs": "^2.1.5",
-    "pg": "^8.7.1"
+    "pg": "^8.7.1",
+    "pino-pretty": "^5.1.2"
   },
   "devDependencies": {
     "morgan": "^1.10.0",

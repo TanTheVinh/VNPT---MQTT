@@ -36,8 +36,10 @@ class site_controller {
                                 )
                                 .then(result => {
                                     const bieudo = result.rows;
-                                    // res.json({soluong, bieudo});
+                                    
                                     const quyen = req.session.quyen;
+                                    console.log({ soluong, bieudo, quyen });
+                                    //res.json({ soluong, bieudo, quyen });
                                     res.render('index', { soluong, bieudo, quyen });
                                 })
                                 .catch(next);
@@ -134,14 +136,14 @@ class site_controller {
             .then((result) => {
                     const nguoidung = result.rows[0];
                     if(nguoidung == undefined){
-                        res.render('changePassUser', { message: 'Đổi mật khẩu thất bại' });
+                        res.render('changePassUser', { message: "\"Đổi mật khẩu thất bại\"" });
                     }
                     else{
                         pool
                             .query(`update nguoidung set matkhau = $1 
                                 where idnguoidung = $2`, [doimatkhau[1], idnguoidung])
                             .then((result) => {
-                                res.render('changePassUser', { message: 'Đổi mật khẩu thành công' });
+                                res.render('changePassUser', { message: "\"Đổi mật khẩu thành công\""  });
                                 // res.redirect('/');
                                 // req.session.destroy();
 

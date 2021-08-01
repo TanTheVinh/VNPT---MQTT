@@ -23,8 +23,10 @@ class unit_controller {
                 .query('select * from donvi')
                 .then(result => {
                     const donvi = result.rows;
-                    // res.json({ donvi });
-                    res.render('listUnit', { donvi });
+                    const quyen = req.session.quyen;
+                    //res.json({ donvi, quyen });
+                    res.render('listUnit', { donvi, quyen });
+                    console.log({donvi});
                 })
                 .catch(next)
             }
@@ -60,10 +62,10 @@ class unit_controller {
         try {
             res.json({thietbi});
             pool.query('delete from donvi where iddonvi = $1', [req.params.id])
-            //res.redirect('back')
-            res.render('listUnit', {message: '"Xóa thành công"'});
+            //res.redirect('back');
+            res.render('listUnit', {message: "\"Xóa thành công\""});
         } catch (error) {
-            res.render('listUnit', {message: '"không thể xóa"'});
+            res.render('listUnit', {message: "\"không thể xóa\""});
         }
     }
 }
