@@ -36,11 +36,15 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <span id="q" class="d-none">{{quyen}}</span>
+        {{#if quyen}}
+        <div id="barChar" class="row">
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                 <div class="white-box">
                     <h3 class="box-title">Số lượng lệnh gửi từng tháng</h3>
-                    <canvas id="myChart" width="900" height="300"></canvas>
+                    {{#if quyen}}
+                        <canvas id="myChart" width="900" height="300"></canvas>
+                    {{/if}}
                     <div class="cJS d-none">
                         <span id="lbls">
                             {{#each bieudo}}
@@ -70,7 +74,7 @@
                                         labels: ["Tháng Một", "Tháng Hai", "Tháng Ba", "Tháng Tư", "Tháng Năm", "Tháng Sáu", "Tháng Bảy", "Tháng Tám", "Tháng Chín", "Tháng Mười", "Tháng Mười Một", "Tháng Mười Hai"],
                                         datasets: [{
                                                 label: 'Năm 2021',
-                                                data: [0,0,0,0,0,0,0,{{#each bieudo}}
+                                                data: [{{#each bieudo}}
                                                             {{this.soluonglenh}},
                                                         {{/each}}],
                                                 backgroundColor: 
@@ -92,6 +96,16 @@
                 </div>
             </div>
         </div>
+        {{/if}}
+        <script>
+            var a = document.getElementById('q').innerHTML;
+            console.log(a);
+            if(a === "nv"){
+                console.log("is nv");
+                document.getElementById("barChar").classList.add('d-none');
+            }
+            
+        </script>
     </div>
     <div id="setSession"></div>
 </div>

@@ -51,7 +51,7 @@
                 <th scope="row">
                 </th>
                 <td>
-                  <button disabled id="save-btn" type="submit" onclick="myFunction()" class="btn btn-success">
+                  <button disabled="disabled" id="save-btn" type="submit" onclick="myFunction()" class="btn btn-success">
                     <i class="fa fa-edit"></i>
                     Cập nhật mật khẩu
                   </button>
@@ -91,6 +91,16 @@
                 document.getElementById("md5password").value = md5(document.getElementById("password").value);
             }
           </script>
+          </script>
+            {{#if message}}
+            <p id="rpl" class="d-none">{{message}}</p>
+            {{/if}}
+            <script>
+              var rp = document.getElementById("rpl").innerHTML;
+              let ex = rp.slice(1, -1);
+              alert(ex);
+              window.location = 'http://localhost:3000/change-password';
+            </script>
         </div>
         <div class="col-md-3"></div>
       </div>

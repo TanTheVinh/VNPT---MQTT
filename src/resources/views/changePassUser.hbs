@@ -48,6 +48,15 @@
               </tr>
             </table>
           </form>
+          {{#if message}}
+            <p id="rpl" class="d-none">{{message}}</p>
+            {{/if}}
+            <script>
+              var rp = document.getElementById("rpl").innerHTML;
+              let ex = rp.slice(1, -1);
+              alert(ex);
+              window.location = 'http://localhost:3000/change-password';
+            </script>
           <script>
               (function ($, window, document) {
                 $(function () {
