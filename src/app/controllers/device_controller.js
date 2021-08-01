@@ -294,7 +294,7 @@ class device_controller {
 
 
     // history create by thang-dev
-    history(req, res, next) {
+    historydata(req, res, next) {
         if (req.session.idnguoidung === undefined) {
             res.redirect('/');
         } else {
