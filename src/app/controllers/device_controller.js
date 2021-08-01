@@ -7,12 +7,18 @@ class device_controller {
 
     //[GET] /list-device/
     list(req, res, next) {
+
         if (req.session.idnguoidung === undefined) {
             res.redirect('/');
         } else {
-            const page = req.query.page;
+            var page;
             if (req.session.quyen == 'nv') {
-                const iddonvi = req.session.iddonvi; 
+                const iddonvi = req.session.iddonvi;
+                if(req.query.page === undefined){
+                 page = 1;
+                }else{
+                     page = req.query.page;
+                }
                 pool
                     .query(`select * from thietbi, loaithietbi 
                         where thietbi.idloai = loaithietbi.idloai and iddonvi = $1
@@ -31,6 +37,11 @@ class device_controller {
                     })
                     .catch(next)
             } else {
+                if(req.query.page === undefined){
+                    page = 1;
+                    }else{
+                    page = req.query.page;
+                    }
                 pool
                 .query(`select * from thietbi, loaithietbi 
                 where thietbi.idloai = loaithietbi.idloai

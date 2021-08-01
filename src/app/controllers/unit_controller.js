@@ -9,24 +9,52 @@ class unit_controller {
             res.redirect('/');
         }
         else{
+            var page;
+            const quyen = req.session.quyen;
             if(req.session.quyen == 'nv'){
+                if(req.query.page === undefined){
+                    page = 1;
+                }
+                else{
+                    page = req.query.page;
+                }
                 pool
-                .query('SELECT * FROM donvi WHERE iddonvi = $1', [req.session.iddonvi])
+                .query(`SELECT * FROM donvi WHERE iddonvi = $1
+                    OFFSET (($2-1)*10) ROWS FETCH NEXT 10 ROWS ONLY`, [req.session.iddonvi, page])
                 .then(result => {
                     const donvi = result.rows;
-                res.render('listUnit', { donvi });
+                    pool
+                        .query(`select count(*) from donvi`)
+                        .then(result => {
+                            const count = result.rows[0];
+                            //res.json({donvi, count});
+                            res.render('listUnit', { donvi, quyen, count});
+                        })
+                        .catch(next);
                 })
                 .catch(next)
 
-            }else{
+            }
+            else{
+                if(req.query.page === undefined){
+                    page = 1;
+                }
+                else{
+                    page = req.query.page;
+                }
                 pool
-                .query('select * from donvi')
+                .query(`select * from donvi
+                OFFSET (($1-1)*10) ROWS FETCH NEXT 10 ROWS ONLY`, [page])
                 .then(result => {
                     const donvi = result.rows;
-                    const quyen = req.session.quyen;
-                    //res.json({ donvi, quyen });
-                    res.render('listUnit', { donvi, quyen });
-                    console.log({donvi});
+                    pool
+                        .query(`select count(*) from thietbi`)
+                        .then(result => {
+                            const count = result.rows[0];
+                            //res.json({ donvi, quyen, count });
+                            res.render('listUnit', { donvi, quyen, count });
+                        })
+                        .catch(next);
                 })
                 .catch(next)
             }
