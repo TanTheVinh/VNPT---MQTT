@@ -38,9 +38,9 @@
             function App() {
               //common variables
               let defaultIndex = 1,
-                defaultPost = 5,
+                defaultPost = 10,
                 listData = listDataGenerator(),
-                pageIndex = Math.ceil(listData.length / defaultPost);
+                pageIndex = Math.ceil({{count.count}} / defaultPost);
 
               let wrapper = $('#tbl');
               let pag = $('#pag');
@@ -101,14 +101,14 @@
 
                 for (let i = 0; i < rangeWithDots.length; i++) {
                   let page = document.createElement('a');
-                  page.setAttribute('href', '/list-catogory?page=' + (i + 1));
+                  page.setAttribute('href', 'list-device/history?page=' + (i + 1));
                   if (rangeWithDots[i] == current) {
                     page.classList.add('page', 'current', 'btn', 'btn-info');
                   } else if (rangeWithDots[i] == '...') {
                     page.addEventListener('click', e => e.preventDefault());
-                    page.classList.add('page', 'btn', 'border-info');
+                    page.classList.add('page', 'btn', 'btn-info');
                   } else {
-                    page.classList.add('page', 'btn', 'border-info');
+                    page.classList.add('page', 'btn', 'btn-info');
                     page.addEventListener('click', changePageIndex);
                   }
                   page.innerHTML = rangeWithDots[i];
@@ -125,12 +125,7 @@
               }
 
               function listDataGenerator(numPosts) {
-                let listDataArray = [{
-                    {
-                      #
-                      each dulieu
-                    }
-                  } {
+                let listDataArray = [{{#each dulieu}} {
                     nam: '{{this.nam}}',
                     thang: '{{this.thang}}',
                     ngay: '{{this.ngay}}',
@@ -139,10 +134,7 @@
                     giay: '{{this.giay}}',
                     chitiet: '{{this.chitiet}}'
                   },
-                  {
-                    {
-                      /each}}
-                    ];
+                  {{/each}}];
                     return listDataArray;
                   }
                 }

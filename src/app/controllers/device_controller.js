@@ -1,9 +1,8 @@
 const pool = require("../../config/db/database");
 const session = require('express-session');
-const {
-    render
-} = require("node-sass");
-
+const { render } = require("node-sass");
+const mqtt = require('mqtt');
+const pub = require('./pub');
 class device_controller {
 
     //[GET] /list-device/
@@ -11,9 +10,9 @@ class device_controller {
         if (req.session.idnguoidung === undefined) {
             res.redirect('/');
         } else {
+            const page = req.query.page;
             if (req.session.quyen == 'nv') {
-                const iddonvi = req.session.iddonvi;
-                const page = req.query.page;
+                const iddonvi = req.session.iddonvi; 
                 pool
                     .query(`select * from thietbi, loaithietbi 
                         where thietbi.idloai = loaithietbi.idloai and iddonvi = $1
@@ -24,7 +23,7 @@ class device_controller {
                             .query(`select count(*) from thietbi`)
                             .then(result => {
                                 const count = result.rows[0];
-                                // res.json({thietbi});
+                               // res.json({thietbi});
                                 // console.log({thietbi, count});
                                 res.render('listDevice', { thietbi, count });
                             })
@@ -33,26 +32,22 @@ class device_controller {
                     .catch(next)
             } else {
                 pool
-                    .query(`SELECT  thietbi.idthietbi,
-                thietbi.idloai,
-                thietbi.iddonvi,
-                thietbi.tenthietbi,
-                thietbi.taikhoan,
-                thietbi.trangthai,
-                loaithietbi.tenloai
-            FROM thietbi INNER JOIN loaithietbi
-            ON 	thietbi.idloai  = loaithietbi.idloai`)
-                    .then(result => {
-                        const thietbi = result.rows;
-                        res.render('listDevice', {
-                            thietbi
-                        });
-                        console.log({
-                            thietbi
-                        });
-                    }).catch(next)
-            }
-
+                .query(`select * from thietbi, loaithietbi 
+                where thietbi.idloai = loaithietbi.idloai
+                OFFSET (($1-1)*10) ROWS FETCH NEXT 10 ROWS ONLY`, [page])
+                .then( result =>{
+                    const thietbi  = result.rows;
+                    pool
+                        .query(`select count(*) from thietbi`)
+                        .then(result => {
+                            const count = result.rows[0];
+                            //res.json({thietbi});
+                            // console.log({thietbi});
+                            res.render('listDevice', { thietbi, count });
+                        })
+                        .catch(next);
+                }).catch(next)
+            }   
         }
     }
 
@@ -220,30 +215,31 @@ class device_controller {
 
             } else {
                 pool
-                    .query(`select * from loaithietbi`)
-                    .then(result => {
-                        const loaithietbi = result.rows;
-                        pool
-                            .query(`select * from donvi`)
-                            .then(result => {
-                                const donvi = result.rows;
-                                pool
-                                    .query(`select tenthietbi, taikhoan from thietbi`)
-                                    .then(result => {
-                                        const thietbi = result.rows;
-                                        // res.json({thietbi, loaithietbi, donvi});
-                                        res.render('addDevice', {
-                                            thietbi,
-                                            loaithietbi,
-                                            donvi
-                                        });
-                                        // console.log({loaithietbi, donvi});
-                                    })
-                                    .catch(next);
-                            })
-                            .catch(next);
-                    })
-                    .catch(next);
+                .query(`select * from loaithietbi`)
+                .then(result => {
+                    const loaithietbi = result.rows;
+                    pool
+                        .query(`select * from donvi`)
+                        .then(result => {
+                            const donvi = result.rows;
+                            pool
+                                .query(`select tenthietbi, taikhoan from thietbi`)
+                                .then(result => {
+                                    const thietbi = result.rows;
+                                    const account = {
+                                        username:'mqtt_' + Math.random().toString(16).substr(2, 8),
+                                        password:'mqtt' 
+                                    }
+
+                                    res.render('addDevice', {thietbi, loaithietbi, donvi,account});
+                                    // console.log({loaithietbi, donvi});
+                                   // res.json({account});
+                                })
+                                .catch(next);
+                        })
+                        .catch(next);
+                })
+                .catch(next);
 
             }
 
@@ -251,24 +247,51 @@ class device_controller {
     }
 
     // [POST] /list-device/create
-    create(req, res, next) {
-        // res.json(req.body)
-        const thietbi = Object.values(req.body);
-        // res.json(thietbi);
-        pool
-            .query('INSERT INTO thietbi (tenthietbi, iddonvi,idloai, taikhoan, matkhau, trangthai) ' +
-                'VALUES ($1, $2, $3, $4, $5, false)', thietbi)
-            .then(() => {
-                res.render('addDevice', {
-                    message: "\"thêm thành công\""
-                })
+    create(req, res, next){
+      //  res.json(req.body)
+        const thietbi = req.body;
+        
+        //console.log(thietbi.taikhoan, thietbi.kiemtratk, thietbi.matkhau, thietbi.kiemtramk);
+        if(thietbi.taikhoan == thietbi.kiemtratk && thietbi.md5matkhau == thietbi.kiemtramk){
+            pool
+            .query('INSERT INTO thietbi (tenthietbi, iddonvi,idloai, taikhoan, matkhau, trangthai) '
+                + 'VALUES ($1, $2, $3, $4, $5, true)',
+                [thietbi.tenthietbi, thietbi.iddonvi, thietbi.idloai, thietbi.taikhoan, thietbi.md5matkhau] )
+            .then(() =>{
+                
+                res.render('addDevice', {message: "\"thêm thành công\""})
+                const user = {
+                    username: thietbi.taikhoan,
+                    password: thietbi.md5matkhau
+                }
+                const client = mqtt.connect('mqtt://localhost:1234', user);
+                const message = 'Hello world!';
+                // <--
+                client.on('connect', () => {
+                    setInterval(() => {
+                        client.publish(user.username, message);
+                        console.log('Message sent: ', message);
+                    }, 5000);
+                    if( client.disconnected){
+                        console.log('ok');
+                    }else{
+                        console.log('ko');
+                    }
+                   
+                });
                 // const message = 'Thêm thiết bị thành công';
                 // res.render('addDevice', {message})
-
+                
             })
             .catch(next);
-    }
+        }else{
+            res.render('addDevice', {message: "\"thêm thất bại\""})
+        }
+        
 
+
+    }
+ 
     // [DELETE] /list-device/delete/:id
     delete(req, res, next) {
         try {
