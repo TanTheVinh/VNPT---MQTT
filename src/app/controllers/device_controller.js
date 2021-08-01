@@ -282,7 +282,6 @@ class device_controller {
         }
     }
 
-<<<<<<< HEAD
     // history(req, res, next){
     //     res.render('publishLog');
     // }
@@ -314,10 +313,6 @@ class device_controller {
             })
             .catch(next)
         }
-=======
-    historydata(req, res, next){
-        res.render('publishLog');
->>>>>>> f3e60136a7c793897efa0be374500ac479876f4c
     }
 
     connect(req, res, next){
