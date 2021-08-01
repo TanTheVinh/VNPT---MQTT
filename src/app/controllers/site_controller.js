@@ -29,10 +29,20 @@ class site_controller {
                             soluong.ngatketnoi = result.rows[0].ngatketnoi;
                             pool
                                 .query(
-                                    `select to_char(thoigiangui,'Mon') as month,
-                                    extract(year from thoigiangui) as year,
-                                    count(thoigiangui) as soluonglenh
-                                    from dulieu group by 1,2;`
+<<<<<<< HEAD
+                                    `select date_part('day',thoigiangui) as ngay, date_part('month',thoigiangui) as thang, date_part('year',thoigiangui) as nam from dulieu order by thoigiangui ASC;`
+                                )
+                                .then(result => {
+                                    const bieudo = result.rows;
+                                     
+                                    const quyen = req.session.quyen;
+                                 res.render('index', { soluong, bieudo, quyen });
+                                //   res.json({soluong, bieudo});
+=======
+                                    `select date_part('day',thoigiangui) as ngay, 
+                                    date_part('month',thoigiangui) as thang, 
+                                    date_part('year',thoigiangui) as nam 
+                                    from dulieu order by thoigiangui ASC;`
                                 )
                                 .then(result => {
                                     const bieudo = result.rows;
@@ -41,6 +51,7 @@ class site_controller {
                                     console.log({ soluong, bieudo, quyen });
                                     //res.json({ soluong, bieudo, quyen });
                                     res.render('index', { soluong, bieudo, quyen });
+>>>>>>> fd74f8d35ca1a6c261bc64e3d703b993258dc2e0
                                 })
                                 .catch(next);
                         })
@@ -65,7 +76,7 @@ class site_controller {
                                 )
                                 .then(result => {
                                     const bieudo = result.rows;
-                                    // res.json({soluong, bieudo});
+                                  //   res.json({soluong, bieudo});
                                     const quyen = req.session.quyen;
                                     res.render('index', { soluong, bieudo, quyen });
                                 })

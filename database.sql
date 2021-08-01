@@ -241,19 +241,19 @@ INSERT INTO public.nguoidung(iddonvi, taikhoan, matkhau, tennguoidung, quyen)
 VALUES (3, 'thevinh03', 'dfa2cf42e689dc76107c5d4c91d03007', 'Tần Thế Vinh 3', 'admin');
 
 INSERT INTO public.thietbi(idloai, iddonvi, tenthietbi, taikhoan, matkhau, trangthai)
-VALUES (1, 3, 'máy tính 1', 'maytinh01', 'dc819a95e66913d46ca261c070519f3c', true);
+VALUES (1, 3, 'máy tính 1', 'mqtt_4a6s5c8s', '46ee7eb02d4c3b504ce79c054464bfd2', true);
 INSERT INTO public.thietbi(idloai, iddonvi, tenthietbi, taikhoan, matkhau, trangthai)
-VALUES (1, 2, 'máy tính 2', 'maytinh02', 'dc819a95e66913d46ca261c070519f3c', false);
+VALUES (1, 2, 'máy tính 2', 'mqtt_as56a2c1', '46ee7eb02d4c3b504ce79c054464bfd2', false);
 INSERT INTO public.thietbi(idloai, iddonvi, tenthietbi, taikhoan, matkhau, trangthai)
-VALUES (1, 1, 'máy tính 3', 'maytinh03', 'dc819a95e66913d46ca261c070519f3c', true);
+VALUES (1, 1, 'máy tính 3', 'mqtt_2546ea3s', '46ee7eb02d4c3b504ce79c054464bfd2', true);
 INSERT INTO public.thietbi(idloai, iddonvi, tenthietbi, taikhoan, matkhau, trangthai)
-VALUES (1, 1, 'máy tính 4', 'maytinh04', 'dc819a95e66913d46ca261c070519f3c', true);
+VALUES (1, 1, 'máy tính 4', 'mqtt_x5as6f2z', '46ee7eb02d4c3b504ce79c054464bfd2', true);
 INSERT INTO public.thietbi(idloai, iddonvi, tenthietbi, taikhoan, matkhau, trangthai)
-VALUES (3, 1, 'nhiệt kế 1', 'nhietke01', '3b5a7330cdf28e5919d2473ed7e292bf', true);
+VALUES (3, 1, 'nhiệt kế 1', 'mqtt_f56a5w1d', '46ee7eb02d4c3b504ce79c054464bfd2', true);
 INSERT INTO public.thietbi(idloai, iddonvi, tenthietbi, taikhoan, matkhau, trangthai)
-VALUES (3, 4, 'nhiệt kế 2', 'nhietke02', '3b5a7330cdf28e5919d2473ed7e292bf', false);
+VALUES (3, 4, 'nhiệt kế 2', 'mqtt_e526123a', '46ee7eb02d4c3b504ce79c054464bfd2', false);
 INSERT INTO public.thietbi(idloai, iddonvi, tenthietbi, taikhoan, matkhau, trangthai)
-VALUES (3, 3, 'nhiệt kế 3', 'nhietke03', '3b5a7330cdf28e5919d2473ed7e292bf', true);
+VALUES (3, 3, 'nhiệt kế 3', 'mqtt_dawkem2v', '46ee7eb02d4c3b504ce79c054464bfd2', true);
 
 INSERT INTO public.lichsu(idnguoidung, idthietbi, thoigiantt, thaotac)
 VALUES (1, 3, '2021-07-08 06:04:06', 'đăng nhập');

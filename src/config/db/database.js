@@ -4,7 +4,7 @@ var pool = new Pool({
     host: 'localhost',
     database: 'mqtt',
     user: 'postgres',
-    password: '7714119',
+    password: 'thevinh',
     port: 5432
 });
 
