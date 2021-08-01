@@ -63,7 +63,7 @@
                 let defaultIndex = 1,
                   defaultPost = 10,
                   listData = listDataGenerator(),
-                  pageIndex = Math.ceil(listData.length / defaultPost);
+                  pageIndex = Math.ceil({{count.count}} / defaultPost);
 
                 let wrapper = $('#tbl');
                 let pag = $('#pag');
@@ -125,7 +125,7 @@
                     let page = document.createElement('a');
                     page.setAttribute('href','/list-catogory?page='+(i+1));
                     if (rangeWithDots[i] == current) {
-                      page.classList.add('page', 'current', 'btn', 'btn-info');
+                      page.classList.add('page', 'current', 'btn', 'border-info');
                     } else if (rangeWithDots[i] == '...') {
                       page.addEventListener('click', e => e.preventDefault());
                       page.classList.add('page', 'btn', 'border-info');

@@ -11,7 +11,7 @@ router.delete('/delete/:id', deviceController.delete);
 router.put('/edit/:id', deviceController.update);
 router.get('/change-password/:id', deviceController.changepass);
 router.put('/change-password/:id', deviceController.updatepass);
-router.get('/history/:id', deviceController.historydata);
+router.get('/history/:id', deviceController.history);
 router.post('/login/:id', deviceController.connect);
 
 router.get('/', deviceController.list);

@@ -13,6 +13,7 @@
           <a href="/list-device/add" class="btn btn-success">
             Thêm thiết bị
           </a>
+          <span id="c" class="d-none">{{count.count}}</span>
           {{#if message}}
             <p id="rpl" class="d-none">{{message}}</p>
             {{/if}}
@@ -61,13 +62,13 @@
               } else {
                 App();
               }
-
+              
               function App() {
                 //common variables
                 let defaultIndex = 1,
                   defaultPost = 10,
                   listData = listDataGenerator(),
-                  pageIndex = Math.ceil(listData.length / defaultPost);
+                  pageIndex = Math.ceil({{count.count}} / defaultPost);
 
                 let wrapper = $('#tbl');
                 let pag = $('#pag');
@@ -136,7 +137,7 @@
                       href="/list-device/detail/${post.idthietbi}" method="GET">
                       <i class="fa fa-info-circle"></i>
                     </a>
-                    <a href="/list-device/history/${post.idthietbi}" class="btn btn-success" data-toggle="tooltip"
+                    <a href="/list-device/history/${post.idthietbi}?page=1" class="btn btn-success" data-toggle="tooltip"
                       data-placement="top" title="Lịch sử">
                       <i class="fa fa-history"></i>
                     </a>
@@ -185,7 +186,7 @@
                     let page = document.createElement('a');
                     page.setAttribute('href','/list-device?page='+(i+1));
                     if (rangeWithDots[i] == current) {
-                      page.classList.add('page', 'current', 'btn', 'btn-info');
+                      page.classList.add('page', 'current', 'btn', 'border-info');
                     } else if (rangeWithDots[i] == '...') {
                       page.addEventListener('click', e => e.preventDefault());
                       page.classList.add('page', 'btn', 'border-info');
