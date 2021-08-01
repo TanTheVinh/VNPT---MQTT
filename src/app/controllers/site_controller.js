@@ -29,10 +29,10 @@ class site_controller {
                             soluong.ngatketnoi = result.rows[0].ngatketnoi;
                             pool
                                 .query(
-                                    `select to_char(thoigiangui,'Mon') as month,
-                                    extract(year from thoigiangui) as year,
-                                    count(thoigiangui) as soluonglenh
-                                    from dulieu group by 1,2;`
+                                    `select date_part('day',thoigiangui) as ngay, 
+                                    date_part('month',thoigiangui) as thang, 
+                                    date_part('year',thoigiangui) as nam 
+                                    from dulieu order by thoigiangui ASC;`
                                 )
                                 .then(result => {
                                     const bieudo = result.rows;

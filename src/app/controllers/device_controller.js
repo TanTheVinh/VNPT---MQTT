@@ -20,11 +20,15 @@ class device_controller {
                         OFFSET (($2-1)*10) ROWS FETCH NEXT 10 ROWS ONLY`, [iddonvi, page])
                     .then(result => {
                         const thietbi = result.rows;
-                        // res.json({thietbi});
-                        // console.log({thietbi});
-                        res.render('listDevice', {
-                            thietbi
-                        });
+                        pool
+                            .query(`select count(*) from thietbi`)
+                            .then(result => {
+                                const count = result.rows[0];
+                                // res.json({thietbi});
+                                // console.log({thietbi, count});
+                                res.render('listDevice', { thietbi, count });
+                            })
+                            .catch(next);
                     })
                     .catch(next)
             } else {
