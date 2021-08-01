@@ -17,32 +17,20 @@
           <hr />
           <form method="POST" action="/list-unit/insert">
             <table class="table">
-
-              {{!-- <tr>
-                <th scope="row">Mã đơn vị
-                  :</th>
-                <td>
-                  <input required type="text" name="maLoaiThietBi" id="maLoaiThietBi" />
-                  <span class="text-danger"> *</span>
-                </td>
-              </tr> --}}
-
               <tr>
                 <th scope="row">Tên đơn vị
                   :</th>
                 <td>
-                  <input required type="text" name="tendonvi" id="tendonvi" /><span class="text-danger">
-                    *</span>
+                  <input required type="text" name="tendonvi" id="tendonvi" />
                 </td>
               </tr>
               <tr>
                 <th scope="row">
                 </th>
                 <td>
-                  <button id="them" type="submit" class="btn btn-success" onclick="myFunction()">
+                  <button id="them" type="submit" class="btn btn-success">
                     <i class="fa fa-plus"></i>
                     Thêm đơn vị
-
                   </button>
                   <button id="xoa" type="reset" class="btn btn-danger">
                     <i class="fa fa-eraser"></i>

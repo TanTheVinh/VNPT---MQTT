@@ -13,9 +13,17 @@
           <a href="/list-user/add" class="btn btn-success">
             Thêm người dùng
           </a>
-          <th scope="col">{{message}}</th>
+          {{#if message}}
+            <p id="rpl" class="d-none">{{message}}</p>
+            {{/if}}
+            <script>
+              var rp = document.getElementById("rpl").innerHTML;
+              let ex = rp.slice(1, -1);
+              alert(ex);
+              window.location = 'http://localhost:3000/list-user';
+            </script>
           <div class="table-responsive">
-            <table id="data" class="table text-nowrap text-center">
+            <table id="tbl" class="table text-nowrap text-center">
               <thead>
                 <tr>
                   <th scope="col">Mã người dùng</th>
@@ -31,25 +39,12 @@
                   </th>
                 </tr>
               </thead>
-              <tbody>{{#each nguoidung}}
+              <tfoot>
                 <tr>
-                  <th scope="row">{{this.idnguoidung}}</th>
-                  <td>{{this.tennguoidung}}</td>
-                  <td>{{this.tendonvi}}</td>
-                  <td>{{this.taikhoan}}</td>
-                  <td>{{this.quyen}}</td>
-                  <td>
-                    <form id="{{this.idnguoidung}}" class="d-inline-block"
-                      action="/list-user/delete/{{this.idnguoidung}}?_method=DELETE" method="post">
-                      <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top"
-                        title="Xoá" onclick="myFunction({{this.idnguoidung}})">
-                        <i class="fa fa-trash-alt"></i>
-                      </button>
-                    </form>
-                  </td>
-                </tr>
-                {{/each}}
-              </tbody>
+                  <td colspan="5"></td>
+                  <td id="pag"></td>
+                </tr> 
+              </tfoot>
             </table>
             <ul id="nav" class="pagination justify-content-center"></ul>
             <script>
@@ -62,34 +57,118 @@
               }
             </script>
             <script>
-                        $(document).ready(function () {
-                            $('#nav').children().remove();
-                            var rowsShown = 5;
-                            var rowsTotal = $('#data tbody tr').length;
-                            var numPages = rowsTotal / rowsShown;
-                            for (i = 0; i < numPages; i++) {
-                                var pageNum = i + 1;
-                                $('#nav').append(
-                                    '<li class="page-item"><a id="f" class="page-link" href="#" rel="' + i +
-                                    '">' + pageNum + '</a> </li>');
-                            }
-                            $('#data tbody tr').hide();
-                            $('#data tbody tr').slice(0, rowsShown).show();
-                            $('#nav li a:first').addClass('active');
-                            $('#nav a').bind('click', function () {
-                                $('#nav a').removeClass('active');
-                                $(this).addClass('active');
-                                var currPage = $(this).attr('rel');
-                                var startItem = currPage * rowsShown;
-                                var endItem = parseInt(startItem, 10) + parseInt(rowsShown, 10);
-                                $('#data tbody tr').css('opacity', '0.0').hide().slice(startItem,
-                                    endItem).
-                                css('display', 'table-row').animate({
-                                    opacity: 1
-                                }, 300);
-                            });
-                        });
-                    </script>
+              if (document.readyState == "loading") {
+                document.addEventListener('DOMContentLoaded', App);
+              } else {
+                App();
+              }
+
+              function App() {
+                //common variables
+                let defaultIndex = 1,
+                  defaultPost = 5,
+                  listData = listDataGenerator(),
+                  pageIndex = Math.ceil(listData.length / defaultPost);
+
+                let wrapper = $('#tbl');
+                let pag = $('#pag');
+
+                let listDiv = document.createElement('tbody');
+                listDiv.classList.add('listStyle01');
+                wrapper.append(listDiv);
+
+
+                let listWrapper = document.querySelector('.listStyle01');
+
+                let pagiDiv = document.createElement('div');
+                pagiDiv.classList.add('pagination', 'm-3', 'justify-content-center');
+                pag.append(pagiDiv);
+
+                let pagiWrapper = document.querySelector('.pagination');
+
+                showPosts(listData, 0, defaultPost);
+                pagination(defaultIndex, pageIndex);
+
+                function showPosts(listData, startPos, endPost) {
+                  listWrapper.innerHTML = '';
+
+                  listData.slice(startPos, endPost).map(post => {
+                    listWrapper.innerHTML += (
+                      ` <tr><th scope='row'>${post.idnguoidung}</th><td>${post.tennguoidung}</td><td>${post.tendonvi}</td><td>${post.taikhoan}</td><td>${post.quyen}</td><td><form id='${post.idnguoidung}' class='d-inline-block' action='/list-user/delete/${post.idnguoidung}?_method=DELETE' method='post'><button type='button' class='btn btn-danger' data-toggle='tooltip' data-placement='top' title='Xoá' onclick='myFunction(${post.idnguoidung})'><i class='fa fa-trash-alt'></i></button></form></td></tr>
+                      `);
+                  })
+                }
+
+                function pagination(index, pageLen = pageIndex) {
+                  pagiWrapper.innerHTML = '';
+                  let current = index,
+                    last = pageLen,
+                    delta = 2,
+                    left = current - delta,
+                    right = current + delta + 1,
+                    range = [],
+                    rangeWithDots = [],
+                    l = null;
+                  for (let i = 1; i <= last; i++) {
+                    if (i == 1 || i == last || i >= left && i < right) {
+                      range.push(i);
+                    }
+                  }
+
+                  for (let i of range) {
+                    if (l) {
+                      if (i - l === 2) {
+                        rangeWithDots.push(l + 1);
+                      } else if (i - l !== 1) {
+                        rangeWithDots.push('...');
+                      }
+                    }
+                    rangeWithDots.push(i);
+                    l = i;
+                  }
+
+                  for (let i = 0; i < rangeWithDots.length; i++) {
+                    let page = document.createElement('a');
+                    page.setAttribute('href','/list-user?page='+(i+1));
+                    if (rangeWithDots[i] == current) {
+                      page.classList.add('page', 'current', 'btn', 'btn-info');
+                    } else if (rangeWithDots[i] == '...') {
+                      page.addEventListener('click', e => e.preventDefault());
+                      page.classList.add('page', 'btn', 'border-info');
+                    } else {
+                      page.classList.add('page', 'btn', 'border-info');
+                      page.addEventListener('click', changePageIndex);
+                    }
+                    page.innerHTML = rangeWithDots[i];
+                    
+                    pagiWrapper.append(page);
+                  }
+
+                  showPosts(listData, (current * defaultPost) - defaultPost, (current * defaultPost));
+                }
+
+                function changePageIndex(event) {
+                  let clickedItem = Number(event.target.innerText);
+                  pagination(clickedItem);
+                }
+
+                function listDataGenerator(numPosts) {
+                  let listDataArray = [
+                    {{#each nguoidung}} 
+                      {
+                        idnguoidung: '{{this.idnguoidung}}',
+                        tennguoidung: '{{this.tennguoidung}}',
+                        iddonvi: '{{this.iddonvi}}',
+                        taikhoan: '{{this.taikhoan}}',
+                        quyen: '{{this.quyen}}',
+                        tendonvi: '{{this.tendonvi}}'
+                      },
+                    {{/each}}
+                  ];
+                  return listDataArray;
+                }
+              }
+            </script>
           </div>
         </div>
       </div>

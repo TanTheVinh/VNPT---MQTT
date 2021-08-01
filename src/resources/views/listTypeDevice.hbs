@@ -13,8 +13,17 @@
           <a href="/list-catogory/add" class="btn btn-success">
             Thêm loại thiết bị
           </a>
+          {{#if message}}
+            <p id="rpl" class="d-none">{{message}}</p>
+            {{/if}}
+            <script>
+              var rp = document.getElementById("rpl").innerHTML;
+              let ex = rp.slice(1, -1);
+              alert(ex);
+              window.location = 'http://localhost:3000/list-catogory';
+            </script>
           <div class="table-responsive">
-            <table id="data" class="table text-nowrap text-center">
+            <table id="tbl" class="table text-nowrap text-center">
               <thead>
                 <tr>
                   <th scope="col">Mã loại thiết bị</th>
@@ -24,31 +33,13 @@
                   </th>
                 </tr>
               </thead>
-              <tbody>
-                {{#each loaithietbi}}
+              <tfoot>
                 <tr>
-                  <th scope="row">{{this.idloai}}</th>
-                  <td>{{this.tenloai}}</td>
-                  <td>
-                    <form class="d-inline-block" action="/list-catogory/detail/{{this.idloai}}" method="get">
-                      <button class="btn btn-info" type="submit" data-placement="top" title="Xem chi tiết">
-                        <i class="fa fa-info-circle"></i>
-
-                      </button>
-                    </form>
-                    <form id="{{this.idloai}}" class="d-inline-block"
-                      action="/list-catogory/delete/{{this.idloai}}?_method=DELETE" method="POST">
-                      <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top"
-                        title="Xoá" onclick="myFunction({{this.idloai}})">
-                        <i class="fa fa-trash-alt"></i>
-                      </button>
-                    </form>
-                  </td>
-                </tr>
-                {{/each}}
-              </tbody>
+                  <td colspan="2"></td>
+                  <td id="pag"></td>
+                </tr> 
+              </tfoot>
             </table>
-            <ul id="nav" class="pagination justify-content-center"></ul>
             <script>
               function myFunction(id) {
                 let r = confirm('Xác nhận xóa loại thiết bị');
@@ -60,34 +51,115 @@
               }
             </script>
             <script>
-                        $(document).ready(function () {
-                            $('#nav').children().remove();
-                            var rowsShown = 5;
-                            var rowsTotal = $('#data tbody tr').length;
-                            var numPages = rowsTotal / rowsShown;
-                            for (i = 0; i < numPages; i++) {
-                                var pageNum = i + 1;
-                                $('#nav').append(
-                                    '<li class="page-item"><a id="f" class="page-link" href="#" rel="' + i +
-                                    '">' + pageNum + '</a> </li>');
-                            }
-                            $('#data tbody tr').hide();
-                            $('#data tbody tr').slice(0, rowsShown).show();
-                            $('#nav li a:first').addClass('active');
-                            $('#nav a').bind('click', function () {
-                                $('#nav a').removeClass('active');
-                                $(this).addClass('active');
-                                var currPage = $(this).attr('rel');
-                                var startItem = currPage * rowsShown;
-                                var endItem = parseInt(startItem, 10) + parseInt(rowsShown, 10);
-                                $('#data tbody tr').css('opacity', '0.0').hide().slice(startItem,
-                                    endItem).
-                                css('display', 'table-row').animate({
-                                    opacity: 1
-                                }, 300);
-                            });
-                        });
-                    </script>
+              
+              if (document.readyState == "loading") {
+                document.addEventListener('DOMContentLoaded', App);
+              } else {
+                App();
+              }
+
+              function App() {
+                //common variables
+                let defaultIndex = 1,
+                  defaultPost = 5,
+                  listData = listDataGenerator(),
+                  pageIndex = Math.ceil(listData.length / defaultPost);
+
+                let wrapper = $('#tbl');
+                let pag = $('#pag');
+
+                let listDiv = document.createElement('tbody');
+                listDiv.classList.add('listStyle01');
+                wrapper.append(listDiv);
+
+
+                let listWrapper = document.querySelector('.listStyle01');
+
+                let pagiDiv = document.createElement('div');
+                pagiDiv.classList.add('pagination', 'm-3', 'justify-content-center');
+                pag.append(pagiDiv);
+
+                let pagiWrapper = document.querySelector('.pagination');
+
+                showPosts(listData, 0, defaultPost);
+                pagination(defaultIndex, pageIndex);
+
+                function showPosts(listData, startPos, endPost) {
+                  listWrapper.innerHTML = '';
+
+                  listData.slice(startPos, endPost).map(post => {
+                    listWrapper.innerHTML += (
+                      `<tr><th scope='row'>${post.idloai}</th><td>${post.tenloai}</td><td><form class='d-inline-block' action='/list-catogory/detail/${post.idloai}' method='get'><button class='btn btn-info' type='submit' data-placement='top' title='Xem chi tiết'><i class='fa fa-info-circle'></i></button></form><form id='${post.idloai}' class='d-inline-block' action='/list-catogory/delete/${post.idloai}?_method=DELETE' method='POST'><button type='button' class='btn btn-danger' data-toggle='tooltip' data-placement='top' title='Xoá' onclick='myFunction(${post.idloai})'><i class='fa fa-trash-alt'></i></button></form></td></tr>`);
+                  })
+                }
+
+                function pagination(index, pageLen = pageIndex) {
+                  pagiWrapper.innerHTML = '';
+                  let current = index,
+                    last = pageLen,
+                    delta = 2,
+                    left = current - delta,
+                    right = current + delta + 1,
+                    range = [],
+                    rangeWithDots = [],
+                    l = null;
+                  for (let i = 1; i <= last; i++) {
+                    if (i == 1 || i == last || i >= left && i < right) {
+                      range.push(i);
+                    }
+                  }
+
+                  for (let i of range) {
+                    if (l) {
+                      if (i - l === 2) {
+                        rangeWithDots.push(l + 1);
+                      } else if (i - l !== 1) {
+                        rangeWithDots.push('...');
+                      }
+                    }
+                    rangeWithDots.push(i);
+                    l = i;
+                  }
+
+                  for (let i = 0; i < rangeWithDots.length; i++) {
+                    let page = document.createElement('a');
+                    page.setAttribute('href','/list-catogory?page='+(i+1));
+                    if (rangeWithDots[i] == current) {
+                      page.classList.add('page', 'current', 'btn', 'btn-info');
+                    } else if (rangeWithDots[i] == '...') {
+                      page.addEventListener('click', e => e.preventDefault());
+                      page.classList.add('page', 'btn', 'border-info');
+                    } else {
+                      page.classList.add('page', 'btn', 'border-info');
+                      page.addEventListener('click', changePageIndex);
+                    }
+                    page.innerHTML = rangeWithDots[i];
+                    
+                    pagiWrapper.append(page);
+                  }
+
+                  showPosts(listData, (current * defaultPost) - defaultPost, (current * defaultPost));
+                }
+
+                function changePageIndex(event) {
+                  let clickedItem = Number(event.target.innerText);
+                  pagination(clickedItem);
+                }
+
+                function listDataGenerator(numPosts) {
+                  let listDataArray = [
+                    {{#each loaithietbi}} 
+                      {
+                        idloai: '{{this.idloai}}',
+                        tenloai: '{{this.tenloai}}',
+                        mota: '{{this.mota}}'
+                      },
+                    {{/each}}
+                  ];
+                  return listDataArray;
+                }
+              }
+            </script>
           </div>
         </div>
       </div>
