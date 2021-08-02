@@ -10,7 +10,14 @@ class user_controller {
             res.redirect('/');
         }
         else{
+            var page;
             if(req.session.quyen == 'nv'){
+                if(req.query.page === undefined){
+                    page = 1;
+                }
+                else{
+                        page = req.query.page;
+                }
                 const idnguoidung = req.session.idnguoidung;
                 pool
                     .query(`SELECT * FROM nguoidung, donvi 
@@ -20,27 +27,28 @@ class user_controller {
                         res.render('infoUser', {nguoidung});
                     })
             }else{
+                if(req.query.page === undefined){
+                    page = 1;
+                }
+                else{
+                        page = req.query.page;
+                }
                 pool
-                .query(`SELECT
-                nguoidung.idnguoidung,
-                nguoidung.tennguoidung,
-                nguoidung.iddonvi,
-                nguoidung.taikhoan,
-                nguoidung.quyen,
-                donvi.tendonvi
-            FROM 
-                nguoidung
-            INNER JOIN 
-                donvi  ON nguoidung.iddonvi = donvi.iddonvi;`)
+                .query(`SELECT * FROM nguoidung, donvi 
+                where nguoidung.iddonvi = donvi.iddonvi
+                OFFSET (($1-1)*10) ROWS FETCH NEXT 10 ROWS ONLY`, [page])
                 .then(result => {
                     const nguoidung = result.rows
-                    //res.json({nguoidung});
-                    res.render('listUser', { nguoidung });
-                    console.log({nguoidung});
+                    pool
+                        .query(`select count(*) from nguoidung`)
+                        .then(result => {
+                            const count = result.rows[0];
+                            //res.json({donvi, count});
+                            res.render('listUser', { nguoidung, count });
+                        })
+                        .catch(next);
                 }).catch(next)
             }
-
-                    // 
         }
     }
    

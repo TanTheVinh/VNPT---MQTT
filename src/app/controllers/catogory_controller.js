@@ -8,12 +8,26 @@ class catogory_controller {
             res.redirect('/');
         }
         else{
+            var page;
+            if(req.query.page === undefined){
+                page = 1;
+            }
+            else{
+                    page = req.query.page;
+            }
             pool
-                .query('select * from loaithietbi')
+                .query(`select * from loaithietbi 
+                OFFSET (($1-1)*10) ROWS FETCH NEXT 10 ROWS ONLY`, [page])
                 .then(result => {
                     const loaithietbi = result.rows;
+                    pool
+                        .query(`select count(*) from loaithietbi`)
+                        .then(result => {
+                            const count = result.rows[0];
+                            res.render('listTypeDevice', { loaithietbi, count });
+                        })
+                        .catch(next);
                     //res.json({ loaithietbi });
-                    res.render('listTypeDevice', { loaithietbi });
                 })
                 .catch(next)
         }
