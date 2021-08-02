@@ -90,11 +90,11 @@
                     let btnTT = "";
                     let btnS = "";
                     if(tt == "\"true\""){
-                      btnTT = `<form id='log-out' action='/list-device/${post.idthietbi}'><button type='button' class='btn btn-success' onclick='cfmo()'>Đang kết nối</button></form>`;
+                      btnTT = `<form id='log-out' action='///list-device/${post.idthietbi}'><button type='button' class='btn btn-success' onclick='cfmo()'>Đang kết nối</button></form>`;
                       btnS = `<button type='button' class='btn btn-danger' data-toggle='tooltip' data-placement='top' title='Gửi lệnh' data-bs-toggle='modal' data-bs-target='#exampleModal'><i class='fa fa-inbox'></i></button>`;
                     }
                     else{
-                      btnTT = `<form id='log-in' action='/list-device/${post.idthietbi}'><button type='button' class='btn btn-danger' onclick='cfmi()'>Ngắt kết nối</button></form>`;
+                      btnTT = `<form id='log-in' action='///list-device/${post.idthietbi}'><button type='button' class='btn btn-danger' onclick='cfmi()'>Ngắt kết nối</button></form>`;
                       btnS = `<button type='button' disabled class='btn btn-danger' data-toggle='tooltip' data-placement='top' title='Gửi lệnh' data-bs-toggle='modal' data-bs-target='#exampleModal'><i class='fa fa-inbox'></i></button>`;
                     }
                     listWrapper.innerHTML += (
