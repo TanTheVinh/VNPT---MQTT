@@ -15,9 +15,9 @@ class device_controller {
             if (req.session.quyen == 'nv') {
                 const iddonvi = req.session.iddonvi;
                 if(req.query.page === undefined){
-                 page = 1;
+                    page = 1;
                 }else{
-                     page = req.query.page;
+                    page = req.query.page;
                 }
                 pool
                     .query(`select * from thietbi, loaithietbi 
@@ -272,8 +272,8 @@ class device_controller {
                 
                 res.render('addDevice', {message: "\"thêm thành công\""})
                 const user = {
-                    username: thietbi.taikhoan,
-                    password: thietbi.md5matkhau
+                    username: '1',
+                    password: '2'
                 }
                 const client = mqtt.connect('mqtt://localhost:1234', user);
                 const message = 'Hello world!';
@@ -282,13 +282,7 @@ class device_controller {
                     setInterval(() => {
                         client.publish(user.username, message);
                         console.log('Message sent: ', message);
-                    }, 5000);
-                    if( client.disconnected){
-                        console.log('ok');
-                    }else{
-                        console.log('ko');
-                    }
-                   
+                    }, 5000);                   
                 });
                 // const message = 'Thêm thiết bị thành công';
                 // res.render('addDevice', {message})
@@ -298,9 +292,6 @@ class device_controller {
         }else{
             res.render('addDevice', {message: "\"thêm thất bại\""})
         }
-        
-
-
     }
  
     // [DELETE] /list-device/delete/:id
@@ -320,13 +311,7 @@ class device_controller {
         }
     }
 
-    // history(req, res, next){
-    //     res.render('publishLog');
-    // }
-
-
-
-
+    // [GET] /list-device/history/:id
     // history create by thang-dev
     historydata(req, res, next) {
         if (req.session.idnguoidung === undefined) {
@@ -342,7 +327,8 @@ class device_controller {
                             date_part('second',thoigiangui) as giay,
                             chitiet from dulieu
                 where
-                idthietbi = $1`, [req.params.id])
+                idthietbi = $1`, [req.params.id]
+            )
             .then(result => {
                 const dulieu = result.rows;
                 // res.json({dulieu});
@@ -353,6 +339,7 @@ class device_controller {
         }
     }
 
+    // [POST] /list-device/login
     connect(req, res, next){
         const account = Object.values(req.body);
         account.unshift(req.params.id);
@@ -369,10 +356,10 @@ class device_controller {
                 } catch (error) {
                     res.render('list-device', {message: 'tài khoản hoặc mật khẩu không đúng'})
                 }
-
             })
             .catch(next);
     }
+
 }
 
 module.exports = new device_controller;
