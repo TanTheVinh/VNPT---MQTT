@@ -13,7 +13,7 @@ class user_controller {
             var page;
             if(req.session.quyen == 'nv'){
                 if(req.query.page === undefined){
-                    page = 1;
+                    page = '1';
                 }
                 else{
                         page = req.query.page;
@@ -24,11 +24,11 @@ class user_controller {
                     where nguoidung.iddonvi = donvi.iddonvi and idnguoidung = $1`, [idnguoidung])
                     .then(result => {
                         const nguoidung = result.rows[0];
-                        res.render('infoUser', {nguoidung});
+                        res.render('infoUser', {nguoidung, page});
                     })
             }else{
                 if(req.query.page === undefined){
-                    page = 1;
+                    page = '1';
                 }
                 else{
                         page = req.query.page;
@@ -43,8 +43,8 @@ class user_controller {
                         .query(`select count(*) from nguoidung`)
                         .then(result => {
                             const count = result.rows[0];
-                            //res.json({donvi, count});
-                            res.render('listUser', { nguoidung, count });
+                            //res.json({ nguoidung, count, page });
+                            res.render('listUser', { nguoidung, count, page });
                         })
                         .catch(next);
                 }).catch(next)

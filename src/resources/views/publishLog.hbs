@@ -12,6 +12,7 @@
       <div class="col-sm-12">
         <div class="white-box">
           <div class="table-responsive">
+            <span id="p" class="d-none">{{page}}</span>
             <table id="tbl" class="table text-nowrap text-center">
               <thead>
                 <tr>
@@ -34,7 +35,7 @@
             } else {
               App();
             }
-
+            let np = document.getElementById('p').innerHTML;
             function App() {
               //common variables
               let defaultIndex = 1,
@@ -102,13 +103,13 @@
                 for (let i = 0; i < rangeWithDots.length; i++) {
                   let page = document.createElement('a');
                   page.setAttribute('href', 'list-device/history?page=' + (i + 1));
-                  if (rangeWithDots[i] == current) {
+                  if (rangeWithDots[i] == np) {
                     page.classList.add('page', 'current', 'btn', 'btn-info');
                   } else if (rangeWithDots[i] == '...') {
                     page.addEventListener('click', e => e.preventDefault());
-                    page.classList.add('page', 'btn', 'btn-info');
+                    page.classList.add('page', 'btn', 'border-info');
                   } else {
-                    page.classList.add('page', 'btn', 'btn-info');
+                    page.classList.add('page', 'btn', 'border-info');
                     page.addEventListener('click', changePageIndex);
                   }
                   page.innerHTML = rangeWithDots[i];

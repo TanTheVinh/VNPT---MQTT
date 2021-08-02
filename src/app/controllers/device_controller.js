@@ -3,6 +3,8 @@ const session = require('express-session');
 const { render } = require("node-sass");
 const mqtt = require('mqtt');
 const pub = require('./pub');
+const { MqttClient } = require('mqtt');
+
 class device_controller {
 
     //[GET] /list-device/
@@ -15,7 +17,7 @@ class device_controller {
             if (req.session.quyen == 'nv') {
                 const iddonvi = req.session.iddonvi;
                 if(req.query.page === undefined){
-                    page = 1;
+                 page = '1';
                 }else{
                     page = req.query.page;
                 }
@@ -31,14 +33,14 @@ class device_controller {
                                 const count = result.rows[0];
                                // res.json({thietbi});
                                 // console.log({thietbi, count});
-                                res.render('listDevice', { thietbi, count });
+                                res.render('listDevice', { thietbi, count, page });
                             })
                             .catch(next);
                     })
                     .catch(next)
             } else {
                 if(req.query.page === undefined){
-                    page = 1;
+                    page = '1';
                     }else{
                     page = req.query.page;
                     }
@@ -52,9 +54,10 @@ class device_controller {
                         .query(`select count(*) from thietbi`)
                         .then(result => {
                             const count = result.rows[0];
-                            //res.json({thietbi});
+                            //res.json({thietbi,page});
                             // console.log({thietbi});
-                            res.render('listDevice', { thietbi, count });
+                            res.render('listDevice', { thietbi, count, page });
+                            // res.json({ thietbi, count, page });
                         })
                         .catch(next);
                 }).catch(next)
@@ -143,7 +146,8 @@ class device_controller {
         } = (req.body);
         //res.json(req.body);
         pool
-            .query(`UPDATE thietbi SET tenthietbi = $1, idloai = $2, taikhoan =$3, trangthai =$4  WHERE idthietbi = $5`, [tenthietbi, idloai, taikhoan, trangthai, id])
+            .query(`UPDATE thietbi SET tenthietbi = $1, idloai = $2, taikhoan =$3, trangthai =$4  
+            WHERE idthietbi = $5`, [tenthietbi, idloai, taikhoan, trangthai, id])
             .then(() => {
                 res.render('editInfoDevice', {
                     message: "\"sửa thành công\""
@@ -272,8 +276,8 @@ class device_controller {
                 
                 res.render('addDevice', {message: "\"thêm thành công\""})
                 const user = {
-                    username: '1',
-                    password: '2'
+                    username: thietbi.taikhoan,
+                    password: thietbi.md5matkhau
                 }
                 const client = mqtt.connect('mqtt://localhost:1234', user);
                 const message = 'Hello world!';
@@ -340,21 +344,67 @@ class device_controller {
     }
 
     // [POST] /list-device/login
-    connect(req, res, next){
-        const account = Object.values(req.body);
-        account.unshift(req.params.id);
+    // login(req, res, next){
+    //     const account = Object.values(req.body);
+    //     account.unshift(req.params.id);
+    //     pool
+    //         .query(`select * from thietbi where 
+    //         idthietbi = $1 and taikhoan = $2 and matkhau = $3`, account)
+    //         .then(result => {
+    //             try {
+    //                 const thietbi = result.rows[0];
+    //                 var username = thietbi.taikhoan;
+    //                 var password = thietbi.matkhau;
+    //                 var message = 'ma thiet bi la :' + req.params.id.toString();
+    //                 pub(username, password, message);
+    //             } catch (error) {
+    //                 res.render('list-device', {message: 'tài khoản hoặc mật khẩu không đúng'})
+    //             }
+    //         })
+    //         .catch(next);
+    // }
+
+    // [PUT] /list-device/check
+    check(req, res, next){
+        const idthietbi = req.params.id;
         pool
-            .query(`select * from thietbi where 
-            idthietbi = $1 and taikhoan = $2 and matkhau = $3`, account)
+            .query(`select * from thietbi where idthietbi = $1`, [idthietbi])
             .then(result => {
-                try {
-                    const thietbi = result.rows[0];
-                    var username = thietbi.taikhoan;
-                    var password = thietbi.matkhau;
-                    var message = 'ma thiet bi la :' + req.params.id.toString();
-                    pub(username, password, message);
-                } catch (error) {
-                    res.render('list-device', {message: 'tài khoản hoặc mật khẩu không đúng'})
+                const thietbi = result.rows[0];
+                pool
+                const user = {
+                    username: thietbi.taikhoan,
+                    password: thietbi.matkhau
+                }
+                const client = mqtt.connect('mqtt://localhost:1234', user);
+                if(!thietbi.trangthai){
+                    client.on('connect', () => {
+                        var message = 'đã kết nối thiết bị ' + thietbi.tenthietbi;
+                        client.publish(user.username, message);
+                        console.log('Thông báo gửi: ', message);
+                    });
+                    pool
+                        .query(`UPDATE thietbi SET trangthai = false
+                        WHERE idthietbi = $1`, [thietbi.idthietbi])
+                        .then(result => {
+                            res.redirect('/list-device');
+                        })
+                        .catch(next);
+                }
+                else{
+                    client.on('connect', () => {
+                        var message = 'ngắt kết nối thiết bị ' + thietbi.tenthietbi;
+                        client.publish(user.username, message);
+                    });
+                    console.log('Thông báo gửi: ', message);
+                    client.end();
+                    pool
+                    .query(`UPDATE thietbi SET trangthai = true
+                    WHERE idthietbi = $1`, [thietbi.idthietbi])
+                    .then(result => {
+                        res.redirect('/list-device');
+                    })
+                    .catch(next);
                 }
             })
             .catch(next);

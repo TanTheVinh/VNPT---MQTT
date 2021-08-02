@@ -13,15 +13,8 @@
                     <a href="/list-unit/add/" class="btn btn-success">
                         Thêm đơn vị
                     </a>
-                    {{#if message}}
-            <p id="rpl" class="d-none">{{message}}</p>
-            {{/if}}
-            <script>
-              var rp = document.getElementById("rpl").innerHTML;
-              let ex = rp.slice(1, -1);
-              alert(ex);
-              window.location = 'http://localhost:3000/list-unit';
-            </script>
+                    <span id="p" class="d-none">{{page}}</span>
+                    
                     <div class="table-responsive">
                         <table id="tbl" class="table text-nowrap text-center">
                             <thead>
@@ -55,7 +48,7 @@
                             } else {
                                 App();
                             }
-
+                            let np = document.getElementById('p').innerHTML;
                             function App() {
                                 //common variables
                                 let defaultIndex = 1,
@@ -123,8 +116,8 @@
                                     for (let i = 0; i < rangeWithDots.length; i++) {
                                         let page = document.createElement('a');
                                         page.setAttribute('href', '/list-unit?page=' + (i + 1));
-                                        if (rangeWithDots[i] == current) {
-                                            page.classList.add('page', 'current', 'btn', 'border-info');
+                                        if (rangeWithDots[i] == np) {
+                                            page.classList.add('page', 'current', 'btn', 'btn-info');
                                         } else if (rangeWithDots[i] == '...') {
                                             page.addEventListener('click', e => e.preventDefault());
                                             page.classList.add('page', 'btn', 'border-info');
@@ -157,6 +150,16 @@
                                         }
                                     }
                         </script>
+                        {{#if message}}
+                            <p id="rpl" class="d-none">{{message}}</p>
+                            <script>
+                                var rp = document.getElementById("rpl").innerHTML;
+                                let ex = rp.slice(1, -1);
+                                alert(ex);
+                                window.location = 'http://localhost:3000/list-unit';
+                            </script>
+                        {{/if}}
+            
                     </div>
                 </div>
             </div>

@@ -13,7 +13,7 @@ class unit_controller {
             const quyen = req.session.quyen;
             if(req.session.quyen == 'nv'){
                 if(req.query.page === undefined){
-                    page = 1;
+                    page = '1';
                 }
                 else{
                     page = req.query.page;
@@ -28,7 +28,7 @@ class unit_controller {
                         .then(result => {
                             const count = result.rows[0];
                             //res.json({donvi, count});
-                            res.render('listUnit', { donvi, quyen, count});
+                            res.render('listUnit', { donvi, quyen, count,page});
                         })
                         .catch(next);
                 })
@@ -37,7 +37,7 @@ class unit_controller {
             }
             else{
                 if(req.query.page === undefined){
-                    page = 1;
+                    page = '1';
                 }
                 else{
                     page = req.query.page;
@@ -48,11 +48,11 @@ class unit_controller {
                 .then(result => {
                     const donvi = result.rows;
                     pool
-                        .query(`select count(*) from thietbi`)
+                        .query(`select count(*) from donvi`)
                         .then(result => {
                             const count = result.rows[0];
                             //res.json({ donvi, quyen, count });
-                            res.render('listUnit', { donvi, quyen, count });
+                            res.render('listUnit', { donvi, quyen, count, page });
                         })
                         .catch(next);
                 })
