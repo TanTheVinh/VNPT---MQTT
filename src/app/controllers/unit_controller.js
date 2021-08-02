@@ -28,7 +28,7 @@ class unit_controller {
                         .then(result => {
                             const count = result.rows[0];
                             //res.json({donvi, count});
-                            res.render('listUnit', { donvi, quyen, count});
+                            res.render('listUnit', { donvi, quyen, count,page});
                         })
                         .catch(next);
                 })
@@ -52,7 +52,7 @@ class unit_controller {
                         .then(result => {
                             const count = result.rows[0];
                             //res.json({ donvi, quyen, count });
-                            res.render('listUnit', { donvi, quyen, count });
+                            res.render('listUnit', { donvi, quyen, count, page });
                         })
                         .catch(next);
                 })

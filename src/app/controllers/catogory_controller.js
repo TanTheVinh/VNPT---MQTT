@@ -24,7 +24,7 @@ class catogory_controller {
                         .query(`select count(*) from loaithietbi`)
                         .then(result => {
                             const count = result.rows[0];
-                            res.render('listTypeDevice', { loaithietbi, count });
+                            res.render('listTypeDevice', { loaithietbi, count, page });
                         })
                         .catch(next);
                     //res.json({ loaithietbi });

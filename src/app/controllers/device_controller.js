@@ -15,7 +15,7 @@ class device_controller {
             if (req.session.quyen == 'nv') {
                 const iddonvi = req.session.iddonvi;
                 if(req.query.page === undefined){
-                 page = 1;
+                 page = '1';
                 }else{
                      page = req.query.page;
                 }
@@ -31,14 +31,14 @@ class device_controller {
                                 const count = result.rows[0];
                                // res.json({thietbi});
                                 // console.log({thietbi, count});
-                                res.render('listDevice', { thietbi, count });
+                                res.render('listDevice', { thietbi, count, page });
                             })
                             .catch(next);
                     })
                     .catch(next)
             } else {
                 if(req.query.page === undefined){
-                    page = 1;
+                    page = '1';
                     }else{
                     page = req.query.page;
                     }
@@ -52,9 +52,9 @@ class device_controller {
                         .query(`select count(*) from thietbi`)
                         .then(result => {
                             const count = result.rows[0];
-                            //res.json({thietbi});
+                            //res.json({thietbi,page});
                             // console.log({thietbi});
-                            res.render('listDevice', { thietbi, count });
+                            res.render('listDevice', { thietbi, count, page });
                         })
                         .catch(next);
                 }).catch(next)
@@ -352,6 +352,7 @@ class device_controller {
             .catch(next)
         }
     }
+
 
     connect(req, res, next){
         const account = Object.values(req.body);
