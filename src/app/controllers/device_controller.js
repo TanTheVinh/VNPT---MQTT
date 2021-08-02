@@ -55,6 +55,7 @@ class device_controller {
                             //res.json({thietbi,page});
                             // console.log({thietbi});
                             res.render('listDevice', { thietbi, count, page });
+                            // res.json({ thietbi, count, page });
                         })
                         .catch(next);
                 }).catch(next)

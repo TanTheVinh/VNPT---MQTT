@@ -48,7 +48,7 @@ class unit_controller {
                 .then(result => {
                     const donvi = result.rows;
                     pool
-                        .query(`select count(*) from thietbi`)
+                        .query(`select count(*) from donvi`)
                         .then(result => {
                             const count = result.rows[0];
                             //res.json({ donvi, quyen, count });

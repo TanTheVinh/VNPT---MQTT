@@ -13,7 +13,7 @@ class user_controller {
             var page;
             if(req.session.quyen == 'nv'){
                 if(req.query.page === undefined){
-                    page = 1;
+                    page = '1';
                 }
                 else{
                         page = req.query.page;
@@ -28,7 +28,7 @@ class user_controller {
                     })
             }else{
                 if(req.query.page === undefined){
-                    page = 1;
+                    page = '1';
                 }
                 else{
                         page = req.query.page;
@@ -43,7 +43,7 @@ class user_controller {
                         .query(`select count(*) from nguoidung`)
                         .then(result => {
                             const count = result.rows[0];
-                            //res.json({donvi, count});
+                            //res.json({ nguoidung, count, page });
                             res.render('listUser', { nguoidung, count, page });
                         })
                         .catch(next);

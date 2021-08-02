@@ -13,16 +13,8 @@
           <a href="/list-device/add" class="btn btn-success">
             Thêm thiết bị
           </a>
+          <span id="p" class="d-none">{{page}}</span>
           <span id="c" class="d-none">{{count.count}}</span>
-          {{#if message}}
-            <p id="rpl" class="d-none">{{message}}</p>
-            {{/if}}
-            <script>
-              var rp = document.getElementById("rpl").innerHTML;
-              let ex = rp.slice(1, -1);
-              alert(ex);
-              window.location = 'http://localhost:3000/list-device';
-            </script>
           <div class="table-responsive">
             <table id="tbl" class="table text-nowrap text-center">
               <thead>
@@ -55,14 +47,15 @@
               </tfoot>
             </table>
           </div>
-          <div class="">
+          <div class="" >
             <script>
               if (document.readyState == "loading") {
                 document.addEventListener('DOMContentLoaded', App);
               } else {
                 App();
               }
-              
+              let np = document.getElementById('p').innerHTML;
+              console.log(np);
               function App() {
                 //common variables
                 let defaultIndex = 1,
@@ -185,8 +178,8 @@
                   for (let i = 0; i < rangeWithDots.length; i++) {
                     let page = document.createElement('a');
                     page.setAttribute('href','/list-device?page='+(i+1));
-                    if (rangeWithDots[i] == current) {
-                      page.classList.add('page', 'current', 'btn', 'border-info');
+                    if (rangeWithDots[i] == np) {
+                      page.classList.add('page', 'current', 'btn', 'btn-info');
                     } else if (rangeWithDots[i] == '...') {
                       page.addEventListener('click', e => e.preventDefault());
                       page.classList.add('page', 'btn', 'border-info');
@@ -202,7 +195,7 @@
                   showPosts(listData, (current * defaultPost) - defaultPost, (current * defaultPost));
                 }
 
-                function changePageIndex(event,num) {
+                function changePageIndex(event) {
                   let clickedItem = Number(event.target.innerText);
                   pagination(clickedItem);
                 }
@@ -239,8 +232,15 @@
                   }
               }
             </script>
+            {{#if message}}
+              <p id="rpl" class="d-none">{{message}}</p>
+              <script>
+              var rp = document.getElementById("rpl").innerHTML;
+              let ex = rp.slice(1, -1);
+              alert(ex);
+              window.location = 'http://localhost:3000/list-device';
             </script>
-            
+            {{/if}}
           </div>
         </div>
       </div>
