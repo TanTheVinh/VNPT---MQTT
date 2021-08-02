@@ -24,7 +24,7 @@ class user_controller {
                     where nguoidung.iddonvi = donvi.iddonvi and idnguoidung = $1`, [idnguoidung])
                     .then(result => {
                         const nguoidung = result.rows[0];
-                        res.render('infoUser', {nguoidung});
+                        res.render('infoUser', {nguoidung, page});
                     })
             }else{
                 if(req.query.page === undefined){
@@ -44,7 +44,7 @@ class user_controller {
                         .then(result => {
                             const count = result.rows[0];
                             //res.json({donvi, count});
-                            res.render('listUser', { nguoidung, count });
+                            res.render('listUser', { nguoidung, count, page });
                         })
                         .catch(next);
                 }).catch(next)

@@ -52,7 +52,7 @@ class device_controller {
                         .query(`select count(*) from thietbi`)
                         .then(result => {
                             const count = result.rows[0];
-                            res.json({thietbi,page});
+                            //res.json({thietbi,page});
                             // console.log({thietbi});
                             res.render('listDevice', { thietbi, count, page });
                         })
