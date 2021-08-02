@@ -97,12 +97,12 @@
                     let btnTT = "";
                     let btnS = "";
                     if(tt == "\"true\""){
-                      btnTT = "<form id='log-out' action=''><button type='button' class='btn btn-success' onclick='cfm()'>Đang kết nối</button></form>";
-                      btnS = "<button type='button' class='btn btn-danger' data-toggle='tooltip' data-placement='top' title='Gửi lệnh' data-bs-toggle='modal' data-bs-target='#exampleModal'><i class='fa fa-inbox'></i></button>";
+                      btnTT = `<form id='log-out' action='/list-device/${post.idthietbi}'><button type='button' class='btn btn-success' onclick='cfmo()'>Đang kết nối</button></form>`;
+                      btnS = `<button type='button' class='btn btn-danger' data-toggle='tooltip' data-placement='top' title='Gửi lệnh' data-bs-toggle='modal' data-bs-target='#exampleModal'><i class='fa fa-inbox'></i></button>`;
                     }
                     else{
-                      btnTT = "<button class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#login-Device'>Ngắt kết nối</button><div class='modal fade' id='login-Device' tabindex='-1' aria-labelledby='login-DeviceLabel' aria-hidden='true'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><h5 class='modal-title' id='login-DeviceLabel'>Đăng nhập thiết bị</h5><button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button></div><div class='modal-body'><form action='' method=''><div class=''><label for='tk'>Tài khoản thiết bị:</label><input type='text' name='tk' id='tk'></div><div class=''><label for='mk'>Mật khẩu thiết bị:</label><input type='password' name='mk' id='mk'></div></div></form><div class='modal-footer'><button type='button' class='btn btn-dark' data-bs-dismiss='modal' onclick='myfunc()'>Thoát</button><button type='submit' class='btn btn-success'>Đăng nhập</button></div></div></div></div>";
-                      btnS = "<button type='button' disabled class='btn btn-danger' data-toggle='tooltip' data-placement='top' title='Gửi lệnh' data-bs-toggle='modal' data-bs-target='#exampleModal'><i class='fa fa-inbox'></i></button>";
+                      btnTT = `<form id='log-in' action='/list-device/${post.idthietbi}'><button type='button' class='btn btn-danger' onclick='cfmi()'>Ngắt kết nối</button></form>`;
+                      btnS = `<button type='button' disabled class='btn btn-danger' data-toggle='tooltip' data-placement='top' title='Gửi lệnh' data-bs-toggle='modal' data-bs-target='#exampleModal'><i class='fa fa-inbox'></i></button>`;
                     }
                     listWrapper.innerHTML += (
                       `
@@ -202,7 +202,7 @@
                   showPosts(listData, (current * defaultPost) - defaultPost, (current * defaultPost));
                 }
 
-                function changePageIndex(event) {
+                function changePageIndex(event,num) {
                   let clickedItem = Number(event.target.innerText);
                   pagination(clickedItem);
                 }
@@ -226,10 +226,16 @@
               }
             </script>
             <script>
-              function cfm(){
+              function cfmo(){
                 let cf = confirm("Xác nhận đăng xuất");
                 if (cf == true) {
                     document.getElementById('log-out').submit();
+                  }
+              }
+              function cfmi(){
+                let cf = confirm("Xác nhận đăng nhập");
+                if (cf == true) {
+                    document.getElementById('log-in').submit();
                   }
               }
             </script>
