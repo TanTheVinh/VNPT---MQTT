@@ -371,43 +371,44 @@ class device_controller {
             .query(`select * from thietbi where idthietbi = $1`, [idthietbi])
             .then(result => {
                 const thietbi = result.rows[0];
-                pool
-                const user = {
-                    username: thietbi.taikhoan,
-                    password: thietbi.matkhau
-                }
-                const client = mqtt.connect('mqtt://localhost:1234', user);
-                if(!thietbi.trangthai){
-                    client.on('connect', () => {
-                        var message = 'đã kết nối thiết bị ' + thietbi.tenthietbi;
-                        client.publish(user.username, message);
-                        console.log('Thông báo gửi: ', message);
-                    });
-                    pool
-                        .query(`UPDATE thietbi SET trangthai = false
-                        WHERE idthietbi = $1`, [thietbi.idthietbi])
-                        .then(result => {
-                            res.redirect('/list-device');
-                        })
-                        .catch(next);
-                }
-                else{
-                    client.on('connect', () => {
-                        var message = 'ngắt kết nối thiết bị ' + thietbi.tenthietbi;
-                        client.publish(user.username, message);
-                    });
-                    console.log('Thông báo gửi: ', message);
-                    client.end();
-                    pool
-                    .query(`UPDATE thietbi SET trangthai = true
-                    WHERE idthietbi = $1`, [thietbi.idthietbi])
-                    .then(result => {
-                        res.redirect('/list-device');
-                    })
-                    .catch(next);
-                }
-            })
-            .catch(next);
+                res.json(thietbi)
+        //         pool
+        //         const user = {
+        //             username: thietbi.taikhoan,
+        //             password: thietbi.matkhau
+        //         }
+        //         const client = mqtt.connect('mqtt://localhost:1234', user);
+        //         if(!thietbi.trangthai){
+        //             client.on('connect', () => {
+        //                 var message = 'đã kết nối thiết bị ' + thietbi.tenthietbi;
+        //                 client.publish(user.username, message);
+        //                 console.log('Thông báo gửi: ', message);
+                     });
+        //             pool
+        //                 .query(`UPDATE thietbi SET trangthai = false
+        //                 WHERE idthietbi = $1`, [thietbi.idthietbi])
+        //                 .then(result => {
+        //                     res.redirect('/list-device');
+        //                 })
+        //                 .catch(next);
+        //         }
+        //         else{
+        //             client.on('connect', () => {
+        //                 var message = 'ngắt kết nối thiết bị ' + thietbi.tenthietbi;
+        //                 client.publish(user.username, message);
+        //                 console.log('Thông báo gửi: ', message);
+        //             });
+        //             client.end();
+        //             pool
+        //             .query(`UPDATE thietbi SET trangthai = true
+        //             WHERE idthietbi = $1`, [thietbi.idthietbi])
+        //             .then(result => {
+        //                 res.redirect('/list-device');
+        //             })
+        //             .catch(next);
+        //         }
+        //     })
+        //     .catch(next);
     }
 
 }
