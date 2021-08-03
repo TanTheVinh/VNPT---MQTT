@@ -3,6 +3,8 @@ const session = require('express-session');
 const { render } = require("node-sass");
 const mqtt = require('mqtt');
 const pub = require('./pub');
+const { MqttClient } = require('mqtt');
+
 class device_controller {
 
     //[GET] /list-device/
@@ -17,7 +19,7 @@ class device_controller {
                 if(req.query.page === undefined){
                  page = '1';
                 }else{
-                     page = req.query.page;
+                    page = req.query.page;
                 }
                 pool
                     .query(`select * from thietbi, loaithietbi 
@@ -144,7 +146,8 @@ class device_controller {
         } = (req.body);
         //res.json(req.body);
         pool
-            .query(`UPDATE thietbi SET tenthietbi = $1, idloai = $2, taikhoan =$3, trangthai =$4  WHERE idthietbi = $5`, [tenthietbi, idloai, taikhoan, trangthai, id])
+            .query(`UPDATE thietbi SET tenthietbi = $1, idloai = $2, taikhoan =$3, trangthai =$4  
+            WHERE idthietbi = $5`, [tenthietbi, idloai, taikhoan, trangthai, id])
             .then(() => {
                 res.render('editInfoDevice', {
                     message: "\"sửa thành công\""
@@ -283,13 +286,7 @@ class device_controller {
                     setInterval(() => {
                         client.publish(user.username, message);
                         console.log('Message sent: ', message);
-                    }, 5000);
-                    if( client.disconnected){
-                        console.log('ok');
-                    }else{
-                        console.log('ko');
-                    }
-                   
+                    }, 5000);                   
                 });
                 // const message = 'Thêm thiết bị thành công';
                 // res.render('addDevice', {message})
@@ -299,9 +296,6 @@ class device_controller {
         }else{
             res.render('addDevice', {message: "\"thêm thất bại\""})
         }
-        
-
-
     }
  
     // [DELETE] /list-device/delete/:id
@@ -321,13 +315,7 @@ class device_controller {
         }
     }
 
-    // history(req, res, next){
-    //     res.render('publishLog');
-    // }
-
-
-
-
+    // [GET] /list-device/history/:id
     // history create by thang-dev
     historydata(req, res, next) {
         if (req.session.idnguoidung === undefined) {
@@ -343,7 +331,8 @@ class device_controller {
                             date_part('second',thoigiangui) as giay,
                             chitiet from dulieu
                 where
-                idthietbi = $1`, [req.params.id])
+                idthietbi = $1`, [req.params.id]
+            )
             .then(result => {
                 const dulieu = result.rows;
                 // res.json({dulieu});
@@ -354,27 +343,73 @@ class device_controller {
         }
     }
 
+    // [POST] /list-device/login
+    // login(req, res, next){
+    //     const account = Object.values(req.body);
+    //     account.unshift(req.params.id);
+    //     pool
+    //         .query(`select * from thietbi where 
+    //         idthietbi = $1 and taikhoan = $2 and matkhau = $3`, account)
+    //         .then(result => {
+    //             try {
+    //                 const thietbi = result.rows[0];
+    //                 var username = thietbi.taikhoan;
+    //                 var password = thietbi.matkhau;
+    //                 var message = 'ma thiet bi la :' + req.params.id.toString();
+    //                 pub(username, password, message);
+    //             } catch (error) {
+    //                 res.render('list-device', {message: 'tài khoản hoặc mật khẩu không đúng'})
+    //             }
+    //         })
+    //         .catch(next);
+    // }
 
-    connect(req, res, next){
-        const account = Object.values(req.body);
-        account.unshift(req.params.id);
+    // [PUT] /list-device/check
+    check(req, res, next){
+        const idthietbi = req.params.id;
         pool
-            .query(`select * from thietbi where 
-            idthietbi = $1 and taikhoan = $2 and matkhau = $3`, account)
+            .query(`select * from thietbi where idthietbi = $1`, [idthietbi])
             .then(result => {
-                try {
-                    const thietbi = result.rows[0];
-                    var username = thietbi.taikhoan;
-                    var password = thietbi.matkhau;
-                    var message = 'ma thiet bi la :' + req.params.id.toString();
-                    pub(username, password, message);
-                } catch (error) {
-                    res.render('list-device', {message: 'tài khoản hoặc mật khẩu không đúng'})
+                const thietbi = result.rows[0];
+                pool
+                const user = {
+                    username: thietbi.taikhoan,
+                    password: thietbi.matkhau
                 }
-
+                const client = mqtt.connect('mqtt://localhost:1234', user);
+                if(!thietbi.trangthai){
+                    client.on('connect', () => {
+                        var message = 'đã kết nối thiết bị ' + thietbi.tenthietbi;
+                        client.publish(user.username, message);
+                        console.log('Thông báo gửi: ', message);
+                    });
+                    pool
+                        .query(`UPDATE thietbi SET trangthai = false
+                        WHERE idthietbi = $1`, [thietbi.idthietbi])
+                        .then(result => {
+                            res.redirect('/list-device');
+                        })
+                        .catch(next);
+                }
+                else{
+                    client.on('connect', () => {
+                        var message = 'ngắt kết nối thiết bị ' + thietbi.tenthietbi;
+                        client.publish(user.username, message);
+                    });
+                    console.log('Thông báo gửi: ', message);
+                    client.end();
+                    pool
+                    .query(`UPDATE thietbi SET trangthai = true
+                    WHERE idthietbi = $1`, [thietbi.idthietbi])
+                    .then(result => {
+                        res.redirect('/list-device');
+                    })
+                    .catch(next);
+                }
             })
             .catch(next);
     }
+
 }
 
 module.exports = new device_controller;

@@ -10,7 +10,7 @@ class catogory_controller {
         else{
             var page;
             if(req.query.page === undefined){
-                page = 1;
+                page = '1';
             }
             else{
                     page = req.query.page;

@@ -13,7 +13,7 @@ class unit_controller {
             const quyen = req.session.quyen;
             if(req.session.quyen == 'nv'){
                 if(req.query.page === undefined){
-                    page = 1;
+                    page = '1';
                 }
                 else{
                     page = req.query.page;
@@ -37,7 +37,7 @@ class unit_controller {
             }
             else{
                 if(req.query.page === undefined){
-                    page = 1;
+                    page = '1';
                 }
                 else{
                     page = req.query.page;

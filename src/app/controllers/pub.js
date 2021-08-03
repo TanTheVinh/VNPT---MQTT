@@ -14,6 +14,7 @@ pool
                 username: element.taikhoan,
                 password: element.matkhau
             }
+            // console.log(user);
             const client = mqtt.connect('mqtt://localhost:1234', user);
             // <--
             client.on('connect', () => {
@@ -21,7 +22,7 @@ pool
                     // mqtt.client()
                     client.publish(user.username, message);
                     console.log('Message sent: ', message);
-                }, 5000);
+                }, 10000);
             });
         });
     })
