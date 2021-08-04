@@ -5,23 +5,26 @@ const pool = require('../../config/db/database');
 // const topic = 'theVinhTest';
 
 pool
-    .query(`select * from thietbi where trangthai = true`)
+    .query(`select * from thietbi where idthietbi = 1`)
     .then(result => {
         const thietbi = result.rows;
         thietbi.forEach(element => {
-            const message = 'Hello world!';
+            
             const user = {
                 username: element.taikhoan,
                 password: element.matkhau
+
             }
+            const message = 'Hello '+ user.username;
             // console.log(user);
             const client = mqtt.connect('mqtt://localhost:1234', user);
+            //client.end();
             // <--
             client.on('connect', () => {
                 setInterval(() => {
                     // mqtt.client()
                     client.publish(user.username, message);
-                    console.log('Message sent: ', message);
+                    console.log('thiết bị gửi: ', message);
                 }, 10000);
             });
         });

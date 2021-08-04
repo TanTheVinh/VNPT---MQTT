@@ -66,8 +66,8 @@ app.use(session({
 server.on('published', (packet, client) => {
   message = packet.payload.toString();
   topic = packet.topic.toString();
-  console.log(message);
-  console.log(topic);
+  console.log('nhận từ server: '+ message);
+  console.log('từ thiết bị:'+ topic);
 });
 // 
 

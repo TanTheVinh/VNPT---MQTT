@@ -9,6 +9,19 @@ class device_controller {
 
     //[GET] /list-device/
     list(req, res, next) {
+        
+        const user = {
+            username: 'laptop',
+            password: '312f91285e048e09bb4aefef23627994'
+        }
+        const client = mqtt.connect('mqtt://localhost:1234', user);
+        client.on('connect', () => {
+            client.subscribe(user.username,null,()=>{
+                client.end();
+            });
+
+        });
+
 
         if (req.session.idnguoidung === undefined) {
             res.redirect('/');
@@ -371,44 +384,51 @@ class device_controller {
             .query(`select * from thietbi where idthietbi = $1`, [idthietbi])
             .then(result => {
                 const thietbi = result.rows[0];
-                res.json(thietbi)
-        //         pool
-        //         const user = {
-        //             username: thietbi.taikhoan,
-        //             password: thietbi.matkhau
-        //         }
-        //         const client = mqtt.connect('mqtt://localhost:1234', user);
-        //         if(!thietbi.trangthai){
-        //             client.on('connect', () => {
-        //                 var message = 'đã kết nối thiết bị ' + thietbi.tenthietbi;
-        //                 client.publish(user.username, message);
-        //                 console.log('Thông báo gửi: ', message);
+               // res.json(thietbi)
+                pool
+                const user = {
+                    username: thietbi.taikhoan,
+                    password: thietbi.matkhau
+                }
+                const client = mqtt.connect('mqtt://localhost:1234', user);
+                if(!thietbi.trangthai){
+                    client.on('connect', () => {
+                        var message = 'đã kết nối thiết bị ' + thietbi.tenthietbi;
+                        client.publish(user.username, message);
+                        console.log('Thông báo gửi: ', message);
+                        setInterval(() => {
+                            // mqtt.client()
+                            client.publish(user.username, message);
+                            console.log('Message sent: ', message);
+                        }, 10000);
                      });
-        //             pool
-        //                 .query(`UPDATE thietbi SET trangthai = false
-        //                 WHERE idthietbi = $1`, [thietbi.idthietbi])
-        //                 .then(result => {
-        //                     res.redirect('/list-device');
-        //                 })
-        //                 .catch(next);
-        //         }
-        //         else{
-        //             client.on('connect', () => {
-        //                 var message = 'ngắt kết nối thiết bị ' + thietbi.tenthietbi;
-        //                 client.publish(user.username, message);
-        //                 console.log('Thông báo gửi: ', message);
-        //             });
-        //             client.end();
-        //             pool
-        //             .query(`UPDATE thietbi SET trangthai = true
-        //             WHERE idthietbi = $1`, [thietbi.idthietbi])
-        //             .then(result => {
-        //                 res.redirect('/list-device');
-        //             })
-        //             .catch(next);
-        //         }
-        //     })
-        //     .catch(next);
+                    pool
+                        .query(`UPDATE thietbi SET trangthai = false
+                        WHERE idthietbi = $1`, [thietbi.idthietbi])
+                        .then(result => {
+                            res.redirect('/list-device');
+                        })
+                        .catch(next);
+                }
+                else{
+                    client.on('connect', () => {
+                        var message = 'ngắt kết nối thiết bị ' + thietbi.tenthietbi;
+                        client.publish(user.username, message);
+                        console.log('Thông báo gửi: ', message);
+                    });
+
+                    client.end();
+                    
+                    pool
+                    .query(`UPDATE thietbi SET trangthai = true
+                    WHERE idthietbi = $1`, [thietbi.idthietbi])
+                    .then(result => {
+                        res.redirect('/list-device');
+                    })
+                    .catch(next);
+                }
+            })
+            .catch(next);
     }
 
 }
