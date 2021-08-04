@@ -1,35 +1,41 @@
-//MQTT broker
-const mosca = require('mosca');
-const { Pool, Client } = require('pg');
-const settings = {port: 1234};
-const broker = new mosca.Server(settings);
-const pool = require('../../config/db/database');
+// //MQTT broker
+// const mosca = require('mosca');
+// const { Pool, Client } = require('pg');
+// // const settings = {port: 1234};
+// // const broker = new mosca.Server(settings);
+// const broker = require('./server');
+// const pool = require('../../config/db/database');
 
-pool.connect(() => {
-    console.log('connected');
-});
+// pool.connect(() => {
+//     console.log('connected');
+// });
 
-broker.on('ready', () => {
-    console.log('Broker is ready!');
-});
+// broker.on('ready', () => {
+//     console.log('Broker is ready!');
+//     // broker.authenticate = function (client, username, password, callback) {
+//     //     callback(null, (username === 'mqtt' && password.toString('ascii') === '46ee7eb02d4c3b504ce79c054464bfd2'));
+//     //     console.log(client);
+//     // }
+// });
 
-broker.on('published', (packet) => {
-    message = packet.payload.toString();
-    console.log(message);
-    // var day = new Date().getDate();
-    // var month = new Date().getMonth()+1;
-    // var year = new Date().getFullYear();
-    // var date = `${year}-${month}-${day}`;
-    // if(message.slice(0, 1) != '{' && message.slice(0, 4) != 'mqtt'){
-    //     pool
-    //         .query(`INSERT INTO public.dulieu(
-    //             idthietbi, thoigiangui, chitiet)
-    //             VALUES (1, $1, $2);`, [date, message]) 
-    //         .then(result => {
-    //             console.log(result.rows[0]);
-    //         })
-    //         .catch(err => {
-    //             console.log(err.stack);
-    //         });
-    // }
-});
+// broker.on('published', (packet, client) => {
+//     message = packet.payload.toString();
+//     client = packet.topic.toString();
+//     console.log(message);
+//     console.log(client);
+    
+//     // if(message.slice(0, 1) == '{' && message.slice(0, 4) == 'mqtt' && client.slice(13, 16) == 'new'){
+//     //     clientid = message.slice(0, 15);
+//     // }
+// });
+
+// // broker.on('clientConnected', (client) => {
+// //     const arr = [client.id, 1, 1, 'mqtt', 'mqtt', '46ee7eb02d4c3b504ce79c054464bfd2'];
+// //     pool
+// //         .query(`INSERT INTO thietbi(idthietbi, idloai, iddonvi, tenthietbi, taikhoan, matkhau, trangthai)
+// //             VALUES ($1, $2, $3, $4, $5, $6, true);`, arr)
+// //         .then(result =>{
+// //             console.log('Thêm thiết bị thành công');
+// //         })
+// //         .catch();
+// // })
