@@ -113,21 +113,23 @@
                     `+ btnS +`
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                       aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Gửi lệnh</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body">
-                            <input type="text" name="mesg" id="mesg">
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Thoát</button>
-                            <button type="button" class="btn btn-success">Gửi</button>
+                      <form name="lenh" method="///" action="" id="">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Gửi lệnh</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <input type="text" name="mesg" id="mesg">
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Thoát</button>
+                              <button type="submit" class="btn btn-success">Gửi</button>
+                            </div>
                           </div>
                         </div>
-                      </div>
+                      </form>
                     </div>
                     <a class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Xem chi tiết"
                       href="/list-device/detail/${post.idthietbi}" method="GET">
