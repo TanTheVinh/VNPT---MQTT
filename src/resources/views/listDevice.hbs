@@ -113,7 +113,7 @@
                     `+ btnS +`
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                       aria-hidden="true">
-                      <form name="lenh" method="///" action="" id="">
+                      <form name="lenh" method="post" action="///list-device" id="${post.idthietbi}${post.idthietbi}${post.idthietbi}">
                         <div class="modal-dialog">
                           <div class="modal-content">
                             <div class="modal-header">
@@ -121,11 +121,11 @@
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                              <input type="text" name="mesg" id="mesg">
+                              <input type="text" name="mesg" id="">
                             </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Thoát</button>
-                              <button type="submit" class="btn btn-success">Gửi</button>
+                              <button type="button" class="btn btn-success" onclick="cfms(${post.idthietbi}${post.idthietbi}${post.idthietbi})">Gửi</button>
                             </div>
                           </div>
                         </div>
@@ -235,6 +235,12 @@
               function cfmi(id){
                 let cfi = confirm("Xác nhận đăng nhập");
                 if (cfi == true) {
+                    id.submit();
+                  }
+              }
+              function cfms(id){
+                let cfs = confirm("Xác nhận gửi lệnh");
+                if (cfs == true) {
                     id.submit();
                   }
               }
