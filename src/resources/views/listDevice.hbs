@@ -57,9 +57,9 @@
                 App();
               }
               let np = document.getElementById('p').innerHTML;
-              console.log(np);
+              
               function App() {
-                console.log('test');
+                
                 //common variables
                 let defaultIndex = 1,
                   defaultPost = 10,
@@ -224,15 +224,16 @@
             </script>
             <script>
               function cfmo(id){
-                let cf = confirm("Xác nhận đăng xuất");
-                if (cf == true) {
-                    document.getElementById(id).submit();
+                let cfo = confirm("Xác nhận đăng xuất");
+                if (cfo == true) {
+                    //document.getElementById(id).submit();
+                    id.submit();
                   }
               }
               function cfmi(id){
-                let cf = confirm("Xác nhận đăng nhập");
-                if (cf == true) {
-                    document.getElementById(id).submit();
+                let cfi = confirm("Xác nhận đăng nhập");
+                if (cfi == true) {
+                    id.submit();
                   }
               }
             </script>
