@@ -57,14 +57,14 @@ class site_controller {
                             soluong.ngatketnoi = result.rows[0].ngatketnoi;
                             pool
                                 .query(
-                                    `select date_part('day',thoigiangui) as ngay, 
-                                    date_part('month',thoigiangui) as thang, 
-                                    date_part('year',thoigiangui) as nam 
-                                    from dulieu order by thoigiangui ASC;`
+                                    `select extract(month from thoigiangui) as month,
+                                    extract(year from thoigiangui) as year,
+                                    count(thoigiangui) as soluonglenh
+                                    from dulieu group by 1,2 order by extract(month from thoigiangui) ASC;`
                                 )
                                 .then(result => {
                                     const bieudo = result.rows;
-                                  //   res.json({soluong, bieudo});
+                                    //   res.json({soluong, bieudo});
                                     const quyen = req.session.quyen;
                                     res.render('index', { soluong, bieudo, quyen });
                                 })
