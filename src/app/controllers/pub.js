@@ -31,7 +31,9 @@ pool
                 client.publish(topic, message);
                 console.log('Thông báo gửi: ' + message);
                 client.end();
+
             }
+
             if(message == 'reconnect'){
                 message = 'Kết nối lại ' + element.tenthietbi;
                 client.publish(topic, message);
