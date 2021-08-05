@@ -57,9 +57,9 @@
                 App();
               }
               let np = document.getElementById('p').innerHTML;
-              console.log(np);
+              
               function App() {
-                console.log('test');
+                
                 //common variables
                 let defaultIndex = 1,
                   defaultPost = 10,
@@ -93,11 +93,11 @@
                     let btnTT = "";
                     let btnS = "";
                     if(tt == "\"true\""){
-                      btnTT = `<form id='${post.idthietbi}${post.idthietbi}' action='/list-device/check/${post.idthietbi}' method="post"><button type='button' class='btn btn-success' onclick='cfmo(${post.idthietbi}${post.idthietbi})'>Đang kết nối</button></form>`;
+                      btnTT = `<form id='${post.idthietbi}${post.idthietbi}' action='/list-device/check/${post.idthietbi}' method="post"><button type='button' class='btn btn-success' onclick='cfmo(${post.idthietbi}${post.idthietbi},${post.trangthai})'>Đang kết nối</button></form>`;
                       btnS = `<button type='button' class='btn btn-danger' data-toggle='tooltip' data-placement='top' title='Gửi lệnh' data-bs-toggle='modal' data-bs-target='#exampleModal'><i class='fa fa-inbox'></i></button>`;
                     }
                     else{
-                      btnTT = `<form id='${post.idthietbi}${post.idthietbi}' action='/list-device/check/${post.idthietbi}' method="post"><button type='button' class='btn btn-danger' onclick='cfmi(${post.idthietbi}${post.idthietbi})'>Ngắt kết nối</button></form>`;
+                      btnTT = `<form id='${post.idthietbi}${post.idthietbi}' action='/list-device/check/${post.idthietbi}' method="post"><button type='button' class='btn btn-danger' onclick='cfmi(${post.idthietbi}${post.idthietbi},${post.trangthai})'>Ngắt kết nối</button></form>`;
                       btnS = `<button type='button' disabled class='btn btn-danger' data-toggle='tooltip' data-placement='top' title='Gửi lệnh' data-bs-toggle='modal' data-bs-target='#exampleModal'><i class='fa fa-inbox'></i></button>`;
                     }
                     listWrapper.innerHTML += (
@@ -113,21 +113,23 @@
                     `+ btnS +`
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                       aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Gửi lệnh</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body">
-                            <input type="text" name="mesg" id="mesg">
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Thoát</button>
-                            <button type="button" class="btn btn-success">Gửi</button>
+                      <form name="lenh" method="post" action="/list-device/mesg/${post.idthietbi}">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Gửi lệnh</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <input type="text" name="mesg" id="">
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Thoát</button>
+                              <button type="submit" class="btn btn-success">Gửi</button>
+                            </div>
                           </div>
                         </div>
-                      </div>
+                      </form>
                     </div>
                     <a class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Xem chi tiết"
                       href="/list-device/detail/${post.idthietbi}" method="GET">
@@ -223,16 +225,22 @@
               }
             </script>
             <script>
-              function cfmo(id){
-                let cf = confirm("Xác nhận đăng xuất");
-                if (cf == true) {
-                    document.getElementById(id).submit();
+              function cfmo(id,stat){
+                let cfo = confirm("Xác nhận đăng xuất");
+                if (cfo == true) {
+                    const myObj = {tt: stat};
+                    const myJSON = JSON.stringify(myObj);
+                    localStorage.setItem("tttb", myJSON);
+                    id.submit();
                   }
               }
-              function cfmi(id){
-                let cf = confirm("Xác nhận đăng nhập");
-                if (cf == true) {
-                    document.getElementById(id).submit();
+              function cfmi(id,stat){
+                let cfi = confirm("Xác nhận đăng nhập");
+                if (cfi == true) {
+                    const myObj = {tt: stat};
+                    const myJSON = JSON.stringify(myObj);
+                    localStorage.setItem("tttb", myJSON);
+                    id.submit();
                   }
               }
             </script>

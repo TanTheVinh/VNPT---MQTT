@@ -376,47 +376,44 @@ class device_controller {
     // [PUT] /list-device/check
     check(req, res, next){
         const idthietbi = req.params.id;
-        res.send(idthietbi);
-        console.log(idthietbi)
-        // pool
-        //     .query(`select * from thietbi where idthietbi = $1`, [idthietbi])
-        //     .then(result => {
-        //         const thietbi = result.rows[0];
-        //         pool
-        //         const user = {
-        //             username: thietbi.taikhoan,
-        //             password: thietbi.matkhau
-        //         }
-        //         const client = mqtt.connect('mqtt://localhost:1234', user);
-        //         if(!thietbi.trangthai){
-        //             client.on('connect', () => {
-        //                 var message = 'reconnect';
-        //                 client.publish(user.username, message);
-        //             });
-        //             pool
-        //                 .query(`UPDATE thietbi SET trangthai = true
-        //                 WHERE idthietbi = $1`, [thietbi.idthietbi])
-        //                 .then(result => {
-        //                     res.redirect('/list-device');
-        //                 })
-        //                 .catch(next);
-        //         }
-        //         else{
-        //             client.on('connect', () => {
-        //                 var message = 'disconnect';
-        //                 client.publish(user.username, message);
-        //             });
-        //             pool
-        //                 .query(`UPDATE thietbi SET trangthai = false
-        //                 WHERE idthietbi = $1`, [thietbi.idthietbi])
-        //                 .then(result => {
-        //                     res.redirect('/list-device');
-        //                 })
-        //                 .catch(next);
-        //         }
-        //     })
-        //     .catch(next);
-    }
+        pool
+            .query(`select * from thietbi where idthietbi = $1`, [idthietbi])
+            .then(result => {
+                const thietbi = result.rows[0];
+                pool
+                const user = {
+                    username: thietbi.taikhoan,
+                    password: thietbi.matkhau
+                }
+                const client = mqtt.connect('mqtt://localhost:1234', user);
+                if(!thietbi.trangthai){
+                    client.on('connect', () => {
+                        var message = 'reconnect';
+                        client.publish(user.username, message);
+                    });
+                    pool
+                        .query(`UPDATE thietbi SET trangthai = true
+                        WHERE idthietbi = $1`, [thietbi.idthietbi])
+                        .then(result => {
+                            res.redirect('/list-device');
+                        })
+                        .catch(next);
+                }
+                else{
+                        var message = 'disconnect';
+                        client.publish(user.username, message);
+                
+                    pool
+                        .query(`UPDATE thietbi SET trangthai = false
+                        WHERE idthietbi = $1`, [thietbi.idthietbi])
+                        .then(result => {
+                            res.redirect('/list-device');
+                        })
+                        .catch(next);
+                }
+            })
+            .catch(next);
+     }
 
 }
 

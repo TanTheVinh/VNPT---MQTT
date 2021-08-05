@@ -38,13 +38,15 @@ pool
                 console.log('Thông báo gửi: ' + message);
                 client.reconnect();
             }
-            if(element.trangthai){
-                message = 'Chào thiết bị ' + element.tenthietbi;
-                setTimeout(() => {
-                    client.publish(topic, message);
-                    console.log('Thông báo gửi: ' + message);
-                }, 5000);
-            }
+                if(element.trangthai){
+                    message = 'Chào thiết bị ' + element.tenthietbi;
+                    setTimeout(() => {
+                        client.publish(topic, message);
+                        console.log('Thông báo gửi: ' + message);
+                    }, 5000);
+                }
+        
+
         });
     });
 })
