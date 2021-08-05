@@ -244,7 +244,7 @@ VALUES (1, 3, 'máy tính 1', 'mqtt_4a6s5c8s', 'maytinh01', '46ee7eb02d4c3b504ce
 INSERT INTO public.thietbi(idloai, iddonvi, tenthietbi, idthietbi, taikhoan, matkhau, trangthai)
 VALUES (1, 2, 'máy tính 2', 'mqtt_as56a2c1', 'maytinh02', '46ee7eb02d4c3b504ce79c054464bfd2', false);
 INSERT INTO public.thietbi(idloai, iddonvi, tenthietbi, idthietbi, taikhoan, matkhau, trangthai)
-VALUES (1, 1, 'máy tính 3', 'mqtt_2546ea3s', 'maytinh03', '46ee7eb02d4c3b504ce79c054464bfd2', true);
+VALUES (1, 1, 'máy tính 3', 'mqtt_2546ea3s', 'maytinh03', '46ee7eb02d4c3b504ce79c054464bfd2', false);
 INSERT INTO public.thietbi(idloai, iddonvi, tenthietbi, idthietbi, taikhoan, matkhau, trangthai)
 VALUES (1, 1, 'máy tính 4', 'mqtt_x5as6f2z', 'maytinh04', '46ee7eb02d4c3b504ce79c054464bfd2', true);
 INSERT INTO public.thietbi(idloai, iddonvi, tenthietbi, idthietbi, taikhoan, matkhau, trangthai)
