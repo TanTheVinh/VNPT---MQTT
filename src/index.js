@@ -19,6 +19,7 @@ const server = new mosca.Server(settings);
 const route = require('./routes/');
 const pool = require('./config/db/database');
 const { options } = require('./routes/site');
+const publish = require('./app/controllers/pub');
 
 //Connect database
 pool.connect(() => {
@@ -47,21 +48,12 @@ app.use(session({
 }));
 
 // test mosca
-// server.on('ready',  () => {
-//   console.log('Mosca server is up and running');
-//   pool
-//         .query(`select * from thietbi where trangthai = true`)
-//         .then(result => {
-//             const thietbi = result.rows[0];
-//             console.log(thietbi);
-//             server.authenticate = function (client, username, password, callback) {
-//                 let taikhoan = thietbi.taikhoan;
-//                 let matkhau = thietbi.matkhau;
-//                 callback(null, (username === taikhoan && password.toString('ascii') === matkhau));
-//             };
-//         })
-//         .catch();
-// });
+server.on('ready',  () => {
+  console.log('Mosca server is up and running');
+  // server.authenticate = function (client, username, password, callback) {
+  //     callback(null, (username === 'mqtt' && password.toString('ascii') === '46ee7eb02d4c3b504ce79c054464bfd2'));
+  // };
+});
 
 server.on('published', (packet, client) => {
   message = packet.payload.toString();

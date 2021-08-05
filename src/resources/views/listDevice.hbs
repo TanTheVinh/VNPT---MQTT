@@ -49,14 +49,17 @@
           </div>
           <div class="" >
             <script>
+              
               if (document.readyState == "loading") {
                 document.addEventListener('DOMContentLoaded', App);
+                
               } else {
                 App();
               }
               let np = document.getElementById('p').innerHTML;
               console.log(np);
               function App() {
+                console.log('test');
                 //common variables
                 let defaultIndex = 1,
                   defaultPost = 10,
@@ -214,6 +217,7 @@
                       },
                     {{/each}}
                   ];
+                  
                   return listDataArray;
                 }
               }
