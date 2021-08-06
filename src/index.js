@@ -9,11 +9,11 @@ const port = 3000;
 const session = require('express-session');
 
 // lib test
-const mosca = require('mosca');
-const settings = {
-  port: 1234
-};
-const server = new mosca.Server(settings);
+// const mosca = require('mosca');
+// const settings = {
+//   port: 1234
+// };
+// const server = new mosca.Server(settings);
 // 
 
 const route = require('./routes/');
@@ -48,19 +48,19 @@ app.use(session({
 }));
 
 // test mosca
-server.on('ready',  () => {
-  console.log('Mosca server is up and running');
-  // server.authenticate = function (client, username, password, callback) {
-  //     callback(null, (username === 'mqtt' && password.toString('ascii') === '46ee7eb02d4c3b504ce79c054464bfd2'));
-  // };
-});
+// server.on('ready',  () => {
+//   console.log('Mosca server is up and running');
+//   // server.authenticate = function (client, username, password, callback) {
+//   //     callback(null, (username === 'mqtt' && password.toString('ascii') === '46ee7eb02d4c3b504ce79c054464bfd2'));
+//   // };
+// });
 
-server.on('published', (packet, client) => {
-  message = packet.payload.toString();
-  topic = packet.topic.toString();
-  console.log('Nhận từ server: '+ message);
-  console.log('Từ thiết bị: '+ topic);
-});
+// server.on('published', (packet, client) => {
+//   message = packet.payload.toString();
+//   topic = packet.topic.toString();
+//   console.log('Nhận từ server: '+ message);
+//   console.log('Từ thiết bị: '+ topic);
+// });
 
 // 
 

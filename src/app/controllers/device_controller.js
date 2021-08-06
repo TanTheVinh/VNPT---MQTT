@@ -345,7 +345,7 @@ class device_controller {
             .then(result => {
                 const dulieu = result.rows;
                 // res.json({dulieu});
-                console.log({dulieu});
+                // console.log({dulieu});
                 res.render('publishLog', {dulieu});
             })
             .catch(next)
@@ -442,7 +442,6 @@ class device_controller {
         })
         .catch(next);
     }
-
 }
 
 module.exports = new device_controller;
