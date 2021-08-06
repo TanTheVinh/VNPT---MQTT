@@ -61,6 +61,7 @@ server.on('published', (packet, client) => {
   console.log('Nhận từ server: '+ message);
   console.log('Từ thiết bị: '+ topic);
 });
+
 // 
 
 app.set('views', path.join(__dirname, 'resources', 'views'));

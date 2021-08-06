@@ -21,69 +21,56 @@ pool
         client.on('connect', () => {
             client.subscribe(topic);
             var message = 'kết nối ' + element.tenthietbi;
-            if(temp == 1){
-                setInterval(() => {
-                    client.publish(topic, message);
-                    console.log('Thông báo gửi: ' + message);
-                    console.log(temp);
-                }, 5000);
-            }
-            if(temp == 0){
-                client.end();
-            }
+            setInterval(() => {
+                client.publish(topic, message);
+                console.log('Thông báo gửi: ' + message);
+                console.log(temp);
+            }, 5000);
         });
 
         client.on('message', (topic, message) => {
             message = message.toString();
             if(message == 'disconnect'){
-                temp = 0;
+                client.end();
             }
             if(message == 'reconnect'){
                 temp = 1;
             }
         })
 
-        // client.on('connect', () => {
-        //     client.subscribe(topic);
-        //     var message = 'kết nối ' + element.tenthietbi;
-        //     client.publish(topic, message);
-        //     console.log('Thông báo gửi: ', message);
-        // });
+        client.on('connect', () => {
+            client.subscribe(topic);
+            var message = 'kết nối ' + element.tenthietbi;
+            client.publish(topic, message);
+            console.log('Thông báo gửi: ', message);
+        });
+        
+        client.on('message', (topic, message) => {
+            message = message.toString();
+
+            if(message == 'disconnect'){
+                message = 'Ngắt kết nối ' + element.tenthietbi;
+                client.publish(topic, message);
+                console.log('Thông báo gửi: ' + message);
+                temp = false;
+                client.end();
+            }
+
+            if(temp == true){
+                message = 'Chào thiết bị ' + element.tenthietbi;
+                setTimeout(() => {
+                    client.publish(topic, message);
+                    console.log('Thông báo gửi: ' + message);
+                }, 5000);
+            }
             
-        // client.on('message', (topic, message) => {
-        //     message = message.toString();
-
-        //     if(message == 'disconnect'){
-        //         message = 'Ngắt kết nối ' + element.tenthietbi;
-        //         client.publish(topic, message);
-        //         console.log('Thông báo gửi: ' + message);
-        //         temp = false;
-        //     }
-
-        //     if(temp == true){
-        //         message = 'Chào thiết bị ' + element.tenthietbi;
-        //         setTimeout(() => {
-        //             client.publish(topic, message);
-        //             console.log('Thông báo gửi: ' + message);
-        //         }, 5000);
-        //     }
-            
-        //     if(message == 'reconnect'){
-        //         message = 'Kết nối lại ' + element.tenthietbi;
-        //         client.publish(topic, message);
-        //         console.log('Thông báo gửi: ' + message);
-        //         temp = true;
-        //     }
-        // });
-
-        // client.on('end', (topic, message) => {
-        //     if(message == 'reconnect'){
-        //         message = 'Kết nối lại ' + element.tenthietbi;
-        //         client.publish(topic, message);
-        //         console.log('Thông báo gửi: ' + message);
-        //         client.reconnect();
-        //     }
-        // })
+            if(message == 'reconnect'){
+                message = 'Kết nối lại ' + element.tenthietbi;
+                client.publish(topic, message);
+                console.log('Thông báo gửi: ' + message);
+                temp = true;
+            }
+        });
     });
 })
 .catch();
