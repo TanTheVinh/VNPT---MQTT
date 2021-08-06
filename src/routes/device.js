@@ -14,6 +14,7 @@ router.put('/change-password/:id', deviceController.updatepass);
 router.get('/history/:id', deviceController.historydata);
 // router.post('/login/:id', deviceController.login);
 router.post('/check/:id', deviceController.check);
+router.post('/mesg/:id', deviceController.sendmessage);
 
 router.get('/', deviceController.list);
 
