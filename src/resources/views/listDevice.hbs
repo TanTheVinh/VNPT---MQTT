@@ -57,15 +57,26 @@
                 App();
               }
               let np = document.getElementById('p').innerHTML;
-              
+              let pg=0;
               function App() {
                 
                 //common variables
                 let defaultIndex = 1,
                   defaultPost = 10,
-                  listData = listDataGenerator(),
+                  listData = [
+                    {{#each thietbi}} 
+                      {
+                        idthietbi: '{{this.idthietbi}}',
+                        idloai: '{{this.idloai}}',
+                        iddonvi: '{{this.iddonvi}}',
+                        tenthietbi: '{{this.tenthietbi}}',
+                        taikhoan: '{{this.taikhoan}}',
+                        trangthai: '"{{this.trangthai}}"',
+                        tenloai: '{{this.tenloai}}'
+                      },
+                    {{/each}}
+                  ],
                   pageIndex = Math.ceil({{count.count}} / defaultPost);
-
                 let wrapper = $('#tbl');
                 let pag = $('#pag');
 
@@ -84,7 +95,6 @@
 
                 showPosts(listData, 0, defaultPost);
                 pagination(defaultIndex, pageIndex);
-
                 function showPosts(listData, startPos, endPost) {
                   listWrapper.innerHTML = '';
 
@@ -154,7 +164,7 @@
 
                 function pagination(index, pageLen = pageIndex) {
                   pagiWrapper.innerHTML = '';
-                  let current = index,
+                  let current = np,
                     last = pageLen,
                     delta = 2,
                     left = current - delta,
@@ -182,7 +192,7 @@
 
                   for (let i = 0; i < rangeWithDots.length; i++) {
                     let page = document.createElement('a');
-                    page.setAttribute('href','/list-device?page='+(i+1));
+                    //page.setAttribute('onclick','simpleTest()');
                     if (rangeWithDots[i] == np) {
                       page.classList.add('page', 'current', 'btn', 'btn-info');
                     } else if (rangeWithDots[i] == '...') {
@@ -190,37 +200,17 @@
                       page.classList.add('page', 'btn', 'border-info');
                     } else {
                       page.classList.add('page', 'btn', 'border-info');
-                      page.addEventListener('click', changePageIndex);
+                      page.addEventListener('click', function(){
+                        let clickedItem = Number(event.target.innerText);  
+                        page.setAttribute('href','/list-device?page='+clickedItem);
+                        pagination(clickedItem);
+                        showPosts(listData, (current * defaultPost) - defaultPost, (current * defaultPost)); 
+                      });
                     }
                     page.innerHTML = rangeWithDots[i];
                     
                     pagiWrapper.append(page);
                   }
-
-                  showPosts(listData, (current * defaultPost) - defaultPost, (current * defaultPost));
-                }
-
-                function changePageIndex(event) {
-                  let clickedItem = Number(event.target.innerText);
-                  pagination(clickedItem);
-                }
-
-                function listDataGenerator(numPosts) {
-                  let listDataArray = [
-                    {{#each thietbi}} 
-                      {
-                        idthietbi: '{{this.idthietbi}}',
-                        idloai: '{{this.idloai}}',
-                        iddonvi: '{{this.iddonvi}}',
-                        tenthietbi: '{{this.tenthietbi}}',
-                        taikhoan: '{{this.taikhoan}}',
-                        trangthai: '"{{this.trangthai}}"',
-                        tenloai: '{{this.tenloai}}'
-                      },
-                    {{/each}}
-                  ];
-                  
-                  return listDataArray;
                 }
               }
             </script>

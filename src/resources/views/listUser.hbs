@@ -60,7 +60,18 @@
                 //common variables
                 let defaultIndex = 1,
                   defaultPost = 10,
-                  listData = listDataGenerator(),
+                  listData = [
+                    {{#each nguoidung}} 
+                      {
+                        idnguoidung: '{{this.idnguoidung}}',
+                        tennguoidung: '{{this.tennguoidung}}',
+                        iddonvi: '{{this.iddonvi}}',
+                        taikhoan: '{{this.taikhoan}}',
+                        quyen: '{{this.quyen}}',
+                        tendonvi: '{{this.tendonvi}}'
+                      },
+                    {{/each}}
+                  ],
                   pageIndex = Math.ceil({{count.count}} / defaultPost);
 
                 let wrapper = $('#tbl');
@@ -94,7 +105,7 @@
 
                 function pagination(index, pageLen = pageIndex) {
                   pagiWrapper.innerHTML = '';
-                  let current = index,
+                  let current = np,
                     last = pageLen,
                     delta = 2,
                     left = current - delta,
@@ -130,35 +141,18 @@
                       page.classList.add('page', 'btn', 'border-info');
                     } else {
                       page.classList.add('page', 'btn', 'border-info');
-                      page.addEventListener('click', changePageIndex);
+                      page.addEventListener('click', function(){
+                        let clickedItem = Number(event.target.innerText);  
+                        page.setAttribute('href','/list-user?page='+clickedItem);
+                        pagination(clickedItem);
+                        showPosts(listData, (current * defaultPost) - defaultPost, (current * defaultPost)); 
+                      });
                     }
                     page.innerHTML = rangeWithDots[i];
                     
                     pagiWrapper.append(page);
                   }
 
-                  showPosts(listData, (current * defaultPost) - defaultPost, (current * defaultPost));
-                }
-
-                function changePageIndex(event) {
-                  let clickedItem = Number(event.target.innerText);
-                  pagination(clickedItem);
-                }
-
-                function listDataGenerator(numPosts) {
-                  let listDataArray = [
-                    {{#each nguoidung}} 
-                      {
-                        idnguoidung: '{{this.idnguoidung}}',
-                        tennguoidung: '{{this.tennguoidung}}',
-                        iddonvi: '{{this.iddonvi}}',
-                        taikhoan: '{{this.taikhoan}}',
-                        quyen: '{{this.quyen}}',
-                        tendonvi: '{{this.tendonvi}}'
-                      },
-                    {{/each}}
-                  ];
-                  return listDataArray;
                 }
               }
             </script>

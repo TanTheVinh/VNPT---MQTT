@@ -346,7 +346,7 @@ class device_controller {
                                 date_part('second',thoigiangui) as giay,
                                 chitiet from dulieu
                     where
-                    idthietbi = $1 OFFSET (($2-1)*10) ROWS FETCH NEXT 10 ROWS ONLY`, [req.params.id, page]
+                    idthietbi = $1 OFFSET (($2-1)*1) ROWS FETCH NEXT 1 ROWS ONLY`, [req.params.id, page]
                 )
                 .then(result => {
                     const dulieu = result.rows;

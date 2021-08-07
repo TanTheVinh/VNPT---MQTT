@@ -53,7 +53,13 @@
                                 //common variables
                                 let defaultIndex = 1,
                                     defaultPost = 10,
-                                    listData = listDataGenerator(),
+                                    listData = [
+                                        {{#each donvi}} {
+                                            iddonvi: '{{this.iddonvi}}',
+                                            tendonvi: '{{this.tendonvi}}'
+                                        },
+                                        {{/each}}
+                                            ],
                                     pageIndex = Math.ceil({{count.count}} / defaultPost);
 
                                 let wrapper = $('#tbl');
@@ -87,7 +93,7 @@
 
                                 function pagination(index, pageLen = pageIndex) {
                                     pagiWrapper.innerHTML = '';
-                                    let current = index,
+                                    let current = np,
                                         last = pageLen,
                                         delta = 2,
                                         left = current - delta,
@@ -115,7 +121,6 @@
 
                                     for (let i = 0; i < rangeWithDots.length; i++) {
                                         let page = document.createElement('a');
-                                        page.setAttribute('href', '/list-unit?page=' + (i + 1));
                                         if (rangeWithDots[i] == np) {
                                             page.classList.add('page', 'current', 'btn', 'btn-info');
                                         } else if (rangeWithDots[i] == '...') {
@@ -123,32 +128,19 @@
                                             page.classList.add('page', 'btn', 'border-info');
                                         } else {
                                             page.classList.add('page', 'btn', 'border-info');
-                                            page.addEventListener('click', changePageIndex);
+                                            page.addEventListener('click', function(){
+                                                    let clickedItem = Number(event.target.innerText);  
+                                                    page.setAttribute('href','/list-unit?page='+clickedItem);
+                                                    pagination(clickedItem);
+                                                    showPosts(listData, (current * defaultPost) - defaultPost, (current * defaultPost)); 
+                                            });
                                         }
                                         page.innerHTML = rangeWithDots[i];
 
                                         pagiWrapper.append(page);
                                     }
-
-                                    showPosts(listData, (current * defaultPost) - defaultPost, (current * defaultPost));
                                 }
-
-                                function changePageIndex(event) {
-                                    let clickedItem = Number(event.target.innerText);
-                                    pagination(clickedItem);
-                                }
-
-                                function listDataGenerator(numPosts) {
-                                    let listDataArray = [
-                                        {{#each donvi}} {
-                                            iddonvi: '{{this.iddonvi}}',
-                                            tendonvi: '{{this.tendonvi}}'
-                                        },
-                                        {{/each}}
-                                            ];
-                                            return listDataArray;
-                                        }
-                                    }
+                            }
                         </script>
                         {{#if message}}
                             <p id="rpl" class="d-none">{{message}}</p>

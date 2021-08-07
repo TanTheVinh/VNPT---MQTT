@@ -54,7 +54,15 @@
                 //common variables
                 let defaultIndex = 1,
                   defaultPost = 10,
-                  listData = listDataGenerator(),
+                  listData = [
+                    {{#each loaithietbi}} 
+                      {
+                        idloai: '{{this.idloai}}',
+                        tenloai: '{{this.tenloai}}',
+                        mota: '{{this.mota}}'
+                      },
+                    {{/each}}
+                  ],
                   pageIndex = Math.ceil({{count.count}} / defaultPost);
 
                 let wrapper = $('#tbl');
@@ -87,7 +95,7 @@
 
                 function pagination(index, pageLen = pageIndex) {
                   pagiWrapper.innerHTML = '';
-                  let current = index,
+                  let current = np,
                     last = pageLen,
                     delta = 2,
                     left = current - delta,
@@ -115,40 +123,24 @@
 
                   for (let i = 0; i < rangeWithDots.length; i++) {
                     let page = document.createElement('a');
-                    page.setAttribute('href','/list-catogory?page='+(i+1));
-                    if (rangeWithDots[i] == np) {
+                    if (rangeWithDots[i] == current) {
                       page.classList.add('page', 'current', 'btn', 'btn-info');
                     } else if (rangeWithDots[i] == '...') {
                       page.addEventListener('click', e => e.preventDefault());
                       page.classList.add('page', 'btn', 'border-info');
                     } else {
                       page.classList.add('page', 'btn', 'border-info');
-                      page.addEventListener('click', changePageIndex);
+                      page.addEventListener('click', function(){
+                        let clickedItem = Number(event.target.innerText);  
+                        page.setAttribute('href','/list-catogory?page='+clickedItem);
+                        pagination(clickedItem);
+                        showPosts(listData, (current * defaultPost) - defaultPost, (current * defaultPost)); 
+                      });
                     }
                     page.innerHTML = rangeWithDots[i];
                     
                     pagiWrapper.append(page);
                   }
-
-                  showPosts(listData, (current * defaultPost) - defaultPost, (current * defaultPost));
-                }
-
-                function changePageIndex(event) {
-                  let clickedItem = Number(event.target.innerText);
-                  pagination(clickedItem);
-                }
-
-                function listDataGenerator(numPosts) {
-                  let listDataArray = [
-                    {{#each loaithietbi}} 
-                      {
-                        idloai: '{{this.idloai}}',
-                        tenloai: '{{this.tenloai}}',
-                        mota: '{{this.mota}}'
-                      },
-                    {{/each}}
-                  ];
-                  return listDataArray;
                 }
               }
             </script>
