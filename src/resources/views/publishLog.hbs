@@ -68,7 +68,7 @@
                 listData.slice(startPos, endPost).map(post => {
                   listWrapper.innerHTML += (
                     `<tr><td>${post.ngay}/${post.thang}/${post.nam}</td><td>${post.gio}:${post.phut}:${post.giay}</td><td>${post.chitiet}</td></tr>`
-                    );
+                  );
                 })
               }
 
@@ -102,7 +102,7 @@
 
                 for (let i = 0; i < rangeWithDots.length; i++) {
                   let page = document.createElement('a');
-                  page.setAttribute('href', 'list-device/history?page=' + (i + 1));
+                  page.setAttribute('href', '?page=' + (i + 1));
                   if (rangeWithDots[i] == np) {
                     page.classList.add('page', 'current', 'btn', 'btn-info');
                   } else if (rangeWithDots[i] == '...') {
