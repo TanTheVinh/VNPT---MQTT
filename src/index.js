@@ -60,6 +60,9 @@ app.use(session({
 //   topic = packet.topic.toString();
 //   console.log('Nhận từ server: '+ message);
 //   console.log('Từ thiết bị: '+ topic);
+//   app.use('/list-device/thongtin', (req, res) => {
+//     res.send(client);
+//   })
 // });
 
 // 

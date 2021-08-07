@@ -327,27 +327,39 @@ class device_controller {
     // [GET] /list-device/history/:id
     // history create by thang-dev
     historydata(req, res, next) {
+        var page;
         if (req.session.idnguoidung === undefined) {
             res.redirect('/');
         } else {
             const dulieu = {};
+            if(req.query.page === undefined){
+                page = '1';
+                }else{
+                page = req.query.page;
+                }
             pool
-            .query(`select  date_part('year',thoigiangui) as nam,
-                            date_part('month',thoigiangui) as thang,
-                            date_part('day',thoigiangui) as ngay,
-                            date_part('hour',thoigiangui) as gio,
-                            date_part('minute',thoigiangui) as phut,
-                            date_part('second',thoigiangui) as giay,
-                            chitiet from dulieu
-                where
-                idthietbi = $1`, [req.params.id]
-            )
-            .then(result => {
-                const dulieu = result.rows;
-                // res.json({dulieu});
-                // console.log({dulieu});
-                res.render('publishLog', {dulieu});
-            })
+                .query(`select  date_part('year',thoigiangui) as nam,
+                                date_part('month',thoigiangui) as thang,
+                                date_part('day',thoigiangui) as ngay,
+                                date_part('hour',thoigiangui) as gio,
+                                date_part('minute',thoigiangui) as phut,
+                                date_part('second',thoigiangui) as giay,
+                                chitiet from dulieu
+                    where
+                    idthietbi = $1 OFFSET (($2-1)*10) ROWS FETCH NEXT 10 ROWS ONLY`, [req.params.id, page]
+                )
+                .then(result => {
+                    const dulieu = result.rows;
+                    pool
+                        .query(`select count(*) from dulieu where idthietbi = $1`, [req.params.id])
+                            .then(result => {
+                                const count = result.rows[0];
+                                // console.log({ dulieu, count, page });
+                                //res.json({ dulieu, count, page });
+                                res.render('publishLog', {dulieu, count, page});
+                            })
+                            .catch(next);
+                })
             .catch(next)
         }
     }
