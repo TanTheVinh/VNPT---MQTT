@@ -19,7 +19,7 @@ const session = require('express-session');
 const route = require('./routes/');
 const pool = require('./config/db/database');
 const { options } = require('./routes/site');
-const publish = require('./app/controllers/pub');
+//const publish = require('./app/controllers/pub');
 
 //Connect database
 pool.connect(() => {

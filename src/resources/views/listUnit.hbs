@@ -12,9 +12,7 @@
                 <div class="white-box">
                     <a href="/list-unit/add/" class="btn btn-success">
                         Thêm đơn vị
-                    </a>
-                    <span id="p" class="d-none">{{page}}</span>
-                    
+                    </a>      
                     <div class="table-responsive">
                         <table id="tbl" class="table text-nowrap text-center">
                             <thead>
@@ -38,7 +36,6 @@
                                 let r = confirm('Xác nhận xóa đơn vị');
                                 if (r == true) {
                                     document.getElementById(id).submit();
-                                    //alert(id);
                                 }
                             }
                         </script>
@@ -48,10 +45,8 @@
                             } else {
                                 App();
                             }
-                            let np = document.getElementById('p').innerHTML;
                             function App() {
-                                //common variables
-                                let defaultIndex = 1,
+                                let defaultIndex = {{page}},
                                     defaultPost = 10,
                                     listData = [
                                         {{#each donvi}} {
@@ -93,7 +88,7 @@
 
                                 function pagination(index, pageLen = pageIndex) {
                                     pagiWrapper.innerHTML = '';
-                                    let current = np,
+                                    let current = index,
                                         last = pageLen,
                                         delta = 2,
                                         left = current - delta,
@@ -121,7 +116,7 @@
 
                                     for (let i = 0; i < rangeWithDots.length; i++) {
                                         let page = document.createElement('a');
-                                        if (rangeWithDots[i] == np) {
+                                        if (rangeWithDots[i] == current) {
                                             page.classList.add('page', 'current', 'btn', 'btn-info');
                                         } else if (rangeWithDots[i] == '...') {
                                             page.addEventListener('click', e => e.preventDefault());

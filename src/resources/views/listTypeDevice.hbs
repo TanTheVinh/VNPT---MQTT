@@ -13,7 +13,6 @@
           <a href="/list-catogory/add" class="btn btn-success">
             Thêm loại thiết bị
           </a>
-          <span id="p" class="d-none">{{page}}</span>
           <div class="table-responsive">
             <table id="tbl" class="table text-nowrap text-center">
               <thead>
@@ -36,9 +35,7 @@
               function myFunction(id) {
                 let r = confirm('Xác nhận xóa loại thiết bị');
                 if (r == true) {
-                  //alert("delete" + id);
                   document.getElementById(id).submit();
-                  //alert(id);
                 }
               }
             </script>
@@ -49,10 +46,8 @@
               } else {
                 App();
               }
-              let np = document.getElementById('p').innerHTML;
               function App() {
-                //common variables
-                let defaultIndex = 1,
+                let defaultIndex = {{page}},
                   defaultPost = 10,
                   listData = [
                     {{#each loaithietbi}} 
@@ -95,7 +90,7 @@
 
                 function pagination(index, pageLen = pageIndex) {
                   pagiWrapper.innerHTML = '';
-                  let current = np,
+                  let current = index,
                     last = pageLen,
                     delta = 2,
                     left = current - delta,

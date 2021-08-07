@@ -35,11 +35,11 @@
             } else {
               App();
             }
-            let np = document.getElementById('p').innerHTML;
+
             function App() {
               //common variables
-              let defaultIndex = 1,
-                defaultPost = 1,
+              let defaultIndex = {{page}},
+                defaultPost = 10,
                 listData = [{{#each dulieu}} {
                     nam: '{{this.nam}}',
                     thang: '{{this.thang}}',
@@ -83,7 +83,7 @@
 
               function pagination(index, pageLen = pageIndex) {
                 pagiWrapper.innerHTML = '';
-                let current = np,
+                let current = index,
                   last = pageLen,
                   delta = 2,
                   left = current - delta,
@@ -130,7 +130,7 @@
                   pagiWrapper.append(page);
                 }
               }
-                }
+            }
           </script>
         </div>
       </div>

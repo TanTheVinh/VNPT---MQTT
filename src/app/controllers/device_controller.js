@@ -2,7 +2,7 @@ const pool = require("../../config/db/database");
 const session = require('express-session');
 const { render } = require("node-sass");
 const mqtt = require('mqtt');
-const connectmqtt = require('./pub');
+//const connectmqtt = require('./pub');
 const { MqttClient } = require('mqtt');
 
 class device_controller {
@@ -346,7 +346,7 @@ class device_controller {
                                 date_part('second',thoigiangui) as giay,
                                 chitiet from dulieu
                     where
-                    idthietbi = $1 OFFSET (($2-1)*1) ROWS FETCH NEXT 1 ROWS ONLY`, [req.params.id, page]
+                    idthietbi = $1 OFFSET (($2-1)*10) ROWS FETCH NEXT 10 ROWS ONLY`, [req.params.id, page]
                 )
                 .then(result => {
                     const dulieu = result.rows;
@@ -354,7 +354,7 @@ class device_controller {
                         .query(`select count(*) from dulieu where idthietbi = $1`, [req.params.id])
                             .then(result => {
                                 const count = result.rows[0];
-                                // console.log({ dulieu, count, page });
+                                console.log({ dulieu, count, page });
                                 //res.json({ dulieu, count, page });
                                 res.render('publishLog', {dulieu, count, page});
                             })
@@ -420,7 +420,7 @@ class device_controller {
                     });
                     pool
                         .query(`UPDATE thietbi SET trangthai = false
-                            WHERE idthietbi = $1`, [thietbi.idthietbi])
+                        WHERE idthietbi = $1`, [thietbi.idthietbi])
                         .then(result => {
                             res.redirect('/list-device');
                         })
@@ -433,27 +433,9 @@ class device_controller {
 
     sendmessage(req, res, next){
         res.json(req.body);
-        message = req.body.mesg;
-        idthietbi = req.params.id;
-        idnguoidung = req.session.idnguoidung;
-        // console.log(message);
-        pool
-        .query(`select * from thietbi where idthietbi = $1`, [idthietbi])
-        .then(result => {
-            const thietbi = result.rows[0];
-            const user = {
-                username: thietbi.taikhoan,
-                password: thietbi.matkhau
-            }
-            const client = mqtt.connect('mqtt://localhost:1234', user);
-            client.on('connect', () => {
-                client.publish(user.username, message);
-                console.log(message);
-                client.end();
-            });
-        })
-        .catch(next);
+        console.log(req);
     }
+
 }
 
 module.exports = new device_controller;

@@ -13,8 +13,6 @@
           <a href="/list-device/add" class="btn btn-success">
             Thêm thiết bị
           </a>
-          <span id="p" class="d-none">{{page}}</span>
-          <span id="c" class="d-none">{{count.count}}</span>
           <div class="table-responsive">
             <table id="tbl" class="table text-nowrap text-center">
               <thead>
@@ -27,15 +25,10 @@
                 </tr>
               </thead>
               <script>
-                function myfunc(){
-                  $('#tk').val('');
-                  $('#mk').val('');
-                }
                 function myFunction(id) {
                 let r = confirm('Xác nhận xóa thiết bị');
                 if (r == true) {
                   document.getElementById(id).submit();
-                  //alert(id);
                 }
               }
               </script>
@@ -56,12 +49,9 @@
               } else {
                 App();
               }
-              let np = document.getElementById('p').innerHTML;
               let pg=0;
               function App() {
-                
-                //common variables
-                let defaultIndex = 1,
+                let defaultIndex = {{page}},
                   defaultPost = 10,
                   listData = [
                     {{#each thietbi}} 
@@ -164,7 +154,7 @@
 
                 function pagination(index, pageLen = pageIndex) {
                   pagiWrapper.innerHTML = '';
-                  let current = np,
+                  let current = index,
                     last = pageLen,
                     delta = 2,
                     left = current - delta,
@@ -192,8 +182,7 @@
 
                   for (let i = 0; i < rangeWithDots.length; i++) {
                     let page = document.createElement('a');
-                    //page.setAttribute('onclick','simpleTest()');
-                    if (rangeWithDots[i] == np) {
+                    if (rangeWithDots[i] == current) {
                       page.classList.add('page', 'current', 'btn', 'btn-info');
                     } else if (rangeWithDots[i] == '...') {
                       page.addEventListener('click', e => e.preventDefault());

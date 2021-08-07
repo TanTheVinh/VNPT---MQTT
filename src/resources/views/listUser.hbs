@@ -13,7 +13,6 @@
           <a href="/list-user/add" class="btn btn-success">
             Thêm người dùng
           </a>
-          <span id="p" class="d-none">{{page}}</span>
           <div class="table-responsive">
             <table id="tbl" class="table text-nowrap text-center">
               <thead>
@@ -54,11 +53,9 @@
               } else {
                 App();
               }
-              let np = document.getElementById('p').innerHTML;
-              console.log(np);
               function App() {
                 //common variables
-                let defaultIndex = 1,
+                let defaultIndex = {{page}},
                   defaultPost = 10,
                   listData = [
                     {{#each nguoidung}} 
@@ -105,7 +102,7 @@
 
                 function pagination(index, pageLen = pageIndex) {
                   pagiWrapper.innerHTML = '';
-                  let current = np,
+                  let current = index,
                     last = pageLen,
                     delta = 2,
                     left = current - delta,
@@ -134,7 +131,7 @@
                   for (let i = 0; i < rangeWithDots.length; i++) {
                     let page = document.createElement('a');
                     page.setAttribute('href','/list-user?page='+(i+1));
-                    if (rangeWithDots[i] == np) {
+                    if (rangeWithDots[i] == current) {
                       page.classList.add('page', 'current', 'btn', 'btn-info');
                     } else if (rangeWithDots[i] == '...') {
                       page.addEventListener('click', e => e.preventDefault());
