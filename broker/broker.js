@@ -30,40 +30,7 @@ broker.on('published', (packet, client)=>{
         clientid = client.id;
         // console.log(client);
     }
-
-    //them thiet bi
-    // if(message.slice(0, 2) == '( '){
-    //     var space = message.split(' ').length - 1;//so luong dau cach
-    //     var length = message.length; //so luong ky tu
-    //     var temp; //vi tri dau cach
-    //     var arr = []; //mang
-    //     var cut;//chuoi trc dau cach
-    //     for (let i = 0; i < space; i++) {
-    //         temp = message.indexOf(' ');
-    //         cut = message.substring(0, temp);
-    //         if(cut != '('){
-    //         arr.push(cut);
-    //         }
-    //         message = message.slice(temp + 1, length);
-    //     }
-    //     pool
-    //         .query(`select * from thietbi where idthietbi = $1`, [arr[0]])
-    //         .then(result => {
-    //             if(result.rows[0] == undefined){
-    //                 pool
-    //                     .query(`INSERT INTO public.thietbi(idthietbi, taikhoan, matkhau, iddonvi, idloai, tenthietbi, trangthai)
-    //                     VALUES ($1, $2, $3, $4, $5, $6, $7);`, arr)
-    //                     .then( result => {
-    //                         console.log('Thêm thiết bị thành công');
-    //                     })
-    //                     .catch();
-    //             }
-    //         })
-    //         .catch(() => {
-    //             console.log('lỗi 2');
-    //         })
-    // }
-    // 
+    
     if(message.slice(0, 2) != '{ ' && message.slice(0, 4) != 'mqtt' && clientid != undefined){
         date = new Date();
         day = date.getDay() + 1;

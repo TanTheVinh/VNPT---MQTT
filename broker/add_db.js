@@ -10,7 +10,7 @@ broker.on('ready', () =>{
 broker.on('published', (packet, client)=>{
     message = packet.payload.toString();
     topic = packet.topic.toString();
-    if(message.slice(0, 2) == '( '){
+    if(message.slice(0, 2) == '{ '){
         var space = message.split(' ').length - 1;//so luong dau cach
         var length = message.length; //so luong ky tu
         var temp; //vi tri dau cach
@@ -19,7 +19,7 @@ broker.on('published', (packet, client)=>{
         for (let i = 0; i < space; i++) {
             temp = message.indexOf(' ');
             cut = message.substring(0, temp);
-            if(cut != '('){
+            if(cut != '{'){
             arr.push(cut);
             }
             message = message.slice(temp + 1, length);
@@ -52,23 +52,14 @@ broker.on('published', (packet, client)=>{
         second = date.getSeconds();
         thoigiangui = `${month}-${day}-${year} ${hour}:${minute}:${second}`;
         pool
-            .query(`select * from thietbi where idthietbi = $1 and trangthai = true`, [clientid])
-            .then(result => {
-                if(result.rows[0] != undefined){
-                    pool
-                    .query(`INSERT INTO dulieu(idthietbi, thoigiangui, chitiet)
-                        VALUES ($1, $2, $3);`, [clientid, thoigiangui, message]
-                    )
-                    .then(result => {
-                        console.log(message);
-                    })
-                    .catch(err => {
-                        console.log(err);
-                    });
-                }
-            })
-            .catch(() => {
-
-            });
+        .query(`INSERT INTO dulieu(idthietbi, thoigiangui, chitiet)
+            VALUES ($1, $2, $3);`, [topic, thoigiangui, message]
+        )
+        .then(result => {
+            console.log(message);
+        })
+        .catch(err => {
+                console.log(err);
+        });
     }
 });

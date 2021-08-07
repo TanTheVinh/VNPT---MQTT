@@ -1,4 +1,5 @@
 // var client = mqtt.connect('mqtt://localhost:1234')
+var mqtt = require('mqtt');
 var topic;
 var message;
 var username = 'mqtt';
@@ -11,7 +12,7 @@ var thietbi;
 var arrTopic = [];
 var arrThietbi = [];
 var arrMessage = [];
-var count = 1000;
+var count = 5;
 
 for(let i = 0; i < count; i++){
     topic = 'mqtt_' + (i+1);
