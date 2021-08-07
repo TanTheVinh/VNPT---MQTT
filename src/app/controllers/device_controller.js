@@ -354,7 +354,7 @@ class device_controller {
                         .query(`select count(*) from dulieu where idthietbi = $1`, [req.params.id])
                             .then(result => {
                                 const count = result.rows[0];
-                                console.log({ dulieu, count, page });
+                                // console.log({ dulieu, count, page });
                                 //res.json({ dulieu, count, page });
                                 res.render('publishLog', {dulieu, count, page});
                             })
@@ -420,7 +420,7 @@ class device_controller {
                     });
                     pool
                         .query(`UPDATE thietbi SET trangthai = false
-                        WHERE idthietbi = $1`, [thietbi.idthietbi])
+                            WHERE idthietbi = $1`, [thietbi.idthietbi])
                         .then(result => {
                             res.redirect('/list-device');
                         })
@@ -433,9 +433,27 @@ class device_controller {
 
     sendmessage(req, res, next){
         res.json(req.body);
-        console.log(req);
+        message = req.body.mesg;
+        idthietbi = req.params.id;
+        idnguoidung = req.session.idnguoidung;
+        // console.log(message);
+        pool
+        .query(`select * from thietbi where idthietbi = $1`, [idthietbi])
+        .then(result => {
+            const thietbi = result.rows[0];
+            const user = {
+                username: thietbi.taikhoan,
+                password: thietbi.matkhau
+            }
+            const client = mqtt.connect('mqtt://localhost:1234', user);
+            client.on('connect', () => {
+                client.publish(user.username, message);
+                console.log(message);
+                client.end();
+            });
+        })
+        .catch(next);
     }
-
 }
 
 module.exports = new device_controller;

@@ -62,7 +62,7 @@ IDDONVI
 create table DULIEU (
    IDDULIEU             SERIAL,
    IDTHIETBI            VARCHAR(20)          not null,
-   THOIGIANGUI          DATE                 not null,
+   THOIGIANGUI          TIMESTAMP            not null,
    CHITIET              TEXT                 not null,
    constraint PK_DULIEU primary key (IDDULIEU)
 );
@@ -88,7 +88,7 @@ create table LICHSU (
    IDLICHSU             SERIAL,
    IDNGUOIDUNG          INT4                 not null,
    IDTHIETBI            VARCHAR(20)          not null,
-   THOIGIANTT           DATE                 not null,
+   THOIGIANTT           TIMESTAMP            not null,
    THAOTAC              VARCHAR(50)          not null,
    constraint PK_LICHSU primary key (IDLICHSU)
 );
