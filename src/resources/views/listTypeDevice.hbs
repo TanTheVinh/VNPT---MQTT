@@ -13,7 +13,6 @@
           <a href="/list-catogory/add" class="btn btn-success">
             Thêm loại thiết bị
           </a>
-          <span id="p" class="d-none">{{page}}</span>
           <div class="table-responsive">
             <table id="tbl" class="table text-nowrap text-center">
               <thead>
@@ -36,9 +35,7 @@
               function myFunction(id) {
                 let r = confirm('Xác nhận xóa loại thiết bị');
                 if (r == true) {
-                  //alert("delete" + id);
                   document.getElementById(id).submit();
-                  //alert(id);
                 }
               }
             </script>
@@ -49,12 +46,18 @@
               } else {
                 App();
               }
-              let np = document.getElementById('p').innerHTML;
               function App() {
-                //common variables
-                let defaultIndex = 1,
+                let defaultIndex = {{page}},
                   defaultPost = 10,
-                  listData = listDataGenerator(),
+                  listData = [
+                    {{#each loaithietbi}} 
+                      {
+                        idloai: '{{this.idloai}}',
+                        tenloai: '{{this.tenloai}}',
+                        mota: '{{this.mota}}'
+                      },
+                    {{/each}}
+                  ],
                   pageIndex = Math.ceil({{count.count}} / defaultPost);
 
                 let wrapper = $('#tbl');
@@ -115,40 +118,24 @@
 
                   for (let i = 0; i < rangeWithDots.length; i++) {
                     let page = document.createElement('a');
-                    page.setAttribute('href','/list-catogory?page='+(i+1));
-                    if (rangeWithDots[i] == np) {
+                    if (rangeWithDots[i] == current) {
                       page.classList.add('page', 'current', 'btn', 'btn-info');
                     } else if (rangeWithDots[i] == '...') {
                       page.addEventListener('click', e => e.preventDefault());
                       page.classList.add('page', 'btn', 'border-info');
                     } else {
                       page.classList.add('page', 'btn', 'border-info');
-                      page.addEventListener('click', changePageIndex);
+                      page.addEventListener('click', function(){
+                        let clickedItem = Number(event.target.innerText);  
+                        page.setAttribute('href','/list-catogory?page='+clickedItem);
+                        pagination(clickedItem);
+                        showPosts(listData, (current * defaultPost) - defaultPost, (current * defaultPost)); 
+                      });
                     }
                     page.innerHTML = rangeWithDots[i];
                     
                     pagiWrapper.append(page);
                   }
-
-                  showPosts(listData, (current * defaultPost) - defaultPost, (current * defaultPost));
-                }
-
-                function changePageIndex(event) {
-                  let clickedItem = Number(event.target.innerText);
-                  pagination(clickedItem);
-                }
-
-                function listDataGenerator(numPosts) {
-                  let listDataArray = [
-                    {{#each loaithietbi}} 
-                      {
-                        idloai: '{{this.idloai}}',
-                        tenloai: '{{this.tenloai}}',
-                        mota: '{{this.mota}}'
-                      },
-                    {{/each}}
-                  ];
-                  return listDataArray;
                 }
               }
             </script>
