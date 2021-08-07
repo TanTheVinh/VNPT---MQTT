@@ -390,6 +390,7 @@ class device_controller {
                     client.on('connect', () => {
                         var message = 'reconnect';
                         client.publish(user.username, message);
+                        client.end();
                     });
                     pool
                         .query(`UPDATE thietbi SET trangthai = true
@@ -400,9 +401,11 @@ class device_controller {
                         .catch(next);
                 }
                 else{
+                    client.on('connect', () => {
                         var message = 'disconnect';
                         client.publish(user.username, message);
-                
+                        client.end();
+                    });
                     pool
                         .query(`UPDATE thietbi SET trangthai = false
                         WHERE idthietbi = $1`, [thietbi.idthietbi])
@@ -411,9 +414,15 @@ class device_controller {
                         })
                         .catch(next);
                 }
+                // client.end();
             })
             .catch(next);
      }
+
+    sendmessage(req, res, next){
+        res.json(req.body);
+        console.log(req);
+    }
 
 }
 

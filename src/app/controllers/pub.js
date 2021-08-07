@@ -13,9 +13,40 @@ pool
             username: element.taikhoan,
             password: element.matkhau
         }
+        
         // console.log(user);
-        const client = mqtt.connect('mqtt://localhost:1234', user);
-        const topic = user.username;
+         const client = mqtt.connect('mqtt://localhost:1234', user);
+        // const topic = user.username;
+        var temp;
+        if(element.trangthai){
+            temp = true;
+        }
+        // client.on('connect', () => {
+        //     client.subscribe(topic);
+        //     var message = 'kết nối ' + element.tenthietbi;
+        //     if(temp == 1){
+        //         setInterval(() => {
+        //             client.publish(topic, message);
+        //             console.log('Thông báo gửi: ' + message);
+        //             console.log(temp);
+        //         }, 5000);
+        //     }
+        //     if(temp == 0){
+        //         client.end();
+        //     }
+        // });
+
+        // client.on('message', (topic, message) => {
+        //     message = message.toString();
+        //     if(message == 'disconnect'){
+        //         temp = 0;
+        //     }
+
+        //     if(message == 'reconnect'){
+        //         temp = 1;
+        //     }
+        // })
+
         client.on('connect', () => {
             client.subscribe(topic);
             var message = 'kết nối ' + element.tenthietbi;
@@ -25,31 +56,38 @@ pool
             
         client.on('message', (topic, message) => {
             message = message.toString();
-            console.log(message);
-            if(message == 'disconnect' || !element.trangthai){
+
+            if(message == 'disconnect'){
                 message = 'Ngắt kết nối ' + element.tenthietbi;
                 client.publish(topic, message);
                 console.log('Thông báo gửi: ' + message);
-                client.end();
-
+                temp = false;
             }
 
+            if(temp == true){
+                message = 'Chào thiết bị ' + element.tenthietbi;
+                setTimeout(() => {
+                    client.publish(topic, message);
+                    console.log('Thông báo gửi: ' + message);
+                }, 5000);
+            }
+            
+            if(message == 'reconnect'){
+                message = 'Kết nối lại ' + element.tenthietbi;
+                client.publish(topic, message);
+                console.log('Thông báo gửi: ' + message);
+                temp = true;
+            }
+        });
+
+        client.on('end', (topic, message) => {
             if(message == 'reconnect'){
                 message = 'Kết nối lại ' + element.tenthietbi;
                 client.publish(topic, message);
                 console.log('Thông báo gửi: ' + message);
                 client.reconnect();
             }
-                if(element.trangthai){
-                    message = 'Chào thiết bị ' + element.tenthietbi;
-                    setTimeout(() => {
-                        client.publish(topic, message);
-                        console.log('Thông báo gửi: ' + message);
-                    }, 5000);
-                }
-        
-
-        });
+        })
     });
 })
 .catch();
