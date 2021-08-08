@@ -6,17 +6,46 @@
         <button class="btn btn-success" type="button" onclick="reload()"><i class="fa fa-sync"></i></button>
         </h2>
       </div>
-      <form method="GET" action="/list-device/search" role="search" class="app-search col-sm-2">
+      <form method="GET" action="/list-device/search/{{idthietbi}}" role="search" class="app-search col-sm-2">
         <div class="input-group mb-3">
           <input id="date" type="date" class="form-control mt-0" aria-describedby="basic-addon2">
-            <a href="" id="basic-addon2" class="active input-group-text">
+            <button type="submit" id="basic-addon2" class="active input-group-text">
               <i class="fa fa-search"></i>
-            </a>
+            </button>
         </div>
       </form>
     </div>
   </div>
   <div class="container-fluid">
+    <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-12">
+                <div class="white-box analytics-info">
+                    <h3 class="box-title">Kết nối
+                    </h3>
+                    <ul class="list-inline two-part d-flex align-items-center mb-0">
+                        <li>
+                            <div id="sparklinedash"><canvas width="67" height="30"
+                                    style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
+                            </div>
+                        </li>
+                        <li class="ms-auto"><span class="counter text-success">{{soluong.dangketnoi}}</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="white-box analytics-info">
+                    <h3 class="box-title">Ngắt kết nối</h3>
+                    <ul class="list-inline two-part d-flex align-items-center mb-0">
+                        <li>
+                            <div id="sparklinedash2"><canvas width="67" height="30"
+                                    style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
+                            </div>
+                        </li>
+                        <li class="ms-auto"><span class="counter text-purple">{{soluong.ngatketnoi}}</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     <div class="row">
       <div class="col-sm-12">
         <div class="white-box">
