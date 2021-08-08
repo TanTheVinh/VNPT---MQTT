@@ -142,18 +142,35 @@ class device_controller {
             tenthietbi,
             idloai,
             taikhoan,
-            trangthai
+            trangthai, 
+            matkhaucu,
+            matkhaumoi
         } = (req.body);
         //res.json(req.body);
         pool
-            .query(`UPDATE thietbi SET tenthietbi = $1, idloai = $2, taikhoan =$3, trangthai =$4  
-            WHERE idthietbi = $5`, [tenthietbi, idloai, taikhoan, trangthai, id])
-            .then(() => {
-                res.render('editInfoDevice', {
-                    message: "\"sửa thành công\""
-                });
+            .query(`select * from thietbi  where idthietbi = $1 and matkhau = $2`, [id, matkhaucu])
+            .then((result) => {
+                const xacthuc = result.rows[0];
+                if(xacthuc == undefined){
+                    res.render('editInfoDevice', {
+                        message: "\"mật khẩu không đúng\""
+                    });
+                    
+                }else{
+                    pool
+                    .query(`UPDATE thietbi SET tenthietbi = $1, idloai = $2, taikhoan =$3, matkhau=$4, trangthai =$5  
+                    WHERE idthietbi = $6`, [tenthietbi, idloai, taikhoan,matkhaumoi, trangthai, id])
+                    .then(() => {
+                        res.render('editInfoDevice', {
+                            message: "\"sửa thành công\""
+                        });
+                    })
+                    .catch(next);
+                }
+
+
             })
-            .catch(next);
+
     }
 
     // [GET] /list-device/change-pass/:id
