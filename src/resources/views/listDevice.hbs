@@ -17,6 +17,7 @@
             <table id="tbl" class="table text-nowrap text-center">
               <thead>
                 <tr>
+                  <th class="border-top-0">Mã thiết bị</th>
                   <th class="border-top-0">Tên thiết bị</th>
                   <th class="border-top-0">Loại thiết bị</th>
                   <th class="border-top-0">Tài khoản</th>
@@ -28,13 +29,13 @@
                 function myFunction(id) {
                 let r = confirm('Xác nhận xóa thiết bị');
                 if (r == true) {
-                  document.getElementById(id).submit();
+                  id.submit();
                 }
               }
               </script>
               <tfoot>
                 <tr>
-                  <td colspan="4"></td>
+                  <td colspan="5"></td>
                   <td id="pag"></td>
                 </tr> 
               </tfoot>
@@ -103,6 +104,7 @@
                     listWrapper.innerHTML += (
                       `
                       <tr>
+                        <td>${post.idthietbi}</td>
                   <td>${post.tenthietbi}</td>
                   <td>${post.tenloai}</td>
                   <td>${post.taikhoan}</td>

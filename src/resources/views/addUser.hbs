@@ -71,8 +71,8 @@
                 <th scope="row">
                 </th>
                 <td>
-                  <button id="save-btn" type="submit" class="btn btn-success" disabled="disabled"><i
-                      class="fa fa-plus"></i>Thêm người dùng</button>
+                  <button disabled="disabled" id="save-btn" type="submit" class="btn btn-success"><i
+                      class="fa fa-plus" ></i>Thêm người dùng</button>
                   <button id="xoa" type="reset" class="btn btn-danger">
                     <i class="fa fa-eraser"></i>
                     Xoá
@@ -89,7 +89,9 @@
                     var pass = $('#password').val();
                     var confirmPass = $('#confirmPassword').val();
                     var saveButton = $("#save-btn");
-                    if (pass == confirmPass) {
+                    var tennguoidung = $('#tennguoidung').val();
+                    var taikhoan = $('#taikhoan').val();
+                    if (pass == confirmPass && pass != '' && tennguoidung != '' && taikhoan != '') {
                       saveButton.removeAttr('disabled');
                     } else {
                       saveButton.attr('disabled', 'disabled');

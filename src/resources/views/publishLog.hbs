@@ -23,21 +23,22 @@
               </thead>
               <tfoot>
                 <tr>
-                  <td colspan="2"></td>
-                  <td id="pag"></td>
+                  <td></td>
+                  <td colspan="2" id="pag"></td>
                 </tr>
               </tfoot>
             </table>
           </div>
           <script>
+            window.setInterval(App, 5000);
             if (document.readyState == "loading") {
               document.addEventListener('DOMContentLoaded', App);
             } else {
               App();
             }
-
             function App() {
               //common variables
+              console.log('test');
               let defaultIndex = {{page}},
                 defaultPost = 10,
                 listData = [{{#each dulieu}} {
@@ -54,6 +55,7 @@
 
               let wrapper = $('#tbl');
               let pag = $('#pag');
+              pag.html('');
 
               let listDiv = document.createElement('tbody');
               listDiv.classList.add('listStyle01');
@@ -63,7 +65,7 @@
               let listWrapper = document.querySelector('.listStyle01');
 
               let pagiDiv = document.createElement('div');
-              pagiDiv.classList.add('pagination', 'm-3', 'justify-content-center');
+              pagiDiv.classList.add('pagination', 'm-3', 'justify-content-end');
               pag.append(pagiDiv);
 
               let pagiWrapper = document.querySelector('.pagination');
