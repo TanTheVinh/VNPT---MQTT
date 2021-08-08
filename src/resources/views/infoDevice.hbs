@@ -9,7 +9,7 @@
   <div class="container-fluid">
     <div class="col">
       <div class="row mx-2 justify-content-around">
-        <div class="col-md-12 border rounded white-box">
+        <div class="col-sm-12 border rounded white-box">
           <h2 id="hello">Thông tin thiết bị:</h2>
           <hr />
           <table class="table">
@@ -61,23 +61,6 @@
               </td>
             </tr>
           </table>
-        </div>
-        <div class="d-none col-md-3 border rounded p-4 white-box">
-          <h2>Lịch sử hoạt động</h2>
-          <hr />
-          <div class="overflow-auto" style="height: 500px">
-            <ul class="p-0" style="list-style-type: none">
-              {{#each thietbi.lichsu}}
-              <li class="border rounded p-2 mb-2">
-                <span>
-                  Thời gian tương tác: {{this.thoigian}}
-                  <br>
-                  Thao tác: {{this.thaotac}}
-                </span>
-              </li>
-              {{/each}}
-            </ul>
-          </div>
         </div>
       </div>
     </div>

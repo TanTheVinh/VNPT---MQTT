@@ -23,7 +23,7 @@ var password = '46ee7eb02d4c3b504ce79c054464bfd2';
 var arrTopic = [];
 var arrThietbi = [];
 var arrMessage = [];
-var count = 10;
+var count = 1000;
 for(let i = 0; i < count; i++){
     topic = 'mqtt_' + (i+1);
     message = 'Hello ' + topic;
@@ -34,7 +34,9 @@ for(let i = 0; i < count; i++){
 }
 
 arrTopic.forEach((element, index) => {
-    const client = mqtt.connect('mqtt://localhost:1234');
+    const client = mqtt.connect('mqtt://localhost:1234', 
+        {username: 'mqtt', password: '46ee7eb02d4c3b504ce79c054464bfd2', clientId: element}
+    );
     client.on('connect', ()=>{
         client.publish(element, arrThietbi[index]);
         setInterval(() => {

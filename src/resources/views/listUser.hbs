@@ -13,7 +13,6 @@
           <a href="/list-user/add" class="btn btn-success">
             Thêm người dùng
           </a>
-          <span id="p" class="d-none">{{page}}</span>
           <div class="table-responsive">
             <table id="tbl" class="table text-nowrap text-center">
               <thead>
@@ -54,13 +53,22 @@
               } else {
                 App();
               }
-              let np = document.getElementById('p').innerHTML;
-              console.log(np);
               function App() {
                 //common variables
-                let defaultIndex = 1,
+                let defaultIndex = {{page}},
                   defaultPost = 10,
-                  listData = listDataGenerator(),
+                  listData = [
+                    {{#each nguoidung}} 
+                      {
+                        idnguoidung: '{{this.idnguoidung}}',
+                        tennguoidung: '{{this.tennguoidung}}',
+                        iddonvi: '{{this.iddonvi}}',
+                        taikhoan: '{{this.taikhoan}}',
+                        quyen: '{{this.quyen}}',
+                        tendonvi: '{{this.tendonvi}}'
+                      },
+                    {{/each}}
+                  ],
                   pageIndex = Math.ceil({{count.count}} / defaultPost);
 
                 let wrapper = $('#tbl');
@@ -123,42 +131,25 @@
                   for (let i = 0; i < rangeWithDots.length; i++) {
                     let page = document.createElement('a');
                     page.setAttribute('href','/list-user?page='+(i+1));
-                    if (rangeWithDots[i] == np) {
+                    if (rangeWithDots[i] == current) {
                       page.classList.add('page', 'current', 'btn', 'btn-info');
                     } else if (rangeWithDots[i] == '...') {
                       page.addEventListener('click', e => e.preventDefault());
                       page.classList.add('page', 'btn', 'border-info');
                     } else {
                       page.classList.add('page', 'btn', 'border-info');
-                      page.addEventListener('click', changePageIndex);
+                      page.addEventListener('click', function(){
+                        let clickedItem = Number(event.target.innerText);  
+                        page.setAttribute('href','/list-user?page='+clickedItem);
+                        pagination(clickedItem);
+                        showPosts(listData, (current * defaultPost) - defaultPost, (current * defaultPost)); 
+                      });
                     }
                     page.innerHTML = rangeWithDots[i];
                     
                     pagiWrapper.append(page);
                   }
 
-                  showPosts(listData, (current * defaultPost) - defaultPost, (current * defaultPost));
-                }
-
-                function changePageIndex(event) {
-                  let clickedItem = Number(event.target.innerText);
-                  pagination(clickedItem);
-                }
-
-                function listDataGenerator(numPosts) {
-                  let listDataArray = [
-                    {{#each nguoidung}} 
-                      {
-                        idnguoidung: '{{this.idnguoidung}}',
-                        tennguoidung: '{{this.tennguoidung}}',
-                        iddonvi: '{{this.iddonvi}}',
-                        taikhoan: '{{this.taikhoan}}',
-                        quyen: '{{this.quyen}}',
-                        tendonvi: '{{this.tendonvi}}'
-                      },
-                    {{/each}}
-                  ];
-                  return listDataArray;
                 }
               }
             </script>

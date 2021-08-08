@@ -34,7 +34,7 @@ broker.on('published', (packet, client)=>{
     if(message.slice(0, 2) != '{ ' && message.slice(0, 4) != 'mqtt' && clientid != undefined){
         date = new Date();
         day = date.getDay() + 1;
-        month = date.getMonth() + 1;
+        month = date.getMonth() ;
         year = date.getFullYear();
         hour = date.getHours();
         minute = date.getMinutes();
