@@ -318,7 +318,8 @@ class device_controller {
                 page = req.query.page;
                 }
             pool
-                .query(`select  date_part('year',thoigiangui) as nam,
+                .query(`select  iddulieu,
+                                date_part('year',thoigiangui) as nam,
                                 date_part('month',thoigiangui) as thang,
                                 date_part('day',thoigiangui) as ngay,
                                 date_part('hour',thoigiangui) as gio,
@@ -326,7 +327,7 @@ class device_controller {
                                 date_part('second',thoigiangui) as giay,
                                 chitiet from dulieu
                     where
-                    idthietbi = $1 OFFSET (($2-1)*10) ROWS FETCH NEXT 10 ROWS ONLY`, [req.params.id, page]
+                    idthietbi = $1 ORDER BY iddulieu  DESC OFFSET (($2-1)*10) ROWS FETCH NEXT 10 ROWS ONLY`, [req.params.id, page]
                 )
                 .then(result => {
                     const dulieu = result.rows;

@@ -38,7 +38,7 @@ broker.on('published', (packet, client)=>{
       //  console.log(topic)
         date = new Date();
         day = date.getDay() + 1;
-        month = date.getMonth() + 1;
+        month = date.getMonth() + 1 ;
         year = date.getFullYear();
         hour = date.getHours();
         minute = date.getMinutes();
