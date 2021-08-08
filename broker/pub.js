@@ -27,7 +27,7 @@ for(let i = 0; i < count; i++){
 arrTopic.forEach((element, index) => {
     const client = mqtt.connect('mqtt://localhost:1234');
         client.on('connect', ()=>{
-            client.publish(element, arrThietbi[index]);
+            //client.publish(element, arrThietbi[index]);
             for (let i = 0; i < 10; i++) {
                 setTimeout(() => {
                     client.publish(element, message);
