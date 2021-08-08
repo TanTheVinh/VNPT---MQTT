@@ -304,7 +304,7 @@ class device_controller {
                 }
                 else{
                     res.render('listDevice', {
-                        message: '"không thể xóa"'
+                        message: "\"không thể xóa\""
                     });
                 }
             })
@@ -353,9 +353,6 @@ class device_controller {
                                         stt = result.rows;
                                     })
                                     .catch(next);
-
-                                pool
-                                    .query(``)
                                 // console.log({ dulieu, count, page });
                                 //res.json({ dulieu, count, page });
                                 res.render('publishLog', {dulieu, count, page, stt});

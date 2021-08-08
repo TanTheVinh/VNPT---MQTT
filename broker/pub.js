@@ -27,7 +27,7 @@ arrTopic.forEach((element, index) => {
         {username: 'mqtt', password: '46ee7eb02d4c3b504ce79c054464bfd2', clientId: element}
     );
         client.on('connect', ()=>{
-            // client.publish(element, arrThietbi[index]);
+            client.publish(element, arrThietbi[index]);
             for (let i = 0; i < 10; i++) {
                 setTimeout(() => {
                     client.publish(element, message);

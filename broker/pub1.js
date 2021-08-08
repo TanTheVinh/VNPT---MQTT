@@ -22,7 +22,7 @@ var password = '46ee7eb02d4c3b504ce79c054464bfd2';
 
 var arrTopic = [];
 var arrThietbi = [];
-var arrMessage = [];
+// var arrMessage = [];
 var count = 1;
 for(let i = 0; i < count; i++){
     topic = 'mqtt_' + (i+1);
@@ -30,7 +30,7 @@ for(let i = 0; i < count; i++){
     thietbi = `( ${topic} ${username} ${password} )`;
     arrTopic.push(topic);
     arrThietbi.push(thietbi);
-    arrMessage.push(message);
+    // arrMessage.push(message);
 }
 
 arrTopic.forEach((element, index) => {
@@ -40,8 +40,8 @@ arrTopic.forEach((element, index) => {
     client.on('connect', ()=>{
         // client.publish(element, arrThietbi[index]);
         setInterval(() => {
-            client.publish(element, arrMessage[index]);
-            console.log('Message sent!', arrMessage[index]);
+            client.publish(element, message);
+            console.log('Message sent!', message);
         }, 5000);
     })
 });
