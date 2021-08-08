@@ -343,9 +343,10 @@ class device_controller {
                         .query(`select count(*) from dulieu where idthietbi = $1`, [req.params.id])
                             .then(result => {
                                 const count = result.rows[0];
+                                const idthietbi = req.params.id;
                                 // console.log({ dulieu, count, page });
-                                //res.json({ dulieu, count, page });
-                                res.render('publishLog', {dulieu, count, page});
+                                //res.json({ dulieu, count, page, idthietbi});
+                                res.render('publishLog', {dulieu, count, page, idthietbi});
                             })
                             .catch(next);
                 })

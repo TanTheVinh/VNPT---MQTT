@@ -1,12 +1,19 @@
 <div class="page-wrapper">
   <div class="page-breadcrumb bg-white">
-    <div class="row align-items-center">
-      <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-        <h2 class="d-inline-block my-0">Danh sách publish
-          <button class="btn btn-success" type="button" onclick="reload()"><i class="fa fa-sync"></i></button>
+    <div class="row justify-content-between">
+      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+        <h2 class="my-0">Danh sách dữ liệu của thiết bị: {{idthietbi}}
+        <button class="btn btn-success" type="button" onclick="reload()"><i class="fa fa-sync"></i></button>
         </h2>
-        
       </div>
+          <form method="GET" action="/list-device/search" role="search" class="app-search col-sm-2">
+            <div class="input-group mb-3">
+                <input id="date" type="date" class="form-control mt-0" aria-describedby="basic-addon2">
+                <a href="" id="basic-addon2" class="active input-group-text">
+                  <i class="fa fa-search"></i>
+                </a>
+            </div>
+          </form>
     </div>
   </div>
   <div class="container-fluid">
