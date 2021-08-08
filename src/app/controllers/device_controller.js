@@ -298,9 +298,8 @@ class device_controller {
                 })
                 .catch(next);
         } catch (err) {
-            res.render('listDevice', {
-                message: '"không thể xóa"'
-            });
+            //res.render('listDevice', { message: "\"không thể xóa\"" });
+            res.json({ message: "\"không thể xóa\"" });
         }
     }
 

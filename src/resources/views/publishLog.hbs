@@ -2,8 +2,10 @@
   <div class="page-breadcrumb bg-white">
     <div class="row align-items-center">
       <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-        <h2 class="d-inline-block">Danh sách publish
+        <h2 class="d-inline-block my-0">Danh sách publish
+          <button class="btn btn-success" type="button" onclick="reload()"><i class="fa fa-sync"></i></button>
         </h2>
+        
       </div>
     </div>
   </div>
@@ -12,7 +14,6 @@
       <div class="col-sm-12">
         <div class="white-box">
           <div class="table-responsive">
-            <span id="p" class="d-none">{{page}}</span>
             <table id="tbl" class="table text-nowrap text-center">
               <thead>
                 <tr>
@@ -30,7 +31,10 @@
             </table>
           </div>
           <script>
-            window.setInterval(App, 5000);
+            function reload(){
+              $('tbody').remove();
+              App();
+            }
             if (document.readyState == "loading") {
               document.addEventListener('DOMContentLoaded', App);
             } else {
@@ -38,6 +42,7 @@
             }
             function App() {
               //common variables
+              
               console.log('test');
               let defaultIndex = {{page}},
                 defaultPost = 10,
@@ -56,7 +61,7 @@
               let wrapper = $('#tbl');
               let pag = $('#pag');
               pag.html('');
-
+              
               let listDiv = document.createElement('tbody');
               listDiv.classList.add('listStyle01');
               wrapper.append(listDiv);
