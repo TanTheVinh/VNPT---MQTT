@@ -2,7 +2,7 @@ var mqtt = require('mqtt')
 // var client = mqtt.connect('mqtt://localhost:1234')
  
 var topic;
-var message;
+var message = 'Hello world';
 var username = 'mqtt';
 var password = '46ee7eb02d4c3b504ce79c054464bfd2';
 var trangthai = true;
@@ -17,11 +17,9 @@ var count = 1000;
 
 for(let i = 0; i < count; i++){
     topic = 'mqtt_' + (i+1);
-    message = 'Hello ' + topic;
     thietbi = `{ ${topic} ${username} ${password} ${iddonvi} ${idloai} ${tenthietbi} ${trangthai} }`
     arrTopic.push(topic);
     arrThietbi.push(thietbi);
-    arrMessage.push(message);
 }
 
 arrTopic.forEach((element, index) => {
@@ -33,7 +31,7 @@ arrTopic.forEach((element, index) => {
             for (let i = 0; i < 10; i++) {
                 setTimeout(() => {
                     client.publish(element, message);
-                    console.log('Message sent!', arrMessage[index]);
+                    console.log('Message sent!', message);
                 }, 1000);
                 
             }

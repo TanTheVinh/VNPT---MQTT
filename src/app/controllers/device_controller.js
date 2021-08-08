@@ -265,20 +265,17 @@ class device_controller {
     create(req, res, next){
       //  res.json(req.body)
         const thietbi = req.body;
-        // res.json(thietbi.idthietbi);
-        //console.log(thietbi.taikhoan, thietbi.kiemtratk, thietbi.matkhau, thietbi.kiemtramk);
-        // if(thietbi.taikhoan == thietbi.kiemtratk && thietbi.md5matkhau == thietbi.kiemtramk){
         pool
             .query(`select * from thietbi where idthietbi = $1`, [thietbi.idthietbi])
             .then(result => {
                 if(result.rows[0] == undefined){
                     pool
-                    .query('INSERT INTO thietbi (tenthietbi, iddonvi,idloai, taikhoan, matkhau, trangthai) '
-                        + 'VALUES ($1, $2, $3, $4, $5, false)',
-                        [thietbi.tenthietbi, thietbi.iddonvi, thietbi.idloai, thietbi.taikhoan, thietbi.md5matkhau] )
+                    .query('INSERT INTO thietbi (idthietbi, tenthietbi, iddonvi,idloai, taikhoan, matkhau, trangthai) '
+                        + 'VALUES ($1, $2, $3, $4, $5, $6, false)',
+                        [thietbi.idthietbi, thietbi.tenthietbi, thietbi.iddonvi, thietbi.idloai, thietbi.taikhoan, thietbi.md5matkhau] )
                     .then(() =>{
-                        // const message = 'Thêm thiết bị thành công';
-                        res.render('addDevice', {message})
+                        const message = 'Thêm thiết bị thành công';
+                        res.render('addDevice', {message: '"Thêm thiết bị thành công"'})
                         
                     })
                     .catch(next);
@@ -288,10 +285,6 @@ class device_controller {
                 }
             })
             .catch(next);
-
-        // }else{
-        //     res.render('addDevice', {message: "\"thêm thất bại\""})
-        // }
     }
  
     // [DELETE] /list-device/delete/:id
@@ -341,7 +334,7 @@ class device_controller {
                         .query(`select count(*) from dulieu where idthietbi = $1`, [req.params.id])
                             .then(result => {
                                 const count = result.rows[0];
-                                console.log({ dulieu, count, page });
+                                // console.log({ dulieu, count, page });
                                 //res.json({ dulieu, count, page });
                                 res.render('publishLog', {dulieu, count, page});
                             })
