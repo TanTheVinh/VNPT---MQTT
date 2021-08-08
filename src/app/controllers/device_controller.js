@@ -9,7 +9,6 @@ class device_controller {
 
     //[GET] /list-device/
     list(req, res, next) {
-
         if (req.session.idnguoidung === undefined) {
             res.redirect('/');
         } else {
@@ -17,7 +16,7 @@ class device_controller {
             if (req.session.quyen == 'nv') {
                 const iddonvi = req.session.iddonvi;
                 if(req.query.page === undefined){
-                 page = '1';
+                    page = '1';
                 }else{
                     page = req.query.page;
                 }
@@ -41,9 +40,9 @@ class device_controller {
             } else {
                 if(req.query.page === undefined){
                     page = '1';
-                    }else{
+                }else{
                     page = req.query.page;
-                    }
+                }
                 pool
                 .query(`select * from thietbi, loaithietbi 
                 where thietbi.idloai = loaithietbi.idloai
@@ -326,16 +325,17 @@ class device_controller {
                 page = req.query.page;
                 }
             pool
-                .query(`select  iddulieu,
-                                date_part('year',thoigiangui) as nam,
-                                date_part('month',thoigiangui) as thang,
-                                date_part('day',thoigiangui) as ngay,
-                                date_part('hour',thoigiangui) as gio,
-                                date_part('minute',thoigiangui) as phut,
-                                date_part('second',thoigiangui) as giay,
-                                chitiet from dulieu
+                .query(`
+                    select  iddulieu,
+                    date_part('year',thoigiangui) as nam,
+                    date_part('month',thoigiangui) as thang,
+                    date_part('day',thoigiangui) as ngay,
+                    date_part('hour',thoigiangui) as gio,
+                    date_part('minute',thoigiangui) as phut,
+                    date_part('second',thoigiangui) as giay,
+                    chitiet from dulieu
                     where
-                    idthietbi = $1 ORDER BY iddulieu  DESC OFFSET (($2-1)*10) ROWS FETCH NEXT 10 ROWS ONLY`, [req.params.id, page]
+                    idthietbi = $1 ORDER BY iddulieu DESC OFFSET (($2-1)*10) ROWS FETCH NEXT 10 ROWS ONLY`, [req.params.id, page]
                 )
                 .then(result => {
                     const dulieu = result.rows;
@@ -343,9 +343,22 @@ class device_controller {
                         .query(`select count(*) from dulieu where idthietbi = $1`, [req.params.id])
                             .then(result => {
                                 const count = result.rows[0];
+                                var stt;
+                                pool
+                                    .query(`select row_number() OVER (ORDER BY iddulieu) as stt
+                                        from dulieu
+                                        OFFSET (($1-1)*10) ROWS FETCH NEXT 10 ROWS ONLY`, [page]
+                                    )
+                                    .then(result => {
+                                        stt = result.rows;
+                                    })
+                                    .catch(next);
+
+                                pool
+                                    .query(``)
                                 // console.log({ dulieu, count, page });
                                 //res.json({ dulieu, count, page });
-                                res.render('publishLog', {dulieu, count, page});
+                                res.render('publishLog', {dulieu, count, page, stt});
                             })
                             .catch(next);
                 })
@@ -387,6 +400,63 @@ class device_controller {
         console.log(req);
     }
 
+    searchdata(req, res, next){
+        // console.log(req.query);
+        // thietbi = req.query;
+        // pool
+        //     .query(`select * from dulieu where idthietbi = $1 and thoigiangui = $2`, [])
+        //     .then(result => {
+        //         dulieu = result.rows;
+                
+        //     })
+        //     .catch(next);
+        var page;
+        if (req.session.idnguoidung === undefined) {
+            res.redirect('/');
+        } else {
+            const dulieu = {};
+            if(req.query.page === undefined){
+                page = '1';
+                }else{
+                page = req.query.page;
+                }
+            pool
+                .query(
+                    `select  iddulieu,
+                    date_part('year',thoigiangui) as nam,
+                    date_part('month',thoigiangui) as thang,
+                    date_part('day',thoigiangui) as ngay,
+                    date_part('hour',thoigiangui) as gio,
+                    date_part('minute',thoigiangui) as phut,
+                    date_part('second',thoigiangui) as giay,
+                    chitiet from dulieu
+                    where
+                    idthietbi = $1 ORDER BY iddulieu DESC OFFSET (($2-1)*10) ROWS FETCH NEXT 10 ROWS ONLY`, [req.params.id, page]
+                )
+                .then(result => {
+                    const dulieu = result.rows;
+                    pool
+                        .query(`select count(*) from dulieu where idthietbi = $1`, [req.params.id])
+                        .then(result => {
+                            const count = result.rows[0];
+                            pool
+                                .query(`select row_number() OVER (ORDER BY iddulieu) as stt
+                                    from dulieu
+                                    OFFSET (($1-1)*10) ROWS FETCH NEXT 10 ROWS ONLY`, [page]
+                                )
+                                .then(result => {
+                                    stt = result.rows;
+                                    res.render('publishLog', {dulieu, count, page, stt});
+                                })
+                                .catch(next);
+                            // console.log({ dulieu, count, page });
+                            //res.json({ dulieu, count, page });
+                        })
+                        .catch(next);
+                })
+            .catch(next)
+        }
+    }
 }
 
 module.exports = new device_controller;
