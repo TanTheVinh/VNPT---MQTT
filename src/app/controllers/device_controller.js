@@ -265,37 +265,26 @@ class device_controller {
     create(req, res, next){
       //  res.json(req.body)
         const thietbi = req.body;
-        
-        //console.log(thietbi.taikhoan, thietbi.kiemtratk, thietbi.matkhau, thietbi.kiemtramk);
-        if(thietbi.taikhoan == thietbi.kiemtratk && thietbi.md5matkhau == thietbi.kiemtramk){
-            pool
-            .query('INSERT INTO thietbi (tenthietbi, iddonvi,idloai, taikhoan, matkhau, trangthai) '
-                + 'VALUES ($1, $2, $3, $4, $5, true)',
-                [thietbi.tenthietbi, thietbi.iddonvi, thietbi.idloai, thietbi.taikhoan, thietbi.md5matkhau] )
-            .then(() =>{
-                
-                res.render('addDevice', {message: "\"thêm thành công\""})
-                const user = {
-                    username: thietbi.taikhoan,
-                    password: thietbi.md5matkhau
+        pool
+            .query(`select * from thietbi where idthietbi = $1`, [thietbi.idthietbi])
+            .then(result => {
+                if(result.rows[0] == undefined){
+                    pool
+                    .query('INSERT INTO thietbi (idthietbi, tenthietbi, iddonvi,idloai, taikhoan, matkhau, trangthai) '
+                        + 'VALUES ($1, $2, $3, $4, $5, $6, false)',
+                        [thietbi.idthietbi, thietbi.tenthietbi, thietbi.iddonvi, thietbi.idloai, thietbi.taikhoan, thietbi.md5matkhau] )
+                    .then(() =>{
+                        const message = 'Thêm thiết bị thành công';
+                        res.render('addDevice', {message: '"Thêm thiết bị thành công"'})
+                        
+                    })
+                    .catch(next);
                 }
-                const client = mqtt.connect('mqtt://localhost:1234', user);
-                const message = 'Hello world!';
-                // <--
-                client.on('connect', () => {
-                    setInterval(() => {
-                        client.publish(user.username, message);
-                        console.log('Message sent: ', message);
-                    }, 5000);                   
-                });
-                // const message = 'Thêm thiết bị thành công';
-                // res.render('addDevice', {message})
-                
+                else{
+                    res.render('addDevice', {message: "\"trùng ID thiết bị\""})
+                }
             })
             .catch(next);
-        }else{
-            res.render('addDevice', {message: "\"thêm thất bại\""})
-        }
     }
  
     // [DELETE] /list-device/delete/:id
@@ -345,7 +334,7 @@ class device_controller {
                         .query(`select count(*) from dulieu where idthietbi = $1`, [req.params.id])
                             .then(result => {
                                 const count = result.rows[0];
-                                console.log({ dulieu, count, page });
+                                // console.log({ dulieu, count, page });
                                 //res.json({ dulieu, count, page });
                                 res.render('publishLog', {dulieu, count, page});
                             })
@@ -382,19 +371,7 @@ class device_controller {
         pool
             .query(`select * from thietbi where idthietbi = $1`, [idthietbi])
             .then(result => {
-                const thietbi = result.rows[0];
-                pool
-                const user = {
-                    username: thietbi.taikhoan,
-                    password: thietbi.matkhau
-                }
-                const client = mqtt.connect('mqtt://localhost:1234', user);
                 if(!thietbi.trangthai){
-                    client.on('connect', () => {
-                        var message = 'reconnect';
-                        client.publish(user.username, message);
-                        client.end();
-                    });
                     pool
                         .query(`UPDATE thietbi SET trangthai = true
                         WHERE idthietbi = $1`, [thietbi.idthietbi])
@@ -404,11 +381,6 @@ class device_controller {
                         .catch(next);
                 }
                 else{
-                    client.on('connect', () => {
-                        var message = 'disconnect';
-                        client.publish(user.username, message);
-                        client.end();
-                    });
                     pool
                         .query(`UPDATE thietbi SET trangthai = false
                         WHERE idthietbi = $1`, [thietbi.idthietbi])

@@ -11,9 +11,6 @@ broker.on('ready', () =>{
 broker.on('published', (packet, client)=>{
     message = packet.payload.toString();
     topic = packet.topic.toString();
- //   console.log('mess'+ message);
-    //console.log(arr);
-    //console.log('topic'+ topic);
     if(message.slice(0, 2) == '{ ' ){
         var space = message.split(' ').length - 1;//so luong dau cach
         var length = message.length; //so luong ky tu
@@ -28,15 +25,13 @@ broker.on('published', (packet, client)=>{
             }
             message = message.slice(temp + 1, length);
         }
-        
         pool
-                        .query(`INSERT INTO public.thietbi(idthietbi, taikhoan, matkhau, iddonvi, idloai, tenthietbi, trangthai)
-                        VALUES ($1, $2, $3, $4, $5, $6, $7);`, arr)
-                        .then( result => {
-                            console.log('Thêm thiết bị thành công');
-                        })
-                        .catch();
-              
+            .query(`INSERT INTO public.thietbi(idthietbi, taikhoan, matkhau, iddonvi, idloai, tenthietbi, trangthai)
+            VALUES ($1, $2, $3, $4, $5, $6, $7);`, arr)
+            .then( result => {
+                console.log('Thêm thiết bị thành công');
+            })
+            .catch();
     }
     
     if(message.slice(0, 2) != '{ ' && message.slice(0, 5) != 'mqtt' && message != '}' && topic.slice(0,1) !='$'){
@@ -59,9 +54,5 @@ broker.on('published', (packet, client)=>{
                     .catch(err => {
                         console.log(err);
                     });
-               
-            
-            
-   }
-
+    }
 });
