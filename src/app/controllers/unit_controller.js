@@ -87,14 +87,29 @@ class unit_controller {
 
     // [DELETE] /list-unit/delete/:id
     delete(req, res, next){
-        try {
-            // res.json({thietbi});
-            pool.query('delete from donvi where iddonvi = $1', [req.params.id])
-            //res.redirect('back');
-            res.render('listUnit', {message: "\"Xóa thành công\""});
-        } catch (error) {
-            res.render('listUnit', {message: "\"không thể xóa\""});
-        }
+        // res.json({thietbi});
+        pool
+            .query(`SELECT * FROM nguoidung
+                FULL OUTER JOIN thietbi on nguoidung.iddonvi = thietbi.iddonvi 
+                where thietbi.iddonvi = $1 or nguoidung.iddonvi = $2;`, 
+                [req.params.id, req.params.id]
+            )
+            .then((result) => {
+                if(result.rows[0] == undefined){
+                    pool
+                        .query(`delete from donvi where iddonvi = $1`, [req.params.id])
+                        .then(result => {
+                            res.render('listUnit', {message: "\"Xóa thành công\""});
+                        })
+                }
+                else{
+                    res.render('listUnit', {message: "\"Không thể xóa\""});
+                }
+            })
+            .catch(next);
+        
+        //res.redirect('back');
+        
     }
 }
     

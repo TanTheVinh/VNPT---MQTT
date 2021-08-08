@@ -306,19 +306,27 @@ class device_controller {
  
     // [DELETE] /list-device/delete/:id
     delete(req, res, next) {
-        try {
-            pool
-                .query('delete from thietbi where idthietbi = $1', [req.params.id])
-                .then(() => {
-                    //res.redirect('back');
-                    res.render('listDevice', {message: "\"xóa thành công\""})
-                })
-                .catch(next);
-        } catch (err) {
-            res.render('listDevice', {
-                message: '"không thể xóa"'
-            });
-        }
+        pool
+            .query(`SELECT * FROM dulieu FULL OUTER JOIN lichsu on dulieu.idthietbi = lichsu.idthietbi 
+                where dulieu.idthietbi = $1 or lichsu.idthietbi = $2;`, [req.params.id, req.params.id]
+            )
+            .then((result) => {
+                if(result.rows[0] == undefined){
+                    pool
+                        .query(`delete from thietbi where idthietbi = $1`, [req.params.id])
+                        .then(() => {
+                            //res.redirect('back');
+                            res.render('listDevice', {message: "\"xóa thành công\""})
+                        })
+                        .catch(next);
+                }
+                else{
+                    res.render('listDevice', {
+                        message: "\"không thể xóa\""
+                    });
+                }
+            })
+            .catch(next);
     }
 
     // [GET] /list-device/history/:id
@@ -352,36 +360,16 @@ class device_controller {
                         .query(`select count(*) from dulieu where idthietbi = $1`, [req.params.id])
                             .then(result => {
                                 const count = result.rows[0];
+                                const idthietbi = req.params.id;
                                 // console.log({ dulieu, count, page });
-                                //res.json({ dulieu, count, page });
-                                res.render('publishLog', {dulieu, count, page});
+                                //res.json({ dulieu, count, page, idthietbi});
+                                res.render('publishLog', {dulieu, count, page, idthietbi});
                             })
                             .catch(next);
                 })
             .catch(next)
         }
     }
-
-    // [POST] /list-device/login
-    // login(req, res, next){
-    //     const account = Object.values(req.body);
-    //     account.unshift(req.params.id);
-    //     pool
-    //         .query(`select * from thietbi where 
-    //         idthietbi = $1 and taikhoan = $2 and matkhau = $3`, account)
-    //         .then(result => {
-    //             try {
-    //                 const thietbi = result.rows[0];
-    //                 var username = thietbi.taikhoan;
-    //                 var password = thietbi.matkhau;
-    //                 var message = 'ma thiet bi la :' + req.params.id.toString();
-    //                 pub(username, password, message);
-    //             } catch (error) {
-    //                 res.render('list-device', {message: 'tài khoản hoặc mật khẩu không đúng'})
-    //             }
-    //         })
-    //         .catch(next);
-    // }
 
     // [PUT] /list-device/check
     check(req, res, next){

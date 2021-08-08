@@ -91,17 +91,27 @@ class user_controller {
     
         // [DELETE] /list-user/delete/:id
     delete(req, res, next){
-        try{
+        if(req.session.idnguoidung != req.params.id){
             pool
-            .query('delete from nguoidung where idnguoidung = $1', [req.params.id])
-            .then(() => {
-                //res.redirect('back');
-                res.render('listUser', {message: "\"xóa thành công\""})
+            .query(`SELECT * FROM lichsu where idnguoidung = $1`, [req.params.id])
+            .then((result) => {
+                if(result.rows[0] == undefined){
+                    pool
+                    .query(`delete from nguoidung where idnguoidung = $1`, [req.params.id])
+                    .then(() => {
+                        //res.redirect('back');
+                        res.render('listUser', {message: "\"xóa thành công\""});
+                    })
+                    .catch(next);
+                }
+                else{
+                    res.render('listUser', {message: "\"Không thể xóa\""});
+                }
             })
             .catch(next);
         }
-        catch(err){
-            res.render('listUser', {message: "\"không thể xóa\""})
+        else{
+            res.render('listUser', {message: "\"Không thể xóa\""});
         }
     }
 

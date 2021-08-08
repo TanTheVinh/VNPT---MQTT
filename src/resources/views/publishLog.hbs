@@ -1,21 +1,59 @@
 <div class="page-wrapper">
   <div class="page-breadcrumb bg-white">
-    <div class="row align-items-center">
-      <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-        <h2 class="d-inline-block">Danh sách publish
+    <div class="row justify-content-between">
+      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+        <h2 class="my-0">Danh sách dữ liệu của thiết bị: {{idthietbi}}
+        <button class="btn btn-success" type="button" onclick="reload()"><i class="fa fa-sync"></i></button>
         </h2>
       </div>
+      <form method="GET" action="/list-device/search/{{idthietbi}}" role="search" class="app-search col-sm-2">
+        <div class="input-group mb-3">
+          <input id="date" type="date" class="form-control mt-0" aria-describedby="basic-addon2">
+            <button type="submit" id="basic-addon2" class="active input-group-text">
+              <i class="fa fa-search"></i>
+            </button>
+        </div>
+      </form>
     </div>
   </div>
   <div class="container-fluid">
+    <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-12">
+                <div class="white-box analytics-info">
+                    <h3 class="box-title">Kết nối
+                    </h3>
+                    <ul class="list-inline two-part d-flex align-items-center mb-0">
+                        <li>
+                            <div id="sparklinedash"><canvas width="67" height="30"
+                                    style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
+                            </div>
+                        </li>
+                        <li class="ms-auto"><span class="counter text-success">{{soluong.dangketnoi}}</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="white-box analytics-info">
+                    <h3 class="box-title">Ngắt kết nối</h3>
+                    <ul class="list-inline two-part d-flex align-items-center mb-0">
+                        <li>
+                            <div id="sparklinedash2"><canvas width="67" height="30"
+                                    style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
+                            </div>
+                        </li>
+                        <li class="ms-auto"><span class="counter text-purple">{{soluong.ngatketnoi}}</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     <div class="row">
       <div class="col-sm-12">
         <div class="white-box">
           <div class="table-responsive">
-            <span id="p" class="d-none">{{page}}</span>
             <table id="tbl" class="table text-nowrap text-center">
               <thead>
                 <tr>
+                  <th>Số thứ tự</th>
                   <th scope="col">Ngày gửi</th>
                   <th scope="col">Thời gian gửi</th>
                   <th scope="col">Dữ liệu gửi</th>
@@ -24,20 +62,23 @@
               <tfoot>
                 <tr>
                   <td colspan="2"></td>
-                  <td id="pag"></td>
+                  <td colspan="2" id="pag"></td>
                 </tr>
               </tfoot>
             </table>
           </div>
           <script>
+            function reload(){
+              $('tbody').remove();
+              App();
+            }
             if (document.readyState == "loading") {
               document.addEventListener('DOMContentLoaded', App);
             } else {
               App();
             }
-
             function App() {
-              //common variables
+              console.log('test');
               let defaultIndex = {{page}},
                 defaultPost = 10,
                 listData = [{{#each dulieu}} {
@@ -54,7 +95,8 @@
 
               let wrapper = $('#tbl');
               let pag = $('#pag');
-
+              pag.html('');
+              
               let listDiv = document.createElement('tbody');
               listDiv.classList.add('listStyle01');
               wrapper.append(listDiv);
@@ -63,7 +105,7 @@
               let listWrapper = document.querySelector('.listStyle01');
 
               let pagiDiv = document.createElement('div');
-              pagiDiv.classList.add('pagination', 'm-3', 'justify-content-center');
+              pagiDiv.classList.add('pagination', 'm-3', 'justify-content-end');
               pag.append(pagiDiv);
 
               let pagiWrapper = document.querySelector('.pagination');
@@ -73,7 +115,6 @@
 
               function showPosts(listData, startPos, endPost) {
                 listWrapper.innerHTML = '';
-
                 listData.slice(startPos, endPost).map(post => {
                   listWrapper.innerHTML += (
                     `<tr><td>${post.ngay}/${post.thang}/${post.nam}</td><td>${post.gio}:${post.phut}:${post.giay}</td><td>${post.chitiet}</td></tr>`
