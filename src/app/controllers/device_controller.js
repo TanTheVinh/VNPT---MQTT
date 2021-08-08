@@ -291,7 +291,7 @@ class device_controller {
     delete(req, res, next) {
         pool
             .query(`SELECT * FROM dulieu FULL OUTER JOIN lichsu on dulieu.idthietbi = lichsu.idthietbi 
-                where dulieu.idthietbi = $1 or lichsu.idthietbi = $1;`, [req.params.id, req.params.id]
+                where dulieu.idthietbi = $1 or lichsu.idthietbi = $2;`, [req.params.id, req.params.id]
             )
             .then((result) => {
                 if(result.rows[0] == undefined){
