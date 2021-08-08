@@ -6,14 +6,14 @@
         <button class="btn btn-success" type="button" onclick="reload()"><i class="fa fa-sync"></i></button>
         </h2>
       </div>
-          <form method="GET" action="/list-device/search" role="search" class="app-search col-sm-2">
-            <div class="input-group mb-3">
-                <input id="date" type="date" class="form-control mt-0" aria-describedby="basic-addon2">
-                <a href="" id="basic-addon2" class="active input-group-text">
-                  <i class="fa fa-search"></i>
-                </a>
-            </div>
-          </form>
+      <form method="GET" action="/list-device/search" role="search" class="app-search col-sm-2">
+        <div class="input-group mb-3">
+          <input id="date" type="date" class="form-control mt-0" aria-describedby="basic-addon2">
+            <a href="" id="basic-addon2" class="active input-group-text">
+              <i class="fa fa-search"></i>
+            </a>
+        </div>
+      </form>
     </div>
   </div>
   <div class="container-fluid">
@@ -24,6 +24,7 @@
             <table id="tbl" class="table text-nowrap text-center">
               <thead>
                 <tr>
+                  <th>Số thứ tự</th>
                   <th scope="col">Ngày gửi</th>
                   <th scope="col">Thời gian gửi</th>
                   <th scope="col">Dữ liệu gửi</th>
@@ -31,7 +32,7 @@
               </thead>
               <tfoot>
                 <tr>
-                  <td></td>
+                  <td colspan="2"></td>
                   <td colspan="2" id="pag"></td>
                 </tr>
               </tfoot>
@@ -48,8 +49,6 @@
               App();
             }
             function App() {
-              //common variables
-              
               console.log('test');
               let defaultIndex = {{page}},
                 defaultPost = 10,
@@ -87,7 +86,6 @@
 
               function showPosts(listData, startPos, endPost) {
                 listWrapper.innerHTML = '';
-
                 listData.slice(startPos, endPost).map(post => {
                   listWrapper.innerHTML += (
                     `<tr><td>${post.ngay}/${post.thang}/${post.nam}</td><td>${post.gio}:${post.phut}:${post.giay}</td><td>${post.chitiet}</td></tr>`
