@@ -59,7 +59,7 @@
                     {{/each}}
                   ],
                   pageIndex = Math.ceil({{count.count}} / defaultPost);
-
+                console.log(listData)
                 let wrapper = $('#tbl');
                 let pag = $('#pag');
 
@@ -127,7 +127,7 @@
                       page.classList.add('page', 'btn', 'border-info');
                       page.addEventListener('click', function(){
                         let clickedItem = Number(event.target.innerText);  
-                        page.setAttribute('href','/list-catogory?page='+clickedItem);
+                        page.setAttribute('href','?page='+clickedItem);
                         pagination(clickedItem);
                         showPosts(listData, (current * defaultPost) - defaultPost, (current * defaultPost)); 
                       });

@@ -25,6 +25,7 @@ class catogory_controller {
                         .then(result => {
                             const count = result.rows[0];
                             res.render('listTypeDevice', { loaithietbi, count, page });
+                            console.log({ loaithietbi, count, page });
                         })
                         .catch(next);
                     //res.json({ loaithietbi });
