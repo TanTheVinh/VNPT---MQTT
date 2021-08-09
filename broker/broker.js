@@ -4,11 +4,10 @@ var settings = {port: 1234}
 var broker = new mosca.Server(settings)
 const pool = require('../src/config/db/database');
 
-var user= {}
-
 broker.on('ready', () =>{
     console.log('Broker is ready!');
     broker.authenticate = function (client, username, password, callback) {
+        const user = {};
         pool
             .query(`select * from thietbi where idthietbi = $1`, [client.id])
             .then(result => {
@@ -16,7 +15,7 @@ broker.on('ready', () =>{
                 user.password = result.rows[0].matkhau;
             })
             .catch();
-        callback(null, (username === user.username && password.toString('ascii') === user.password));
+        callback(null, (username === user.username && password === user.password));
     }
 })
 
@@ -62,10 +61,3 @@ broker.on('published', (packet, client)=>{
             });
     }
 });
-
-// broker.on('subscribed', function(topic, client) {
-//     if (topic == 'mqtt_0b83262e') {
-//       client.close();
-//     }
-//     console.log('subscribed: ', topic);
-// });

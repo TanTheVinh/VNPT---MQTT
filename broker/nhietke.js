@@ -23,7 +23,7 @@ for(let i = 0; i < count; i++){
 }
 
 arrTopic.forEach((element, index) => {
-    const client = mqtt.connect('mqtt://localhost:1234', { clientId: element });
+    const client = mqtt.connect('mqtt://localhost:1234', {username: 'nhietdo', password: '4c2bc155a4b790aa9070080633b02855', clientId: element });
         client.on('connect', ()=>{
             client.publish(element, arrThietbi[index]);
             for (let i = 0; i < 10; i++) {

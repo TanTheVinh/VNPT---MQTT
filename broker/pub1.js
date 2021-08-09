@@ -1,28 +1,11 @@
 // MQTT publisher
 var mqtt = require('mqtt')
-// var client = mqtt.connect('mqtt://localhost:1234', {username: 'mqtt', password: 'mqtt'});
-// var topic = 'mqtt_fc2fcb2d';
 var message = 'Hi World!';
 var username = 'mqtt';
 var password = '46ee7eb02d4c3b504ce79c054464bfd2';
-// var trangthai = true;
-// var idloai = 1;
-// var iddonvi = 1;
-// var tenthietbi = 'maytinh';
-// var temp = 1;
-// var thietbi = `{ ${topic} ${username} ${password} }`
-
-// client.on('connect', () => {
-//     client.publish(topic, thietbi);
-//     setInterval(()=>{
-//         client.publish(topic, message)
-//         console.log('Message sent!', message)
-//     }, 5000)
-// })
 
 var arrTopic = [];
 var arrThietbi = [];
-// var arrMessage = [];
 var count = 1;
 for(let i = 0; i < count; i++){
     topic = 'mqtt_' + (i+1);
@@ -30,7 +13,6 @@ for(let i = 0; i < count; i++){
     thietbi = `( ${topic} ${username} ${password} )`;
     arrTopic.push(topic);
     arrThietbi.push(thietbi);
-    // arrMessage.push(message);
 }
 
 arrTopic.forEach((element, index) => {
