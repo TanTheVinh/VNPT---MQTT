@@ -2,9 +2,10 @@
   <div class="page-breadcrumb bg-white">
     <div class="row justify-content-between">
       <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-        <h2 class="my-0">Danh sách dữ liệu của thiết bị: {{idthietbi}}
+        <h2 class="my-0">Danh sách dữ liệu của thiết bị: {{idthietbi}} 
         <button class="btn btn-success" type="button" onclick="window.location.reload();"><i class="fa fa-sync"></i></button>
         </h2>
+        
       </div>
       <form method="GET"
       onsubmit="window.location = '/list-device/search/{{idthietbi}}?date=' + dt.value + '&page=' + {{page}}; return false;"
@@ -136,7 +137,7 @@
                   } else {
                     page.classList.add('page', 'btn', 'border-info');
                     page.addEventListener('click', function(){
-                        let clickedItem = Number(event.target.innerText);  
+                        let clickedItem = Number(event.target.innerText); 
                         page.setAttribute('href','?page='+clickedItem);
                         pagination(clickedItem);
                         showPosts(listData, (current * defaultPost) - defaultPost, (current * defaultPost)); 
