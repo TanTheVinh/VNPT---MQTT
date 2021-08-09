@@ -15,7 +15,7 @@
           <h2 class="text-center">Cập nhật thông tin
             thiết bị:</h2>
           <hr />
-          <form id="capNhat" method="POST" action="/list-device/edit/{{thietbi.idthietbi}}?_method=PUT">
+          <form id="capNhat" method="POST" action="/list-device/edit/{{thietbi.idthietbi}}?_method=PUT" onclick="md5pass()">
           <table class="table ">
             <tr>
               <th scope="row">Mã thiết bị
@@ -57,7 +57,28 @@
                 <input required type="text" name="taikhoan" id="taiKhoan" value={{thietbi.taikhoan}} />
               </td>
             </tr>
+            <tr>
+                <th scope="row">Mật khẩu cũ:</th>
+                <td>
+                  <input required type="password" id="oldPassword" />
+                  <input type="hidden" name="matkhaucu" id="md5oldpassword" value=""/>
+                </td>
+              </tr>
 
+                <tr>
+                  <th scope="row">Mật khẩu mới:</th>
+                  <td>
+                    <input required type="password" id="password" minlength="1" maxlength="50">
+                    <input type="hidden" name="matkhaumoi" id="md5password" value="">
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row">Nhập lại mật khẩu mới:</th>
+                  <td>
+                    <input required type="password" id="confirmPassword" minlength="1" maxlength="50">
+                  </td>
+                </tr>
             <tr>
               <th scope="row">Trạng thái thiết bị
                 :</th>
@@ -74,7 +95,7 @@
               <th scope="row">
               </th>
               <td>
-                <button type="button" id="up" onclick="myFunction()" class="btn btn-success">
+                <button disabled="disabled" type="button" id="save-btn" onclick="myFunction()" class="btn btn-success">
                   <i class="fa fa-edit"></i>
                   Cập nhật thông tin
                 </button>
@@ -103,6 +124,26 @@
                 }
               }
             }
+            function md5pass(){
+                document.getElementById("md5oldpassword").value = md5(document.getElementById("oldPassword").value);
+                document.getElementById("md5password").value = md5(document.getElementById("password").value);
+            }
+            (function ($, window, document) {
+              $(function () {
+                $("form input").on({
+                  "keyup": function () {
+                    var pass = $('#password').val();
+                    var confirmPass = $('#confirmPassword').val();
+                    var saveButton = $("#save-btn");
+                    if (pass == confirmPass && pass != '') {
+                      saveButton.removeAttr('disabled');
+                    } else {
+                      saveButton.attr('disabled', 'disabled');
+                    }
+                  }
+                });
+              });
+            }(window.jQuery, window, document));
           </script>
           </script>
           {{#if message}}

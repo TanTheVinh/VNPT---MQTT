@@ -16,29 +16,7 @@
           <hr />
           <form action="">
             <table class="table ">
-              <tr>
-                <th scope="row">Mật khẩu cũ:</th>
-                <td>
-                  <input required type="password" id="oldPassword" />
-                  <input type="hidden" name="matkhaucu" id="md5oldpassword" value=""/>
-                </td>
-              </tr>
-
-                <tr>
-                  <th scope="row">Mật khẩu mới:</th>
-                  <td>
-                    <input required type="password" id="password" minlength="1" maxlength="50">
-                    <input type="hidden" name="matkhaumoi" id="md5password" value="">
-                  </td>
-                </tr>
-
-                <tr>
-                  <th scope="row">Nhập lại mật khẩu mới:</th>
-                  <td>
-                    <input required type="password" id="confirmPassword" minlength="1" maxlength="50">
-                  </td>
-                </tr>
-                <tr>
+              
               <tr>
                 <th scope="row">
                 </th>
@@ -52,22 +30,7 @@
             </table>
           </form>
           <script>
-            (function ($, window, document) {
-              $(function () {
-                $("form input").on({
-                  "keyup": function () {
-                    var pass = $('#password').val();
-                    var confirmPass = $('#confirmPassword').val();
-                    var saveButton = $("#save-btn");
-                    if (pass == confirmPass) {
-                      saveButton.removeAttr('disabled');
-                    } else {
-                      saveButton.attr('disabled', 'disabled');
-                    }
-                  }
-                });
-              });
-            }(window.jQuery, window, document));
+            
           </script>
           {{#if message}}
           <p id="rpl" class="d-none">{{message}}</p>
@@ -78,10 +41,7 @@
             alert(ex);
           </script>
           <script>
-            function md5pass(){
-                document.getElementById("md5oldpassword").value = md5(document.getElementById("oldPassword").value);
-                document.getElementById("md5password").value = md5(document.getElementById("password").value);
-            }
+            
           </script>
           </script>
             {{#if message}}
