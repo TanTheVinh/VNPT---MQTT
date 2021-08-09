@@ -6,9 +6,9 @@
         <button class="btn btn-success" type="button" onclick="reload()"><i class="fa fa-sync"></i></button>
         </h2>
       </div>
-      <form method="GET" action="/list-device/search/{{idthietbi}}" role="search" class="app-search col-sm-2">
+      <form method="GET" action="/list-device/search/{{idthietbi}}?" role="search" class="app-search col-sm-2">
         <div class="input-group mb-3">
-          <input id="date" type="date" class="form-control mt-0" aria-describedby="basic-addon2">
+          <input id="dt" type="date" class="form-control mt-0" aria-describedby="basic-addon2">
             <button type="submit" id="basic-addon2" class="active input-group-text">
               <i class="fa fa-search"></i>
             </button>
@@ -82,6 +82,7 @@
               let defaultIndex = {{page}},
                 defaultPost = 10,
                 listData = [{{#each dulieu}} {
+                    stt: '{{this.stt}}'
                     nam: '{{this.nam}}',
                     thang: '{{this.thang}}',
                     ngay: '{{this.ngay}}',
@@ -117,7 +118,7 @@
                 listWrapper.innerHTML = '';
                 listData.slice(startPos, endPost).map(post => {
                   listWrapper.innerHTML += (
-                    `<tr><td>${post.ngay}/${post.thang}/${post.nam}</td><td>${post.gio}:${post.phut}:${post.giay}</td><td>${post.chitiet}</td></tr>`
+                    `<tr><td>${post.stt}</td><td>${post.ngay}/${post.thang}/${post.nam}</td><td>${post.gio}:${post.phut}:${post.giay}</td><td>${post.chitiet}</td></tr>`
                   );
                 })
               }
