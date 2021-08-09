@@ -364,7 +364,7 @@ class device_controller {
                                     .then(result => {
                                         const stt = result.rows;
                                         // res.json({idthietbi ,dulieu, count, page, stt});
-                                        res.render('publishLog', {idthietbi ,dulieu, count, page, stt});
+                                        res.render('publishLog', {idthietbi , dulieu, count, page, stt});
                                     })
                                     .catch(next);
                                 // console.log({ dulieu, count, page });
@@ -422,6 +422,7 @@ class device_controller {
                 page = req.query.page;
             }
             const thietbi = req.query;
+            var date = thietbi.date;
             const idthietbi = req.params.id;
             if(thietbi.date != ''){
                 thietbi.timestart = thietbi.date + ' 00:00:00';
@@ -456,8 +457,8 @@ class device_controller {
                                     )
                                     .then(result => {
                                         const stt = result.rows;
-                                        // res.json({dulieu, count, page, stt});
-                                        res.render('search', {idthietbi, dulieu, count, page, stt});
+                                        // res.json({idthietbi, date, dulieu, count, page, stt});
+                                        res.render('search', {idthietbi, date, dulieu, count, page, stt});
                                     })
                                     .catch(next);
                             })

@@ -139,8 +139,9 @@
                   } else {
                     page.classList.add('page', 'btn', 'border-info');
                     page.addEventListener('click', function(){
-                        let clickedItem = Number(event.target.innerText);
-                        page.setAttribute('href','?date=' + dtt + '&page='+clickedItem);
+                        let clickedItem = Number(event.target.innerText);  
+                        var dtt = $('dt').val();
+                        page.setAttribute('href','?date='+ dtt + '&page='+clickedItem);
                         pagination(clickedItem);
                         showPosts(listData, (current * defaultPost) - defaultPost, (current * defaultPost)); 
                       });
