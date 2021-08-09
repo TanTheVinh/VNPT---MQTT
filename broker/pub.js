@@ -13,7 +13,7 @@ var thietbi;
 var arrTopic = [];
 var arrThietbi = [];
 var arrMessage = [];
-var count = 1;
+var count = 500;
 
 for(let i = 0; i < count; i++){
     topic = 'mqtt_' + (i+1);

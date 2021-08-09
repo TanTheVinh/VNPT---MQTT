@@ -23,15 +23,12 @@ for(let i = 0; i < count; i++){
 }
 
 arrTopic.forEach((element, index) => {
-    const client = mqtt.connect('mqtt://localhost:1234', { clientId: element });
+    const client = mqtt.connect('mqtt://localhost:1234', {username: 'doman', password: '27567bca0d8d0d8b29d15d5bce436b62', clientId: element });
         client.on('connect', ()=>{
-            client.publish(element, arrThietbi[index]);
-            for (let i = 0; i < 10; i++) {
-                setTimeout(() => {
-                    client.publish(element, message);
-                    console.log('thông só gửi!', message);
-                }, 5000);
-                
-            }
+            // client.publish(element, arrThietbi[index]);
+            setInterval(() => {
+                client.publish(element, message);
+                console.log('thông só gửi!', message);
+            }, 5000);
         })
 });
