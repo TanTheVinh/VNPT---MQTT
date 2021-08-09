@@ -135,7 +135,7 @@
                     var pass = $('#password').val();
                     var confirmPass = $('#confirmPassword').val();
                     var saveButton = $("#save-btn");
-                    if (pass == confirmPass) {
+                    if (pass == confirmPass && pass != '') {
                       saveButton.removeAttr('disabled');
                     } else {
                       saveButton.attr('disabled', 'disabled');

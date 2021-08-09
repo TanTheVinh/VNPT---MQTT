@@ -2,7 +2,7 @@
   <div class="page-breadcrumb bg-white">
     <div class="row justify-content-between">
       <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-        <h2 class="my-0">Danh sách dữ liệu của thiết bị: {{idthietbi}}
+        <h2 class="my-0">Tìm kiếm: {{idthietbi}}
         <button class="btn btn-success" type="button" onclick="reload()"><i class="fa fa-sync"></i></button>
         </h2>
       </div>
@@ -19,35 +19,6 @@
     </div>
   </div>
   <div class="container-fluid">
-    <div class="row justify-content-center">
-            <div class="col-lg-6 col-md-12">
-                <div class="white-box analytics-info">
-                    <h3 class="box-title">Max trong ngày
-                    </h3>
-                    <ul class="list-inline two-part d-flex align-items-center mb-0">
-                        <li>
-                            <div id="sparklinedash"><canvas width="67" height="30"
-                                    style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
-                            </div>
-                        </li>
-                        <li class="ms-auto"><span class="counter text-success">{{soluong.dangketnoi}}</span></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-12">
-                <div class="white-box analytics-info">
-                    <h3 class="box-title">Min trong ngày</h3>
-                    <ul class="list-inline two-part d-flex align-items-center mb-0">
-                        <li>
-                            <div id="sparklinedash2"><canvas width="67" height="30"
-                                    style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
-                            </div>
-                        </li>
-                        <li class="ms-auto"><span class="counter text-purple">{{soluong.ngatketnoi}}</span></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
     <div class="row">
       <div class="col-sm-12">
         <div class="white-box">
@@ -169,7 +140,7 @@
                     page.classList.add('page', 'btn', 'border-info');
                     page.addEventListener('click', function(){
                         let clickedItem = Number(event.target.innerText);  
-                        page.setAttribute('href','?page='+clickedItem);
+                        page.setAttribute('href','&&?page='+clickedItem);
                         pagination(clickedItem);
                         showPosts(listData, (current * defaultPost) - defaultPost, (current * defaultPost)); 
                       });

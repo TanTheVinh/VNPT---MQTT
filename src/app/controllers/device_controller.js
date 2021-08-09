@@ -361,7 +361,7 @@ class device_controller {
                             .then(result => {
                                 const count = result.rows[0];
                                 const idthietbi = req.params.id;
-                                // console.log({ dulieu, count, page });
+                                //console.log({ dulieu, count, page });
                                 //res.json({ dulieu, count, page, idthietbi});
                                 res.render('publishLog', {dulieu, count, page, idthietbi});
                             })
