@@ -13,7 +13,7 @@ var thietbi;
 var arrTopic = [];
 var arrThietbi = [];
 var arrMessage = [];
-var count = 1000;
+var count = 1;
 
 for(let i = 0; i < count; i++){
     topic = 'mqtt_' + (i+1);
@@ -27,7 +27,7 @@ arrTopic.forEach((element, index) => {
         {username: 'mqtt', password: '46ee7eb02d4c3b504ce79c054464bfd2', clientId: element}
     );
         client.on('connect', ()=>{
-            // client.publish(element, arrThietbi[index]);
+            client.publish(element, arrThietbi[index]);
             for (let i = 0; i < 10; i++) {
                 setTimeout(() => {
                     client.publish(element, message);

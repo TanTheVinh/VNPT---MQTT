@@ -2,14 +2,12 @@ const pool = require("../../config/db/database");
 const session = require('express-session');
 const { render } = require("node-sass");
 const mqtt = require('mqtt');
-//const connectmqtt = require('./pub');
 const { MqttClient } = require('mqtt');
 
 class device_controller {
 
     //[GET] /list-device/
     list(req, res, next) {
-
         if (req.session.idnguoidung === undefined) {
             res.redirect('/');
         } else {
@@ -17,13 +15,14 @@ class device_controller {
             if (req.session.quyen == 'nv') {
                 const iddonvi = req.session.iddonvi;
                 if(req.query.page === undefined){
-                 page = '1';
+                    page = '1';
                 }else{
                     page = req.query.page;
                 }
                 pool
                     .query(`select * from thietbi, loaithietbi 
                         where thietbi.idloai = loaithietbi.idloai and iddonvi = $1
+                        order by idthietbi ASC
                         OFFSET (($2-1)*10) ROWS FETCH NEXT 10 ROWS ONLY`, [iddonvi, page])
                     .then(result => {
                         const thietbi = result.rows;
@@ -41,13 +40,15 @@ class device_controller {
             } else {
                 if(req.query.page === undefined){
                     page = '1';
-                    }else{
+                }else{
                     page = req.query.page;
-                    }
+                }
                 pool
-                .query(`select * from thietbi, loaithietbi 
-                where thietbi.idloai = loaithietbi.idloai
-                OFFSET (($1-1)*10) ROWS FETCH NEXT 10 ROWS ONLY`, [page])
+                .query(`
+                    select * from thietbi, loaithietbi 
+                    where thietbi.idloai = loaithietbi.idloai
+                    order by idthietbi DESC
+                    OFFSET (($1-1)*10) ROWS FETCH NEXT 10 ROWS ONLY`, [page])
                 .then( result =>{
                     const thietbi  = result.rows;
                     pool
@@ -142,11 +143,10 @@ class device_controller {
             tenthietbi,
             idloai,
             taikhoan,
-            trangthai, 
             matkhaucu,
-            matkhaumoi
+            matkhaumoi,
+                trangthai,
         } = (req.body);
-        //res.json(req.body);
         pool
             .query(`select * from thietbi  where idthietbi = $1 and matkhau = $2`, [id, matkhaucu])
             .then((result) => {
@@ -158,8 +158,8 @@ class device_controller {
                     
                 }else{
                     pool
-                    .query(`UPDATE thietbi SET tenthietbi = $1, idloai = $2, taikhoan =$3, matkhau=$4, trangthai =$5  
-                    WHERE idthietbi = $6`, [tenthietbi, idloai, taikhoan,matkhaumoi, trangthai, id])
+                    .query(`UPDATE thietbi SET tenthietbi = $1, idloai = $2, taikhoan = $3, matkhau = $4, trangthai = $5  
+                        WHERE idthietbi = $6`, [tenthietbi, idloai, taikhoan,matkhaumoi, trangthai, id])
                     .then(() => {
                         res.render('editInfoDevice', {
                             message: "\"sửa thành công\""
@@ -167,10 +167,7 @@ class device_controller {
                     })
                     .catch(next);
                 }
-
-
             })
-
     }
 
     // [GET] /list-device/change-pass/:id
@@ -193,7 +190,7 @@ class device_controller {
 
     // [PUT] /list-device/change-pass/:id
     updatepass(req, res, next) {
-        // res.json(req.body);
+        res.json(req.body);
         const idthietbi = req.params.id;
         const doimatkhau = Object.values(req.body);
         pool
@@ -202,7 +199,6 @@ class device_controller {
             .then((result) => {
                 const thietbi = result.rows[0];
                 if (thietbi == undefined) {
-                    // res.redirect('change-password');
                     res.render('editPassDevice', {
                         message: 'Mật khẩu không trùng khớp'
                     })
@@ -211,8 +207,6 @@ class device_controller {
                         .query(`update thietbi set matkhau = $1 
                                 where idthietbi = $2`, [doimatkhau[1], idthietbi])
                         .then((result) => {
-                            // res.redirect('/');
-                            // req.session.destroy();
                             res.render('editPassDevice', {
                                 message: 'Đổi mật khẩu thành công'
                             })
@@ -337,22 +331,24 @@ class device_controller {
             res.redirect('/');
         } else {
             const dulieu = {};
+            var idthietbi = req.params.id;
             if(req.query.page === undefined){
                 page = '1';
-                }else{
-                page = req.query.page;
-                }
+            }else{
+            page = req.query.page;
+            }
             pool
-                .query(`select  iddulieu,
-                                date_part('year',thoigiangui) as nam,
-                                date_part('month',thoigiangui) as thang,
-                                date_part('day',thoigiangui) as ngay,
-                                date_part('hour',thoigiangui) as gio,
-                                date_part('minute',thoigiangui) as phut,
-                                date_part('second',thoigiangui) as giay,
-                                chitiet from dulieu
+                .query(`
+                    select  iddulieu,
+                    date_part('year',thoigiangui) as nam,
+                    date_part('month',thoigiangui) as thang,
+                    date_part('day',thoigiangui) as ngay,
+                    date_part('hour',thoigiangui) as gio,
+                    date_part('minute',thoigiangui) as phut,
+                    date_part('second',thoigiangui) as giay,
+                    chitiet from dulieu
                     where
-                    idthietbi = $1 ORDER BY iddulieu  DESC OFFSET (($2-1)*10) ROWS FETCH NEXT 10 ROWS ONLY`, [req.params.id, page]
+                    idthietbi = $1 ORDER BY thoigiangui DESC OFFSET (($2-1)*10) ROWS FETCH NEXT 10 ROWS ONLY`, [req.params.id, page]
                 )
                 .then(result => {
                     const dulieu = result.rows;
@@ -360,10 +356,18 @@ class device_controller {
                         .query(`select count(*) from dulieu where idthietbi = $1`, [req.params.id])
                             .then(result => {
                                 const count = result.rows[0];
-                                const idthietbi = req.params.id;
-                                //console.log({ dulieu, count, page });
-                                //res.json({ dulieu, count, page, idthietbi});
-                                res.render('publishLog', {dulieu, count, page, idthietbi});
+                                pool
+                                    .query(`select row_number() OVER (ORDER BY iddulieu) as row
+                                        from dulieu
+                                        OFFSET (($1-1)*10) ROWS FETCH NEXT 10 ROWS ONLY`, [page]
+                                    )
+                                    .then(result => {
+                                        const stt = result.rows;
+                                        // res.json({idthietbi ,dulieu, count, page, stt});
+                                        res.render('publishLog', {idthietbi ,dulieu, count, page, stt});
+                                    })
+                                    .catch(next);
+                                // console.log({ dulieu, count, page });
                             })
                             .catch(next);
                 })
@@ -377,6 +381,7 @@ class device_controller {
         pool
             .query(`select * from thietbi where idthietbi = $1`, [idthietbi])
             .then(result => {
+                const thietbi = result.rows[0];
                 if(!thietbi.trangthai){
                     pool
                         .query(`UPDATE thietbi SET trangthai = true
@@ -405,6 +410,66 @@ class device_controller {
         console.log(req);
     }
 
+    searchdata(req, res, next){
+        var page;
+        if (req.session.idnguoidung === undefined) {
+            res.redirect('/');
+        } else {
+            const dulieu = {};
+            if(req.query.page === undefined){
+                page = '1';
+            }else{
+                page = req.query.page;
+            }
+            const thietbi = req.query;
+            const idthietbi = req.params.id;
+            if(thietbi.date != ''){
+                thietbi.timestart = thietbi.date + ' 00:00:00';
+                thietbi.timesend = thietbi.date + ' 23:59:59';
+                pool
+                    .query(
+                        `select  iddulieu,
+                        date_part('year',thoigiangui) as nam,
+                        date_part('month',thoigiangui) as thang,
+                        date_part('day',thoigiangui) as ngay,
+                        date_part('hour',thoigiangui) as gio,
+                        date_part('minute',thoigiangui) as phut,
+                        date_part('second',thoigiangui) as giay,
+                        chitiet from dulieu
+                        where
+                        idthietbi = $1 and thoigiangui between $2 and $3
+                        ORDER BY iddulieu DESC OFFSET (($4-1)*10) ROWS FETCH NEXT 10 ROWS ONLY`, 
+                        [req.params.id, thietbi.timestart, thietbi.timesend, page]
+                    )
+                    .then(result => {
+                        const dulieu = result.rows;
+                        // res.json(dulieu);
+                        pool
+                            .query(`select count(*) from dulieu where idthietbi = $1`, [req.params.id])
+                            .then(result => {
+                                const count = result.rows[0];
+                                pool
+                                    .query(
+                                        `select row_number() OVER (ORDER BY iddulieu) as row
+                                        from dulieu
+                                        OFFSET (($1-1)*10) ROWS FETCH NEXT 10 ROWS ONLY`, [page]
+                                    )
+                                    .then(result => {
+                                        const stt = result.rows;
+                                        // res.json({dulieu, count, page, stt});
+                                        res.render('publishLog', {idthietbi, dulieu, count, page, stt});
+                                    })
+                                    .catch(next);
+                            })
+                            .catch(next);
+                    })
+                .catch(next)
+            }
+            else{
+                res.redirect('/list-device/history/' + idthietbi);
+            }
+        }
+    }
 }
 
 module.exports = new device_controller;
