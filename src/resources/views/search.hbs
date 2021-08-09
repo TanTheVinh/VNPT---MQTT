@@ -7,7 +7,7 @@
         </h2>
       </div>
       <form method="GET"
-      onsubmit="window.location = '/list-device/search/{{idthietbi}}?date=' + dt.value; return false;"
+      onsubmit="window.location = '/list-device/search/{{idthietbi}}?date=' + dt.value + '&page=' + {{page}}; return false;"
        role="search" class="app-search col-sm-2">
         <div class="input-group mb-3">
           <input id="dt" type="date" class="form-control mt-0" aria-describedby="basic-addon2">
