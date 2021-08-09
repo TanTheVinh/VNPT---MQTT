@@ -11,20 +11,23 @@ broker.on('ready', () =>{
 broker.on('published', (packet, client)=>{
     message = packet.payload.toString();
     topic = packet.topic.toString();
-    if(message.slice(0, 2) == '{ ' ){
-        var space = message.split(' ').length - 1;//so luong dau cach
+  //  console.log(message);
+    
+    if(message.slice(0, 2) == '{,' ){
+        var space = message.split(',').length - 1;//so luong dau cach
         var length = message.length; //so luong ky tu
         var temp; //vi tri dau cach
         var arr = []; //mang
         var cut;//chuoi trc dau cach
         for (let i = 0; i < space; i++) {
-            temp = message.indexOf(' ');
+            temp = message.indexOf(',');
             cut = message.substring(0, temp);
             if(cut != '{'){
             arr.push(cut);
             }
             message = message.slice(temp + 1, length);
         }
+     //   console.log(arr)
         pool
             .query(`INSERT INTO public.thietbi(idthietbi, taikhoan, matkhau, iddonvi, idloai, tenthietbi, trangthai)
             VALUES ($1, $2, $3, $4, $5, $6, $7);`, arr)
@@ -34,10 +37,10 @@ broker.on('published', (packet, client)=>{
             .catch();
     }
     
-    if(message.slice(0, 2) != '{ ' && message.slice(0, 5) != 'mqtt' && message != '}' && topic.slice(0,1) !='$'){
+    if(message.slice(0, 2) != '{,' && message.slice(0, 5) != 'mqtt' && message != '}' && topic.slice(0,1) !='$'){
       //  console.log(topic)
         date = new Date();
-        day = date.getDay() + 1;
+        day = date.getDate() + 1;
         month = date.getMonth() + 1 ;
         year = date.getFullYear();
         hour = date.getHours();
@@ -54,5 +57,5 @@ broker.on('published', (packet, client)=>{
                     .catch(err => {
                         console.log(err);
                     });
-    }
+   }
 });
