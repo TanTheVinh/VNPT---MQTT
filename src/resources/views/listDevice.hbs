@@ -92,14 +92,11 @@
                   listData.slice(startPos, endPost).map(post => {
                     let tt = post.trangthai;
                     let btnTT = "";
-                    let btnS = "";
                     if(tt == "\"true\""){
                       btnTT = `<form id='${post.idthietbi}${post.idthietbi}' action='/list-device/check/${post.idthietbi}' method="post"><button type='button' class='btn btn-success' onclick='cfmo(${post.idthietbi}${post.idthietbi},${post.trangthai})'>Đang kết nối</button></form>`;
-                      btnS = `<button type='button' class='btn btn-danger' data-toggle='tooltip' data-placement='top' title='Gửi lệnh' data-bs-toggle='modal' data-bs-target='#exampleModal'><i class='fa fa-inbox'></i></button>`;
                     }
                     else{
                       btnTT = `<form id='${post.idthietbi}${post.idthietbi}' action='/list-device/check/${post.idthietbi}' method="post"><button type='button' class='btn btn-danger' onclick='cfmi(${post.idthietbi}${post.idthietbi},${post.trangthai})'>Ngắt kết nối</button></form>`;
-                      btnS = `<button type='button' disabled class='btn btn-danger' data-toggle='tooltip' data-placement='top' title='Gửi lệnh' data-bs-toggle='modal' data-bs-target='#exampleModal'><i class='fa fa-inbox'></i></button>`;
                     }
                     listWrapper.innerHTML += (
                       `
@@ -111,28 +108,7 @@
                   <td>
                     `+ btnTT +`
                   </td>
-                  <td>
-                    `+ btnS +`
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                      aria-hidden="true">
-                      <form name="lenh" method="post" action="/list-device/mesg/${post.idthietbi}">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Gửi lệnh</h5>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                              <input type="text" name="mesg" id="">
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Thoát</button>
-                              <button type="submit" class="btn btn-success">Gửi</button>
-                            </div>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
+                  <td>           
                     <a class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Xem chi tiết"
                       href="/list-device/detail/${post.idthietbi}" method="GET">
                       <i class="fa fa-info-circle"></i>
@@ -193,7 +169,7 @@
                       page.classList.add('page', 'btn', 'border-info');
                       page.addEventListener('click', function(){
                         let clickedItem = Number(event.target.innerText);  
-                        page.setAttribute('href','/list-device?page='+clickedItem);
+                        page.setAttribute('href','?page='+clickedItem);
                         pagination(clickedItem);
                         showPosts(listData, (current * defaultPost) - defaultPost, (current * defaultPost)); 
                       });
