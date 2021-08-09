@@ -28785,7 +28785,7 @@ COPY public.lichsu (idlichsu, idnguoidung, idthietbi, thoigiantt, thaotac) FROM 
 --
 
 COPY public.loaithietbi (idloai, tenloai, mota) FROM stdin;
-1	Máy đo độ ẩm\n	máy đo độ ẩm không khí
+1	Máy đo độ ẩm	máy đo độ ẩm không khí
 3	Đo lượng mưa	Máy đo lượng mưa
 2	Nhiệt kế	Máy đo nhiệt độ trong không khí
 4	Máy đo độ mặn	Máy dùng để đo độ mặn

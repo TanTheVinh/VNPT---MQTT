@@ -457,7 +457,7 @@ class device_controller {
                                     .then(result => {
                                         const stt = result.rows;
                                         // res.json({dulieu, count, page, stt});
-                                        res.render('publishLog', {idthietbi, dulieu, count, page, stt});
+                                        res.render('search', {idthietbi, dulieu, count, page, stt});
                                     })
                                     .catch(next);
                             })
