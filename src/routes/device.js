@@ -12,7 +12,7 @@ router.put('/edit/:id', deviceController.update);
 router.get('/change-password/:id', deviceController.changepass);
 router.put('/change-password/:id', deviceController.updatepass);
 router.get('/history/:id', deviceController.historydata);
-router.get('/search/', deviceController.searchdata);
+router.get('/search/:id', deviceController.searchdata);
 router.post('/check/:id', deviceController.check);
 router.post('/mesg/:id', deviceController.sendmessage);
 

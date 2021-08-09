@@ -319,11 +319,12 @@ class device_controller {
             res.redirect('/');
         } else {
             const dulieu = {};
+            var idthietbi = req.params.id;
             if(req.query.page === undefined){
                 page = '1';
-                }else{
-                page = req.query.page;
-                }
+            }else{
+            page = req.query.page;
+            }
             pool
                 .query(`
                     select  iddulieu,
@@ -343,19 +344,18 @@ class device_controller {
                         .query(`select count(*) from dulieu where idthietbi = $1`, [req.params.id])
                             .then(result => {
                                 const count = result.rows[0];
-                                var stt;
                                 pool
-                                    .query(`select row_number() OVER (ORDER BY iddulieu) as stt
+                                    .query(`select row_number() OVER (ORDER BY iddulieu) as row
                                         from dulieu
                                         OFFSET (($1-1)*10) ROWS FETCH NEXT 10 ROWS ONLY`, [page]
                                     )
                                     .then(result => {
-                                        stt = result.rows;
+                                        const stt = result.rows;
+                                        // res.json({idthietbi ,dulieu, count, page, stt});
+                                        res.render('publishLog', {idthietbi ,dulieu, count, page, stt});
                                     })
                                     .catch(next);
                                 // console.log({ dulieu, count, page });
-                                //res.json({ dulieu, count, page });
-                                res.render('publishLog', {dulieu, count, page, stt});
                             })
                             .catch(next);
                 })
@@ -369,6 +369,7 @@ class device_controller {
         pool
             .query(`select * from thietbi where idthietbi = $1`, [idthietbi])
             .then(result => {
+                const thietbi = result.rows[0];
                 if(!thietbi.trangthai){
                     pool
                         .query(`UPDATE thietbi SET trangthai = true
@@ -398,15 +399,6 @@ class device_controller {
     }
 
     searchdata(req, res, next){
-        // console.log(req.query);
-        // thietbi = req.query;
-        // pool
-        //     .query(`select * from dulieu where idthietbi = $1 and thoigiangui = $2`, [])
-        //     .then(result => {
-        //         dulieu = result.rows;
-                
-        //     })
-        //     .catch(next);
         var page;
         if (req.session.idnguoidung === undefined) {
             res.redirect('/');
@@ -414,9 +406,13 @@ class device_controller {
             const dulieu = {};
             if(req.query.page === undefined){
                 page = '1';
-                }else{
+            }else{
                 page = req.query.page;
-                }
+            }
+            const thietbi = req.query;
+            const idthietbi = req.params.id;
+            thietbi.timestart = thietbi.date + ' 00:00:00';
+            thietbi.timesend = thietbi.date + ' 23:59:59';
             pool
                 .query(
                     `select  iddulieu,
@@ -428,26 +424,29 @@ class device_controller {
                     date_part('second',thoigiangui) as giay,
                     chitiet from dulieu
                     where
-                    idthietbi = $1 ORDER BY iddulieu DESC OFFSET (($2-1)*10) ROWS FETCH NEXT 10 ROWS ONLY`, [req.params.id, page]
+                    idthietbi = $1 and thoigiangui between $2 and $3
+                    ORDER BY iddulieu DESC OFFSET (($4-1)*10) ROWS FETCH NEXT 10 ROWS ONLY`, 
+                    [req.params.id, thietbi.timestart, thietbi.timesend, page]
                 )
                 .then(result => {
                     const dulieu = result.rows;
+                    // res.json(dulieu);
                     pool
                         .query(`select count(*) from dulieu where idthietbi = $1`, [req.params.id])
                         .then(result => {
                             const count = result.rows[0];
                             pool
-                                .query(`select row_number() OVER (ORDER BY iddulieu) as stt
+                                .query(`select row_number() OVER (ORDER BY iddulieu) as row
                                     from dulieu
                                     OFFSET (($1-1)*10) ROWS FETCH NEXT 10 ROWS ONLY`, [page]
                                 )
                                 .then(result => {
-                                    stt = result.rows;
+                                    const stt = result.rows;
+                                    // console.log({ dulieu, count, page });
+                                    // res.json({dulieu, count, page, stt});
                                     res.render('publishLog', {dulieu, count, page, stt});
                                 })
                                 .catch(next);
-                            // console.log({ dulieu, count, page });
-                            //res.json({ dulieu, count, page });
                         })
                         .catch(next);
                 })
